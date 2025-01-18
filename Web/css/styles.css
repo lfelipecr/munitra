@@ -10860,6 +10860,24 @@ header.masthead:before {
   top: 0;
   left: 0;
 }
+header.mastheadNoticia{
+  position: relative;
+  background-color: var(--orange-muni);
+  background-image: none;
+  background-size: cover;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+header.mastheadNoticia::before{
+  content: "";
+  position: absolute;
+  background-color: #1c375e;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.25;
+}
 header.masthead h1, header.masthead .h1 {
   font-size: 2rem;
 }
@@ -10933,6 +10951,17 @@ footer.footer {
 .footer-link:hover {
     color: #0d6efd;
 }
+
+.linksContacto {
+  color: var(--orange-muni);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.linksContacto:hover {
+  color: #0d6efd;
+}
+
 .collap-link{
   color: var(--orange-muni);
   text-decoration: none;
@@ -10948,4 +10977,48 @@ footer.footer {
   background-color: var(--orange-muni);
   border-radius: 5em;
   padding: 10px;
+}
+.departamento{
+  border: 1px solid var(--orange-muni);
+  border-radius: 1em;
+  padding: 1em;
+  color: var(or);
+  transition: .35s ease;
+}
+.departamento:hover{
+  background-color: var(--orange-muni);
+  color: white;
+}
+.iconDpto{
+  width: 2em;
+}
+.udDepartamento{
+  padding-left: .5em;
+  padding-right: .5m;
+}
+.bgNoticiaNoPic{
+  background-color: var(--orange-muni);
+  height: 8em;
+  box-shadow: var(bla);
+
+}
+.rsIframeCont{
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+}
+.rsIframe{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 20px;
+}
+.ubiDistrito{
+  border-radius: 5em;
+  padding: .5em;
+  background-color: white;
+  cursor: help;
 }
