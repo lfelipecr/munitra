@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=New+Rocker&display=swap');
+.fuente {
+    font-family: "New Rocker", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+body {
+    background-image: url('fondo.jpg');
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(10px);
+    z-index: -1;
+}
+.nav-link{
+    color: white !important;
+}
+.nav-link{
+    color: white !important;
+}
