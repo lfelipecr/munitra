@@ -1,13 +1,17 @@
 <?php
+require_once './Utilidades/Utilidades.php';
 
 class LoginControlador
-{
+{   
+    function AdminInicio(){
+        $u = new Utilidades();
+        $u->LlamarVista('./Vista/Dashboard/inicio.php');
+    }
     function Login()
     {
-        require_once './Vista/Dashboard/usuarioAdmin.php';
+        $this->AdminInicio();
     }
     function Registro()
     {
-        
     }
 }
