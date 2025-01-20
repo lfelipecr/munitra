@@ -25,24 +25,32 @@
         <div class="card p-5">
             <div class="text-center p-5">
                 <h4 class="h3">Ingrese</h4>
+                <div class="mx-1">
+                    <img src="./Vista/assets/img/icon.png" class="img-fluid" alt="">
+                </div>
                 <hr>
-                <form action="index.php?controlador=Login&metodo=Login" method="post">
+                <input type="hidden" id="msg" value="<?php echo $msg; ?>">
+                <form action="index.php?controlador=Login&metodo=Login" method="post" id="frmIngresar">
                     <div class="form-floating mb-3">
-                        <input type="email" name="cedula" class="form-control" placeholder="">
+                        <input type="email" name="correo" class="form-control" placeholder="" id="txtCorreo">
                         <label>Correo</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" name="cedula" class="form-control" placeholder="">
+                        <input type="password" name="pass" class="form-control" placeholder="" id="txtContraseña">
                         <label>Contraseña</label>
                     </div>
+                    <div class="col-12 py-2">
+                        <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
+                    </div>
                     <button class="btn-outline-warning btn w-100" type="submit">
-                        <span class="p-1 px-5">Listo</span>
-                    </button>  
+                        <span class="p-1 px-5">Ingresar</span>
+                    </button>
                 </form>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="./Vista/assets/js/login.js"></script>
 </body>
 </html>

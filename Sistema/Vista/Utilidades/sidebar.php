@@ -164,7 +164,6 @@
             </li>
           </ul>
         </div>
-        <!-- Cambair Tema -->
       </div>
     </div>
   </nav>
@@ -181,7 +180,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="index.php?controlador=Login&metodo=Login#" class="nav-link link-body-emphasis" aria-current="page">
+        <a href="index.php?controlador=Login&metodo=AdminInicio#" class="nav-link link-body-emphasis" aria-current="page">
           <p class="bi bi-house-door" style="position:fixed;"> Inicio</p><br>
         </a>
       </li>

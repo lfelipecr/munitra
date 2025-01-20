@@ -227,9 +227,9 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE SpConsultarCredenciales(IN correo VARCHAR(100), IN pass VARCHAR(200))
+CREATE PROCEDURE SpConsultarCredenciales(IN p_correo VARCHAR(100), IN p_pass VARCHAR(200))
 BEGIN
-    SELECT * FROM USUARIO WHERE CORREO = correo AND PASS = pass;
+    SELECT * FROM USUARIO WHERE CORREO = p_correo AND PASS = p_pass;
 END //
 DELIMITER ;
 
