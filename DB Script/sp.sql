@@ -97,7 +97,7 @@ CREATE PROCEDURE SpActualizarPersona(
     IN telefono VARCHAR(15),
     IN whatsapp VARCHAR(15),
     IN estado VARCHAR(100),
-    IN correo VARCHAR(20),
+    IN correo VARCHAR(100),
     IN situacion VARCHAR(200),
     IN monto_morosidad FLOAT,
     IN monto_adeudado FLOAT,
@@ -125,7 +125,6 @@ BEGIN
         MONTO_MOROSIDAD = monto_morosidad, 
         MONTO_ADEUDADO = monto_adeudado, 
         CONSENTIMIENTO = consentimiento, 
-        FECHA_CONSENTIMIENTO = fecha_consentimiento, 
         PROPIEDAD_FUERA = propiedad_fuera, 
         FECHA_ACTUALIZACION = NOW(), 
         ID_DISTRITO = id_distrito, 
@@ -176,7 +175,6 @@ CREATE PROCEDURE SpActualizarUsuario(
     IN id_usuario INT,
     IN nombre_usuario VARCHAR(100),
     IN correo VARCHAR(100),
-    IN pass VARCHAR(200),
     IN responsable BIT,
     IN id_persona INT,
     IN id_departamento INT,
@@ -187,12 +185,10 @@ BEGIN
     SET 
         NOMBRE_USUARIO = nombre_usuario,
         CORREO = correo,
-        PASS = pass,
         RESPONSABLE = responsable,
         ID_PERSONA = id_persona,
         ID_DEPARTAMENTO = id_departamento,
-        ID_ESTADO = id_estado,
-        FECHA_ACTUALIZACION = NOW()
+        ID_ESTADO = id_estado
     WHERE ID = id_usuario AND BORRADO = 0;
 END //
 DELIMITER ;
