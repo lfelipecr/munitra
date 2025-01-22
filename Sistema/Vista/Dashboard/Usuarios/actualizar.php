@@ -4,7 +4,7 @@
       <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
         id="title">
-        <h1 class="h2">Nuevo Registro</h1>
+        <h1 class="h2">Actualizar Registro: <?php echo $persona->getNombre()." ".$persona->getPrimerApellido()." ".$persona->getSegundoApellido();?></h1>
         <a href="index.php?controlador=Usuario&metodo=Listado" class="btn btn-outline-secondary">
           <span>x</span>
         </a>
@@ -29,51 +29,51 @@
             </div>
             <div class="col-md-6">
               <span class="mb-3">Identificacion (*)</span>
-              <input type="text" class="form-control mb-3" name="identificacion" id="txtIdentificacion">
+              <input type="text" class="form-control mb-3" name="identificacion" id="txtIdentificacion" value="<?php echo $persona->getIdentificacion();?>">
             </div>
             <div class="col-md-4">
               <span class="mb-3">Nombre (*)</span>
-              <input type="text" class="form-control mb-3" name="nombre" id="txtNombre">
+              <input type="text" class="form-control mb-3" name="nombre" id="txtNombre" value="<?php echo $persona->getNombre();?>">
             </div>
             <div class="col-md-4">
               <span class="mb-3">Primer Apellido (*)</span>
-              <input type="text" class="form-control mb-3" name="apellido1" id="txtApellido1">
+              <input type="text" class="form-control mb-3" name="apellido1" id="txtApellido1" value="<?php echo $persona->getPrimerApellido();?>">
             </div>
             <div class="col-md-4">
               <span class="mb-3">Segundo Apellido</span>
-              <input type="text" class="form-control mb-3" name="apellido2" id="txtApellido2">
+              <input type="text" class="form-control mb-3" name="apellido2" id="txtApellido2" value="<?php echo $persona->getSegundoApellido();?>">
             </div>
             <div class="col-12">
               <span class="mb-3">Dirección (*)</span>
-              <input type="text" class="form-control mb-3" name="direccion" id="txtDireccion">
+              <input type="text" class="form-control mb-3" name="direccion" id="txtDireccion" value="<?php echo $persona->getDireccion();?>">
             </div>
             <div class="col-md-6">
               <span class="mb-3">Teléfono</span>
-              <input type="number" class="form-control mb-3" name="telefono" id="txtTelefono">
+              <input type="number" class="form-control mb-3" name="telefono" id="txtTelefono" value="<?php echo $persona->getTelefono();?>">
             </div>
             <div class="col-md-6">
               <span class="mb-3">Whatsapp</span>
-              <input type="number" class="form-control mb-3" name="whatsapp" id="txtWhatsapp">
+              <input type="number" class="form-control mb-3" name="whatsapp" id="txtWhatsapp" value="<?php echo $persona->getWhatsapp();?>">
             </div>
             <div class="col-md-6">
               <span class="mb-3">Correo (*)</span>
-              <input type="text" class="form-control mb-3" name="correo" id="txtCorreo">
+              <input type="text" class="form-control mb-3" name="correo" id="txtCorreo" value="<?php echo $persona->getCorreo();?>">
             </div>
             <div class="col-md-6">
               <span class="mb-3">Situación</span>
-              <input type="text" class="form-control mb-3" name="situacion" id="txtSituacion">
+              <input type="text" class="form-control mb-3" name="situacion" id="txtSituacion" value="<?php echo $persona->getSituacion();?>">
             </div>
             <div class="col-md-6">
               <span class="mb-3">Monto Morosidad</span>
-              <input type="number" class="form-control mb-3" name="montoMorosidad" id="txtMontoMorosidad">
+              <input type="number" class="form-control mb-3" name="montoMorosidad" id="txtMontoMorosidad" value="<?php echo $persona->getMontoMorosidad();?>">
             </div>
             <div class="col-md-6">
               <span class="mb-3">Monto Adeudado</span>
-              <input type="number" class="form-control mb-3" name="montoAdeudado" id="txtMontoAdeudado">
+              <input type="number" class="form-control mb-3" name="montoAdeudado" id="txtMontoAdeudado" value="<?php echo $persona->getMontoAdeudado();?>">
             </div>
             <div class="col-12">
               <span class="mb-3">Propiedad Fuera</span>
-              <input type="int" class="form-control mb-3" name="propiedadFuera" id="txtPropiedadFuera">
+              <input type="int" class="form-control mb-3" name="propiedadFuera" id="txtPropiedadFuera" value="<?php echo $persona->getPropiedadFuera();?>">
             </div>
             <div class="col-12">
               <span class="mb-3">Consentimiento</span>
@@ -84,9 +84,15 @@
               <span class="mb-3">Provincia (*)</span>
               <select name="provincia" class="form-control" id="slProvincia">
                 <?php for ($i = 0; $i < sizeof($arrLocaciones[0]); $i++) {?>
-                  <option value="<?php echo $arrLocaciones[0][$i]->getId();?>">
-                    <span><?php echo $arrLocaciones[0][$i]->getNombre();?></span>
-                  </option>
+                  <?php if ($arrLocaciones[0][$id] == $persona->getIdProvincia()) {?>
+                    <option selected value="<?php echo $arrLocaciones[0][$i]->getId();?>">
+                      <span><?php echo $arrLocaciones[0][$i]->getNombre();?></span>
+                    </option>
+                  <?php } else { ?>
+                    <option value="<?php echo $arrLocaciones[0][$i]->getId();?>">
+                      <span><?php echo $arrLocaciones[0][$i]->getNombre();?></span>
+                    </option>
+                  <?php } ?>
                 <?php } ?>
               </select>
             </div>
@@ -121,7 +127,7 @@
               </div>
               <div class="col-md-6">
                 <span class="mb-3">Nombre de Usuario (*)</span>
-                <input type="text" class="form-control mb-3" name="nombreUsuario" id="txtNombreUsuario">
+                <input type="text" class="form-control mb-3" name="nombreUsuario" id="txtNombreUsuario" value="<?php echo $usuario->getNombreUsuario();?>">
               </div>
               <div class="col-md-6">
                 <span class="mb-3">Departamento (*)</span>
@@ -135,11 +141,11 @@
               </div>
               <div class="col-md-6">
                 <span class="mb-3">Contraseña (*)</span>
-                <input type="password" class="form-control mb-3" name="pass" id="txtPass1">
+                <input type="password" class="form-control mb-3" name="pass" id="txtPass1" value="<?php echo $usuario->getPass();?>">
               </div>
               <div class="col-md-6">
                 <span class="mb-3">Confirme su contraseña (*)</span>
-                <input type="password" class="form-control mb-3" id="txtPass2">
+                <input type="password" class="form-control mb-3" id="txtPass2" value="<?php echo $usuario->getPass();?>">
               </div>
               <div class="col-12 mb-3">
                 <span class="mb-3">Estado</span>

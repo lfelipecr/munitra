@@ -44,7 +44,7 @@ CREATE PROCEDURE SpIngresarPersona(
     IN telefono VARCHAR(15),
     IN whatsapp VARCHAR(15),
     IN estado VARCHAR(100),
-    IN correo VARCHAR(20),
+    IN correo VARCHAR(100),
     IN situacion VARCHAR(200),
     IN monto_morosidad FLOAT,
     IN monto_adeudado FLOAT,
@@ -75,6 +75,13 @@ DELIMITER //
 CREATE PROCEDURE SpConsultarPersonas()
 BEGIN
     SELECT * FROM PERSONA WHERE BORRADO = false;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SpConsultarPersona(IN p_id INT)
+BEGIN
+    SELECT * FROM PERSONA WHERE ID = p_id;
 END //
 DELIMITER ;
 
@@ -197,11 +204,12 @@ BEGIN
         u.ID AS ID_USUARIO,
         u.NOMBRE_USUARIO,
         u.CORREO,
-        u.PASS,
         u.RESPONSABLE,
         u.BORRADO,
         p.ID AS ID_PERSONA,
         p.NOMBRE AS NOMBRE_PERSONA,
+        p.ID_TIPO_IDENTIFICACION,
+        p.IDENTIFICACION,
         p.PRIMER_APELLIDO,
         p.SEGUNDO_APELLIDO,
         p.DIRECCION,
@@ -227,9 +235,16 @@ END //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE SpConsultarCredenciales(IN p_correo VARCHAR(100), IN p_pass VARCHAR(200))
+CREATE PROCEDURE SpConsultarCredenciales(IN p_correo VARCHAR(100))
 BEGIN
-    SELECT * FROM USUARIO WHERE CORREO = p_correo AND PASS = p_pass;
+    SELECT * FROM USUARIO WHERE CORREO = p_correo;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SpConsultarUsuario(IN p_id INT)
+BEGIN
+    SELECT * FROM USUARIO WHERE ID = p_id;
 END //
 DELIMITER ;
 

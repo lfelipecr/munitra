@@ -20,10 +20,35 @@ $(document).ready(function () {
             $('.formUsuario').hide();
         }
     }
+    //Dato booleano de consentimiento
+    function CheckboxConsentimiento(){
+        if ($('#cbxConsentimiento').prop('checked')) {
+            $('#valorConsentimiento').val('1');
+        } else {
+            $('#valorConsentimiento').val('0');
+        }
+    }
+    function CheckboxResponsable(){
+        if ($('#cbxResponsable').prop('checked')) {
+            $('#valorResponsable').val('1');
+        } else {
+            $('#valorResponsable').val('0');
+        }
+    }
     CheckboxUsuario();
+    CheckboxConsentimiento();
+    CheckboxResponsable();
     //Evento
     $('#cbxGenerarUsuario').on('change', function () {
         CheckboxUsuario();
+    })
+    //Evento consentimiento: setea el input oculto con 1 o 0
+    $('#cbxConsentimiento').on('change', function () {
+        CheckboxConsentimiento();
+    })
+    //Evento responsable: setea el input oculto con 1 o 0
+    $('#cbxResponsable').on('change', function () {
+        CheckboxResponsable();
     })
     //Validacion del formulario
     $('#frmPersona').on('submit', function (){

@@ -9,7 +9,6 @@ class Rutas
 
         if(!is_file($archivoControlador))
         {
-            echo "aaaa";
             $nombreControlador="IndexControlador";
             $archivoControlador=RUTA_FIJA;
         }

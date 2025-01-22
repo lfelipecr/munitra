@@ -6,11 +6,16 @@ require_once './Modelo/Entidades/Usuario.php';
 class LoginControlador
 {   
     function InicioTramites(){
-        require_once './Vista/TramitesUsuario/listadoTramites.php';
+        $u = new Utilidades();
+        if ($u->VerificarSesion()) {
+            require_once './Vista/TramitesUsuario/listadoTramites.php';
+        }
     }
     function AdminInicio(){
         $u = new Utilidades();
-        $u->LlamarVista('./Vista/Dashboard/inicio.php');
+        if ($u->VerificarSesion()) {
+            $u->LlamarVista('./Vista/Dashboard/inicio.php');
+        }
     }
     function Login()
     {
@@ -22,13 +27,19 @@ class LoginControlador
             $msg = 'El usuario no se encuentra, </br> verifique sus credenciales';
             require_once './Vista/Login/login.php';
         } else {
-            session_start();
-            $_SESSION['Usuario'] = $usuario;
-            if ($usuario->getIdDepartamento() == 1){
-                $this->InicioTramites();
+            //Usuario activo
+            if ($usuario->getIdEstado() == 1){
+                session_start();
+                $_SESSION['usuario'] = $usuario;
+                if ($usuario->getIdDepartamento() == 1){
+                    $this->InicioTramites();
+                } else {
+                    //Permisos
+                    $this->AdminInicio();
+                }
             } else {
-                //Permisos
-                $this->AdminInicio();
+                $msg = 'El usuario se encuentra inactivo, </br> comuniquese con la municipalidad';
+                require_once './Vista/Login/login.php';
             }
         }
     }
