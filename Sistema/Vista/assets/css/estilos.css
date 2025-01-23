@@ -1,0 +1,28 @@
+:root{
+    --orange-muni: #f3aa16;
+    --d-blue: #0f1a4f;
+    --wt: #fafafa;
+}
+#collapseEX, .bg-bl, .navbar{
+    background-color: var(--d-blue) !important;
+    color: var(--wt) !important;
+}
+#title{
+    padding: 1em;
+}
+.link-blog{
+    color: var(--orange-muni);
+}
+.colorWt {
+    color: var(--wt) !important;
+}
+.colorWt:hover {
+    color: var(--orange-muni) !important;
+}
+.cardOpciones{
+    transition: .5s ease;
+}
+.cardOpciones:hover{
+    background-color: var(--d-blue);
+    color: var(--wt);
+}

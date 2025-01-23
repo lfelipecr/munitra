@@ -92,8 +92,8 @@
       </path>
     </symbol>
   </svg>
-  <nav class="navbar sticky-top navbar-expand-lg border-bottom bg-body-tertiary">
-    <div class="container-fluid">
+  <nav class="navbar sticky-top navbar-expand-lg border-bottom">
+    <div class="container-fluid bg-bl">
 
       <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
         data-bs-target="#collapseEX" aria-expanded="true" aria-controls="collapseEX"
@@ -168,38 +168,38 @@
 
 
   
-  <aside class="collapse show collapse-horizontal col-sm-2 p-3 border-end bg-body-tertiary" id="collapseEX">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+  <aside class="collapse show collapse-horizontal col-sm-2 p-3 border-end" id="collapseEX">
+    <a href="index.php?controlador=Login&metodo=AdminInicio" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
       <div class="mx-1">
         <img src="./Vista/assets/img/icon.png" class="img-fluid" alt="">
       </div>
-      <span class="d-print-block">Trámites Río Cuarto</span>
+      <span class="d-print-block colorWt">Trámites Río Cuarto</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
         <a href="index.php?controlador=Login&metodo=AdminInicio#" class="nav-link link-body-emphasis" aria-current="page">
-          <p class="bi bi-house-door" style="position:fixed;"> Inicio</p><br>
+          <p class="bi bi-house-door colorWt" style="position:fixed;"> Inicio</p><br>
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-body-emphasis">
-          <p class="bi bi-speedometer2" style="position:fixed;"> Documentación</p><br>
+          <p class="bi bi-speedometer2 colorWt" style="position:fixed;"> Documentación</p><br>
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-body-emphasis">
-          <p class="bi bi-table" style="position:fixed;"> Trámites</p><br>
+          <p class="bi bi-table colorWt" style="position:fixed;"> Trámites</p><br>
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          <p class="bi bi-grid" style="position:fixed;"> Blog</p><br>
+        <a href="index.php?controlador=Blog&metodo=Index" class="nav-link link-body-emphasis">
+          <p class="bi bi-grid colorWt" style="position:fixed;"> Blog</p><br>
         </a>
       </li>
       <li>
         <a href="index.php?controlador=Usuario&metodo=Listado" class="nav-link link-body-emphasis">
-          <p class="bi bi-person-circle" style="position:fixed;"> Usuarios</p><br>
+          <p class="bi bi-person-circle colorWt" style="position:fixed;"> Usuarios</p><br>
         </a>
       </li>
     </ul>
@@ -208,7 +208,7 @@
       <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
         data-bs-toggle="dropdown" aria-expanded="true">
         <img src="#" alt="" width="32" height="32" class="rounded-circle me-2">
-        <span class="d-print-block"><strong>Usuario</strong></span>
+        <span class="d-print-block colorWt"><strong>Usuario</strong></span>
       </a>
       <ul class="dropdown-menu text-small shadow">
         <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
