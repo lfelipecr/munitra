@@ -1,6 +1,7 @@
 <?php 
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/NoticiaM.php';
+require_once './Modelo/Metodos/SesionM.php';
 
 class BlogControlador {
     function Index(){
@@ -12,14 +13,19 @@ class BlogControlador {
     function Sesiones(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
-            $u->LlamarVista('./Vista/Dashboard/Blog/Sesiones/listado.php');
+            $sesionM = new SesionM();
+            $jsonData = $sesionM->BuscarSesiones();
+            $vista = './Vista/Dashboard/Blog/Sesiones/listado.php';
+            require_once './Vista/Utilidades/sidebar.php';
         }
     }
     function Noticias(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
+            session_start();
+            $idUsuario = $_SESSION['usuario']->getId();
             $notiM = new NoticiaM();
-            $noticias = $notiM->BuscarNoticias();
+            $jsonData = $notiM->BuscarNoticias();
             $vista = './Vista/Dashboard/Blog/Noticias/listado.php';
             require_once './Vista/Utilidades/sidebar.php';
         }

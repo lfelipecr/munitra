@@ -5,6 +5,7 @@ require_once './Modelo/Conexion.php';
 
 class UsuarioM {
     function IngresarUsuario(Usuario $usuario){
+        $retVal = false;
         $conexion= new Conexion();
         $passHash = password_hash($usuario->getPass(), PASSWORD_DEFAULT);
         $sql = "Call SpInsertarUsuario('".$usuario->getNombreUsuario().
@@ -16,16 +17,28 @@ class UsuarioM {
         ", ".$usuario->getIdEstado().")";
         try{
             if($conexion->Ejecutar($sql)){
-                return true;
+                $retVal = true;
             }
         } catch (Exception $ex){
-            return false;
+            $retVal = false;
         }
         
         $conexion->Cerrar();
-        return true;
+        return $retVal;
     }
-
+    function ListadoPersonasJSON(){
+        $conexion= new Conexion();
+        $sql="CALL SpConsultarTodosUsuarios();";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            $registro = json_encode($resultado->fetch_all());
+        }
+        else
+            $registro=null;
+        $conexion->Cerrar();
+        return $registro;
+    }
     function ValidarCredenciales($correo, $pass){
         $hashPass = password_hash($pass, PASSWORD_DEFAULT);
         $conexion= new Conexion();
@@ -78,6 +91,7 @@ class UsuarioM {
         return $usuario;
     }
     function Actualizar($usuario){
+        $retVal = false;
         $conexion= new Conexion();
         $passHash = password_hash($usuario->getPass(), PASSWORD_DEFAULT);
         $sql = "Call SpActualizarUsuario( ".$usuario->getID().
@@ -89,13 +103,13 @@ class UsuarioM {
         ", ".$usuario->getIdEstado().")";
         try{
             if($conexion->Ejecutar($sql)){
-                return true;
+                $retVal = true;
             }
         } catch (Exception $ex){
-            return false;
+            $retVal = false;
         }
         
         $conexion->Cerrar();
-        return true;
+        return $retVal;
     }
 }

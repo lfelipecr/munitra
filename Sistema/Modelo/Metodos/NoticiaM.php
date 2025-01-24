@@ -4,6 +4,64 @@ require_once './Modelo/Entidades/Persona.php';
 require_once './Modelo/Entidades/Usuario.php';
 require_once './Modelo/Entidades/Noticia.php';
 class NoticiaM {
+    function ActualizarNoticia(Noticia $noticia){
+        $retVal=false;
+        $conexion= new Conexion();
+        $sql = "CALL SpActualizarNoticia(".$noticia->getId().
+        ", '".$noticia->getTitulo().
+        "', '".$noticia->getDescripcionLarga().
+        "', '".$noticia->getUrlImagen()."')";
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;   
+    }
+    function IngresarNoticia(Noticia $noticia){
+        $retVal=false;
+        $conexion= new Conexion();
+        $sql = "CALL SpIngresarNoticia(".$noticia->getIdUsuario().
+        ", '".$noticia->getTitulo().
+        "', '".$noticia->getDescripcionLarga().
+        "', '".$noticia->getUrlImagen()."')";
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
+    }
+    function BuscarNoticia($id){
+        $registro=null;
+        $conexion= new Conexion();
+        $sql="CALL SpBuscarNoticia($id);";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            while($fila=$resultado->fetch_assoc())
+            {
+                $noticia = new Noticia();
+                $noticia->setId($fila["ID"]);
+                $noticia->setIdUsuario($fila['ID_USUARIO']);
+                $noticia->setTitulo($fila["TITULO"]);
+                $noticia->setDescripcionLarga($fila["DESCRIPCION_LARGA"]);
+                $noticia->setUrlImagen($fila["URL_IMAGEN"]);
+                $noticia->setInhabilitada($fila["INHABILITADA"]);
+                $registro = $noticia;
+            }
+        }
+        else
+            $registro=null;
+        $conexion->Cerrar();
+        return $registro;
+    }
     function BuscarNoticias(){
         $registro=array();
         $conexion= new Conexion();
@@ -11,32 +69,7 @@ class NoticiaM {
         $resultado=$conexion->Ejecutar($sql);
         if(mysqli_num_rows($resultado)>0)
         {
-            while($fila=$resultado->fetch_assoc())
-            {
-                //Arreglo que contiene los datos de las 3 tablas
-                $arr = array();
-                $noticia = new Noticia();
-                $usuario = new Usuario();
-                $persona = new Persona();
-                $noticia->setId($fila["NOTICIA_ID"]);
-                $noticia->setTitulo($fila["NOTICIA_TITULO"]);
-                $noticia->setDescripcionLarga($fila["NOTICIA_DESCRIPCION"]);
-                $noticia->setUrlImagen($fila["NOTICIA_URL_IMAGEN"]);
-                $usuario->setId($fila["USUARIO_ID"]);
-                $usuario->setNombreUsuario($fila["USUARIO_NOMBRE"]);
-                $usuario->setCorreo($fila["USUARIO_CORREO"]);
-                $persona->setId($fila["PERSONA_ID"]);
-                $persona->setNombre($fila["PERSONA_NOMBRE"]);
-                $persona->setPrimerApellido($fila["PERSONA_PRIMER_APELLIDO"]);
-                $persona->setSegundoApellido($fila["PERSONA_SEGUNDO_APELLIDO"]);
-                //0
-                $arr[] = $noticia;
-                //1
-                $arr[] = $usuario;
-                //2
-                $arr[] = $persona;
-                $registro[] = $arr;
-            }
+            $registro = json_encode($resultado->fetch_all());
         }
         else
             $registro=null;

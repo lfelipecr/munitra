@@ -628,3 +628,91 @@ INNER JOIN
     PERSONA ON USUARIO.ID_PERSONA = PERSONA.ID;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SpBuscarNoticia(IN n_id INT)
+BEGIN
+    SELECT * FROM NOTICIA WHERE ID = n_id
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SpActualizarNoticia(
+    IN idNoti INT,
+    IN n_titulo VARCHAR (100),
+    IN n_descripcionLarga VARCHAR(1000),
+    IN urlImagen VARCHAR(200))
+BEGIN
+    IF urlimagen = '' THEN
+        UPDATE NOTICIA
+        SET TITULO = n_titulo,
+        DESCRIPCION_LARGA = n_descripcionLarga
+        WHERE ID =  idNoti;
+    ELSE
+        UPDATE NOTICIA
+        SET TITULO = n_titulo,
+        DESCRIPCION_LARGA = n_descripcionLarga,
+        URL_IMAGEN = urlImagen
+        WHERE ID =  idNoti;
+    END IF;
+END //
+DELIMITER ;
+
+/*Sesiones*/
+DELIMITER //
+
+CREATE PROCEDURE SpIngresarSesion(
+    IN s_fecha DATETIME,
+    IN s_descrip VARCHAR(100),
+    IN s_aprobada BIT,
+    IN urlActa VARCHAR(200),
+    IN urlAgenda VARCHAR(200),
+    IN urlVideo VARCHAR(200)
+)
+BEGIN
+    INSERT INTO SESION (FECHA, DESCRIPCION, ACTA_APROBADA, URL_ACTA, URL_AGENDA, URL_VIDEO)
+    VALUES (s_fecha, s_descrip, s_aprobada, urlActa, urlAgenda, urlVideo);
+END //
+
+DELIMITER ;
+
+--CALL SpIngresarSesion('2025-01-23 14:30:00', 'Reunión mensual', 1, '', '', '');
+DELIMITER //
+
+CREATE PROCEDURE SpIngresarPersonaSesion(
+    IN idSesion INT,
+    IN idPersona INT
+)
+BEGIN
+    INSERT INTO PERSONA_SESION (ID_SESION, ID_PERSONA)
+    VALUES (idSesion, idPersona);
+END //
+
+DELIMITER ;
+--CALL SpIngresarPersonaSesion(1,60);
+
+DELIMITER //
+
+CREATE PROCEDURE SpBuscarSesiones()
+BEGIN
+    SELECT
+        SESION.ID AS SESION_ID,
+        SESION.FECHA,
+        SESION.DESCRIPCION,
+        SESION.ACTA_APROBADA,
+        SESION.URL_ACTA,
+        SESION.URL_AGENDA,
+        SESION.URL_VIDEO,
+        PERSONA.ID AS PERSONA_ID,
+        PERSONA.NOMBRE,
+        PERSONA.PRIMER_APELLIDO,
+        PERSONA.SEGUNDO_APELLIDO
+    FROM
+        SESION
+    INNER JOIN
+        PERSONA_SESION ON SESION.ID = PERSONA_SESION.ID_SESION
+    INNER JOIN
+        PERSONA ON PERSONA_SESION.ID_PERSONA = PERSONA.ID;
+END //
+
+DELIMITER ;

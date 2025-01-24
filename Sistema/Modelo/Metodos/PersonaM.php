@@ -56,13 +56,52 @@ class PersonaM {
         $conexion->Cerrar();
         return $persona;
     }
+    function ListadoPersonas(){
+        $registro = null;
+        $conexion= new Conexion();
+        $sql="CALL SpConsultarPersonas()";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            while($fila=$resultado->fetch_assoc())
+            {
+                $persona = new Persona();
+                $persona->setId($fila["ID"]);
+                $persona->setIdTipoIdentificacion($fila["ID_TIPO_IDENTIFICACION"]);
+                $persona->setIdentificacion($fila["IDENTIFICACION"]);
+                $persona->setNombre($fila["NOMBRE"]);
+                $persona->setPrimerApellido($fila["PRIMER_APELLIDO"]);
+                $persona->setSegundoApellido($fila["SEGUNDO_APELLIDO"]);
+                $persona->setDireccion($fila["DIRECCION"]);
+                $persona->setTelefono($fila["TELEFONO"]);
+                $persona->setWhatsapp($fila["WHATSAPP"]);
+                $persona->setEstado($fila["ESTADO"]);
+                $persona->setSituacion($fila["SITUACION"]);
+                $persona->setMontoMorosidad($fila["MONTO_MOROSIDAD"]);
+                $persona->setMontoAdeudado($fila["MONTO_ADEUDADO"]);
+                $persona->setConsentimiento($fila["CONSENTIMIENTO"]);
+                $persona->setFechaConsentimiento($fila["FECHA_CONSENTIMIENTO"]);
+                $persona->getPropiedadFuera($fila["PROPIEDAD_FUERA"]);
+                $persona->setFechaActualizacion($fila["FECHA_ACTUALIZACION"]);
+                $persona->setFechaCreacion($fila["FECHA_CREACION"]);
+                $persona->setIdDistrito($fila["ID_DISTRITO"]);
+                $persona->setIdCanton($fila["ID_CANTON"]);
+                $persona->setIdProvincia($fila["ID_PROVINCIA"]);
+                $persona->setUsuarioCreacion($fila["USUARIO_CREACION"]);
+                $persona->setCorreo($fila["CORREO"]);
+                $registro[] = $persona;
+            }
+        }
+        $conexion->Cerrar();
+        return $registro;
+    }
     function ListadoPersonasJSON(){
         $conexion= new Conexion();
         $sql="CALL SpConsultarTodosUsuarios();";
         $resultado=$conexion->Ejecutar($sql);
         if(mysqli_num_rows($resultado)>0)
         {
-            return json_encode($resultado->fetch_all());
+            $registro = json_encode($resultado->fetch_all());
         }
         else
             $registro=null;
