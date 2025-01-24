@@ -18,6 +18,21 @@ class PersonaM {
         $conexion->Cerrar();
         return $idMax;
     }
+    //Solo se usa dentro de controladores, no se llama directamente
+    function EliminarPersona($id){
+        $retVal=false;
+        $conexion= new Conexion();
+        $sql = "DELETE FROM PERSONA WHERE ID = $id";
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
+    }
     function BuscarPersona($id){
         $persona=null;
         $conexion= new Conexion();

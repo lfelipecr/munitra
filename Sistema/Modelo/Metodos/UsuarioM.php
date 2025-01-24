@@ -26,19 +26,6 @@ class UsuarioM {
         $conexion->Cerrar();
         return $retVal;
     }
-    function ListadoPersonasJSON(){
-        $conexion= new Conexion();
-        $sql="CALL SpConsultarTodosUsuarios();";
-        $resultado=$conexion->Ejecutar($sql);
-        if(mysqli_num_rows($resultado)>0)
-        {
-            $registro = json_encode($resultado->fetch_all());
-        }
-        else
-            $registro=null;
-        $conexion->Cerrar();
-        return $registro;
-    }
     function ValidarCredenciales($correo, $pass){
         $hashPass = password_hash($pass, PASSWORD_DEFAULT);
         $conexion= new Conexion();

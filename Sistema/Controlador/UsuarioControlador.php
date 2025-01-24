@@ -60,14 +60,20 @@ class UsuarioControlador
     function VActualizar(){
         //Id de URL
         $id = $_GET['id'];
+        $idUsuario = $_GET['idUsuario'];
         $u = new Utilidades();
         $usuario = new Usuario();
         $persona = new Persona();
         $usuarioM = new UsuarioM();
         $personaM = new PersonaM();
-        //Busca el usuario y la persona con el ID de persona
-        $usuario = $usuarioM->BuscarUsuarioId($id);
-        $persona = $personaM->BuscarPersona($usuario->getIdPersona());
+        if ($idUsuario != 'null'){
+            $usuario = $usuarioM->BuscarUsuarioId($idUsuario);
+        } else {
+            $usuario->setId('');
+            $usuario->setNombreUsuario('');
+            $usuario->setPass('');
+        }
+        $persona = $personaM->BuscarPersona($id);
         if ($u->VerificarSesion()) {
             $msg = "";
             $this->LlamarVistaActualizar($msg, $usuario, $persona);
@@ -110,7 +116,6 @@ class UsuarioControlador
                 $usuario->setId($_POST['idUsuario']);
                 $usuario->setNombreUsuario(trim($_POST['nombreUsuario']));
                 $usuario->setCorreo(trim($_POST['correo']));
-                $usuario->setPass(trim($_POST['pass']));
                 $usuario->setResponsable($_POST['responsable']);
                 $usuario->setIdPersona($_POST['idPersona']);
                 $usuario->setIdDepartamento($_POST['depto']);
@@ -198,6 +203,7 @@ class UsuarioControlador
                     if ($usuarioM->IngresarUsuario($usuario)){
                         $this->LlamarVistaIngresar('Persona y usuario registrados correctamente');    
                     } else {
+                        $personaM->EliminarPersona($idUsuario);
                         $this->LlamarVistaIngresar('Credenciales de usuario ya existen');    
                     }
                 } else {
