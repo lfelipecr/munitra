@@ -1,8 +1,8 @@
 <?php
     require_once './Core/RutaFija.php';
     require_once './Core/Rutas.php';
-    //ini_set('display_errors', 1);
-    //error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
     $ruta=new Rutas();
 
     if(isset($_GET['controlador']))

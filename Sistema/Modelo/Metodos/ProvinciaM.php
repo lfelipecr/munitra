@@ -7,7 +7,7 @@ require_once './Modelo/Conexion.php';
 
 class ProvinciaM 
 {
-    private function BuscarDistritos() {
+    function BuscarDistritos() {
         $registro=array();
         $conexion= new Conexion();
         $sql="SELECT * FROM DISTRITO;";

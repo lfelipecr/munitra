@@ -409,44 +409,36 @@ DELIMITER ;
 
 /*Solicitud*/
 DELIMITER //
+
 CREATE PROCEDURE SpIngresarSolicitud(
-    IN id_persona INT,
-    IN id_usuario INT,
-    IN estado_solicitud INT,
-    IN tipo_solicitud INT
+    IN idPersona INT, 
+    IN idUsuario INT,
+    IN estadoSolicitud INT,
+    IN tipoSolicitud INT
 )
 BEGIN
     INSERT INTO SOLICITUD (FECHA, ID_PERSONA, ID_USUARIO, ESTADO_SOLICITUD, TIPO_SOLICITUD)
-    VALUES (NOW(), id_persona, id_usuario, estado_solicitud, tipo_solicitud);
+    VALUES (NOW(), idPersona, idUsuario, estadoSolicitud, tipoSolicitud);
 END //
+
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE SpActualizarSolicitud(
-    IN id_solicitud INT,
-    IN fecha DATETIME,
-    IN id_persona INT,
-    IN id_usuario INT,
-    IN estado_solicitud INT,
-    IN tipo_solicitud INT
-)
+CREATE PROCEDURE SpActualizarSolicitud(IN s_id INT, IN estado INT)
 BEGIN
     UPDATE SOLICITUD
-    SET FECHA = fecha,
-        ID_PERSONA = id_persona,
-        ID_USUARIO = id_usuario,
-        ESTADO_SOLICITUD = estado_solicitud,
-        TIPO_SOLICITUD = tipo_solicitud
-    WHERE ID = id_solicitud;
+    SET ESTADO_SOLICITUD = estado,
+    FECHA = NOW()
+    WHERE ID = s_id;
 END //
 DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE SpEliminarSolicitud(
-    IN id_solicitud INT
+    IN s_id INT
 )
 BEGIN
-    DELETE FROM SOLICITUD WHERE ID = id_solicitud;
+    DELETE FROM SOLICITUD WHERE ID = s_id;
 END //
 DELIMITER ;
 
@@ -462,7 +454,8 @@ BEGIN
         P.PRIMER_APELLIDO AS PERSONA_APELLIDO, 
         U.NOMBRE_USUARIO AS USUARIO_NOMBRE, 
         ES.DESCRIPCION AS ESTADO_SOLICITUD_DESCRIPCION, 
-        TS.DESCRIPCION AS TIPO_SOLICITUD_DESCRIPCION
+        TS.DESCRIPCION AS TIPO_SOLICITUD_DESCRIPCION,
+        P.ID AS PERSONA_ID
     FROM SOLICITUD S
     INNER JOIN PERSONA P ON S.ID_PERSONA = P.ID
     INNER JOIN USUARIO U ON S.ID_USUARIO = U.ID
@@ -481,6 +474,7 @@ BEGIN
         S.FECHA, 
         S.ESTADO_SOLICITUD, 
         S.TIPO_SOLICITUD,
+        P.ID AS PERSONA_ID,
         P.NOMBRE AS PERSONA_NOMBRE, 
         P.PRIMER_APELLIDO AS PERSONA_APELLIDO, 
         U.NOMBRE_USUARIO AS USUARIO_NOMBRE, 
@@ -512,42 +506,25 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE SpBuscarDetallesPorSolicitud (
-    IN ID_SOLICITUD INT
+    IN idSolicitud INT
 )
 BEGIN
-    SELECT 
-        ds.ID AS DETALLE_ID, 
-        ds.CAMPO_REQUISITO, 
-        ds.ADJUNTO_REQUISITO, 
-        ds.CUMPLE, 
-        ts.ID AS TIPO_REQUISITO_ID,
-        ts.DESCRIPCION AS TIPO_REQUISITO_DESCRIPCION,
-        ts.FORMATO_CAMPO,
-        ts.TIPO_CONTROL
-    FROM DETALLE_SOLICITUD ds
-    INNER JOIN TIPO_REQUISITO ts ON ds.TIPO_REQUISITO = ts.ID
-    WHERE ds.ID_SOLICITUD = ID_SOLICITUD;
+    SELECT ds.ID AS DetalleSolicitudID, ds.CAMPO_REQUISITO AS CampoRequisito, ds.ADJUNTO_REQUISITO AS AdjuntoRequisito, ds.CUMPLE AS Cumple, tr.ID AS TipoRequisitoID, tr.DESCRIPCION AS TipoRequisitoDescripcion, tc.ID AS TipoCampoID, tc.DESCRIPCION AS TipoCampoDescripcion, tc.FORMATO_CAMPO AS FormatoCampo, tc.TIPO_CONTROL AS TipoControl, rts.ID AS RequisitoTipoSolicitudID, rts.DESCRIPCION AS RequisitoDescripcion, rts.REQUERIDO AS Requerido, rts.ADJUNTO AS Adjunto FROM DETALLE_SOLICITUD ds INNER JOIN TIPO_REQUISITO tr ON ds.TIPO_REQUISITO = tr.ID INNER JOIN TIPO_CAMPO tc ON tr.ID_TIPO_CAMPO = tc.ID INNER JOIN REQUISITO_TIPO_SOLICITUD rts ON tr.ID = rts.TIPO_REQUISITO WHERE ds.ID_SOLICITUD = idSolicitud; 
 END //
 DELIMITER ;
 
 
 DELIMITER //
 CREATE PROCEDURE SpActualizarDetalleSolicitud (
-    IN ID INT,
-    IN CAMPO_REQUISITO VARCHAR(200),
-    IN ADJUNTO_REQUISITO VARCHAR(200),
-    IN CUMPLE BIT,
-    IN ID_SOLICITUD INT,
-    IN TIPO_REQUISITO INT
+    IN s_id INT,
+    IN campoRequisito VARCHAR(200),
+    IN s_cumple BIT
 )
 BEGIN
     UPDATE DETALLE_SOLICITUD
-    SET CAMPO_REQUISITO = CAMPO_REQUISITO,
-        ADJUNTO_REQUISITO = ADJUNTO_REQUISITO,
-        CUMPLE = CUMPLE,
-        ID_SOLICITUD = ID_SOLICITUD,
-        TIPO_REQUISITO = TIPO_REQUISITO
-    WHERE ID = ID;
+    SET CAMPO_REQUISITO = campoRequisito,
+        CUMPLE = s_cumple
+    WHERE ID = s_id;
 END //
 DELIMITER ;
 
@@ -646,43 +623,61 @@ END //
 
 DELIMITER ;
 
---CALL SpIngresarSesion('2025-01-23 14:30:00', 'Reunión mensual', 1, '', '', '');
 DELIMITER //
 
-CREATE PROCEDURE SpIngresarPersonaSesion(
-    IN idSesion INT,
-    IN idPersona INT
+CREATE PROCEDURE SpActualizarSesion(
+    IN s_id INT,
+    IN s_fecha DATETIME,
+    IN s_descrip VARCHAR(100),
+    IN s_aprobada BIT,
+    IN urlActa VARCHAR(200),
+    IN urlAgenda VARCHAR(200),
+    IN urlVideo VARCHAR(200)
 )
 BEGIN
-    INSERT INTO PERSONA_SESION (ID_SESION, ID_PERSONA)
-    VALUES (idSesion, idPersona);
+    UPDATE SESION
+    SET 
+        FECHA = s_fecha,
+        DESCRIPCION = s_descrip,
+        ACTA_APROBADA = s_aprobada
+    WHERE ID = s_id;
+
+    IF urlActa <> '' THEN
+        UPDATE SESION
+        SET URL_ACTA = urlActa
+        WHERE ID = s_id;
+    END IF;
+
+    IF urlAgenda <> '' THEN
+        UPDATE SESION
+        SET URL_AGENDA = urlAgenda
+        WHERE ID = s_id;
+    END IF;
+
+    IF urlVideo <> '' THEN
+        UPDATE SESION
+        SET URL_VIDEO = urlVideo
+        WHERE ID = s_id;
+    END IF;
 END //
 
 DELIMITER ;
---CALL SpIngresarPersonaSesion(1,60);
+
 
 DELIMITER //
 
 CREATE PROCEDURE SpBuscarSesiones()
 BEGIN
-    SELECT
-        SESION.ID AS SESION_ID,
-        SESION.FECHA,
-        SESION.DESCRIPCION,
-        SESION.ACTA_APROBADA,
-        SESION.URL_ACTA,
-        SESION.URL_AGENDA,
-        SESION.URL_VIDEO,
-        PERSONA.ID AS PERSONA_ID,
-        PERSONA.NOMBRE,
-        PERSONA.PRIMER_APELLIDO,
-        PERSONA.SEGUNDO_APELLIDO
-    FROM
-        SESION
-    INNER JOIN
-        PERSONA_SESION ON SESION.ID = PERSONA_SESION.ID_SESION
-    INNER JOIN
-        PERSONA ON PERSONA_SESION.ID_PERSONA = PERSONA.ID;
+    SELECT * FROM SESION;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SpBuscarSesion(IN s_id INT)
+BEGIN
+    SELECT * FROM SESION WHERE ID = s_id;
 END //
 
 DELIMITER ;
