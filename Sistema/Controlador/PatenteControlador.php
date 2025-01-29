@@ -43,9 +43,6 @@ class PatenteControlador {
                     if (!is_writable('./repo/')) {
                         $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
                     }                
-                    if (!is_dir($rutaDestino)) {
-                        mkdir($rutaDestino, 0777, true);
-                    }
                     if (move_uploaded_file($_FILES['requisitos']['tmp_name'], $urlArchivo)) {
                         //Si todos los datos están correctos, guarda la solicitud y obtiene el id
                         $solicitudM = new SolicitudM();
