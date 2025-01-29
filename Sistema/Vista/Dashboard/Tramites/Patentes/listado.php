@@ -11,6 +11,7 @@
         </a>
       </div>
       <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
+      <input type="hidden" id="controlador" value="Patente">
       <input type="hidden" id="idUsuario" value='<?php echo $idUsuario; ?>'>
       <div class="row">
         <div class="table-responsive small">
@@ -31,6 +32,7 @@
     </div>
     <form action="index.php?controlador=Bitacora&metodo=EnviarEmail" id="frmEmail" method="post">
       <input type="hidden" name="idSolicitante" value="" id="idSolicitante">
+      <input type="hidden" name="idSolicitud" value="" id="idSolicitud">
       <div class="modal fade" id="modalBitacora" tabindex="-1" aria-labelledby="modalBitacoraLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -59,5 +61,6 @@
         </div>
       </div>
     </form>
-    <script src="./Vista/assets/js/listadoPatentes.js"></script>
+    <script src="./Vista/assets/js/listadoSolicitudes.js"></script>
+    <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
   </main>

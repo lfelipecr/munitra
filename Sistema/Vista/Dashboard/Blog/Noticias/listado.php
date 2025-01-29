@@ -29,4 +29,5 @@
       </div>
     </div>
     <script src="./Vista/assets/js/listadoNoticias.js"></script>
+    <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
   </main>

@@ -1,13 +1,4 @@
 $(document).ready(function () {
-    //Variable con el feedback del servidor
-    let msg = $('#msg').val();
-    //Valida que el servidor no haya dado ningún feedback
-    if (msg != ''){
-        $('#alerta').show();
-        $('#alerta').html(msg);
-    } else {
-        $('#alerta').hide();
-    }
     $('#frmNoticia').on('submit', function () {
         $('#alerta').show();
         let titulo = $('#txtTitulo').val().trim();

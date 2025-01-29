@@ -3,18 +3,18 @@
     --d-blue: #0f1a4f;
     --wt: #fafafa;
 }
-#collapseEX, .bg-bl, .navbar{
+/*#collapseEX, .bg-bl, .navbar{
     background-color: var(--d-blue) !important;
     color: var(--wt) !important;
 }
 #title{
     padding: 1em;
 }
-.link-blog{
-    color: var(--orange-muni);
-}
 .colorWt {
     color: var(--wt) !important;
+}*/
+.link-blog{
+    color: var(--orange-muni);
 }
 .colorWt:hover {
     color: var(--orange-muni) !important;

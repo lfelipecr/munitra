@@ -55,3 +55,4 @@
     </div>
   </main>
   <script src="./Vista/assets/js/sesiones.js"></script>
+  <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>

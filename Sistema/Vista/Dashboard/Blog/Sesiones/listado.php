@@ -28,4 +28,5 @@
       </div>
     </div>
 <script src="./Vista/assets/js/listadoSesiones.js"></script>
+<script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
 </main>

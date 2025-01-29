@@ -1,18 +1,8 @@
 $(document).ready(function (){
-    //Variable con el feedback del servidor
-    let msg = $('#msg').val();
-    //Valida que el servidor no haya dado ningún feedback
-    if (msg != ''){
-        $('#alerta').show();
-        $('#alerta').html(msg);
-    } else {
-        $('#alerta').hide();
-    }
     function RenderizarDatosJSON(){
         let datos = $('#jsonData').val();
         if (datos != ''){
             datos = JSON.parse(datos);
-            console.log(datos);
             for (let i = 0; i < datos.length; i++)
             {
                 switch  (datos[i][4]){

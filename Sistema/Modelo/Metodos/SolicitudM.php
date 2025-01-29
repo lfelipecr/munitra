@@ -29,6 +29,7 @@ class SolicitudM {
     function BuscarDetallesSolicitud($id){
         $conexion= new Conexion();
         $sql="CALL SpBuscarDetallesPorSolicitud($id);";
+        
         $resultado=$conexion->Ejecutar($sql);
         if(mysqli_num_rows($resultado)>0)
         {
@@ -105,9 +106,9 @@ class SolicitudM {
         $conexion->Cerrar();
         return $retVal;
     }
-    function BuscarSolicitudes(){
+    function BuscarSolicitudes($idTipo){
         $conexion= new Conexion();
-        $sql="CALL SpConsultarTodasSolicitudes();";
+        $sql="CALL SpConsultarTodasSolicitudes($idTipo);";
         $resultado=$conexion->Ejecutar($sql);
         if(mysqli_num_rows($resultado)>0)
         {

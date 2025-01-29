@@ -13,16 +13,28 @@ class TramitesControlador {
         $u = new Utilidades();
         if ($u->VerificarSesion()){
             $solicitudM = new SolicitudM();
-            $jsonData = $solicitudM->BuscarSolicitudes();
+            $jsonData = $solicitudM->BuscarSolicitudes(1);
             $vista = './Vista/Dashboard/Tramites/Patentes/listado.php';
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
     function UsoSuelo(){
-
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $solicitudM = new SolicitudM();
+            $jsonData = $solicitudM->BuscarSolicitudes(2);
+            $vista = './Vista/Dashboard/Tramites/UsoSuelo/listado.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }
     }
     function Visado (){
-
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $solicitudM = new SolicitudM();
+            $jsonData = $solicitudM->BuscarSolicitudes(3);
+            $vista = './Vista/Dashboard/Tramites/Visado/listado.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }
     }
     function Condonacion(){
 

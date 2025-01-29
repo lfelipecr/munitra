@@ -13,29 +13,29 @@
             </div>
         </div>
         <div class="col-12 mb-3 col-md-6">
-            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Blog&metodo=Noticias';">
-                <h4>Noticias - <a href="#" class="link-blog">Ir</a></h4>
+            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Tramites&metodo=UsoSuelo';">
+                <h4>Solicitud de Uso de Suelo - <a href="#" class="link-blog">Ir</a></h4>
                 <hr>
-                <p>Publique acontecimientos y proyectos municipales de valor para la población cantonal</p>
+                <p>Formulario de solicitud de uso de suelo</p>
             </div>
         </div>
         <div class="col-12 mb-3 col-md-6">
-            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Blog&metodo=Sesiones';">
-                <h4>Sesiones - <a href="#" class="link-blog">Ir</a></h4>
+            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Tramites&metodo=Visado';">
+                <h4>Solicitud de Visado - <a href="#" class="link-blog">Ir</a></h4>
                 <hr>
                 <p>Planifique sesiones y comparta documentos de relevancia para la población cantonal</p>
             </div>
         </div>
         <div class="col-12 mb-3 col-md-6">
-            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Blog&metodo=Noticias';">
-                <h4>Noticias - <a href="#" class="link-blog">Ir</a></h4>
+            <div class="card p-5 cardOpciones">
+                <h4>Solicitud de Condonación - <a href="#" class="link-blog">Ir</a></h4>
                 <hr>
                 <p>Publique acontecimientos y proyectos municipales de valor para la población cantonal</p>
             </div>
         </div>
         <div class="col-12 mb-3">
-            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Blog&metodo=Actividades';">
-                <h4>Actividades - <a href="#" class="link-blog">Ir</a></h4>
+            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Declaraciones&metodo=Index';">
+                <h4>Declaraciones - <a href="#" class="link-blog">Ir</a></h4>
                 <hr>
                 <p>Modifique la información sobre actividades cantonales y lugares de interés</p>
             </div>
