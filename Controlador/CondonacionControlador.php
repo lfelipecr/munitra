@@ -32,7 +32,6 @@ class CondonacionControlador {
         $u = new Utilidades();
         if ($u->VerificarSesion()){
             //if
-
             //Si todos los datos están correctos, guarda la solicitud y obtiene el id
             $solicitudM = new SolicitudM();
             $solicitud = new Solicitud();

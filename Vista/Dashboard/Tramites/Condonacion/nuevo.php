@@ -50,7 +50,7 @@
             <div class="col-md-6 mt-md-3">
               <span class="mb-3">Tipo de Solicitud (*)</span><br>
               <select name="tipoSolicitud" id="tipoSolicitud" class="form-control">
-                <option value="Pago de contado" id="contadoOpcion">Pago de contado</option>
+                <option selected value="Pago de contado" id="contadoOpcion">Pago de contado</option>
                 <option value="Arreglo de pago" id="arregloOpcion">Arreglo de pago</option>
               </select>
             </div>
@@ -86,7 +86,7 @@
                 </select>
             </div>
             <div id="pagoContado" class="row">
-                <div class="col-md-12 mt-md-3">
+                <div class="col-md-12 mt-3">
                     <span><strong>Modalidad: Pago de Contado</strong></span>
                 </div>
                 <div class="col-md-6 mt-md-3">
@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div id="pagoArreglo" class="row">
-                <div class="col-md-12 mt-md-3">
+                <div class="col-md-12 mt-3">
                     <span><strong>Modalidad: Arreglo de Pago</strong></span>
                 </div>
                 <div class="col-md-6 mt-md-3">
