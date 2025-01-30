@@ -7,15 +7,26 @@ require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class VisadoControlador {
     private function LlamarVistaActualizar($msg, $id){
-        $solicitudM = new SolicitudM();
-        $personaM = new PersonaM();
-        $provinciaM = new ProvinciaM();
-        $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
-        $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
-        $personas = $personaM->ListadoPersonas();
-        $distritos = $provinciaM->BuscarDistritos();
-        $vista = './Vista/Dashboard/Tramites/Visado/actualizar.php';
-        require_once './Vista/Utilidades/sidebar.php';
+        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $solicitudM = new SolicitudM();
+            $provinciaM = new ProvinciaM();
+            $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
+            $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+            $id = $_SESSION['usuario']->getIdPersona();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/TramitesUsuario/Visado/actualizar.php';
+            require_once './Vista/Utilidades/navbar.php';
+        } else {
+            $solicitudM = new SolicitudM();
+            $personaM = new PersonaM();
+            $provinciaM = new ProvinciaM();
+            $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
+            $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+            $personas = $personaM->ListadoPersonas();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/Dashboard/Tramites/Visado/actualizar.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }        
     }
     private function LlamarVistaIngresar($msg){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){

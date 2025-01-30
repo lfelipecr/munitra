@@ -7,7 +7,7 @@
     color: red;
   }
 </style>
-<main class="col-sm-10 bg-body-tertiary" id="main">
+<main class="col-sm-12 bg-body-tertiary" id="main">
     <div class="container-fluid">
       <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
@@ -23,14 +23,7 @@
         <input type="hidden" value="<?php echo $id; ?>" name="idSolicitud">  
         <div class="my-3 p-3 bg-body rounded shadow-sm">
           <div class="row mt-3">
-            <div class="col-12">
-              <span class="mb-3">Solicitante (*)</span>
-              <select name="persona" id="slPersonas" class="form-control">
-                <?php for ($i = 0; $i < count($personas); $i++) {?>
-                  <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
-                  <?php }?>
-              </select>
-            </div>
+            <input type="hidden" name="persona" id="slPersonas" value="<?php echo $id; ?>">
             <div class="col-12"><hr></div>
             <div class="col-12 mt-md-3">
               <span class="mb-3">Dirección de plano a revisar (*)</span><br>
@@ -128,13 +121,7 @@
               <input type="hidden" name="firma" id="firma">
               <button id="clear" class="btn btn-outline-danger">Limpiar</button>
             </div>
-            <div class="col-12 mt-md-3">
-              <span class="mb-3">Estado de Solicitud</span><br>
-              <select name="estadoSolicitud" id="slEstado" class="form-control">
-                <option value="1">Aprobada</option>
-                <option value="2">No Aprobada</option>
-              </select>
-            </div>   
+            <input type="hidden" name="estadoSolicitud" id="slEstado" value="2">   
             <div class="col-12 py-2">
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
             </div>

@@ -70,7 +70,21 @@ class TramitesControlador {
         }
     }
     function Condonacion(){
-
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            session_start();
+            if ($_SESSION['usuario']->getIdDepartamento() == 1){
+                $solicitudM = new SolicitudM();
+                $jsonData = $solicitudM->BuscarSolicitudes(4);
+                $vista = './Vista/TramitesUsuario/Condonacion/listado.php';
+                require_once './Vista/Utilidades/navbar.php';
+            } else {
+                $solicitudM = new SolicitudM();
+                $jsonData = $solicitudM->BuscarSolicitudes(4);
+                $vista = './Vista/Dashboard/Tramites/Condonacion/listado.php';
+                require_once './Vista/Utilidades/sidebar.php';
+            }
+        }
     }
     function Declaraciones(){
 
