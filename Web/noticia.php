@@ -14,15 +14,15 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="./Web/css/styles.css" rel="stylesheet"/>
     </head>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-body-transparent py-4" style="background-color: #0f1a4f;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="./index.php">
                     <div class="mx-3 mx-md-5">
-                        <img src="assets/img/Municipalidad de Rio Cuarto.png" class="img-fluid" alt="">
+                        <img src="./Web/assets/img/Municipalidad de Rio Cuarto.png" class="img-fluid" alt="">
                     </div>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,29 +30,29 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-1">
-                        <button class="btn btn-outline-warning">
+                        <a href="./index.php?controlador=Login&metodo=Index" class="btn btn-outline-warning">
                             <span style="font-size: 1em;">Trámites</span>
-                        </button>
+                        </a>
                     </ul>
                     <div class="navbar-text px-md-5">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+                                <a class="nav-link" aria-current="page" href="index.php">Inicio</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Nosotros</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="municipalidad.html">La Municipalidad</a></li>
-                                    <li><a class="dropdown-item" href="alcaldia.html">Alcaldía</a></li>
-                                    <li><a class="dropdown-item" href="departamentos.html">Departamentos</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Municipalidad">La Municipalidad</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Alcaldia">Alcaldía</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Departamentos">Departamentos</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle pagActual" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Nuestro Cantón</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item pagActual" href="noticias.html">Noticias</a></li>
-                                    <li><a class="dropdown-item" href="quehacer.html">¿Qué hacer?</a></li>
-                                    <li><a class="dropdown-item" href="himno.html">Himno</a></li>
+                                    <li><a class="dropdown-item pagActual" href="index.php?controlador=Web&metodo=Noticias">Noticias</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Actividades">¿Qué hacer?</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Himno">Himno</a></li>
                                     <li><a class="dropdown-item" href="https://munirc.maps.arcgis.com/home/index.html">Visor Geográfico</a></li>
                                     <li><a class="dropdown-item" href="https://muniriocuarto-my.sharepoint.com/personal/ti_muniriocuarto_go_cr1/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables%2F216%5FZonasHomog%C3%A9neas%2Epdf&parent=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables&ga=1">Zonas Homogéneas</a></li>
                                     <li><a class="dropdown-item" href="https://muniriocuarto-my.sharepoint.com/personal/ti_muniriocuarto_go_cr1/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables%2F216%5FZonas%5FAgropecuarias%5FPVA%20%2Epdf&parent=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables&ga=1">Zonas Agropecuarias</a></li>
@@ -61,12 +61,12 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Concejo Municipal</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="conformacion.html">Conformación</a></li>
-                                    <li><a class="dropdown-item" href="sesiones.html">Sesiones</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Conformacion">Conformación</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Sesiones">Sesiones</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="contacto.html">Contacto</a>
+                                <a class="nav-link" aria-current="page" href="index.php?controlador=Web&metodo=Contacto">Contacto</a>
                             </li>
                         </ul>
                     </div>

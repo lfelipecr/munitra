@@ -7,23 +7,43 @@ require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class PatenteControlador {
     private function LlamarVistaActualizar($msg, $id){
-        $solicitudM = new SolicitudM();
-        $personaM = new PersonaM();
-        $provinciaM = new ProvinciaM();
-        $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
-        $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
-        $personas = $personaM->ListadoPersonas();
-        $distritos = $provinciaM->BuscarDistritos();
-        $vista = './Vista/Dashboard/Tramites/Patentes/actualizar.php';
-        require_once './Vista/Utilidades/sidebar.php';
+        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $solicitudM = new SolicitudM();
+            $personaM = new PersonaM();
+            $provinciaM = new ProvinciaM();
+            $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
+            $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+            $personas = $personaM->ListadoPersonas();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/TramitesUsuario/Patentes/actualizar.php';
+            require_once './Vista/Utilidades/navbar.php';
+        } else {
+            $solicitudM = new SolicitudM();
+            $personaM = new PersonaM();
+            $provinciaM = new ProvinciaM();
+            $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
+            $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+            $personas = $personaM->ListadoPersonas();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/Dashboard/Tramites/Patentes/actualizar.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }
     }
     private function LlamarVistaIngresar($msg){
-        $personaM = new PersonaM();
-        $provinciaM = new ProvinciaM();
-        $personas = $personaM->ListadoPersonas();
-        $distritos = $provinciaM->BuscarDistritos();
-        $vista = './Vista/Dashboard/Tramites/Patentes/nuevo.php';
-        require_once './Vista/Utilidades/sidebar.php';
+        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $id = $_SESSION['usuario']->getIdPersona();
+            $provinciaM = new ProvinciaM();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/TramitesUsuario/Patentes/nuevo.php';
+            require_once './Vista/Utilidades/navbar.php';
+        } else {
+            $personaM = new PersonaM();
+            $provinciaM = new ProvinciaM();
+            $personas = $personaM->ListadoPersonas();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/Dashboard/Tramites/Patentes/nuevo.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }
     }
     function VIngresar(){
         $u = new Utilidades();

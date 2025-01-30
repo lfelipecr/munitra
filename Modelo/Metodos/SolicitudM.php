@@ -82,6 +82,7 @@ class SolicitudM {
         ", ".$solicitud->getIdUsuario().
         ", ".$solicitud->getEstadoSolicitud().
         ", ".$solicitud->getTipoSolicitud().")";
+        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = $this->MaxID();

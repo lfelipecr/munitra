@@ -7,15 +7,26 @@ require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class UsosueloControlador {
     private function LlamarVistaActualizar($msg, $id){
-        $solicitudM = new SolicitudM();
-        $personaM = new PersonaM();
-        $provinciaM = new ProvinciaM();
-        $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
-        $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
-        $personas = $personaM->ListadoPersonas();
-        $distritos = $provinciaM->BuscarDistritos();
-        $vista = './Vista/Dashboard/Tramites/UsoSuelo/actualizar.php';
-        require_once './Vista/Utilidades/sidebar.php';
+        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $solicitudM = new SolicitudM();
+            $provinciaM = new ProvinciaM();
+            $idUsuario = $_SESSION['usuario']->getIdPersona();
+            $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
+            $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/TramitesUsuario/UsoSuelo/actualizar.php';
+            require_once './Vista/Utilidades/navbar.php';
+        } else {
+            $solicitudM = new SolicitudM();
+            $personaM = new PersonaM();
+            $provinciaM = new ProvinciaM();
+            $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
+            $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+            $personas = $personaM->ListadoPersonas();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/Dashboard/Tramites/UsoSuelo/actualizar.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }        
     }
     function VActualizar(){
         $u = new Utilidades();
@@ -25,12 +36,20 @@ class UsosueloControlador {
         }
     }
     private function LlamarVistaIngresar($msg){
-        $personaM = new PersonaM();
-        $provinciaM = new ProvinciaM();
-        $personas = $personaM->ListadoPersonas();
-        $distritos = $provinciaM->BuscarDistritos();
-        $vista = './Vista/Dashboard/Tramites/UsoSuelo/nuevo.php';
-        require_once './Vista/Utilidades/sidebar.php';
+        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $id = $_SESSION['usuario']->getIdPersona();
+            $provinciaM = new ProvinciaM();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/TramitesUsuario/UsoSuelo/nuevo.php';
+            require_once './Vista/Utilidades/navbar.php';
+        } else {
+            $personaM = new PersonaM();
+            $provinciaM = new ProvinciaM();
+            $personas = $personaM->ListadoPersonas();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/Dashboard/Tramites/UsoSuelo/nuevo.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }
     }
     function VIngresar(){
         $u = new Utilidades();

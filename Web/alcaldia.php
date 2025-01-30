@@ -14,15 +14,15 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="./Web/css/styles.css" rel="stylesheet"/>
     </head>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-body-transparent py-4" style="background-color: #0f1a4f;">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="./index.php">
                     <div class="mx-3 mx-md-5">
-                        <img src="assets/img/Municipalidad de Rio Cuarto.png" class="img-fluid" alt="">
+                        <img src="./Web/assets/img/Municipalidad de Rio Cuarto.png" class="img-fluid" alt="">
                     </div>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,29 +30,29 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-1">
-                        <button class="btn btn-outline-warning">
+                        <a href="./index.php?controlador=Login&metodo=Index" class="btn btn-outline-warning">
                             <span style="font-size: 1em;">Trámites</span>
-                        </button>
+                        </a>
                     </ul>
                     <div class="navbar-text px-md-5">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+                                <a class="nav-link" aria-current="page" href="index.php">Inicio</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Nosotros</a>
+                                <a class="nav-link dropdown-toggle pagActual" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Nosotros</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="municipalidad.html">La Municipalidad</a></li>
-                                    <li><a class="dropdown-item" href="alcaldia.html">Alcaldía</a></li>
-                                    <li><a class="dropdown-item" href="departamentos.html">Departamentos</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Municipalidad">La Municipalidad</a></li>
+                                    <li><a class="dropdown-item pagActual" href="index.php?controlador=Web&metodo=Alcaldia">Alcaldía</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Departamentos">Departamentos</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle pagActual" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Nuestro Cantón</a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Nuestro Cantón</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="noticias.html">Noticias</a></li>
-                                    <li><a class="dropdown-item pagActual" href="quehacer.html">¿Qué hacer?</a></li>
-                                    <li><a class="dropdown-item" href="himno.html">Himno</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Noticias">Noticias</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Actividades">¿Qué hacer?</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Himno">Himno</a></li>
                                     <li><a class="dropdown-item" href="https://munirc.maps.arcgis.com/home/index.html">Visor Geográfico</a></li>
                                     <li><a class="dropdown-item" href="https://muniriocuarto-my.sharepoint.com/personal/ti_muniriocuarto_go_cr1/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables%2F216%5FZonasHomog%C3%A9neas%2Epdf&parent=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables&ga=1">Zonas Homogéneas</a></li>
                                     <li><a class="dropdown-item" href="https://muniriocuarto-my.sharepoint.com/personal/ti_muniriocuarto_go_cr1/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables%2F216%5FZonas%5FAgropecuarias%5FPVA%20%2Epdf&parent=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables&ga=1">Zonas Agropecuarias</a></li>
@@ -61,35 +61,99 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Concejo Municipal</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="conformacion.html">Conformación</a></li>
-                                    <li><a class="dropdown-item" href="sesiones.html">Sesiones</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Conformacion">Conformación</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Sesiones">Sesiones</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="contacto.html">Contacto</a>
+                                <a class="nav-link" aria-current="page" href="index.php?controlador=Web&metodo=Contacto">Contacto</a>
                             </li>
                         </ul>
                     </div>
               </div>
             </div>
         </nav>
-        <header class="mastheadNoticia">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center text-white">
-                            <h1>Actividad</h1>
+        <div class="container">
+            <section class="testimonials text-center">
+                <div class="container">
+                    <h2 class="mb-4">Alcaldía</h2>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
+                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
+                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
+                                </button>
+                                <h6 class="mt-1">Alcalde</h6>
+                                <p class="font-weight-light mb-0">
+                                    Abogado, especialista en derecho comercial. Asesor en Casa Presidencial 2006- 2008. Asesor jurídico de la Presidencia Ejecutiva del IMAS, 2008 - 2010. Jefe de proyectos del IMAS, 2010 - 2014. Asesor de Subgerencia de Desarrollo Social del IMAS. Vicepresidente de Asociación Solidarista del IMAS.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
+                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
+                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
+                                </button>
+                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
+                                <p class="font-weight-light mb-0">Tiene 29 años de edad.  Graduada en la Universidad de Costa Rica de la carrera Administración Aduanera y Comercio Exterior, trabajó en el sector privado en temas de logística y exportación durante 3 años.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
+                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
+                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
+                                </button>
+                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
+                                <p class="font-weight-light mb-0"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
+        </div>
+        <!-- Modal de Contacto-->
+        <div class="modal fade" id="modalContacto" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Comuníquese con {NOMBRE}, {PUESTO}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Nombre Completo *</label>
+                                <input type="email" class="form-control" id="">
+                            </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Telefono *</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Correo *</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Asunto *</label>
+                                <input type="text" class="form-control" id="">
+                            </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Consulta *</label>
+                                <textarea name="" class="form-control" id=""></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning">
+                            <span>Enviar</span>
+                        </button>
+                    </div>
+                    </form>
+                </div>
             </div>
-        </header>
-        <div class="container mb-5">
-            <hr class="mt-5">
-            <p class="lead mb-3 mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti excepturi deserunt consequuntur vero, sequi voluptas a perspiciatis dolor omnis qui quaerat dolorem! Id, deserunt non? Dolorem, dolorum? Aperiam, rerum dolorum.</p>
-            <button class="btn btn-warning mb-5 mt-5">
-                <span>Descargar Adjuntos</span>
-            </button>
         </div>
         <!-- Footer-->
         <footer class="text-center text-lg-start" style="background-color: #f3aa16;">

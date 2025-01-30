@@ -18,12 +18,20 @@ class VisadoControlador {
         require_once './Vista/Utilidades/sidebar.php';
     }
     private function LlamarVistaIngresar($msg){
-        $personaM = new PersonaM();
-        $provinciaM = new ProvinciaM();
-        $personas = $personaM->ListadoPersonas();
-        $distritos = $provinciaM->BuscarDistritos();
-        $vista = './Vista/Dashboard/Tramites/Visado/nuevo.php';
-        require_once './Vista/Utilidades/sidebar.php';
+        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $provinciaM = new ProvinciaM();
+            $id = $_SESSION['usuario']->getIdPersona();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/TramitesUsuario/Visado/nuevo.php';
+            require_once './Vista/Utilidades/navbar.php';
+        } else {
+            $personaM = new PersonaM();
+            $provinciaM = new ProvinciaM();
+            $personas = $personaM->ListadoPersonas();
+            $distritos = $provinciaM->BuscarDistritos();
+            $vista = './Vista/Dashboard/Tramites/Visado/nuevo.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }
     }
     function VIngresar(){
         $u = new Utilidades();

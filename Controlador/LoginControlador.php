@@ -5,10 +5,14 @@ require_once './Modelo/Entidades/Usuario.php';
 
 class LoginControlador
 {   
+    function Index(){
+        $msg = '';
+        require_once './Vista/Login/login.php';
+    }
     function InicioTramites(){
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
-            require_once './Vista/TramitesUsuario/listadoTramites.php';
+            header('location: index.php?controlador=Tramites&metodo=ListadoTramites');
         }
     }
     function AdminInicio(){
