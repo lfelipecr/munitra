@@ -226,8 +226,6 @@ class PatenteControlador {
                     $dimensiones->setTipoRequisito(9);
                     $registrar[] = $dimensiones;   
                     //Si se envió un archivo, se agrega a la lista de detalles para modificar
-
-                    
                     if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
                         header('location: index.php?controlador=Tramites&metodo=Patentes');
                     } else {

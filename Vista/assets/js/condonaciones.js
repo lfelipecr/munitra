@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#pagoContado').show();
+    $('#pagoContado').hide();
     $('#pagoArreglo').hide();
     $('#prevencion').hide();
     function CheckboxCumple(){
@@ -9,18 +9,127 @@ $(document).ready(function () {
             $('#valorCumple').val('0');
         }
     }
-    CheckboxCumple();
-    $('#cbxCumple').on('change', function (){
-        CheckboxCumple();
-    });
-    $('#resolucion').on('change', function(){
+    function RenderizarDatosJSON(){
+        let datos = $('#jsonData').val();
+        if (datos != ''){
+            datos = JSON.parse(datos);
+            console.log(datos);
+            for (let i = 0; i < datos.length; i++)
+            {
+                switch  (datos[i][4]){
+                    case '32':
+                        $('#idRepresentante').val(datos[i][0]);
+                        $('#txtRepresentante').val(datos[i][1]);
+                        break;
+                    case '33':
+                        $('#idIdentificacionRepresentante').val(datos[i][0]);
+                        $('#txtIdentificacionRepresentante').val(datos[i][1]);
+                        break;
+                    case '34':
+                        $('#idDireccion').val(datos[i][0]);
+                        $('#txtDireccion').val(datos[i][1]);
+                        break;
+                    case '35':
+                        $('#idNotificaciones').val(datos[i][0]);
+                        $('#txtNotificaciones').val(datos[i][1]);
+                        break;
+                    case '36':
+                        let html;
+                        if (datos[1][1] == 'Pago de contado'){
+                            html = '<option selected="" value="Pago de contado" id="contadoOpcion">Pago de contado</option><option value="Arreglo de pago" id="arregloOpcion">Arreglo de pago</option>'
+                        } else {
+                            html = html = '<option value="Pago de contado" id="contadoOpcion">Pago de contado</option><option value="Arreglo de pago" selected="" id="arregloOpcion">Arreglo de pago</option>'
+                        }
+                        $('#tipoSolicitud').html(html);
+                        break;
+                    case '37':
+                        $('#idFirma').val(datos[i][0]);
+                        break;
+                    case '38':
+                        $('#idRecibido').val(datos[i][0]);
+                        $('#txtRecibido').val(datos[i][1]);
+                        break;
+                    case '39':
+                        $('#idFecha').val(datos[i][0]);
+                        $('#fecha').val(datos[i][1]);
+                        break;
+                    case '40':
+                        id = datos[i][1].replaceAll(' ','_');
+                        $('#idFuncionario').val(datos[i][0]);
+                        $('#'+id).attr('selected', '');
+                        break;
+                    case '41':
+                        $('#idConsecutivo').val(datos[i][0]);
+                        $('#consecutivo').val(datos[i][1]);
+                        break;
+                    case '42':
+                        $('#idTotalContado').val(datos[i][0]);
+                        $('#totalContado').val(datos[i][1]);
+                        break;
+                    case '43':
+                        $('#idMontoCondonarContado').val(datos[i][0]);
+                        $('#montoCondonarContado').val(datos[i][1]);
+                        break;
+                    case '44':
+                        $('#idFechaPago').val(datos[i][0]);
+                        $('#fechaPago').val(datos[i][1]);
+                        break;
+                    case '45':
+                        $('#idTotalArreglo').val(datos[i][0]);
+                        $('#totalArreglo').val(datos[i][1]);
+                        break;
+                    case '46':
+                        $('#montoCondonarArreglo').val(datos[i][0]);
+                        $('#montoCondonarArreglo').val(datos[i][1]);
+                        break;
+                    case '47':
+                        $('#idFechaInicio').val(datos[i][0]);
+                        $('#fechaInicio').val(datos[i][1]);
+                        break;
+                    case '48':
+                        $('#idPlazoMeses').val(datos[i][0]);
+                        $('#plazoMeses').val(datos[i][1]);
+                        break;
+                    case '49':
+                        $('#idCantidadCuotas').val(datos[i][0]);
+                        $('#cantidadCuotas').val(datos[i][1]);
+                        break;
+                    case '50':
+                        $('#idAdelanto').val(datos[i][0]);
+                        $('#adelanto').val(datos[i][1]);
+                        break;
+                    case '51':
+                        $('#idPagoPorCuota').val(datos[i][0]);
+                        $('#pagoPorCuota').val(datos[i][1]);
+                        break;
+                    case '52':
+                        $('#idResolucion').val(datos[i][0]);
+                        //
+                        break;
+                    case '53':
+                        $('#idPlazo').val(datos[i][0]);
+                        $('#plazo').val(datos[i][1]);
+                        break;
+                    case '54':
+                        $('#idFechaNotificacion').val(datos[i][0]);
+                        $('#fechaNotificacion').val(datos[i][1]);
+                        break;
+                    case '55':
+                        $('#idCumple').val(datos[i][0]);
+                        $('#valorCumple').val(datos[i][1]);
+                        break;
+                }
+            }
+        }
+    }
+    function Resolucion(){
         if ($('#opcionPrevencion').is(':selected')){
             $('#prevencion').show();
         } else {
             $('#prevencion').hide();
         }
-    });
-    $('#tipoSolicitud').on('change', function(){
+    }
+    function TipoSolicitud(){
         if ($('#contadoOpcion').is(':selected')){
             $('#pagoContado').show();
             $('#pagoArreglo').hide();
@@ -28,6 +137,18 @@ $(document).ready(function () {
             $('#pagoContado').hide();
             $('#pagoArreglo').show();
         }
+    }
+    RenderizarDatosJSON();
+    CheckboxCumple();
+    Resolucion();
+    $('#cbxCumple').on('change', function (){
+        CheckboxCumple();
+    });
+    $('#resolucion').on('change', function(){
+        Resolucion();
+    });
+    $('#tipoSolicitud').on('change', function(){
+        TipoSolicitud();
     });
     $('#frmCondonacion').on('submit', function () {
         $('#alerta').show();

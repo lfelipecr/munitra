@@ -11,7 +11,6 @@ class BitacoraSolicitudM {
         ", ".$bitacora->getIdEstado().
         ", '".$bitacora->getNota().
         "', '".$bitacora->getDetalle()."')";
-        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;

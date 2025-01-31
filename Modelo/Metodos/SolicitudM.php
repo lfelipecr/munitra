@@ -82,7 +82,6 @@ class SolicitudM {
         ", ".$solicitud->getIdUsuario().
         ", ".$solicitud->getEstadoSolicitud().
         ", ".$solicitud->getTipoSolicitud().")";
-        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = $this->MaxID();
@@ -109,7 +108,13 @@ class SolicitudM {
     }
     function BuscarSolicitudes($idTipo){
         $conexion= new Conexion();
-        $sql="CALL SpConsultarTodasSolicitudes($idTipo);";
+        session_start();
+        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $idUsuario = $_SESSION['usuario']->getIdPersona();
+            $sql="CALL SpConsultarTodasSolicitudesUsuario($idTipo, $idUsuario);";
+        } else {
+            $sql="CALL SpConsultarTodasSolicitudes($idTipo);";
+        }
         $resultado=$conexion->Ejecutar($sql);
         if(mysqli_num_rows($resultado)>0)
         {
@@ -142,7 +147,6 @@ class SolicitudM {
             $sql = "CALL SpActualizarDetalleSolicitud( ".$arregloDetalles[$i]->getId().
             ", '".$arregloDetalles[$i]->getCampoRequisito().
             "', ".$arregloDetalles[$i]->getCumple().")";
-            echo $sql;
             try{
                 if($conexion->Ejecutar($sql)){
                     $retVal = true;
