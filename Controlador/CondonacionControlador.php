@@ -262,10 +262,10 @@ class CondonacionControlador {
                 if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
                     header('location: index.php?controlador=Tramites&metodo=Condonacion');
                 } else {
-                    $this->LlamarVistaIngresar('Verfique los datos de la solicitud');    
+                    $this->LlamarVistaActualizar('Verfique los detalles de la solicitud', $idSolicitud);    
                 }
             } else {
-                $this->LlamarVistaIngresar('Verfique los datos de la solicitud');
+                $this->LlamarVistaActualizar('Verfique los datos de la solicitud', $idSolicitud);
             }
         }
     }

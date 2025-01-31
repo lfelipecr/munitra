@@ -35,6 +35,7 @@ $(document).ready(function () {
                         $('#txtNotificaciones').val(datos[i][1]);
                         break;
                     case '36':
+                        $('#idTipoSolicitud').val(datos[i][0]);
                         html = '';
                         if (datos[i][1] == 'Pago de contado'){
                             html = '<option selected="" value="Pago de contado" id="contadoOpcion">Pago de contado</option><option value="Arreglo de pago" id="arregloOpcion">Arreglo de pago</option>'
@@ -160,7 +161,7 @@ $(document).ready(function () {
     $('#tipoSolicitud').on('change', function(){
         TipoSolicitud();
     });
-    
+
     $('#frmCondonacion').on('submit', function () {
         $('#alerta').show();
         //datos obligatorios
