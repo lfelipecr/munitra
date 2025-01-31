@@ -29,11 +29,12 @@ class UsuarioControlador
                 $urlArchivo = $rutaDestino.basename($_FILES['foto']['name']);
                 if (!is_writable($rutaDestino)) {
                     $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
-                    $vista = './Vista/Dashboard/Blog/Sesiones/usuario.php';
+                    $vista = './Vista/Dashboard/usuario.php';
                     require_once './Vista/Utilidades/sidebar.php';
                 }
                 if (move_uploaded_file($_FILES['foto']['tmp_name'], $urlArchivo)) {
                     session_start();
+                    
                     $personaM = new PersonaM();
                     $imagen = new ImagenUsuario();
                     $imagen->setId($_POST['idFoto']);
@@ -44,7 +45,7 @@ class UsuarioControlador
                     }
                 } else {
                     $msg = 'Ha habido un error con la subida del archivo, intente con otro archivo';
-                    $vista = './Vista/Dashboard/Blog/Sesiones/usuario.php';
+                    $vista = './Vista/Dashboard/usuario.php';
                     require_once './Vista/Utilidades/sidebar.php';
                 }
             }

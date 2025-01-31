@@ -92,3 +92,4 @@
   </main>
   <script src="./Vista/assets/js/usosuelo.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
+  <script src="./Vista/assets/js/firmas.js"></script>

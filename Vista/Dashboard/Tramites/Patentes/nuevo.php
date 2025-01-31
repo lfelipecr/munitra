@@ -97,4 +97,5 @@
     </div>
   </main>
   <script src="./Vista/assets/js/patentes.js"></script>
+  <script src="./Vista/assets/js/firmas.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>

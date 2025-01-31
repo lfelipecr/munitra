@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="col-12 mb-3 col-md-6">
-            <div class="card p-5 cardOpciones">
+            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Tramites&metodo=Condonacion';">
                 <h4>Solicitud de Condonación - <a href="#" class="link-blog">Ir</a></h4>
                 <hr>
                 <p>Publique acontecimientos y proyectos municipales de valor para la población cantonal</p>
