@@ -89,7 +89,7 @@
             <div class="row mb-3">
                 
                 <div class="col-md-4 text-center d-flex justify-content-center">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card my-1" style="width: 18rem;">
                         <div class="bgNoticiaNoPic"></div>
                         <!--<img src="..." class="card-img-top" alt="...">-->
                         <div class="card-body">
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 text-center d-flex justify-content-center">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card my-1" style="width: 18rem;">
                         <div class="bgNoticiaNoPic"></div>
                         <!--<img src="..." class="card-img-top" alt="...">-->
                         <div class="card-body">
@@ -109,7 +109,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 text-center d-flex justify-content-center">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card my-1" style="width: 18rem;">
                         <div class="bgNoticiaNoPic"></div>
                         <!--<img src="..." class="card-img-top" alt="...">-->
                         <div class="card-body">

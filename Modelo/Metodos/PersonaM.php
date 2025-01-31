@@ -2,6 +2,7 @@
 require_once './Modelo/Entidades/Persona.php';
 require_once './Modelo/Entidades/Usuario.php';
 require_once './Modelo/Entidades/DTO/PersonaDTO.php';
+require_once './Modelo/Entidades/ImagenUsuario.php';
 require_once './Modelo/Conexion.php';
 
 class PersonaM {
@@ -17,6 +18,54 @@ class PersonaM {
         }
         $conexion->Cerrar();
         return $idMax;
+    }
+    function ActualizarImagen(ImagenUsuario $imagen){
+        $retVal = false;
+        $conexion= new Conexion();
+        $sql="UPDATE IMAGEN_USUARIO SET URL_IMAGEN = '".$imagen->getUrlImagen()."' WHERE ID = ".$imagen->getId().";";
+        $resultado=$conexion->Ejecutar($sql);
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
+    }
+    function IngresarImagen(ImagenUsuario $imagen){
+        $retVal = false;
+        $conexion= new Conexion();
+        $sql="INSERT INTO IMAGEN_USUARIO (ID_USUARIO, URL_IMAGEN) VALUES (".$imagen->getIdUsuario().", '".$imagen->getUrlImagen()."')";
+        $resultado=$conexion->Ejecutar($sql);
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
+    }
+    function BuscarImagen($idPersona){
+        $imagenUsuario=null;
+        $conexion= new Conexion();
+        $sql="SELECT * FROM IMAGEN_USUARIO WHERE ID_USUARIO = $idPersona";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            while($fila=$resultado->fetch_assoc())
+            {
+                $imagenUsuario = new ImagenUsuario();
+                $imagenUsuario->setId($fila["ID"]);
+                $imagenUsuario->setIdUsuario($fila["ID_USUARIO"]);
+                $imagenUsuario->setUrlImagen($fila["URL_IMAGEN"]);
+            }
+        }
+        $conexion->Cerrar();
+        return $imagenUsuario;
     }
     //Solo se usa dentro de controladores, no se llama directamente
     function EliminarPersona($id){

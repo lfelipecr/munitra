@@ -33,12 +33,12 @@
               </select>
               <input type="hidden" id="idUsoPatentes" name="idUsoPatentes">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Nombre de Fantasía (*)</span><br>
               <input type="text" class="form-control" name="nombreFantasia" id="txtNombreFantasia">
               <input type="hidden" id="idNombreFantasia" name="idNombreFantasia">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Actividad Comercial (*)</span><br>
               <input type="text" class="form-control" name="actividadComercial" id="txtActvidadComercial">
               <input type="hidden" id="idActividadComercial" name="idActividadComercial">
@@ -52,7 +52,7 @@
               <input type="number" class="form-control" name="numeroUsoSuelo" id="txtUsoSuelo">
               <input type="hidden" id="idNumeroUsoSuelo" name="idNumeroUsoSuelo">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Distrito (*)</span><br>
               <input type="hidden" id="idDistrito" name="idDistrito">
               <select name="distrito" id="slDistrito" class="form-control">
@@ -61,17 +61,17 @@
                 <?php } ?>
               </select>
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Dirección exacta del local (*)</span><br>
               <input type="hidden" id="idDireccionExacta" name="idDireccionExacta">
               <input type="text" class="form-control" name="direccionExacta" id="txtDireccionExacta">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Área (*)</span><br>
               <input type="hidden" id="idArea" name="idArea">
               <input type="text" class="form-control" name="area" id="txtArea">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Dimensiones (*)</span><br>
               <input type="hidden" id="idDimensiones" name="idDimensiones">
               <input type="text" class="form-control" name="dimensiones" id="txtDimensiones">

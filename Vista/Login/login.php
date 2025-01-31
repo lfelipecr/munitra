@@ -23,7 +23,7 @@
 <body>
     <div class="container-fluid d-flex justify-content-center all pt-md-5 mt-5">
         <div class="card p-5">
-            <div class="text-center p-5">
+            <div class="text-center p-md-5 p-1">
                 <h4 class="h3">Ingrese</h4>
                 <div class="mx-1">
                     <img src="./Vista/assets/img/icon.png" class="img-fluid" alt="">
@@ -43,7 +43,7 @@
                         <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
                     </div>
                     <button class="btn-outline-warning btn w-100" type="submit">
-                        <span class="p-1 px-5">Ingresar</span>
+                        <span class="p-1 px-md-5 p-1">Ingresar</span>
                     </button>
                 </form>
             </div>

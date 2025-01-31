@@ -81,7 +81,7 @@ $(document).ready(function () {
                         $('#totalArreglo').val(datos[i][1]);
                         break;
                     case '46':
-                        $('#montoCondonarArreglo').val(datos[i][0]);
+                        $('#idMontoCondonarArreglo').val(datos[i][0]);
                         $('#montoCondonarArreglo').val(datos[i][1]);
                         break;
                     case '47':

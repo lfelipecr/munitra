@@ -30,11 +30,11 @@
                 <option value="Comercial">Comercial</option>
               </select>
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Nombre de Fantasía (*)</span><br>
               <input type="text" class="form-control" name="nombreFantasia" id="txtNombreFantasia">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Actividad Comercial (*)</span><br>
               <input type="text" class="form-control" name="actividadComercial" id="txtActvidadComercial">
             </div>
@@ -46,7 +46,7 @@
               <span class="mb-3"> Número de uso de Suelo (*)</span><br>
               <input type="number" class="form-control" name="numeroUsoSuelo" id="txtUsoSuelo">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Distrito (*)</span><br>
               <select name="distrito" id="slDistrito" class="form-control">
                 <?php for ($i = 0; $i < count($distritos); $i++) { ?>
@@ -54,15 +54,15 @@
                 <?php } ?>
               </select>
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Dirección exacta del local (*)</span><br>
               <input type="text" class="form-control" name="direccionExacta" id="txtDireccionExacta">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Área (*)</span><br>
               <input type="text" class="form-control" name="area" id="txtArea">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Dimensiones (*)</span><br>
               <input type="text" class="form-control" name="dimensiones" id="txtDimensiones">
             </div>

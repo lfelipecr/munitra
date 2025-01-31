@@ -32,12 +32,12 @@
               </select>
             </div>
             <div class="col-12"><hr></div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Representante Legal (*)</span><br>
               <input type="hidden" id="idRepresentante" name="idRepresentante">
               <input type="text" class="form-control" name="representante" id="txtRepresentante">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Identificación N° (*)</span><br>
               <input type="hidden" id="idIdentificacionRepresentante" name="idIdentificacionRepresentante">
               <input type="text" class="form-control" name="identificacionRepresentante" id="txtIdentificacionRepresentante">

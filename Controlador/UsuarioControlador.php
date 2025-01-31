@@ -5,6 +5,7 @@ require_once './Modelo/Metodos/DepartamentoM.php';
 require_once './Modelo/Metodos/UsuarioM.php';
 require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Entidades/Persona.php';
+require_once './Modelo/Entidades/ImagenUsuario.php';
 require_once './Modelo/Entidades/Usuario.php';
 
 class UsuarioControlador
@@ -14,7 +15,39 @@ class UsuarioControlador
         if ($u->VerificarSesion()) {
             $personaM = new PersonaM();
             $usuario = $_SESSION['usuario'];
-            var_dump($usuario);
+            $persona = $personaM->BuscarPersona($usuario->getIdPersona());
+            $imagen = $personaM->BuscarImagen($usuario->getIdPersona());
+            $vista = './Vista/Dashboard/usuario.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }
+    }
+    function CambiarFotoPerfil(){
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+            if ($_FILES['foto']['type'] == 'image/jpeg' ||
+            $_FILES['foto']['type'] == 'image/jpg' || $_FILES['foto']['type'] == 'image/png'){
+                $rutaDestino = './repo/';
+                $urlArchivo = $rutaDestino.basename($_FILES['foto']['name']);
+                if (!is_writable($rutaDestino)) {
+                    $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
+                    $vista = './Vista/Dashboard/Blog/Sesiones/usuario.php';
+                    require_once './Vista/Utilidades/sidebar.php';
+                }
+                if (move_uploaded_file($_FILES['foto']['tmp_name'], $urlArchivo)) {
+                    session_start();
+                    $personaM = new PersonaM();
+                    $imagen = new ImagenUsuario();
+                    $imagen->setId($_POST['idFoto']);
+                    $imagen->setIdUsuario($_SESSION['usuario']->getIdPersona());
+                    $imagen->setUrlImagen($urlArchivo);
+                    if ($personaM->ActualizarImagen($imagen)){
+                        $this->Perfil();
+                    }
+                } else {
+                    $msg = 'Ha habido un error con la subida del archivo, intente con otro archivo';
+                    $vista = './Vista/Dashboard/Blog/Sesiones/usuario.php';
+                    require_once './Vista/Utilidades/sidebar.php';
+                }
+            }
         }
     }
     //Llama a la vista de ingresar GET
@@ -209,7 +242,12 @@ class UsuarioControlador
                     $usuario->setIdDepartamento($_POST['depto']);
                     $usuario->setIdEstado($_POST['estado']);
                     if ($usuarioM->IngresarUsuario($usuario)){
-                        $this->LlamarVistaIngresar('Persona y usuario registrados correctamente');    
+                        $imagen = new ImagenUsuario();
+                        $imagen->setIdUsuario($idUsuario);
+                        $imagen->setUrlImagen('./repo/serverside/placeholder.jpg');
+                        if ($personaM->IngresarImagen($imagen)){
+                            $this->LlamarVistaIngresar('Persona y usuario registrados correctamente');    
+                        }
                     } else {
                         $personaM->EliminarPersona($idUsuario);
                         $this->LlamarVistaIngresar('Credenciales de usuario ya existen');    

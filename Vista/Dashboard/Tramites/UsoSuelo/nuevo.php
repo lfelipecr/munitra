@@ -33,19 +33,19 @@
                 <?php } ?>
               </select>
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Dirección de la propiedad (*)</span><br>
               <input type="text" class="form-control" name="direccionPropiedad" id="txtDireccionPropiedad">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Número de Finca (*)</span><br>
               <input type="number" class="form-control" name="finca" id="txtFinca">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Número de Plano (*)</span><br>
               <input type="number" class="form-control" name="plano" id="txtPlano">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
                 <span class="mb-3">Motivo de la solicitud de Uso de Suelo</span><br>
                 <select name="motivoUso" id="slMotivoUso" class="form-control">
                     <option value="Solicitud de Patente">Solicitud de Patente</option>
@@ -54,11 +54,11 @@
                     <option value="Otros">Otros</option>
                 </select>
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Uso Solicitado</span><br>
               <input type="text" class="form-control" name="usoSolicitado" id="txtUsoSolicitado">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Plano Catastro</span><br>
               <input type="file" class="form-control" name="planoCatastro" id="txtPlanoCatastro">
             </div>

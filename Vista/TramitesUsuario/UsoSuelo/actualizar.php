@@ -28,22 +28,22 @@
                 <?php } ?>
               </select>
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Dirección de la propiedad (*)</span><br>
               <input type="text" class="form-control" name="direccionPropiedad" id="txtDireccionPropiedad">
               <input type="hidden" id="idDireccionPropiedad" name="idDireccionPropiedad">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Número de Finca (*)</span><br>
               <input type="number" class="form-control" name="finca" id="txtFinca">
               <input type="hidden" id="idFinca" name="idFinca">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Número de Plano (*)</span><br>
               <input type="number" class="form-control" name="plano" id="txtPlano">
               <input type="hidden" id="idPlano" name="idPlano">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
                 <span class="mb-3">Motivo de la solicitud de Uso de Suelo</span><br>
                 <input type="hidden" id="idMotivoUso" name="idMotivoUso">
                 <select name="motivoUso" id="slMotivoUso" class="form-control">
@@ -53,12 +53,12 @@
                     <option value="Otros">Otros</option>
                 </select>
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Uso Solicitado</span><br>
               <input type="hidden" id="idUsoSolicitado" name="idUsoSolicitado">
               <input type="text" class="form-control" name="usoSolicitado" id="txtUsoSolicitado">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Plano Catastro</span><br>
               <input type="hidden" id="idPlanoCatastro" name="idPlanoCatastro">
               <input type="file" class="form-control" name="planoCatastro" id="txtPlanoCatastro">

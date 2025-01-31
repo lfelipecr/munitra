@@ -38,27 +38,27 @@
                 <?php } ?>
               </select>
             </div>
-            <div class="col-4 mt-md-3">
+            <div class="col-md-4 mt-md-3">
               <span class="mb-3">Número de plano o presentación (*)</span><br>
               <input type="text" class="form-control" id="numeroPlano" name="numeroPlano">
             </div>
-            <div class="col-4 mt-md-3">
+            <div class="col-md-4 mt-md-3">
               <span class="mb-3">Área del plano (*)</span><br>
               <input type="text" class="form-control" id="areaPlano" name="areaPlano">
             </div>
-            <div class="col-4 mt-md-3">
+            <div class="col-md-4 mt-md-3">
               <span class="mb-3">Número de Finca (*)</span><br>
               <input type="text" class="form-control" id="numeroFinca" name="numeroFinca">
             </div>
-            <div class="col-4 mt-md-3">
+            <div class="col-md-4 mt-md-3">
               <span class="mb-3">Área según Registro Público (*)</span><br>
               <input type="text" class="form-control" id="areaRegistroPublico" name="areaRegistroPublico">
             </div>
-            <div class="col-4 mt-md-3">
+            <div class="col-md-4 mt-md-3">
               <span class="mb-3">Frente (*)</span><br>
               <input type="text" class="form-control" id="frente" name="frente">
             </div>
-            <div class="col-4 mt-md-3">
+            <div class="col-md-4 mt-md-3">
               <span class="mb-3">Número de Contrato CFIA (*)</span><br>
               <input type="text" class="form-control" id="numeroContrato" name="numeroContrato">
             </div>
@@ -79,23 +79,23 @@
                 <li><span>Si el plano a visar se encuentra frente a la red vial nacional, definida en el artículo N°1 de la Ley General de Caminos Públicos, deberá aportar original y tres copias con el alineamiento oficial del Ministerio de Obras Públicas y Transportes. Carta de certificación emitida por el MOPT en donde se indica el retiro de Ley para construir cercas y  edificaciones.</span></li>
               </ol>
             </div>
-            <div class="col-4 mt-md-3">
+            <div class="col-md-4 mt-md-3">
               <span class="mb-3">Carta de Disponibilidad de Agua (*)</span><br>
               <input type="file" class="form-control" id="flCartaDisponibilidad" name="flCartaDisponibilidad">
             </div>
-            <div class="col-4 mt-md-3">
+            <div class="col-md-4 mt-md-3">
               <span class="mb-3">Croquis (*)</span><br>
               <input type="file" class="form-control" id="flCroquis" name="flCroquis">
             </div>
-            <div class="col-4 mt-md-3">
+            <div class="col-md-4 mt-md-3">
               <span class="mb-3">Plano Corregido (*)</span><br>
               <input type="file" class="form-control" id="flPlanoCorregido" name="flPlanoCorregido">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Copia de la minuta (*)</span><br>
               <input type="file" class="form-control" id="flMinuta" name="flMinuta">
             </div>
-            <div class="col-6 mt-md-3">
+            <div class="col-md-6 mt-md-3">
               <span class="mb-3">Carta de certificación  MOPT</span><br>
               <input type="file" class="form-control" id="flCartaMOPT" name="flCartaMOPT">
             </div>

@@ -83,7 +83,7 @@
         <section class="showcase">
             <div class="container-fluid p-0">
                 <div class="row g-0">
-                    <div class="col-md-6 order-md-1 order-2 text-white showcase-img d-flex align-items-center justify-content-center">
+                    <div class="col-md-6 order-md-1 order-2 text-white d-flex align-items-center justify-content-center">
                         <div class="p-5 w-100 text-center">
                             <div class="rsIframeCont">
                                 <iframe class="rsIframe" src="//www.youtube.com/embed/vr0uA3MmCTU?autoplay=0&amp;rel=0" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
@@ -101,14 +101,12 @@
         <footer class="text-center text-lg-start" style="background-color: #f3aa16;">
             <div class="container">
                 <div class="row g-4 my-1 py-3 d-flex justify-content-between">
-                    <!-- Company Info -->
                     <div class="col-lg-4 col-md-6">
                         <h5 class="mb-4">Sobre Río Cuarto</h5>
                         <p class="mb-4">Cantón número 82 del país, parte de la provincia de Alajuela <br>
                             Averigua más sobre <a href="" class="footer-link">nuestra historia</a>
                         </p>
                     </div>
-                    <!-- Contact Info -->
                     <div class="col-lg-4 col-md-6">
                         <h5 class="mb-4">Contáctenos!</h5>
                         <ul class="list-unstyled">
