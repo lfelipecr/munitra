@@ -9,6 +9,14 @@ require_once './Modelo/Entidades/Usuario.php';
 
 class UsuarioControlador
 {
+    function Perfil(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()) {
+            $personaM = new PersonaM();
+            $usuario = $_SESSION['usuario'];
+            var_dump($usuario);
+        }
+    }
     //Llama a la vista de ingresar GET
     private function LlamarVistaIngresar($msg){
         $u = new Utilidades();

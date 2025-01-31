@@ -212,7 +212,7 @@
         <span class="d-print-block colorWt"><strong>Usuario</strong></span>
       </a>
       <ul class="dropdown-menu text-small shadow">
-        <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+        <li><a class="dropdown-item" href="index.php?controlador=Usuario&metodo=Perfil">Mi Perfil</a></li>
         <li><a class="dropdown-item" href="index.php?controlador=Login&metodo=CerrarSesion">Cerrar Sesión</a></li>
       </ul>
     </div>

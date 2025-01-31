@@ -22,7 +22,6 @@ class BlogControlador {
     function Noticias(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
-            session_start();
             $idUsuario = $_SESSION['usuario']->getId();
             $notiM = new NoticiaM();
             $jsonData = $notiM->BuscarNoticias();

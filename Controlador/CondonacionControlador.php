@@ -63,6 +63,7 @@ class CondonacionControlador {
                 $registrar = array();
                 //representante legal
                 $representante = new DetalleSolicitud();
+                $representante->setId($_POST['idRepresentante']);
                 $representante->setCumple(1);
                 $representante->setCampoRequisito($_POST['representante']);
                 $representante->setIdSolicitud($idSolicitud);
@@ -70,6 +71,7 @@ class CondonacionControlador {
                 $registrar[] = $representante;
                 //identificacion
                 $identificacionRepresentante = new DetalleSolicitud();
+                $identificacionRepresentante->setId($_POST['idIdentificacionRepresentante']);
                 $identificacionRepresentante->setCumple(1);
                 $identificacionRepresentante->setCampoRequisito($_POST['identificacionRepresentante']);
                 $identificacionRepresentante->setIdSolicitud($idSolicitud);
@@ -77,6 +79,7 @@ class CondonacionControlador {
                 $registrar[] = $identificacionRepresentante;
                 //direccion
                 $direccion = new DetalleSolicitud();
+                $direccion->setId($_POST['idDireccion']);
                 $direccion->setCumple(1);
                 $direccion->setCampoRequisito($_POST['direccion']);
                 $direccion->setIdSolicitud($idSolicitud);
@@ -84,6 +87,7 @@ class CondonacionControlador {
                 $registrar[] = $direccion;
                 //notificaciones
                 $notificaciones = new DetalleSolicitud();
+                $notificaciones->setId($_POST['idNotificaciones']);
                 $notificaciones->setCumple(1);
                 $notificaciones->setCampoRequisito($_POST['notificaciones']);
                 $notificaciones->setIdSolicitud($idSolicitud);
@@ -91,6 +95,7 @@ class CondonacionControlador {
                 $registrar[] = $notificaciones;
                 //tipo de solicitud
                 $tipoSolicitud = new DetalleSolicitud();
+                $tipoSolicitud->setId($_POST['idTipoSolicitud']);
                 $tipoSolicitud->setCumple(1);
                 $tipoSolicitud->setCampoRequisito($_POST['tipoSolicitud']);
                 $tipoSolicitud->setIdSolicitud($idSolicitud);
@@ -104,6 +109,7 @@ class CondonacionControlador {
                 $archivo = "repo/firmas/firma_" . time() . ".png";
                 file_put_contents($archivo, $imagen);
                 $soliFirma = new DetalleSolicitud();
+                $soliFirma->setId($_POST['idFirma']);
                 $soliFirma->setCumple(1);
                 $soliFirma->setIdSolicitud($idSolicitud);
                 $soliFirma->setCampoRequisito($archivo);
@@ -111,6 +117,7 @@ class CondonacionControlador {
                 $registrar[] = $soliFirma;
                 //recibido por
                 $recibido = new DetalleSolicitud();
+                $recibido->setId($_POST['idRecibido']);
                 $recibido->setCumple(1);
                 $recibido->setCampoRequisito($_POST['recibido']);
                 $recibido->setIdSolicitud($idSolicitud);
@@ -118,6 +125,7 @@ class CondonacionControlador {
                 $registrar[] = $recibido;
                 //fecha
                 $fecha = new DetalleSolicitud();
+                $fecha->setId($_POST['idFecha']);
                 $fecha->setCumple(1);
                 $fecha->setCampoRequisito($_POST['fecha']);
                 $fecha->setIdSolicitud($idSolicitud);
@@ -125,6 +133,7 @@ class CondonacionControlador {
                 $registrar[] = $fecha;
                 //funcionario
                 $funcionario = new DetalleSolicitud();
+                $funcionario->setId($_POST['idFuncionario']);
                 $funcionario->setCumple(1);
                 $funcionario->setCampoRequisito($_POST['funcionario']);
                 $funcionario->setIdSolicitud($idSolicitud);
@@ -132,6 +141,7 @@ class CondonacionControlador {
                 $registrar[] = $funcionario;
                 //consecutivo
                 $consecutivo = new DetalleSolicitud();
+                $consecutivo->setId($_POST['idConsecutivo']);
                 $consecutivo->setCumple(1);
                 $consecutivo->setCampoRequisito($_POST['consecutivo']);
                 $consecutivo->setIdSolicitud($idSolicitud);
@@ -139,6 +149,7 @@ class CondonacionControlador {
                 $registrar[] = $consecutivo;
                 //total de contado
                 $totalContado = new DetalleSolicitud();
+                $totalContado->setId($_POST['idTotalContado']);
                 $totalContado->setCumple(1);
                 $totalContado->setCampoRequisito($_POST['totalContado']);
                 $totalContado->setIdSolicitud($idSolicitud);
@@ -146,6 +157,7 @@ class CondonacionControlador {
                 $registrar[] = $totalContado;
                 //monto a condonar de contado
                 $montoCondonarContado = new DetalleSolicitud();
+                $montoCondonarContado->setId($_POST['idMontoCondonarContado']);
                 $montoCondonarContado->setCumple(1);
                 $montoCondonarContado->setCampoRequisito($_POST['montoCondonarContado']);
                 $montoCondonarContado->setIdSolicitud($idSolicitud);
@@ -153,6 +165,7 @@ class CondonacionControlador {
                 $registrar[] = $montoCondonarContado;
                 //fecha de pago
                 $fechaPago = new DetalleSolicitud();
+                $fechaPago->setId($_POST['idFechaPago']);
                 $fechaPago->setCumple(1);
                 $fechaPago->setCampoRequisito($_POST['fechaPago']);
                 $fechaPago->setIdSolicitud($idSolicitud);
@@ -160,6 +173,7 @@ class CondonacionControlador {
                 $registrar[] = $fechaPago;
                 //total arreglo de pago
                 $totalArreglo = new DetalleSolicitud();
+                $totalArreglo->setId($_POST['idTotalArreglo']);
                 $totalArreglo->setCumple(1);
                 $totalArreglo->setCampoRequisito($_POST['totalArreglo']);
                 $totalArreglo->setIdSolicitud($idSolicitud);
@@ -167,6 +181,7 @@ class CondonacionControlador {
                 $registrar[] = $totalArreglo;
                 //monto a condonar arreglo de pago
                 $montoCondonarArreglo = new DetalleSolicitud();
+                $montoCondonarArreglo->setId($_POST['idMontoCondonarArreglo']);
                 $montoCondonarArreglo->setCumple(1);
                 $montoCondonarArreglo->setCampoRequisito($_POST['montoCondonarArreglo']);
                 $montoCondonarArreglo->setIdSolicitud($idSolicitud);
@@ -174,6 +189,7 @@ class CondonacionControlador {
                 $registrar[] = $montoCondonarArreglo;
                 //fecha de inicio
                 $fechaInicio = new DetalleSolicitud();
+                $fechaInicio->setId($_POST['idFechaInicio']);
                 $fechaInicio->setCumple(1);
                 $fechaInicio->setCampoRequisito($_POST['fechaInicio']);
                 $fechaInicio->setIdSolicitud($idSolicitud);
@@ -181,6 +197,7 @@ class CondonacionControlador {
                 $registrar[] = $fechaInicio;
                 //plazo en meses
                 $plazoMeses = new DetalleSolicitud();
+                $plazoMeses->setId($_POST['idPlazoMeses']);
                 $plazoMeses->setCumple(1);
                 $plazoMeses->setCampoRequisito($_POST['plazoMeses']);
                 $plazoMeses->setIdSolicitud($idSolicitud);
@@ -188,6 +205,7 @@ class CondonacionControlador {
                 $registrar[] = $plazoMeses;
                 //cantidad de cuotas
                 $cantidadCuotas = new DetalleSolicitud();
+                $cantidadCuotas->setId($_POST['idCantidadCuotas']);
                 $cantidadCuotas->setCumple(1);
                 $cantidadCuotas->setCampoRequisito($_POST['cantidadCuotas']);
                 $cantidadCuotas->setIdSolicitud($idSolicitud);
@@ -195,6 +213,7 @@ class CondonacionControlador {
                 $registrar[] = $cantidadCuotas;
                 //adelanto 20%
                 $adelanto = new DetalleSolicitud();
+                $adelanto->setId($_POST['idAdelanto']);
                 $adelanto->setCumple(1);
                 $adelanto->setCampoRequisito($_POST['adelanto']);
                 $adelanto->setIdSolicitud($idSolicitud);
@@ -202,6 +221,7 @@ class CondonacionControlador {
                 $registrar[] = $adelanto;
                 //pago por cuota
                 $pagoPorCuota = new DetalleSolicitud();
+                $pagoPorCuota->setId($_POST['idPagoPorCuota']);
                 $pagoPorCuota->setCumple(1);
                 $pagoPorCuota->setCampoRequisito($_POST['pagoPorCuota']);
                 $pagoPorCuota->setIdSolicitud($idSolicitud);
@@ -209,6 +229,7 @@ class CondonacionControlador {
                 $registrar[] = $pagoPorCuota;
                 //resolucion
                 $resolucion = new DetalleSolicitud();
+                $resolucion->setId($_POST['idResolucion']);
                 $resolucion->setCumple(1);
                 $resolucion->setCampoRequisito($_POST['resolucion']);
                 $resolucion->setIdSolicitud($idSolicitud);
@@ -216,6 +237,7 @@ class CondonacionControlador {
                 $registrar[] = $resolucion;
                 //plazo de prevención
                 $plazo = new DetalleSolicitud();
+                $plazo->setId($_POST['idPlazo']);
                 $plazo->setCumple(1);
                 $plazo->setCampoRequisito($_POST['plazo']);
                 $plazo->setIdSolicitud($idSolicitud);
@@ -223,6 +245,7 @@ class CondonacionControlador {
                 $registrar[] = $plazo;
                 //fecha de notificacion
                 $fechaNotificacion = new DetalleSolicitud();
+                $fechaNotificacion->setId($_POST['idFechaNotificacion']);
                 $fechaNotificacion->setCumple(1);
                 $fechaNotificacion->setCampoRequisito($_POST['fechaNotificacion']);
                 $fechaNotificacion->setIdSolicitud($idSolicitud);
@@ -230,12 +253,13 @@ class CondonacionControlador {
                 $registrar[] = $fechaNotificacion;
                 //cumple
                 $cumple = new DetalleSolicitud();
+                $cumple->setId($_POST['idCumple']);
                 $cumple->setCumple(1);
                 $cumple->setCampoRequisito($_POST['cumple']);
                 $cumple->setIdSolicitud($idSolicitud);
                 $cumple->setTipoRequisito(55);
                 $registrar[] = $cumple;
-                if ($solicitudM->IngresarDetalles($registrar)){
+                if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
                     header('location: index.php?controlador=Tramites&metodo=Condonacion');
                 } else {
                     $this->LlamarVistaIngresar('Verfique los datos de la solicitud');    

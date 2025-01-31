@@ -14,6 +14,7 @@ $(document).ready(function () {
         if (datos != ''){
             datos = JSON.parse(datos);
             console.log(datos);
+            let html;
             for (let i = 0; i < datos.length; i++)
             {
                 switch  (datos[i][4]){
@@ -34,11 +35,11 @@ $(document).ready(function () {
                         $('#txtNotificaciones').val(datos[i][1]);
                         break;
                     case '36':
-                        let html;
-                        if (datos[1][1] == 'Pago de contado'){
+                        html = '';
+                        if (datos[i][1] == 'Pago de contado'){
                             html = '<option selected="" value="Pago de contado" id="contadoOpcion">Pago de contado</option><option value="Arreglo de pago" id="arregloOpcion">Arreglo de pago</option>'
                         } else {
-                            html = html = '<option value="Pago de contado" id="contadoOpcion">Pago de contado</option><option value="Arreglo de pago" selected="" id="arregloOpcion">Arreglo de pago</option>'
+                            html = '<option value="Pago de contado" id="contadoOpcion">Pago de contado</option><option value="Arreglo de pago" selected="" id="arregloOpcion">Arreglo de pago</option>'
                         }
                         $('#tipoSolicitud').html(html);
                         break;
@@ -104,7 +105,15 @@ $(document).ready(function () {
                         break;
                     case '52':
                         $('#idResolucion').val(datos[i][0]);
-                        //
+                        html = '';
+                        if (datos[i][1] == 'Prevención'){
+                            html = '<option value="Aprobación">Aprobación</option><option value="Denegatoria">Denegatoria</option><option selected value="Prevención" id="opcionPrevencion">Prevención</option>';
+                        } else if (datos[i][1] == 'Denegatoria'){
+                            html = '<option value="Aprobación">Aprobación</option><option selected value="Denegatoria">Denegatoria</option><option value="Prevención" id="opcionPrevencion">Prevención</option>';
+                        } else {
+                            html = '<option selected value="Aprobación">Aprobación</option><option value="Denegatoria">Denegatoria</option><option value="Prevención" id="opcionPrevencion">Prevención</option>';
+                        }
+                        $('#resolucion').html(html);
                         break;
                     case '53':
                         $('#idPlazo').val(datos[i][0]);
@@ -141,6 +150,7 @@ $(document).ready(function () {
     RenderizarDatosJSON();
     CheckboxCumple();
     Resolucion();
+    TipoSolicitud();
     $('#cbxCumple').on('change', function (){
         CheckboxCumple();
     });
@@ -150,6 +160,7 @@ $(document).ready(function () {
     $('#tipoSolicitud').on('change', function(){
         TipoSolicitud();
     });
+    
     $('#frmCondonacion').on('submit', function () {
         $('#alerta').show();
         //datos obligatorios
@@ -171,27 +182,37 @@ $(document).ready(function () {
                 $('#alerta').html('Los montos no son válidos');
                 return false;
             }
+            //borra los campos no necesarios para la solicitud
+            $('#totalArreglo').val('');
+            $('#montoCondonarArreglo').val('');
+            $('#plazoMeses').val('');
+            $('#cantidadCuotas').val('');
+            $('#adelanto').val('');
+            $('#pagoPorCuota').val('');
         } else {
             if ($('#totalArreglo').val().trim() == '' || 
-                $('#montoCondonarArreglo').val().trim() == '' ||
-                $('#plazoMeses').val().trim() == '' ||
-                $('#cantidadCuotas').val().trim() == '' ||
-                $('#adelanto').val().trim() == '' ||
-                $('#pagoPorCuota').val().trim() == '')
+            $('#montoCondonarArreglo').val().trim() == '' ||
+            $('#plazoMeses').val().trim() == '' ||
+            $('#cantidadCuotas').val().trim() == '' ||
+            $('#adelanto').val().trim() == '' ||
+            $('#pagoPorCuota').val().trim() == '')
             {
                 $('#alerta').html('Debe proporcionar todos los datos obligatorios para acuerdo de pago');
                 return false;                
             }
             else if (Number($('#totalArreglo').val()) < 1 || 
-                Number($('#montoCondonarArreglo').val()) < 1 ||
-                Number($('#plazoMeses').val()) < 1 ||
-                Number($('#cantidadCuotas').val()) < 1 ||
-                Number($('#adelanto').val()) < 1 ||
-                Number($('#pagoPorCuota').val()) < 1)
+            Number($('#montoCondonarArreglo').val()) < 1 ||
+            Number($('#plazoMeses').val()) < 1 ||
+            Number($('#cantidadCuotas').val()) < 1 ||
+            Number($('#adelanto').val()) < 1 ||
+            Number($('#pagoPorCuota').val()) < 1)
             {
                 $('#alerta').html('Los montos no son válidos');
                 return false;
             }
+            //borra los campos no necesarios para la solicitud
+            $('#totalContado').val('');
+            $('#montoCondonarContado').val('');
         }
         if ($('#opcionPrevencion').is(':selected')){
             if ($('#plazo').val().trim() == ''){

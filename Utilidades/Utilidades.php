@@ -5,6 +5,7 @@ class Utilidades
     public static function VerificarSesion(){
         session_start();
         if (isset($_SESSION['usuario'])) {
+            
             return true;
         } else {
             header('location: index.php?controlador=Login&metodo=CerrarSesion');
