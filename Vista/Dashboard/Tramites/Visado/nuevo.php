@@ -116,13 +116,8 @@
             <div class="col-12 mt-md-3">
               <span class="mb-3">Estado de Solicitud</span><br>
               <select name="estadoSolicitud" id="slEstado" class="form-control">
-                <?php if ($solicitud->getEstadoSolicitud() == 1) { ?>
-                    <option value="1" selected>Aprobada</option>
-                    <option value="2">No Aprobada</option>
-                <?php } else { ?>
-                    <option value="1">Aprobada</option>
-                    <option value="2" selected>No Aprobada</option>
-                <?php }?>
+                <option value="1">Aprobada</option>
+                <option value="2">No Aprobada</option>
               </select>
             </div>
             <div class="col-12 py-2">
