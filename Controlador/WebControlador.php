@@ -1,4 +1,6 @@
 <?php 
+require_once './Modelo/Metodos/DepartamentoM.php';
+
 class WebControlador {
     function Actividad(){
         require_once './Web/actividad.php';
@@ -13,6 +15,8 @@ class WebControlador {
         require_once './Web/contacto.php';
     }
     function Departamentos(){
+        $deptomodel = new DepartamentoM();
+        $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         require_once './Web/departamentos.php';
     }
     function Himno(){

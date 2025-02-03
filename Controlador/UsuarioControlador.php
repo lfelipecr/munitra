@@ -247,7 +247,7 @@ class UsuarioControlador
                         $imagen->setIdUsuario($idUsuario);
                         $imagen->setUrlImagen('./repo/serverside/placeholder.jpg');
                         if ($personaM->IngresarImagen($imagen)){
-                            $this->LlamarVistaIngresar('Persona y usuario registrados correctamente');    
+                            header('location: index.php?controlador=Usuario&metodo=Listado');
                         }
                     } else {
                         $personaM->EliminarPersona($idUsuario);

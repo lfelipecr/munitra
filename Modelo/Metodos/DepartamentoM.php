@@ -4,6 +4,20 @@ require_once './Modelo/Conexion.php';
 
 class DepartamentoM
 {
+    function BuscarDepartamentosUsuario(){
+        $registro='';
+        $conexion= new Conexion();
+        $sql="CALL UsuariosDepartamento()";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            $registro = json_encode($resultado->fetch_all());
+        }
+        else
+            $registro=null;
+        $conexion->Cerrar();
+        return $registro;
+    }
     function BuscarDepartamentos()
     {
         $registro=array();

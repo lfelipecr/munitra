@@ -74,6 +74,7 @@
             </div>
         </nav>
         <div class="container">
+            <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
             <section class="testimonials text-center">
                 <div class="container">
                     <h2 class="mb-4">Departamentos</h2>
@@ -90,35 +91,7 @@
                             </p>
                             <div class="collapse" id="collapseAlcaldia">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
+                                    <div class="row justify-content-between" id="listadoDepto2">
                                     </div>
                                 </div>
                             </div>
@@ -134,36 +107,7 @@
                             </p>
                             <div class="collapse" id="collapseProveeduria">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-between" id="listadoDepto3"></div>
                                 </div>
                             </div>
                         </div>
@@ -178,36 +122,7 @@
                             </p>
                             <div class="collapse" id="collapseDptoLegal">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-between" id="listadoDepto4"></div>
                                 </div>
                             </div>
                         </div>
@@ -222,36 +137,7 @@
                             </p>
                             <div class="collapse" id="collapseCtrlUrbano">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-between" id="listadoDepto5"></div>
                                 </div>
                             </div>
                         </div>
@@ -266,36 +152,7 @@
                             </p>
                             <div class="collapse" id="collapseCatastroValoracion">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-between" id="listadoDepto6"></div>
                                 </div>
                             </div>
                         </div>
@@ -310,36 +167,7 @@
                             </p>
                             <div class="collapse" id="collapseUdTecVial">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-between" id="listadoDepto7"></div>
                                 </div>
                             </div>
                         </div>
@@ -354,36 +182,7 @@
                             </p>
                             <div class="collapse" id="collapseFinancieraTrib">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-between" id="listadoDepto8"></div>
                                 </div>
                             </div>
                         </div>
@@ -398,36 +197,7 @@
                             </p>
                             <div class="collapse" id="collapsePlataforma">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-between" id="listadoDepto9"></div>
                                 </div>
                             </div>
                         </div>
@@ -442,80 +212,22 @@
                             </p>
                             <div class="collapse" id="collapsePatentes">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-between" id="listadoDepto10"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="udDepartamento">
                             <p class="d-inline-flex gap-1">
                                 <div class="row">
-                                    <div class="col-12 d-flex justify-content-between departamento"  data-bs-toggle="collapse" href="#collapsePatentes" role="button">
+                                    <div class="col-12 d-flex justify-content-between departamento"  data-bs-toggle="collapse" href="#collapseSecretaria" role="button">
                                         <h4> Secretaría del Concejo</h4>
                                         <svg class="iconDpto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#f3aa16" d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z"/></svg>
                                     </div>
                                 </div>
                             </p>
-                            <div class="collapse" id="collapsePatentes">
+                            <div class="collapse" id="collapseSecretaria">
                                 <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Alcalde</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Primer Vicealcaldesa</h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                                                <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="...">
-                                                <button class="btn btn-warning nomFuncionario" data-bs-toggle="modal" data-bs-target="#modalContacto">
-                                                    <h5 class="mt-1">José Miguel Jiménez Araya</h5>
-                                                </button>
-                                                <h6 class="mt-1">Segunda Vicealcaldesa</h6>
-                                                <p class="font-weight-light mb-0"></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="row justify-content-between" id="listadoDepto11"></div>
                                 </div>
                             </div>
                         </div>
@@ -528,7 +240,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5">Comuníquese con {NOMBRE}, {PUESTO}</h1>
+                        <h1 class="modal-title fs-5"><span id="nombreComunicar"></span>, <span id="puestoComunicar"></span></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -594,13 +306,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Copyright -->
             <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
               © 2024 Copyright: Municipalidad de Río Cuarto
             </div>
-        <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+        <script src="./Web/assets/js/departamentos.js"></script>
         <script src="js/scripts.js"></script>
     </body>
 </html>
