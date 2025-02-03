@@ -85,62 +85,27 @@ class UsosueloControlador {
                         //Si el id es válido, genera un arreglo con los detalles
                         if ($idSolicitud != 0) {
                             $registrar = array();
-                            //distrito
-                            $distrito = new DetalleSolicitud();
-                            $distrito->setCumple(1);
-                            $distrito->setCampoRequisito($_POST['distrito']);
-                            $distrito->setIdSolicitud($idSolicitud);
-                            $distrito->setTipoRequisito(10);
-                            $registrar[] = $distrito;
-                            //direccion de la propiedad
-                            $direccionPropiedad = new DetalleSolicitud();
-                            $direccionPropiedad->setCumple(1);
-                            $direccionPropiedad->setCampoRequisito($_POST['direccionPropiedad']);
-                            $direccionPropiedad->setIdSolicitud($idSolicitud);
-                            $direccionPropiedad->setTipoRequisito(11);
-                            $registrar[] = $direccionPropiedad;
-                            //numero de finca
-                            $finca = new DetalleSolicitud();
-                            $finca->setCumple(1);
-                            $finca->setCampoRequisito($_POST['finca']);
-                            $finca->setIdSolicitud($idSolicitud);
-                            $finca->setTipoRequisito(12);
-                            $registrar[] = $finca;
-                            //numero de plano
-                            $plano = new DetalleSolicitud();
-                            $plano->setCumple(1);
-                            $plano->setCampoRequisito($_POST['plano']);
-                            $plano->setIdSolicitud($idSolicitud);
-                            $plano->setTipoRequisito(13);
-                            $registrar[] = $plano;
-                            //motivo
-                            $motivoUso = new DetalleSolicitud();
-                            $motivoUso->setCumple(1);
-                            $motivoUso->setCampoRequisito($_POST['motivoUso']);
-                            $motivoUso->setIdSolicitud($idSolicitud);
-                            $motivoUso->setTipoRequisito(14);
-                            $registrar[] = $motivoUso;
-                            //uso solicitado
-                            $usoSolicitado = new DetalleSolicitud();
-                            $usoSolicitado->setCumple(1);
-                            $usoSolicitado->setCampoRequisito($_POST['usoSolicitado']);
-                            $usoSolicitado->setIdSolicitud($idSolicitud);
-                            $usoSolicitado->setTipoRequisito(15);
-                            $registrar[] = $usoSolicitado;                            
-                            //archivo adjunto
-                            $adjunto = new DetalleSolicitud();
-                            $adjunto->setCumple(1);
-                            $adjunto->setCampoRequisito($urlArchivo);
-                            $adjunto->setIdSolicitud($idSolicitud);
-                            $adjunto->setTipoRequisito(16);
-                            $registrar[] = $adjunto;
-                            //digital
-                            $digital = new DetalleSolicitud();
-                            $digital->setCumple(1);
-                            $digital->setCampoRequisito($_POST['digital']);
-                            $digital->setIdSolicitud($idSolicitud);
-                            $digital->setTipoRequisito(17);
-                            $registrar[] = $digital;
+                            //variables del POST 
+                            $post = ['distrito', 'direccionPropiedad', 'finca', 'plano', 'motivoUso', 'usoSolicitado', 'adjunto', 'digital'];
+                            $contador = 10;
+                            for ($i = 0; $i < 8; $i++){
+                                if ($contador == 16){
+                                    $adjunto = new DetalleSolicitud();
+                                    $adjunto->setCumple(1);
+                                    $adjunto->setCampoRequisito($urlArchivo);
+                                    $adjunto->setIdSolicitud($idSolicitud);
+                                    $adjunto->setTipoRequisito($contador);
+                                    $registrar[] = $adjunto;
+                                } else {
+                                    $detalle = new DetalleSolicitud();
+                                    $detalle->setCumple(1);
+                                    $detalle->setCampoRequisito($_POST[$post[$i]]);
+                                    $detalle->setIdSolicitud($idSolicitud);
+                                    $detalle->setTipoRequisito($contador);
+                                    $registrar[] = $detalle;
+                                }
+                                $contador++;
+                            }
                             if ($solicitudM->IngresarDetalles($registrar)){
                                 header('location: index.php?controlador=Tramites&metodo=UsoSuelo');
                             } else {
@@ -178,85 +143,44 @@ class UsosueloControlador {
                 $solicitud->setIdPersona($_POST['persona']);
                 if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)) {
                     $registrar = array();
-                    //distrito
-                    $distrito = new DetalleSolicitud();
-                    $distrito->setId($_POST['idDistrito']);
-                    $distrito->setCumple(1);
-                    $distrito->setCampoRequisito($_POST['distrito']);
-                    $distrito->setIdSolicitud($idSolicitud);
-                    $distrito->setTipoRequisito(10);
-                    $registrar[] = $distrito;
-                    //direccion de la propiedad
-                    $direccionPropiedad = new DetalleSolicitud();
-                    $direccionPropiedad->setId($_POST['idDireccionPropiedad']);
-                    $direccionPropiedad->setCumple(1);
-                    $direccionPropiedad->setCampoRequisito($_POST['direccionPropiedad']);
-                    $direccionPropiedad->setIdSolicitud($idSolicitud);
-                    $direccionPropiedad->setTipoRequisito(11);
-                    $registrar[] = $direccionPropiedad;
-                    //numero de finca
-                    $finca = new DetalleSolicitud();
-                    $finca->setId($_POST['idFinca']);
-                    $finca->setCumple(1);
-                    $finca->setCampoRequisito($_POST['finca']);
-                    $finca->setIdSolicitud($idSolicitud);
-                    $finca->setTipoRequisito(12);
-                    $registrar[] = $finca;
-                    //numero de plano
-                    $plano = new DetalleSolicitud();
-                    $plano->setId($_POST['idPlano']);
-                    $plano->setCumple(1);
-                    $plano->setCampoRequisito($_POST['plano']);
-                    $plano->setIdSolicitud($idSolicitud);
-                    $plano->setTipoRequisito(13);
-                    $registrar[] = $plano;
-                    //Si se subió un archivo, se actualiza
-                    if (isset($_FILES['planoCatastro']) && $_FILES['planoCatastro']['error'] === UPLOAD_ERR_OK) {
-                        $rutaDestino = './repo/';
-                        $urlArchivo = $rutaDestino.basename($_FILES['planoCatastro']['name']);
-                        if (!is_writable('./repo/')) {
-                            $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
-                        }                
-                        if (!is_dir($rutaDestino)) {
-                            mkdir($rutaDestino, 0777, true);
-                        }
-                        if (move_uploaded_file($_FILES['planoCatastro']['tmp_name'], $urlArchivo)) {
-                            //archivo adjunto
-                            $adjunto = new DetalleSolicitud();
-                            $adjunto->setId($_POST['idPlanoCatastro']);
-                            $adjunto->setCumple(1);
-                            $adjunto->setCampoRequisito($urlArchivo);
-                            $adjunto->setIdSolicitud($idSolicitud);
-                            $adjunto->setTipoRequisito(16);
-                            $registrar[] = $adjunto;
+                    //variables del POST 
+                    $post = ['distrito', 'direccionPropiedad', 'finca', 'plano', 'motivoUso', 'usoSolicitado', 'adjunto', 'digital'];
+                    $ids = ['idDistrito', 'idDireccionPropiedad', 'idFinca', 'idPlano', 'idMotivoUso', 'idUsoSolicitado', 'idPlanoCatastro', 'idDigital'];
+                    $contador = 10;
+                    for($i = 0; $i < 8; $i++){
+                        if ($contador == 16){
+                            if (isset($_FILES['planoCatastro']) && $_FILES['planoCatastro']['error'] === UPLOAD_ERR_OK) {
+                                $rutaDestino = './repo/';
+                                $urlArchivo = $rutaDestino.basename($_FILES['planoCatastro']['name']);
+                                if (!is_writable('./repo/')) {
+                                    $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
+                                }                
+                                if (!is_dir($rutaDestino)) {
+                                    mkdir($rutaDestino, 0777, true);
+                                }
+                                if (move_uploaded_file($_FILES['planoCatastro']['tmp_name'], $urlArchivo)) {
+                                    //archivo adjunto
+                                    $adjunto = new DetalleSolicitud();
+                                    $adjunto->setId($_POST['idPlanoCatastro']);
+                                    $adjunto->setCumple(1);
+                                    $adjunto->setCampoRequisito($urlArchivo);
+                                    $adjunto->setIdSolicitud($idSolicitud);
+                                    $adjunto->setTipoRequisito($contador);
+                                    $registrar[] = $adjunto;
+                                } else {
+                                    $this->LlamarVistaIngresar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI');
+                                }
+                            }
                         } else {
-                            $this->LlamarVistaIngresar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI');
+                            $detalle = new DetalleSolicitud();
+                            $detalle->setId($_POST[$ids[$i]]);
+                            $detalle->setCumple(1);
+                            $detalle->setCampoRequisito($_POST[$post[$i]]);
+                            $detalle->setIdSolicitud($idSolicitud);
+                            $detalle->setTipoRequisito($contador);
+                            $registrar[] = $detalle;
                         }
                     }
-                    //motivo
-                    $motivoUso = new DetalleSolicitud();
-                    $motivoUso->setId($_POST['idMotivoUso']);
-                    $motivoUso->setCumple(1);
-                    $motivoUso->setCampoRequisito($_POST['motivoUso']);
-                    $motivoUso->setIdSolicitud($idSolicitud);
-                    $motivoUso->setTipoRequisito(14);
-                    $registrar[] = $motivoUso;
-                    //uso solicitado
-                    $usoSolicitado = new DetalleSolicitud();
-                    $usoSolicitado->setId($_POST['idUsoSolicitado']);
-                    $usoSolicitado->setCumple(1);
-                    $usoSolicitado->setCampoRequisito($_POST['usoSolicitado']);
-                    $usoSolicitado->setIdSolicitud($idSolicitud);
-                    $usoSolicitado->setTipoRequisito(15);
-                    $registrar[] = $usoSolicitado;
-                    //digital
-                    $digital = new DetalleSolicitud();
-                    $digital->setId($_POST['idDigital']);
-                    $digital->setCumple(1);
-                    $digital->setCampoRequisito($_POST['digital']);
-                    $digital->setIdSolicitud($idSolicitud);
-                    $digital->setTipoRequisito(17);
-                    $registrar[] = $digital;
                     if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
                         header('location: index.php?controlador=Tramites&metodo=UsoSuelo');
                     } else {

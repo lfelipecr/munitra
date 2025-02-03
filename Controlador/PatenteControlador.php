@@ -83,62 +83,21 @@ class PatenteControlador {
                             $adjunto->setIdSolicitud($idSolicitud);
                             $adjunto->setTipoRequisito(1);
                             $registrar[] = $adjunto;
-                            //uso de patente
-                            $usoPatente = new DetalleSolicitud();
-                            $usoPatente->setCumple(1);
-                            $usoPatente->setCampoRequisito($_POST['usoPatente']);
-                            $usoPatente->setIdSolicitud($idSolicitud);
-                            $usoPatente->setTipoRequisito(2);
-                            $registrar[] = $usoPatente;
-                            //nombre de fantasia
-                            $nombreFantasia = new DetalleSolicitud();
-                            $nombreFantasia->setCumple(1);
-                            $nombreFantasia->setCampoRequisito($_POST['nombreFantasia']);
-                            $nombreFantasia->setIdSolicitud($idSolicitud);
-                            $nombreFantasia->setTipoRequisito(3);
-                            $registrar[] = $nombreFantasia;
-                            //actividad comercial
-                            $actividadComercial = new DetalleSolicitud();
-                            $actividadComercial->setCumple(1);
-                            $actividadComercial->setCampoRequisito($_POST['actividadComercial']);
-                            $actividadComercial->setIdSolicitud($idSolicitud);
-                            $actividadComercial->setTipoRequisito(4);
-                            $registrar[] = $actividadComercial;
-                            //uso de suelo
-                            $numeroUsoSuelo = new DetalleSolicitud();
-                            $numeroUsoSuelo->setCumple(1);
-                            $numeroUsoSuelo->setCampoRequisito($_POST['numeroUsoSuelo']);
-                            $numeroUsoSuelo->setIdSolicitud($idSolicitud);
-                            $numeroUsoSuelo->setTipoRequisito(5);
-                            $registrar[] = $numeroUsoSuelo;
-                            //distrito
-                            $distrito = new DetalleSolicitud();
-                            $distrito->setCumple(1);
-                            $distrito->setCampoRequisito($_POST['distrito']);
-                            $distrito->setIdSolicitud($idSolicitud);
-                            $distrito->setTipoRequisito(6);
-                            $registrar[] = $distrito;
-                            //direccion exacta del local
-                            $direccionExacta = new DetalleSolicitud();
-                            $direccionExacta->setCumple(1);
-                            $direccionExacta->setCampoRequisito($_POST['direccionExacta']);
-                            $direccionExacta->setIdSolicitud($idSolicitud);
-                            $direccionExacta->setTipoRequisito(7);
-                            $registrar[] = $direccionExacta;
-                            //area
-                            $area = new DetalleSolicitud();
-                            $area->setCumple(1);
-                            $area->setCampoRequisito($_POST['area']);
-                            $area->setIdSolicitud($idSolicitud);
-                            $area->setTipoRequisito(8);
-                            $registrar[] = $area;
-                            //dimensiones
-                            $dimensiones = new DetalleSolicitud();
-                            $dimensiones->setCumple(1);
-                            $dimensiones->setCampoRequisito($_POST['dimensiones']);
-                            $dimensiones->setIdSolicitud($idSolicitud);
-                            $dimensiones->setTipoRequisito(9);
-                            $registrar[] = $dimensiones;
+                            //variables del post
+                            $post = ['usoPatente', 'nombreFantasia', 'actividadComercial', 'numeroUsoSuelo',
+                            'distrito', 'direccionExacta', 'area', 'dimensiones'];
+                            $contador = 2;
+                            //objetos
+                            for($i = 0; $i < 8; $i++){
+                                $detalle = new DetalleSolicitud();
+                                $detalle->setCumple(1);
+                                $detalle->setIdSolicitud($idSolicitud);
+                                $detalle->setTipoRequisito($contador);
+                                $detalle->setCampoRequisito($_POST[$post[$i]]);
+                                $contador++;
+                                $registrar[] = $detalle;
+                            }
+                            
                             if ($solicitudM->IngresarDetalles($registrar)){
                                 header('location: index.php?controlador=Tramites&metodo=Patentes');
                             } else {
@@ -169,67 +128,42 @@ class PatenteControlador {
                 if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)){
                     //Si la actualización es exitosa, genera un arreglo
                     $registrar = array();
-                    //uso de patente
-                    $usoPatente = new DetalleSolicitud();
-                    $usoPatente->setId($_POST['idUsoPatentes']);
-                    $usoPatente->setCumple(1);
-                    $usoPatente->setCampoRequisito($_POST['usoPatente']);
-                    $usoPatente->setTipoRequisito(2);
-                    $registrar[] = $usoPatente;
-                    //nombre de fantasia
-                    $nombreFantasia = new DetalleSolicitud();
-                    $nombreFantasia->setId($_POST['idNombreFantasia']);
-                    $nombreFantasia->setCumple(1);
-                    $nombreFantasia->setCampoRequisito($_POST['nombreFantasia']);
-                    $nombreFantasia->setTipoRequisito(3);
-                    $registrar[] = $nombreFantasia;
-                    //actividad comercial
-                    $actividadComercial = new DetalleSolicitud();
-                    $actividadComercial->setId($_POST['idActividadComercial']);
-                    $actividadComercial->setCumple(1);
-                    $actividadComercial->setCampoRequisito($_POST['actividadComercial']);
-                    $actividadComercial->setTipoRequisito(4);
-                    $registrar[] = $actividadComercial;
-                    //uso de suelo
-                    $numeroUsoSuelo = new DetalleSolicitud();
-                    $numeroUsoSuelo->setId($_POST['idNumeroUsoSuelo']);
-                    $numeroUsoSuelo->setCumple(1);
-                    $numeroUsoSuelo->setCampoRequisito($_POST['numeroUsoSuelo']);
-                    $numeroUsoSuelo->setTipoRequisito(5);
-                    $registrar[] = $numeroUsoSuelo;
-                    //distrito
-                    $distrito = new DetalleSolicitud();
-                    $distrito->setId($_POST['idDistrito']);
-                    $distrito->setCumple(1);
-                    $distrito->setCampoRequisito($_POST['distrito']);
-                    $distrito->setTipoRequisito(6);
-                    $registrar[] = $distrito;
-                    //direccion exacta del local
-                    $direccionExacta = new DetalleSolicitud();
-                    $direccionExacta->setId($_POST['idDireccionExacta']);
-                    $direccionExacta->setCumple(1);
-                    $direccionExacta->setCampoRequisito($_POST['direccionExacta']);
-                    $direccionExacta->setTipoRequisito(7);
-                    $registrar[] = $direccionExacta;
-                    //area
-                    $area = new DetalleSolicitud();
-                    $area->setId($_POST['idArea']);
-                    $area->setCumple(1);
-                    $area->setCampoRequisito($_POST['area']);
-                    $area->setTipoRequisito(8);
-                    $registrar[] = $area;
-                    //dimensiones
-                    $dimensiones = new DetalleSolicitud();
-                    $dimensiones->setId($_POST['idDimensiones']);
-                    $dimensiones->setCumple(1);
-                    $dimensiones->setCampoRequisito($_POST['dimensiones']);
-                    $dimensiones->setTipoRequisito(9);
-                    $registrar[] = $dimensiones;   
+                    //archivo adjunto
+                    if (isset($_FILES['requisitos']) && $_FILES['requisitos']['error'] === UPLOAD_ERR_OK) {
+                        $rutaDestino = './repo/';
+                        $urlArchivo = $rutaDestino.basename($_FILES['requisitos']['name']);
+                        if (!is_writable('./repo/')) {
+                            $this->LlamarVistaActualizar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI', $_POST['idSolicitud']);
+                        }                
+                        if (move_uploaded_file($_FILES['requisitos']['tmp_name'], $urlArchivo)) {
+                            $adjunto = new DetalleSolicitud();
+                            $adjunto->setCumple(1);
+                            $adjunto->setId($_POST['idAdjuntos']);
+                            $adjunto->setTipoRequisito(1);
+                            $adjunto->setCampoRequisito($urlArchivo);
+                            $registrar[] = $adjunto;
+                        }                        
+                    }
+                    //variables del post
+                    $post = ['usoPatente', 'nombreFantasia', 'actividadComercial', 'numeroUsoSuelo',
+                    'distrito', 'direccionExacta', 'area', 'dimensiones'];
+                    $ids = ['idUsoPatentes', 'idNombreFantasia', 'idActividadComercial', 'idNumeroUsoSuelo',
+                    'idDistrito', 'idDireccionExacta', 'idArea', 'idDimensiones'];
+                    $contador = 2;
+                    for($i = 0; $i < 8; $i++){
+                        $detalle = new DetalleSolicitud();
+                        $detalle->setCumple(1);
+                        $detalle->setId($_POST[$ids[$i]]);
+                        $detalle->setTipoRequisito($contador);
+                        $detalle->setCampoRequisito($_POST[$post[$i]]);
+                        $registrar[] = $detalle;
+                        $contador++;
+                    }
                     //Si se envió un archivo, se agrega a la lista de detalles para modificar
                     if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
                         header('location: index.php?controlador=Tramites&metodo=Patentes');
                     } else {
-                        echo 'error';
+                        $this->LlamarVistaActualizar('Ha ocurrido un error interno, si el problema persiste, contacte al profesional de TI', $_POST['idSolicitud']);
                     }
                 } else {
                     $this->LlamarVistaActualizar('Ha ocurrido un error interno, si el problema persiste, contacte al profesional de TI', $_POST['idSolicitud']);
