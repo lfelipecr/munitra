@@ -1,9 +1,7 @@
 function ModificarFormulario(id){
     let datosJSON = JSON.parse($('#jsonData').val());   
     let comunicado = datosJSON[id];
-    alert(id);
     $('#nombreComunicar').html(`${comunicado[1]} ${comunicado[2]} ${comunicado[3]}`);
-    $('#puestoComunicar').html(comunicado[14]);
 }
 $(document).ready(function () {
     function DatosDepartamento(){
