@@ -4,6 +4,19 @@ require_once './Modelo/Entidades/Usuario.php';
 require_once './Modelo/Conexion.php';
 
 class UsuarioM {
+    function IdMax(){
+        $idMax = 0;
+        $conexion= new Conexion();
+        $sql="SELECT MAX(ID) FROM USUARIO;";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            while($fila=$resultado->fetch_assoc())
+                $idMax = $fila["MAX(ID)"];
+        }
+        $conexion->Cerrar();
+        return $idMax;
+    }
     function IngresarUsuario(Usuario $usuario){
         $retVal = false;
         $conexion= new Conexion();

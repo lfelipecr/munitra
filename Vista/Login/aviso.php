@@ -22,33 +22,17 @@
 </head>
 <body>
     <div class="container-fluid d-flex justify-content-center all pt-md-5 mt-5">
-        <div class="card p-5">
+        <div class="card p-5 w-75">
             <div class="text-center p-md-5 p-1">
-                <h4 class="h3">Ingrese</h4>
                 <div class="mx-1">
                     <img src="./Vista/assets/img/icon.png" class="img-fluid" alt="">
                 </div>
                 <hr>
-                <input type="hidden" id="msg" value="<?php echo $msg; ?>">
-                <form action="index.php?controlador=Login&metodo=Login" method="post" id="frmIngresar">
-                    <div class="form-floating mb-3">
-                        <input type="email" name="correo" class="form-control" placeholder="" id="txtCorreo">
-                        <label>Correo</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="password" name="pass" class="form-control" placeholder="" id="txtContraseña">
-                        <label>Contraseña</label>
-                    </div>
-                    <div class="col-12 py-1 text-center">
-                        <span>¿No tiene una cuenta? Solicitela <a href="index.php?controlador=Login&metodo=Registro">acá</a></span>
-                    </div>
-                    <div class="col-12 py-2">
-                        <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
-                    </div>
-                    <button class="btn-outline-warning btn w-100" type="submit">
-                        <span class="p-1 px-md-5 p-1">Ingresar</span>
-                    </button>
-                </form>
+                <div class="my-md-2">
+                    <span class="h5"><strong>Su cuenta ha sido creada exitosamente!</strong></span>
+                    <p>A continuación, debe esperar la confirmación de sus credenciales por parte de la <span>Municipalidad de Río Cuarto</span>, mientras tanto, puede utilizar la plataforma y realizar sus trámites, ingrese con su correo y contraseña <a href="index.php?controlador=Login&metodo=Index" style="text-decoration: none;">aquí</a></p>
+                    <P>Una vez sus credenciales hayan sido validadas, deberá ingresar a su perfil en la plataforma e ingresar el código enviado a su correo electrónico. Después, los trámites que realice entraran en vigencia</P>
+                </div>
             </div>
         </div>
     </div>

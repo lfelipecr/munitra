@@ -30,8 +30,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-1">
-                        <a href="./index.php?controlador=Login&metodo=Index" class="btn btn-outline-warning">
+                        <a href="./index.php?controlador=Login&metodo=Index" class="btn btn-outline-warning mx-1">
                             <span style="font-size: 1em;">Trámites</span>
+                        </a>
+                        <a href="https://comercio.ifam.go.cr/riocuarto" class="btn btn-outline-warning mx-1">
+                            <span style="font-size: 1em;">Consultar Estado de Cuenta</span>
                         </a>
                     </ul>
                     <div class="navbar-text px-md-5">
@@ -310,7 +313,7 @@
               © 2024 Copyright: Municipalidad de Río Cuarto
             </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="./Web/assets/js/departamentos.js"></script>
+        <script src="./Web/assets/js/conformaciones.js"></script>
         <script src="js/scripts.js"></script>
     </body>
 </html>

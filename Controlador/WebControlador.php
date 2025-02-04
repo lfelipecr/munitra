@@ -6,9 +6,13 @@ class WebControlador {
         require_once './Web/actividad.php';
     }
     function Alcaldia(){
+        $deptomodel = new DepartamentoM();
+        $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         require_once './Web/alcaldia.php';
     }
     function Conformacion(){
+        $deptomodel = new DepartamentoM();
+        $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         require_once './Web/conformacion.php';
     }
     function Contacto(){

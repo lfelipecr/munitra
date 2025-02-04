@@ -50,23 +50,6 @@ $(document).ready(function () {
             $('#alerta').html('Debe proporcionar todos los datos marcados con asterisco (*)');
             return false;
         }
-        //Cedula  
-        /*let cedula = $('#txtTipoId').val().trim();
-        switch($('#txtTipoId').val()){
-            //Cedula
-            case '1':
-                break;
-            //Pasaporte
-            case '2':
-                if (!cedula.includes('P'))
-                    return false;
-                if (!cedula.length == 9)
-                    return false;
-                break;
-            //Cédula de residencia
-            case '3':
-                break;
-        }*/
         //Info de contacto 
         //Debe llenar al menos un teléfono
         if ($('#txtTelefono').val().trim() == '' && $('#txtWhatsapp').val().trim() == ''){

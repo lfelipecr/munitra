@@ -8,6 +8,7 @@ function ModificarFormulario(id){
 $(document).ready(function () {
     function DatosDepartamento(){
         let datosJSON = JSON.parse($('#jsonData').val());   
+        console.log(datosJSON);
         if (datosJSON != ''){
             for (let i = 0; i < datosJSON.length; i++){
                 let idDom = "#listadoDepto"+datosJSON[i][17]
