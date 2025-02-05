@@ -21,4 +21,21 @@ class BitacoraSolicitudM {
         $conexion->Cerrar();
         return $retVal;
     }
+    function CredencialesSMTP(){
+        $registro=array();
+        $conexion= new Conexion();
+        $sql="SELECT * FROM PARAMETROS";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            while($fila=$resultado->fetch_assoc())
+            {
+                $registro[$fila['DESCRIPCION']] = $fila['VALOR'];
+            }
+        }
+        else
+            $registro=null;
+        $conexion->Cerrar();
+        return $registro;
+    }
 }

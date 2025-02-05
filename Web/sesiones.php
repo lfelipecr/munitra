@@ -30,10 +30,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-1">
-                        <a href="./index.php?controlador=Login&metodo=Index" class="btn btn-outline-warning mx-1">
+                        <a href="./index.php?controlador=Login&metodo=Index" class="btn btn-outline-warning mx-1 mt-md-none mt-1">
                             <span style="font-size: 1em;">Trámites</span>
                         </a>
-                        <a href="https://comercio.ifam.go.cr/riocuarto" class="btn btn-outline-warning mx-1">
+                        <a href="https://comercio.ifam.go.cr/riocuarto" class="btn btn-outline-warning mx-1 mt-md-none mt-1">
                             <span style="font-size: 1em;">Consultar Estado de Cuenta</span>
                         </a>
                     </ul>
