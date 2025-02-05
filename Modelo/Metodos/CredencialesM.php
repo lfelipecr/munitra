@@ -7,10 +7,10 @@ class CredencialesM{
     {
         $retVal = false;
         $conexion= new Conexion();
-        $sql="CALL IngresarCredenciales(".$credenciales->getIdUsuario().
+        $sql="CALL SpIngresarCredenciales(".$credenciales->getIdUsuario().
         ", '".$credenciales->getCodigo().
-        "', '".$credenciales->getUrlImagen()."', '".$credenciales->getFirma()."')";
-        $resultado=$conexion->Ejecutar($sql);
+        "', '".$credenciales->getUrlImagen()."', '".$credenciales->getFirma().
+        "', '".$credenciales->getUrlConsentimiento()."')";
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -24,9 +24,10 @@ class CredencialesM{
     function ModificarCredenciales(Credenciales $credenciales){
         $retVal = false;
         $conexion= new Conexion();
-        $sql="CALL ActualizarCredenciales(".$credenciales->getId().
+        $sql="CALL SpActualizarCredenciales(".$credenciales->getId().
         ", '".$credenciales->getCodigo().
-        "', '".$credenciales->getUrlImagen()."', '".$credenciales->getFirma()."')";
+        "', '".$credenciales->getUrlImagen()."', '".$credenciales->getFirma().
+        "', '".$credenciales->getUrlConsentimiento()."')";
         $resultado=$conexion->Ejecutar($sql);
         try{
             if($conexion->Ejecutar($sql)){
@@ -39,6 +40,31 @@ class CredencialesM{
         return $retVal;
     }
     function BuscarCredenciales($id){
-
+        $registro=null;
+        $conexion= new Conexion();
+        $sql="CALL SpBuscarCredenciales($id)";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            $registro = json_encode($resultado->fetch_assoc());
+        }
+        else
+            $registro=null;
+        $conexion->Cerrar();
+        return $registro;
+    }
+    function ValidarCodigo($codigo){
+        $registro=null;
+        $conexion= new Conexion();
+        $sql="CALL SpValidarCodigo('$codigo')";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            $registro = json_encode($resultado->fetch_assoc());
+        }
+        else
+            $registro=null;
+        $conexion->Cerrar();
+        return $registro;
     }
 }

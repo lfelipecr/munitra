@@ -36,7 +36,7 @@
                     <img src="./Vista/assets/img/icon.png" class="img-fluid" alt="">
                 </div>
                 <hr>
-                <form action="index.php?controlador=Login&metodo=IngresarCredenciales" method="post" id="frmIngresar">
+                <form action="index.php?controlador=Login&metodo=IngresarCredenciales" method="post" id="frmIngresar" enctype="multipart/form-data">
                     <input type="hidden" id="idUsuario" name="idUsuario" value="<?php echo $idUsuario; ?>">
                     <div class="row justify-content-center">
                         <div class="col-md-12 text-center">
@@ -66,9 +66,22 @@
                             <button id="clear" class="btn btn-outline-danger">Limpiar</button>
                         </div>
                     </div>
-                    <button class="btn-outline-warning btn w-100" type="submit">
-                        <span class="p-1 px-md-5 p-1">Ingresar</span>
-                    </button>
+                    <div class="row justify-content-center mb-3 mt-1">
+                        <div class="col-md-12 mt-md-3 text-center">
+                            <span class="mb-3">Consentimiento Informado (Descargue <a href="./repo/serverside/ConsentimientoInformadoEditable.pdf" download="" style="text-decoration: none;">acá</a> *)</span><br>
+                            <input type="file" class="form-control" name="consentimiento">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex">
+                            <button class="btn-outline-warning btn w-100" type="submit">
+                                <span class="p-1 px-md-5 p-1">Ingresar</span>
+                            </button>
+                            <a href="index.php?controlador=Tramites&metodo=ListadoTramites" class="btn-outline-danger btn w-100">
+                                <span class="p-1 px-md-5 p-1">Cancelar</span>
+                            </a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

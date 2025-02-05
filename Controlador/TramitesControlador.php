@@ -13,6 +13,7 @@ class TramitesControlador {
     function ListadoTramites(){
         session_start();
         $usuario = $_SESSION['usuario']->getIdPersona();
+        $estado = $_SESSION['usuario']->getIdEstado();
         $vista = './Vista/TramitesUsuario/listadoTramites.php';
         require_once './Vista/Utilidades/navbar.php';
     }
@@ -84,6 +85,21 @@ class TramitesControlador {
                 $vista = './Vista/Dashboard/Tramites/Condonacion/listado.php';
                 require_once './Vista/Utilidades/sidebar.php';
             }
+        }
+    }
+    function Credenciales(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            session_start();
+            $idUsuario = $_SESSION['usuario']->getId();
+            require_once './Vista/Login/credenciales.php';
+        }       
+    }
+    function IngresarCodigo(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $msg = '';
+            require_once './Vista/Login/codigo.php';
         }
     }
     function Declaraciones(){

@@ -6,6 +6,24 @@
         <h1 class="h2">Trámites</h1>
       </div>
       <div class="row">
+        <div class="col-12 mb-3">
+            <?php if ($estado == 5) {?>
+                <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Tramites&metodo=IngresarCodigo';">
+                    <h4>Verificar Cuenta - <a href="#" class="link-blog">Ir</a></h4>
+                    <hr>
+                    <p>Verifique su cuenta para que sus trámites entren en vigencia, ingresando el código enviado a su correo</p>
+                </div>
+            <?php } ?>
+        </div>
+        <div class="col-12 mb-3">
+            <?php if ($estado == 3) {?>
+                <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Tramites&metodo=Credenciales';">
+                    <h4>Ingrese sus Credenciales - <a href="#" class="link-blog">Ir</a></h4>
+                    <hr>
+                    <p>Verifique su cuenta para que sus trámites entren en vigencia, enviando una confirmación fotográfica de sus credenciales, su firma y un consentimiento</p>
+                </div>
+            <?php } ?>
+        </div>
         <div class="col-12 mb-3 col-md-6">
             <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Tramites&metodo=Patentes';">
                 <h4>Solicitud de Patentes - <a href="#" class="link-blog">Ir</a></h4>
@@ -41,7 +59,7 @@
                 <p>Modifique la información sobre actividades cantonales y lugares de interés</p>
             </div>
         </div>
-      </div>
+    </div>
     </div>
   </main>
 <script src="./Vista/assets/js/credenciales.js"></script>

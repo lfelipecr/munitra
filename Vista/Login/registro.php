@@ -143,7 +143,7 @@
                             <input type="password" class="form-control mb-3" id="txtPass2">
                         </div>
                         <div class="col-12 mb-3">
-                            <input type="hidden" name="estado" id="lsEstado" value="4">
+                            <input type="hidden" name="estado" id="lsEstado" value="3">
                         </div>
                         <div class="col-12">
                             <input type="hidden" name="responsable" value="0" id="valorResponsable">

@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/ProvinciaM.php';
 require_once './Modelo/Metodos/DepartamentoM.php';
@@ -7,6 +10,8 @@ require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Entidades/Persona.php';
 require_once './Modelo/Entidades/ImagenUsuario.php';
 require_once './Modelo/Entidades/Usuario.php';
+require_once './Modelo/Metodos/CredencialesM.php';
+require_once './Modelo/Metodos/BitacoraSolicitudM.php';
 
 class UsuarioControlador
 {
@@ -262,6 +267,91 @@ class UsuarioControlador
             }
         } else {
             $this->LlamarVistaIngresar($msg);
+        }
+    }
+    function VerCredenciales(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $id = $_GET['id'];
+            $credencialesM = new CredencialesM();
+            $jsonData = $credencialesM->BuscarCredenciales($id);
+            require_once './Vista/Dashboard/Usuarios/credenciales.php';
+        }
+    }
+    function ValidarCredenciales(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $id = $_GET['id'];
+            $idCredencial = $_GET['idCredencial'];
+            $usuarioM = new UsuarioM();
+            $usuario = $usuarioM->BuscarUsuarioId($id);
+            $msg = '';
+            $asunto = '';
+            $codigo = bin2hex(random_bytes(4));
+            if ($_GET['validar'] == 'true'){
+                $asunto = 'Código de verificación | Municipalidad de Río Cuarto';
+                $msg = 'Sus credenciales han sido aceptadas! Su código de verificación es: '.$codigo;
+                $usuario->setIdEstado(5);
+                
+            }
+            if ($_GET['validar'] == 'false'){
+                $asunto = 'Credenciales de Identificación | Municipalidad de Río Cuarto';
+                $msg = 'Sus credenciales no son correctas o no pudieron ser verificadas, intente de nuevo';
+                $usuario->setIdEstado(3);
+            }
+            $mail = new PHPMailer();
+            try{
+                session_start();
+                $bitacora = new BitacoraSolicitud();
+                $bitacoraM = new BitacoraSolicitudM();
+                $credenciales = $bitacoraM->CredencialesSMTP();
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->isSMTP();
+                $mail->Encoding = "base64";
+                $mail->Host = $credenciales['host'];
+                $mail->SMTPAuth = true;
+                $mail->Username = $credenciales['user'];
+                $mail->Password = $credenciales['key'];
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+                $mail->setFrom($credenciales['from']);
+                $mail->addAddress($usuario->getCorreo());
+                $mail->isHTML(true);
+                $mail->Subject = $asunto;
+                $mail->Body = $msg;
+                $mail->send();
+                //base de datos
+                $usuarioM->Actualizar($usuario);
+                $credencialesM = new CredencialesM();
+                $credenciales = new Credenciales();
+                $credenciales->setCodigo($codigo);
+                $credenciales->setId($idCredencial);
+                $credencialesM->ModificarCredenciales($credenciales);
+                header('location: index.php?controlador=Usuario&metodo=Listado');
+                
+            } catch (Exception $ex){
+                var_dump($ex);
+            }
+        }
+    }
+    function ValidarCodigo(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $credencialesM = new CredencialesM();
+            $codigo = $_POST['codigo'];
+            $usuario = $_SESSION['usuario'];
+            var_dump($codigo);
+            $datos = $credencialesM->ValidarCodigo($codigo);
+            if ($datos != NULL){
+                $usuarioM = new UsuarioM();
+                $usuario->setIdEstado(1);
+                if ($usuarioM->Actualizar($usuario)){
+                    header('location: index.php?controlador=Tramites&metodo=ListadoTramites');
+                }
+            } else {
+                $msg = 'El código proporcionado no es el correcto, intente de nuevo o reciba otro código';
+                require_once './Vista/Login/codigo.php';
+            }
         }
     }
 }

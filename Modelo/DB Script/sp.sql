@@ -765,25 +765,78 @@ DELIMITER ;
 /*Credenciales*/
 DELIMITER //
 
-CREATE PROCEDURE IngresarCredenciales(IN idUsuario INT,
-IN codigoCred VARCHAR(20), IN urlImagen VARCHAR(1000), IN urlFirma VARCHAR(100))
+CREATE PROCEDURE SpIngresarCredenciales(IN idUsuario INT,
+IN codigoCred VARCHAR(20), IN urlImagen VARCHAR(1000), IN urlFirma VARCHAR(100), IN urlConsentimiento VARCHAR(1000))
 BEGIN
-    INSERT INTO CREDENCIALES (ID_USUARIO, CODIGO, URL_IMAGEN, FIRMA)
-    VALUES (idUsuario, codigoCred, urlImagen, urlFirma);
+    INSERT INTO CREDENCIALES (ID_USUARIO, CODIGO, URL_IMAGEN, FIRMA, URL_CONSENTIMIENTO)
+    VALUES (idUsuario, codigoCred, urlImagen, urlFirma, urlConsentimiento);
 END //
 
 DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE ActualizarCredenciales(IN idCred INT,
-IN codigoCred VARCHAR(20), IN urlImagen VARCHAR(1000), IN urlFirma VARCHAR(100))
+CREATE PROCEDURE SpActualizarCredenciales(IN idCred INT,
+IN codigoCred VARCHAR(20), IN urlImagen VARCHAR(1000), IN urlFirma VARCHAR(100), IN urlConsentimiento VARCHAR(1000))
 BEGIN
-    UPDATE CREDENCIALES 
-    SET CODIGO = codigoCred,
-    URL_IMAGEN = urlImagen,
-    FIRMA = urlFirma
-    WHERE ID = idCred;
+    IF codigoCred = '' THEN
+        UPDATE CREDENCIALES 
+        SET CODIGO = codigoCred,
+        URL_IMAGEN = urlImagen,
+        URL_CONSENTIMIENTO = urlConsentimiento,
+        FIRMA = urlFirma
+        WHERE ID = idCred;    
+    ELSE
+        UPDATE CREDENCIALES SET CODIGO = codigoCred WHERE ID = idCred;
+    END IF;
+    
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SpBuscarCredenciales(IN idUsuario INT)
+BEGIN
+    SELECT 
+    P.ID AS ID_PERSONA,
+    P.NOMBRE,
+    P.PRIMER_APELLIDO,
+    P.SEGUNDO_APELLIDO,
+    P.IDENTIFICACION,
+    P.TELEFONO,
+    P.WHATSAPP,
+    P.ESTADO,
+    P.CORREO AS CORREO_PERSONA,
+    P.SITUACION,
+    P.MONTO_MOROSIDAD,
+    P.MONTO_ADEUDADO,
+    P.FECHA_CREACION AS FECHA_CREACION_PERSONA,
+    U.ID AS ID_USUARIO,
+    U.NOMBRE_USUARIO,
+    U.CORREO AS CORREO_USUARIO,
+    U.RESPONSABLE,
+    U.ID_DEPARTAMENTO,
+    U.ID_ESTADO,
+    U.BORRADO AS BORRADO_USUARIO,
+    C.ID AS ID_CREDENCIAL,
+    C.CODIGO,
+    C.URL_IMAGEN AS URL_IMAGEN_CREDENCIAL,
+    C.FIRMA,
+    C.URL_CONSENTIMIENTO
+    FROM PERSONA P
+    INNER JOIN USUARIO U ON P.ID = U.ID_PERSONA
+    INNER JOIN CREDENCIALES C ON U.ID = C.ID_USUARIO
+    WHERE U.ID_PERSONA = idUsuario;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SpValidarCodigo(IN codigoValidar VARCHAR(100))
+BEGIN
+    SELECT * FROM CREDENCIALES WHERE CODIGO = codigoValidar;
 END //
 
 DELIMITER ;

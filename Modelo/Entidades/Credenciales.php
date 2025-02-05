@@ -4,6 +4,7 @@ class Credenciales{
     private $idUsuario;
     private $codigo;
     private $urlImagen;
+    private $urlConsentimiento;
     private $firma;
     
     public function getId() {
@@ -22,6 +23,9 @@ class Credenciales{
         return $this->urlImagen;
     }
 
+    public function getUrlConsentimiento() {
+        return $this->urlConsentimiento;
+    }
     public function getFirma() {
         return $this->firma;
     }
@@ -41,7 +45,9 @@ class Credenciales{
     public function setUrlImagen($urlImagen) {
         $this->urlImagen = $urlImagen;
     }
-
+    public function setUrlConsentimiento($urlConsentimiento) {
+        $this->urlConsentimiento = $urlConsentimiento;
+    }
     public function setFirma($firma) {
         $this->firma = $firma;
     }

@@ -15,4 +15,7 @@ class Utilidades
     public static function LlamarVista($vista){
         require_once './Vista/Utilidades/sidebar.php';
     }
+    public static function GenerarCorreoGenerico($cuerpo){
+        
+    }
 }

@@ -52,6 +52,7 @@ class UsuarioM {
                 $usuario->setId($fila["ID"]);
                 $usuario->setNombreUsuario($fila["NOMBRE_USUARIO"]);
                 $usuario->setPass($fila["PASS"]);
+                $usuario->setCorreo($correo);
                 $usuario->setResponsable($fila["RESPONSABLE"]);
                 $usuario->setIdPersona($fila["ID_PERSONA"]);
                 $usuario->setIdDepartamento($fila["ID_DEPARTAMENTO"]);
@@ -80,6 +81,7 @@ class UsuarioM {
                 $usuario = new Usuario();
                 $usuario->setId($fila["ID"]);
                 $usuario->setNombreUsuario($fila["NOMBRE_USUARIO"]);
+                $usuario->setCorreo($fila['CORREO']);
                 $usuario->setPass($fila["PASS"]);
                 $usuario->setResponsable($fila["RESPONSABLE"]);
                 $usuario->setIdPersona($fila["ID_PERSONA"]);
