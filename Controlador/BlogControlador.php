@@ -2,6 +2,7 @@
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/NoticiaM.php';
 require_once './Modelo/Metodos/SesionM.php';
+require_once './Modelo/Metodos/ActividadM.php';
 
 class BlogControlador {
     function Index(){
@@ -32,7 +33,11 @@ class BlogControlador {
     function Actividades(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
-            $u->LlamarVista('./Vista/Dashboard/Blog/Actividades/listado.php');
+            $actividadM = new ActividadM();
+            $jsonData = $actividadM->BuscarTodas();
+            $idUsuario = $_SESSION['usuario']->getId();
+            $vista = './Vista/Dashboard/Blog/Actividades/listado.php';
+            require_once './Vista/Utilidades/sidebar.php';
         }
     }
 }

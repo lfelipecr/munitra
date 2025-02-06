@@ -80,43 +80,10 @@
             <div class="row text-center mt-md-5 mt-4 mx-3">
                 <h1>¿Qué Hacer?</h1>
                 <p>Actividades de Nuestro Cantón</p>
+                <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
             </div>
             <hr>
-            <div class="row mb-3">
-                <div class="col-md-4 text-center d-flex justify-content-center">
-                    <div class="card my-1" style="width: 18rem;">
-                        <div class="bgNoticiaNoPic"></div>
-                        <!--<img src="..." class="card-img-top" alt="...">-->
-                        <div class="card-body">
-                          <h5 class="card-title">Actividad</h5>
-                          <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis eligendi adipisci beatae eum doloremque, at eos necessitatibus qui vero</p>
-                          <a href="actividad.html" class="btn btn-outline-warning">Información</a>
-                        </div>
-                      </div>
-                </div>
-                <div class="col-md-4 text-center d-flex justify-content-center">
-                    <div class="card my-1" style="width: 18rem;">
-                        <div class="bgNoticiaNoPic"></div>
-                        <!--<img src="..." class="card-img-top" alt="...">-->
-                        <div class="card-body">
-                          <h5 class="card-title">Actividad</h5>
-                          <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis eligendi adipisci beatae eum doloremque, at eos necessitatibus qui vero</p>
-                          <a href="actividad.html" class="btn btn-outline-warning">Información</a>
-                        </div>
-                      </div>
-                </div>
-                <div class="col-md-4 text-center d-flex justify-content-center">
-                    <div class="card my-1" style="width: 18rem;">
-                        <div class="bgNoticiaNoPic"></div>
-                        <!--<img src="..." class="card-img-top" alt="...">-->
-                        <div class="card-body">
-                          <h5 class="card-title">Actividad</h5>
-                          <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis eligendi adipisci beatae eum doloremque, at eos necessitatibus qui vero</p>
-                          <a href="actividad.html" class="btn btn-outline-warning">Información</a>
-                        </div>
-                      </div>
-                </div>
-            </div>
+            <div class="row mb-3" id="actividades"></div>
         </div>
         <!-- Footer-->
         <footer class="text-center text-lg-start" style="background-color: #f3aa16;">
@@ -157,5 +124,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="./Web/assets/js/info/actividades.js"></script>
     </body>
 </html>

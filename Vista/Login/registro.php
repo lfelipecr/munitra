@@ -128,8 +128,7 @@
                             </select>
                         </div>
                         <div class="col-md-12 mt-1">
-                            <span class="mb-3">Nombre de Usuario (*)</span>
-                            <input type="text" class="form-control mb-3" name="nombreUsuario" id="txtNombreUsuario">
+                            <input type="hidden" class="form-control mb-3" name="nombreUsuario" id="txtNombreUsuario">
                         </div>
                         <div class="col-md-12">
                             <input type="hidden" value="1" name="depto" id="slDepto">

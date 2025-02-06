@@ -19,7 +19,7 @@ $(document).ready(function () {
             $('#alerta').html('Debe verificar el correo');
             return false;
         }
-        if ($('#txtNombreUsuario').val() == '' || $('#txtPass1').val() == ''){
+        if ($('#txtPass1').val() == ''){
             $('#alerta').html('Debe proporcionar todos los datos marcados con asterisco');
             return false;
         } else 
@@ -28,6 +28,9 @@ $(document).ready(function () {
                 $('#alerta').html('Las contraseñas no coinciden');
                 return false;
             }
+        }
+        if ($('#txtNombreUsuario').val() == ''){
+            $('#txtNombreUsuario').val($('#txtCorreo').val().trim());
         }
         return true;
     });

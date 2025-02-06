@@ -14,7 +14,23 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../Web/css/styles.css" rel="stylesheet" />
+        <link href="./Web/css/styles.css" rel="stylesheet"/>
+        <style>
+            .carousel-item img {
+                width: 100%;
+                height: 200px;
+                object-fit: contain;
+                background-color: #0f1a4f;
+            }
+            .carousel-control-prev,
+            .carousel-control-next {
+                background-color: rgba(15, 26, 79, 0.5);
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                margin-top: 45%;
+            }
+        </style>
     </head>
     <body>
         <!-- Navigation-->
@@ -54,8 +70,8 @@
                                 <a class="nav-link dropdown-toggle pagActual" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Nuestro Cantón</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Noticias">Noticias</a></li>
-                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Actividades">¿Qué hacer?</a></li>
-                                    <li><a class="dropdown-item pagActual" href="index.php?controlador=Web&metodo=Himno">Himno</a></li>
+                                    <li><a class="dropdown-item pagActual" href="index.php?controlador=Web&metodo=Actividades">¿Qué hacer?</a></li>
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Himno">Himno</a></li>
                                     <li><a class="dropdown-item" href="https://munirc.maps.arcgis.com/home/index.html">Visor Geográfico</a></li>
                                     <li><a class="dropdown-item" href="https://muniriocuarto-my.sharepoint.com/personal/ti_muniriocuarto_go_cr1/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables%2F216%5FZonasHomog%C3%A9neas%2Epdf&parent=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables&ga=1">Zonas Homogéneas</a></li>
                                     <li><a class="dropdown-item" href="https://muniriocuarto-my.sharepoint.com/personal/ti_muniriocuarto_go_cr1/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables%2F216%5FZonas%5FAgropecuarias%5FPVA%20%2Epdf&parent=%2Fpersonal%2Fti%5Fmuniriocuarto%5Fgo%5Fcr1%2FDocuments%2FDescargables&ga=1">Zonas Agropecuarias</a></li>
@@ -81,7 +97,9 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
                         <div class="text-center text-white">
-                            <h1>Actividad</h1>
+                            <h1><?php echo $actividad->getTitulo();?></h1>
+                            <input type="hidden" id="imagenes" value='<?php echo $actividad->getUrlAdjunto();?>'>
+                            <input type="hidden" id="jsonData" value=''>
                         </div>
                     </div>
                 </div>
@@ -89,10 +107,27 @@
         </header>
         <div class="container mb-5">
             <hr class="mt-5">
-            <p class="lead mb-3 mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti excepturi deserunt consequuntur vero, sequi voluptas a perspiciatis dolor omnis qui quaerat dolorem! Id, deserunt non? Dolorem, dolorum? Aperiam, rerum dolorum.</p>
-            <button class="btn btn-warning mb-5 mt-5">
-                <span>Descargar Adjuntos</span>
-            </button>
+            <p class="lead mb-3 mt-5"><?php echo $actividad->getDescripcionLarga();?></p>
+            <div class="row">
+                <div class="col-12">
+                    <div id="imgNoticias" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#imgNoticias" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#imgNoticias" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#imgNoticias" data-bs-slide-to="2"></button>
+                        </div>
+
+                        <div class="carousel-inner" id="carousel"></div>
+                        
+                        <button class="carousel-control-prev" type="button" data-bs-target="#imgNoticias" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#imgNoticias" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Footer-->
         <footer class="text-center text-lg-start" style="background-color: #f3aa16;">
@@ -133,5 +168,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="./Web/assets/js/info/actividades.js"></script>
     </body>
 </html>

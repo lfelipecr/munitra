@@ -2,9 +2,13 @@
 require_once './Modelo/Metodos/DepartamentoM.php';
 require_once './Modelo/Metodos/NoticiaM.php';
 require_once './Modelo/Metodos/SesionM.php';
+require_once './Modelo/Metodos/ActividadM.php';
 
 class WebControlador {
     function Actividad(){
+        $id = $_GET['id'];
+        $actividadM = new ActividadM();
+        $actividad = $actividadM->BuscarActividad($id);
         require_once './Web/actividad.php';
     }
     function Alcaldia(){
@@ -42,6 +46,8 @@ class WebControlador {
         require_once './Web/noticia.php';
     }
     function Actividades(){
+        $actividadM = new ActividadM();
+        $jsonData = $actividadM->BuscarTodas();
         require_once './Web/quehacer.php';
     }
     function Sesiones(){

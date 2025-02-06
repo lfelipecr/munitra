@@ -109,6 +109,29 @@ class NoticiaControlador {
                         }
                     }
                 }
+                if (isset($_FILES['adjunto']) && $_FILES['adjunto']['error'] === UPLOAD_ERR_OK) {
+                    $rutaDestino = './repo/';
+                    $urlArchivo = $rutaDestino.basename($_FILES['adjunto']['name']);
+                    if (!is_writable('./repo/')) {
+                        $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
+                        $vista = './Vista/Dashboard/Blog/Noticias/actualizar.php';
+                        require_once './Vista/Utilidades/sidebar.php';
+                    }                
+                    if (!is_dir($rutaDestino)) {
+                        mkdir($rutaDestino, 0777, true);
+                    }
+                    if (file_exists($urlArchivo)){
+                        $noticia->setUrlAdjunto($urlArchivo);    
+                    } else {
+                        if (move_uploaded_file($_FILES['adjunto']['tmp_name'], $urlArchivo)) {
+                            $noticia->setUrlAdjunto($urlArchivo);    
+                        } else {
+                            $msg = 'Ha habido un error con la subida del archivo, intente con otro archivo';
+                            $vista = './Vista/Dashboard/Blog/Noticias/actualizar.php';
+                            require_once './Vista/Utilidades/sidebar.php';
+                        }
+                    }
+                }
                 if ($noticiaM->ActualizarNoticia($noticia)){
                     header('location: index.php?controlador=Blog&metodo=Noticias');
                 }                
