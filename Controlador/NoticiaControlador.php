@@ -38,6 +38,25 @@ class NoticiaControlador {
                         require_once './Vista/Utilidades/sidebar.php';
                     }
                 }
+                if (isset($_FILES['adjunto']) && $_FILES['adjunto']['error'] === UPLOAD_ERR_OK) {
+                    $rutaDestino = './repo/';
+                    $urlArchivo = $rutaDestino.basename($_FILES['adjunto']['name']);
+                    if (!is_writable('./repo/')) {
+                        $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
+                        $vista = './Vista/Dashboard/Blog/Noticias/nuevo.php';
+                        require_once './Vista/Utilidades/sidebar.php';
+                    }                
+                    if (!is_dir($rutaDestino)) {
+                        mkdir($rutaDestino, 0777, true);
+                    }
+                    if (move_uploaded_file($_FILES['adjunto']['tmp_name'], $urlArchivo)) {
+                        $noticia->setUrlAdjunto($urlArchivo);    
+                    } else {
+                        $msg = 'Ha habido un error con la subida del archivo, intente con otro archivo';
+                        $vista = './Vista/Dashboard/Blog/Noticias/nuevo.php';
+                        require_once './Vista/Utilidades/sidebar.php';
+                    }
+                }
                 $noticia->setIdUsuario($_SESSION['usuario']->getId());
                 $noticia->setTitulo(trim($_POST['titulo']));
                 $noticia->setDescripcionLarga(trim($_POST['descripcionLarga']));

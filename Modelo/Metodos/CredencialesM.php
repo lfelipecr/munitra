@@ -39,6 +39,21 @@ class CredencialesM{
         $conexion->Cerrar();
         return $retVal;
     }
+    function EliminarCredenciales($id){
+        $retVal = false;
+        $conexion= new Conexion();
+        $sql="DELETE FROM CREDENCIALES WHERE ID = $id";
+        $resultado=$conexion->Ejecutar($sql);
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
+    }
     function BuscarCredenciales($id){
         $registro=null;
         $conexion= new Conexion();

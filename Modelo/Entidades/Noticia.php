@@ -5,6 +5,7 @@ class Noticia {
     private $titulo;
     private $descripcionLarga;
     private $urlImagen;
+    private $urlAdjunto;
     private $inhabilitada;
     
     public function getId() {
@@ -36,6 +37,12 @@ class Noticia {
     }
     public function setUrlImagen($urlImagen) {
         $this->urlImagen = $urlImagen;
+    }
+    public function getUrlAdjunto() {
+        return $this->urlAdjunto;
+    }
+    public function setUrlAdjunto($urlAdjunto) {
+        $this->urlAdjunto = $urlAdjunto;
     }
     public function getInhabilitada() {
         return $this->inhabilitada;

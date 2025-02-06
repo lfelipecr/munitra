@@ -1,5 +1,7 @@
 <?php 
 require_once './Modelo/Metodos/DepartamentoM.php';
+require_once './Modelo/Metodos/NoticiaM.php';
+require_once './Modelo/Metodos/SesionM.php';
 
 class WebControlador {
     function Actividad(){
@@ -30,15 +32,21 @@ class WebControlador {
         require_once './Web/municipalidad.php';
     }
     function Noticias(){
+        $noticiaM = new NoticiaM();
+        $jsonData = $noticiaM->BuscarNoticias();
         require_once './Web/noticias.php';
     }
     function Noticia(){
+        $noticiaM = new NoticiaM();
+        $noticia = $noticiaM->BuscarNoticia($_GET['id']);
         require_once './Web/noticia.php';
     }
     function Actividades(){
         require_once './Web/quehacer.php';
     }
     function Sesiones(){
+        $sesionM = new SesionM();
+        $jsonData = $sesionM->BuscarSesiones();
         require_once './Web/sesiones.php';
     }
 }

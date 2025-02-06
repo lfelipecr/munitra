@@ -79,48 +79,18 @@
         <div class="container">
             <div class="row text-center mt-md-5 mt-4 mx-3">
                 <h1>Sesiones</h1>
-                <p>Noticias Relevantes sobre la Municipalidad</p>
+                <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
                 <div class="col-12 col-md-3 text-center d-flex justify-content-center">
-                    <select name=""  class="form-control" id="">
-                        <option value="">2024</option>
-                        <option value="">2025</option>
+                    <select name=""  class="form-control" id="fecha">
+                        <option value="2025" selected>2025</option>    
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
                     </select>
                 </div>
                 <div class="col-md-9"></div>
             </div>
             <hr>
-            <div class="row mb-3">
-                
-                <div class="col-md-4 text-center d-flex justify-content-center">
-                    <div class="card my-1" style="width: 18rem;">
-                        <div class="bgNoticiaNoPic"></div>
-                        <!--<img src="..." class="card-img-top" alt="...">-->
-                        <div class="card-body">
-                          <h5 class="card-title mb-3">Sesión - Año</h5>
-                          <a href="noticia.html" class="btn btn-outline-warning">Descargar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center d-flex justify-content-center">
-                    <div class="card my-1" style="width: 18rem;">
-                        <div class="bgNoticiaNoPic"></div>
-                        <!--<img src="..." class="card-img-top" alt="...">-->
-                        <div class="card-body">
-                          <h5 class="card-title mb-3">Sesión - Año</h5>
-                          <a href="noticia.html" class="btn btn-outline-warning">Descargar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 text-center d-flex justify-content-center">
-                    <div class="card my-1" style="width: 18rem;">
-                        <div class="bgNoticiaNoPic"></div>
-                        <!--<img src="..." class="card-img-top" alt="...">-->
-                        <div class="card-body">
-                          <h5 class="card-title mb-3">Sesión - Año</h5>
-                          <a href="noticia.html" class="btn btn-outline-warning">Descargar</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="row mb-3" id="sesiones">
             </div>
         </div>
         <!-- Footer-->
@@ -162,5 +132,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="./Web/assets/js/info/sesiones.js"></script>
     </body>
 </html>

@@ -289,15 +289,26 @@ class UsuarioControlador
             $asunto = '';
             $codigo = bin2hex(random_bytes(4));
             if ($_GET['validar'] == 'true'){
+                //base de datos
+                $usuario->setIdEstado(5);
+                $usuarioM->Actualizar($usuario);
+                $credencialesM = new CredencialesM();
+                $credenciales = new Credenciales();
+                $credenciales->setCodigo($codigo);
+                $credenciales->setId($idCredencial);
+                $credencialesM->ModificarCredenciales($credenciales);
                 $asunto = 'Código de verificación | Municipalidad de Río Cuarto';
                 $msg = 'Sus credenciales han sido aceptadas! Su código de verificación es: '.$codigo;
-                $usuario->setIdEstado(5);
+                
                 
             }
             if ($_GET['validar'] == 'false'){
+                $credencialesM = new CredencialesM();
+                $credencialesM->EliminarCredenciales($idCredencial);
                 $asunto = 'Credenciales de Identificación | Municipalidad de Río Cuarto';
                 $msg = 'Sus credenciales no son correctas o no pudieron ser verificadas, intente de nuevo';
                 $usuario->setIdEstado(3);
+                $usuarioM->Actualizar($usuario);
             }
             $mail = new PHPMailer();
             try{
@@ -320,13 +331,6 @@ class UsuarioControlador
                 $mail->Subject = $asunto;
                 $mail->Body = $msg;
                 $mail->send();
-                //base de datos
-                $usuarioM->Actualizar($usuario);
-                $credencialesM = new CredencialesM();
-                $credenciales = new Credenciales();
-                $credenciales->setCodigo($codigo);
-                $credenciales->setId($idCredencial);
-                $credencialesM->ModificarCredenciales($credenciales);
                 header('location: index.php?controlador=Usuario&metodo=Listado');
                 
             } catch (Exception $ex){

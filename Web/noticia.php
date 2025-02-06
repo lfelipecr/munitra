@@ -76,12 +76,12 @@
               </div>
             </div>
         </nav>
-        <header class="mastheadNoticia">
+        <header class="mastheadNoticia" style='background: url("<?php echo $noticia->getUrlImagen();?>") no-repeat center center;'>
             <div class="container position-relative">
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
                         <div class="text-center text-white">
-                            <h1>Noticia</h1>
+                            <h1><?php echo $noticia->getTitulo();?></h1>
                         </div>
                     </div>
                 </div>
@@ -89,10 +89,10 @@
         </header>
         <div class="container mb-5">
             <hr class="mt-5">
-            <p class="lead mb-3 mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti excepturi deserunt consequuntur vero, sequi voluptas a perspiciatis dolor omnis qui quaerat dolorem! Id, deserunt non? Dolorem, dolorum? Aperiam, rerum dolorum.</p>
-            <button class="btn btn-warning mb-5 mt-5">
+            <p class="lead mb-3 mt-5"><?php echo $noticia->getDescripcionLarga();?></p>
+            <a class="btn btn-warning mb-5 mt-5" href="<?php echo $noticia->getUrlAdjunto(); ?>">
                 <span>Descargar Adjuntos</span>
-            </button>
+            </a>
         </div>
         <!-- Footer-->
         <footer class="text-center text-lg-start" style="background-color: #f3aa16;">

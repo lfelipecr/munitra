@@ -569,11 +569,12 @@ CREATE PROCEDURE SpIngresarNoticia(
     IN idUsuario INT,
     IN n_titulo VARCHAR (100),
     IN n_descripcionLarga VARCHAR(1000),
+    IN n_urlAdjunto VARCHAR (200),
     IN urlImagen VARCHAR(200)
 )
 BEGIN
-    INSERT INTO NOTICIA (ID_USUARIO, TITULO, DESCRIPCION_LARGA, URL_IMAGEN, INHABILITADA) 
-    VALUES (idUsuario, n_titulo, n_descripcionLarga, urlImagen, 0);
+    INSERT INTO NOTICIA (ID_USUARIO, TITULO, DESCRIPCION_LARGA, URL_IMAGEN, INHABILITADA, URL_ADJUNTO) 
+    VALUES (idUsuario, n_titulo, n_descripcionLarga, urlImagen, 0, n_urlAdjunto);
 END //
 DELIMITER ;
 --CALL SpIngresarNoticia(6, 'Noticia de Prueba', 'blablablablablablablabla', '');
@@ -609,25 +610,43 @@ END //
 DELIMITER ;
 
 DELIMITER //
+
 CREATE PROCEDURE SpActualizarNoticia(
     IN idNoti INT,
-    IN n_titulo VARCHAR (100),
+    IN n_titulo VARCHAR(100),
     IN n_descripcionLarga VARCHAR(1000),
-    IN urlImagen VARCHAR(200))
+    IN urlImagen VARCHAR(200),
+    IN urlAdjunto VARCHAR(200)
+)
 BEGIN
-    IF urlimagen = '' THEN
+    IF urlImagen = '' AND urlAdjunto = '' THEN
         UPDATE NOTICIA
         SET TITULO = n_titulo,
-        DESCRIPCION_LARGA = n_descripcionLarga
-        WHERE ID =  idNoti;
+            DESCRIPCION_LARGA = n_descripcionLarga
+        WHERE ID = idNoti;
+    ELSEIF urlImagen = '' THEN
+        UPDATE NOTICIA
+        SET TITULO = n_titulo,
+            DESCRIPCION_LARGA = n_descripcionLarga,
+            URL_ADJUNTO = urlAdjunto
+        WHERE ID = idNoti;
+    ELSEIF urlAdjunto = '' THEN
+        UPDATE NOTICIA
+        SET TITULO = n_titulo,
+            DESCRIPCION_LARGA = n_descripcionLarga,
+            URL_IMAGEN = urlImagen
+        WHERE ID = idNoti;
     ELSE
         UPDATE NOTICIA
         SET TITULO = n_titulo,
-        DESCRIPCION_LARGA = n_descripcionLarga,
-        URL_IMAGEN = urlImagen
-        WHERE ID =  idNoti;
+            DESCRIPCION_LARGA = n_descripcionLarga,
+            URL_IMAGEN = urlImagen,
+            URL_ADJUNTO = urlAdjunto
+        WHERE ID = idNoti;
     END IF;
+    
 END //
+
 DELIMITER ;
 
 /*Sesiones*/
