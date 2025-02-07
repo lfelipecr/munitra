@@ -11,6 +11,7 @@ class LoginControlador
 {   
     function Index(){
         $msg = '';
+        session_start();
         require_once './Vista/Login/login.php';
     }
     function InicioTramites(){

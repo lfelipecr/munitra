@@ -39,7 +39,6 @@ class TramitesControlador {
     function UsoSuelo(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
-            session_start();
             if ($_SESSION['usuario']->getIdDepartamento() == 1){
                 $solicitudM = new SolicitudM();
                 $jsonData = $solicitudM->BuscarSolicitudes(2);

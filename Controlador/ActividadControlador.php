@@ -102,4 +102,12 @@ class ActividadControlador {
             }           
         }       
     }
+    function Eliminar(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $actividadM = new ActividadM();
+            $actividadM->Eliminar($_GET['id']);
+            
+        }
+    }
 }

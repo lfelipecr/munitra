@@ -13,6 +13,14 @@ class NoticiaControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
+    function Eliminar(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $noticiaM = new NoticiaM();
+            $noticiaM->Eliminar($_GET['id']);
+            header('location: index.php?controlador=Blog&metodo=Noticias');
+        }
+    }
     function Ingresar(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){

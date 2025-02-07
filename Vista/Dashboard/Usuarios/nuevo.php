@@ -120,7 +120,7 @@
                 <h6><strong>Datos de Usuario en Sistema</strong></h6>
               </div>
               <div class="col-md-6">
-                <span class="mb-3">Nombre de Usuario (*)</span>
+                <span class="mb-3">Descripción de Usuario (*)</span>
                 <input type="text" class="form-control mb-3" name="nombreUsuario" id="txtNombreUsuario">
               </div>
               <div class="col-md-6">

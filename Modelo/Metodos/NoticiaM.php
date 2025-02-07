@@ -38,6 +38,20 @@ class NoticiaM {
         $conexion->Cerrar();
         return $retVal;
     }
+    function Eliminar($id){
+        $retVal = false;
+        $conexion= new Conexion();
+        $sql="UPDATE NOTICIA SET INHABILITADA = 1 WHERE ID = $id";
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
+    }
     function BuscarNoticia($id){
         $registro=null;
         $conexion= new Conexion();

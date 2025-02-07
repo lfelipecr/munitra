@@ -19,16 +19,8 @@
             .carousel-item img {
                 width: 100%;
                 height: 200px;
-                object-fit: contain;
+                object-fit: cover;
                 background-color: #0f1a4f;
-            }
-            .carousel-control-prev,
-            .carousel-control-next {
-                background-color: rgba(15, 26, 79, 0.5);
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                margin-top: 45%;
             }
         </style>
     </head>

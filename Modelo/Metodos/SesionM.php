@@ -40,6 +40,7 @@ class SesionM {
         $conexion->Cerrar();
         return $sesion;
     }
+    
     function IngresarSesion(Sesion $sesion){
         $retVal = false;
         $conexion= new Conexion();       

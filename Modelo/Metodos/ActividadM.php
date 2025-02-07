@@ -19,6 +19,20 @@ class ActividadM {
         $conexion->Cerrar();
         return $retVal;
     }
+    function Eliminar($id){
+        $retVal = false;
+        $conexion= new Conexion();
+        $sql="UPDATE ACTIVIDAD SET INHABILITADA = 1 WHERE ID = $id";
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
+    }
     function Actualizar(Actividad $actividad){
         $retVal = false;
         $conexion= new Conexion();
