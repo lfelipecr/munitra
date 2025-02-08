@@ -38,25 +38,6 @@
                 <hr>
                 <form action="index.php?controlador=Login&metodo=IngresarCredenciales" method="post" id="frmIngresar" enctype="multipart/form-data">
                     <input type="hidden" id="idUsuario" name="idUsuario" value="<?php echo $idUsuario; ?>">
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 text-center">
-                            <video id="video" class="border rounded" width="100%" height="auto" autoplay></video>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="col-md-12 text-center">
-                            <canvas id="canvasFoto" class="d-none"></canvas>
-                            <img id="photo" class="img-fluid border rounded d-none">
-                            <input type="hidden" name="foto" id="fotoUrl">
-                        </div>
-                    </div>
-                    <div class="row justify-content-center mt-1 mb-3">
-                        <div class="col-12 text-center">
-                            <button id="capture" class="btn btn-outline-primary mt-3 mx-1">Tomar Foto</button>
-                            <button id="new" class="btn btn-outline-primary mt-3 mx-1">Tomar de nuevo</button>
-                        </div>
-                    </div>
                     <div class="row justify-content-center mb-3 mt-1">
                         <div class="col-md-12 mt-md-3 text-center">
                             <span class="mb-3">Firma (*)</span><br>
@@ -64,7 +45,7 @@
 
                             <br>
                             <input type="hidden" name="firma" id="firma">
-                            <button id="clear" class="btn btn-outline-danger">Limpiar</button>
+                            <button id="clear" class="btn btn-outline-danger mt-1">Limpiar</button>
                         </div>
                     </div>
                     <div class="row justify-content-center mb-3 mt-1">
@@ -89,7 +70,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
-    <script src="./Vista/assets/js/fotos.js"></script>
     <script src="./Vista/assets/js/firmas.js"></script>
     <script>
        $('#frmIngresar').on('submit', function (){

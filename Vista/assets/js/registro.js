@@ -30,7 +30,11 @@ $(document).ready(function () {
             }
         }
         if ($('#txtNombreUsuario').val() == ''){
-            $('#txtNombreUsuario').val($('#txtCorreo').val().trim());
+            let fecha = new Date();
+            let nombreUsuario = $('#txtNombre').val().trim().charAt(0);
+            nombreUsuario += $('#txtApellido1').val().trim();
+            nombreUsuario += fecha.getDay()+'-'+fecha.getMonth()+'-'+fecha.getHours();
+            $('#txtNombreUsuario').val(nombreUsuario);
         }
         return true;
     });

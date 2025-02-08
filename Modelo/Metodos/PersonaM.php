@@ -159,6 +159,20 @@ class PersonaM {
         $conexion->Cerrar();
         return $registro;
     }
+    function BuscarPersonaCedula($cedula){
+        $listado = $this->ListadoPersonas();
+        if ($listado != 'null'){
+            for($i = 0; $i < count($listado); $i++)
+            {
+                if ($cedula == $listado[$i]->getIdentificacion()){
+                    return $listado[$i];
+                }
+            }
+        } else {
+            return null;
+        }
+        return null;
+    }
     function ListadoPersonasJSON(){
         $conexion= new Conexion();
         $sql="CALL SpConsultarTodosUsuarios();";

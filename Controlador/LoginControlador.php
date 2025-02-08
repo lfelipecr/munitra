@@ -29,7 +29,7 @@ class LoginControlador
     function IngresarCredenciales(){
         $credenciales = new Credenciales();
         $credencialesM = new CredencialesM();
-        if (isset($_POST['foto']) && isset($_POST['firma'])){
+        if (isset($_POST['firma'])){
             $firma = $_POST['firma'];
             $firma = str_replace("data:image/png;base64,", "", $firma);
             $firma = str_replace(" ", "+", $firma);
@@ -37,13 +37,6 @@ class LoginControlador
             $archivo = "repo/firmas/firma_" . time() . ".png";
             file_put_contents($archivo, $imagen);
             $credenciales->setFirma($archivo);
-            $foto = $_POST['foto'];
-            $foto = str_replace("data:image/png;base64,", "", $foto);
-            $foto = str_replace(" ", "+", $foto);
-            $imagen = base64_decode($foto);
-            $archivo = "repo/foto_" . time() . ".png";
-            file_put_contents($archivo, $imagen);
-            $credenciales->setUrlImagen($archivo);
             $credenciales->setIdUsuario($_POST['idUsuario']);
 
             if (isset($_FILES['consentimiento']) && $_FILES['consentimiento']['error'] === UPLOAD_ERR_OK) {

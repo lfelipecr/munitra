@@ -358,4 +358,30 @@ class UsuarioControlador
             }
         }
     }
+    function BuscarCedula(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $personaM = new PersonaM();
+            $cedula = $_GET['cedula'];
+            $persona = $personaM->BuscarPersonaCedula($cedula);
+            if ($persona != null){
+                $arreglo = array();
+                $arreglo['nombre'] = $persona->getNombre();
+                $arreglo['tipoId'] = $persona->getIdTipoIdentificacion();
+                $arreglo['apellido1'] = $persona->getPrimerApellido();
+                $arreglo['apellido2'] = $persona->getSegundoApellido();
+                $arreglo['telefono'] = $persona->getTelefono();
+                $arreglo['whatsapp'] = $persona->getWhatsapp();
+                $arreglo['direccion'] = $persona->getDireccion();
+                $arreglo['correo'] = $persona->getCorreo();
+                $arreglo['provincia'] = $persona->getIdProvincia();
+                $arreglo['distrito'] = $persona->getIdDistrito();
+                $arreglo['canton'] = $persona->getIdCanton();
+                echo json_encode($arreglo);
+            } else {
+                echo 'null';
+            }
+            
+        }
+    }
 }

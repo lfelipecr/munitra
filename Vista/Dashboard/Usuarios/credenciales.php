@@ -37,12 +37,6 @@
                             <p id="cedula">Cédula: </p>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-12">
-                            <span>Foto con la Cédula</span><br>
-                            <img id="fotoCredencial" class="img-fluid border rounded">
-                        </div>
-                    </div>
                     <div class="row justify-content-center mb-3 mt-1">
                         <div class="col-md-12 mt-md-3 text-center">
                             <span class="mb-3">Firma</span><br>

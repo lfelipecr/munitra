@@ -28,7 +28,7 @@
             <div class="col-12"><hr></div>
             <div class="col-12 mt-md-3">
                 <span class="mb-3">Adjunte los requisitos para la solicitud de patentes</span> <br>
-                <input type="file" class="form-control"  name="requisitos">
+                <input type="file" class="form-control"  name="requisitos[]" multiple>
             </div>
             <div class="col-12 mt-md-3">
               <span class="mb-3">Uso de Patente (*)</span><br>
