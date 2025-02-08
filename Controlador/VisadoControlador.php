@@ -8,12 +8,15 @@ require_once './Modelo/Entidades/DetalleSolicitud.php';
 class VisadoControlador {
     private function LlamarVistaActualizar($msg, $id){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $personaM = new PersonaM();
             $solicitudM = new SolicitudM();
             $provinciaM = new ProvinciaM();
             $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
             $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
             $id = $_SESSION['usuario']->getIdPersona();
+            $arrLocaciones  = $provinciaM->BuscarLocaciones();
             $distritos = $provinciaM->BuscarDistritos();
+            $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
             $vista = './Vista/TramitesUsuario/Visado/actualizar.php';
             require_once './Vista/Utilidades/navbar.php';
         } else {
@@ -33,6 +36,7 @@ class VisadoControlador {
             $provinciaM = new ProvinciaM();
             $id = $_SESSION['usuario']->getIdPersona();
             $distritos = $provinciaM->BuscarDistritos();
+            $arrLocaciones  = $provinciaM->BuscarLocaciones();
             $vista = './Vista/TramitesUsuario/Visado/nuevo.php';
             require_once './Vista/Utilidades/navbar.php';
         } else {
@@ -202,7 +206,45 @@ class VisadoControlador {
                 $solicitud->setIdUsuario($_SESSION['usuario']->getId());
                 $solicitud->setTipoSolicitud(3);
                 $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-                $solicitud->setIdPersona($_POST['persona']);
+                 //si un administrador ingresa la persona, manda el id
+                //si un usuario externo lo hace, busca los datos de la persona
+                if (isset($_POST['persona'])){
+                    $solicitud->setIdPersona($_POST['persona']);
+                } else {
+                    $cedula = $_POST['identificacion'];
+                    $personaM = new PersonaM();
+                    //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
+                    $persona = $personaM->BuscarPersonaCedula($cedula);
+                    var_dump($persona);
+                    if ($persona != null){
+                        $solicitud->setIdPersona($persona->getId());
+                    } else {
+                        //genera el usuario
+                        session_start();
+                        $persona = new Persona();
+                        $persona->setIdTipoIdentificacion($_POST['tipoIdentificacion']);
+                        $persona->setIdentificacion(trim($_POST['identificacion']));
+                        $persona->setNombre(trim($_POST['nombre']));
+                        $persona->setPrimerApellido(trim($_POST['apellido1']));
+                        $persona->setSegundoApellido(trim($_POST['apellido2']));
+                        $persona->setDireccion(trim($_POST['direccion']));
+                        $persona->setTelefono(trim($_POST['telefono']));
+                        $persona->setWhatsapp(trim($_POST['whatsapp']));
+                        $persona->setCorreo(trim($_POST['correo']));
+                        $persona->setSituacion(trim($_POST['situacion']));
+                        $persona->setEstado(2);
+                        $persona->setMontoMorosidad($_POST['montoMorosidad']);
+                        $persona->setMontoAdeudado($_POST['montoAdeudado']);
+                        $persona->setPropiedadFuera($_POST['propiedadFuera']);
+                        $persona->setConsentimiento($_POST['consentimiento']);
+                        $persona->setIdProvincia($_POST['provincia']);
+                        $persona->setIdCanton($_POST['canton']);
+                        $persona->setIdDistrito($_POST['distrito']);
+                        $persona->setUsuarioCreacion($_SESSION['usuario']->getId());
+                        $idUsuario = $personaM->IngresarPersona($persona);
+                        $solicitud->setIdPersona($idUsuario);
+                    }
+                }
                 $idSolicitud = $solicitudM->IngresarSolicitud($solicitud);
                 //Valida que la solicitud se haya ingresado
                 if ($idSolicitud != 0){

@@ -12,7 +12,7 @@ $(document).ready(function (){
         for(let i = 0; i < datos.length; i++){
             console.log(datos);
             tabla += `<div class="col-12 mb-3">
-                <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Patente&metodo=VActualizar&id=${datos[i][0]}';">
+                <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=${controlador}&metodo=VActualizar&id=${datos[i][0]}';">
                     <div class="d-flex justify-content-between">
                     <h4>Solicitud de ${controlador} - <a href="#" class="link-blog">${datos[i][1]}</a></h4>
                     <h4># ${datos[i][0]}</h4>
@@ -41,7 +41,7 @@ $(document).ready(function (){
                 if (datos[i][0].includes(query) || datos[i][1].includes(query) || 
                     datos[i][4].includes(query) || datos[i][5].includes(query) || datos[i][7].includes(query)){
                         tabla += `<div class="col-12 mb-3">
-                                    <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Patente&metodo=VActualizar&id=${datos[i][0]}';">
+                                    <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=${controlador}&metodo=VActualizar&id=${datos[i][0]}';">
                                         <div class="d-flex justify-content-between">
                                         <h4>Solicitud de ${controlador} - <a href="#" class="link-blog">${datos[i][1]}</a></h4>
                                         <h4># ${datos[i][0]}</h4>

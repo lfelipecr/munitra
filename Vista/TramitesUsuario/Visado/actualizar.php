@@ -23,7 +23,36 @@
         <input type="hidden" value="<?php echo $id; ?>" name="idSolicitud">  
         <div class="my-3 p-3 bg-body rounded shadow-sm">
           <div class="row mt-3">
-            <input type="hidden" name="persona" id="slPersonas" value="<?php echo $id; ?>">
+          <div class="col-md-6">
+              <span class="mb-3">Tipo de Identificacion (*)</span>
+              <select disabled name="tipoIdentificacion" id="txtTipoId" class="form-control mb-3">
+                <option value="1" <?php if ($persona->getIdTipoIdentificacion()==1) {echo 'selected';}?>>Cedula de Identidad</option>
+                <option value="2" <?php if ($persona->getIdTipoIdentificacion()==2) {echo 'selected';}?>>Pasaporte</option>
+                <option value="3" <?php if ($persona->getIdTipoIdentificacion()==3) {echo 'selected';}?>>Cédula de Residencia</option>
+                <option value="4" <?php if ($persona->getIdTipoIdentificacion()==4) {echo 'selected';}?>>Número Interno</option>
+                <option value="5" <?php if ($persona->getIdTipoIdentificacion()==5) {echo 'selected';}?>>Número Asegurado</option>
+                <option value="6" <?php if ($persona->getIdTipoIdentificacion()==6) {echo 'selected';}?>>DIMEX</option>
+                <option value="7" <?php if ($persona->getIdTipoIdentificacion()==7) {echo 'selected';}?>>NITE</option>
+                <option value="8" <?php if ($persona->getIdTipoIdentificacion()==8) {echo 'selected';}?>>DIDI</option>
+              </select>
+            </div>
+            <input type="hidden" value="<?php echo $persona->getId(); ?>" name="idPersona">
+            <div class="col-md-6">
+              <span class="mb-3">Identificacion (*)</span>
+              <input type="text" disabled class="form-control mb-3" name="identificacion" id="txtIdentificacion" value="<?php echo $persona->getIdentificacion();?>">
+            </div>
+            <div class="col-md-4">
+              <span class="mb-3">Nombre (*)</span>
+              <input type="text" disabled class="form-control mb-3" name="nombre" id="txtNombre" value="<?php echo $persona->getNombre();?>">
+            </div>
+            <div class="col-md-4">
+              <span class="mb-3">Primer Apellido (*)</span>
+              <input type="text" disabled class="form-control mb-3" name="apellido1" id="txtApellido1" value="<?php echo $persona->getPrimerApellido();?>">
+            </div>
+            <div class="col-md-4">
+              <span class="mb-3">Segundo Apellido</span>
+              <input type="text" disabled class="form-control mb-3" name="apellido2" id="txtApellido2" value="<?php echo $persona->getSegundoApellido();?>">
+            </div>
             <div class="col-12"><hr></div>
             <div class="col-12 mt-md-3">
               <span class="mb-3">Dirección de plano a revisar (*)</span><br>

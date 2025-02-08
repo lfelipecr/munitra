@@ -8,12 +8,14 @@ require_once './Modelo/Entidades/DetalleSolicitud.php';
 class UsosueloControlador {
     private function LlamarVistaActualizar($msg, $id){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $personaM = new PersonaM();
             $solicitudM = new SolicitudM();
             $provinciaM = new ProvinciaM();
             $idUsuario = $_SESSION['usuario']->getIdPersona();
             $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
             $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
             $distritos = $provinciaM->BuscarDistritos();
+            $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
             $vista = './Vista/TramitesUsuario/UsoSuelo/actualizar.php';
             require_once './Vista/Utilidades/navbar.php';
         } else {
@@ -39,6 +41,7 @@ class UsosueloControlador {
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
             $id = $_SESSION['usuario']->getIdPersona();
             $provinciaM = new ProvinciaM();
+            $arrLocaciones = $provinciaM->BuscarLocaciones();
             $distritos = $provinciaM->BuscarDistritos();
             $vista = './Vista/TramitesUsuario/UsoSuelo/nuevo.php';
             require_once './Vista/Utilidades/navbar.php';
@@ -60,7 +63,7 @@ class UsosueloControlador {
     function Ingresar(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
-            if (isset($_POST['persona']) && isset($_POST['direccionPropiedad']) &&
+            if (isset($_POST['direccionPropiedad']) &&
             isset($_POST['finca']) && isset($_POST['plano']) &&
             isset($_POST['usoSolicitado'])){
                 if (isset($_FILES['planoCatastro']) && $_FILES['planoCatastro']['error'] === UPLOAD_ERR_OK) {
@@ -80,7 +83,42 @@ class UsosueloControlador {
                         $solicitud->setIdUsuario($_SESSION['usuario']->getId());
                         $solicitud->setTipoSolicitud(2);
                         $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-                        $solicitud->setIdPersona($_POST['persona']);
+                        if (isset($_POST['persona'])){
+                            $solicitud->setIdPersona($_POST['persona']);
+                        } else {
+                            $cedula = $_POST['identificacion'];
+                            $personaM = new PersonaM();
+                            //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
+                            $persona = $personaM->BuscarPersonaCedula($cedula);
+                            if ($persona != null){
+                                $solicitud->setIdPersona($persona->getId());
+                            } else {
+                                //genera el usuario
+                                session_start();
+                                $persona = new Persona();
+                                $persona->setIdTipoIdentificacion($_POST['tipoIdentificacion']);
+                                $persona->setIdentificacion(trim($_POST['identificacion']));
+                                $persona->setNombre(trim($_POST['nombre']));
+                                $persona->setPrimerApellido(trim($_POST['apellido1']));
+                                $persona->setSegundoApellido(trim($_POST['apellido2']));
+                                $persona->setDireccion(trim($_POST['direccion']));
+                                $persona->setTelefono(trim($_POST['telefono']));
+                                $persona->setWhatsapp(trim($_POST['whatsapp']));
+                                $persona->setCorreo(trim($_POST['correo']));
+                                $persona->setSituacion(trim($_POST['situacion']));
+                                $persona->setEstado(2);
+                                $persona->setMontoMorosidad($_POST['montoMorosidad']);
+                                $persona->setMontoAdeudado($_POST['montoAdeudado']);
+                                $persona->setPropiedadFuera($_POST['propiedadFuera']);
+                                $persona->setConsentimiento($_POST['consentimiento']);
+                                $persona->setIdProvincia($_POST['provincia']);
+                                $persona->setIdCanton($_POST['canton']);
+                                $persona->setIdDistrito($_POST['distritoPersona']);
+                                $persona->setUsuarioCreacion($_SESSION['usuario']->getId());
+                                $idUsuario = $personaM->IngresarPersona($persona);
+                                $solicitud->setIdPersona($idUsuario);
+                            }
+                        }
                         $idSolicitud = $solicitudM->IngresarSolicitud($solicitud);
                         //Si el id es válido, genera un arreglo con los detalles
                         if ($idSolicitud != 0) {
@@ -128,7 +166,7 @@ class UsosueloControlador {
     function Actualizar(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
-            if (isset($_POST['persona']) && isset($_POST['direccionPropiedad']) &&
+            if (isset($_POST['direccionPropiedad']) &&
             isset($_POST['finca']) && isset($_POST['plano']) &&
             isset($_POST['usoSolicitado'])){
                 //Cabecera solicitud
@@ -168,7 +206,7 @@ class UsosueloControlador {
                                     $adjunto->setTipoRequisito($contador);
                                     $registrar[] = $adjunto;
                                 } else {
-                                    $this->LlamarVistaIngresar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI');
+                                    $this->LlamarVistaActualizar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI', $idSolicitud);
                                 }
                             }
                         } else {
@@ -184,13 +222,13 @@ class UsosueloControlador {
                     if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
                         header('location: index.php?controlador=Tramites&metodo=UsoSuelo');
                     } else {
-                        $this->LlamarVistaIngresar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI');        
+                        $this->LlamarVistaActualizar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI', $idSolicitud);        
                     }
                 } else {
-                    $this->LlamarVistaIngresar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI');        
+                    $this->LlamarVistaActualizar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI', $idSolicitud);        
                 }
             } else { 
-                $this->LlamarVistaIngresar('Debe llenar todos los datos marcados con asterisco (*)');  
+                $this->LlamarVistaActualizar('Debe llenar todos los datos marcados con asterisco (*)', $_POST['idSolicitud']);  
             }
         } 
     }

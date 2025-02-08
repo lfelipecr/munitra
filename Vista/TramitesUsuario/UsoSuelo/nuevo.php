@@ -14,7 +14,88 @@
       <form action="index.php?controlador=Usosuelo&metodo=Ingresar" id="frmUsoSuelo" method="post" enctype="multipart/form-data">
         <div class="my-3 p-3 bg-body rounded shadow-sm">
           <div class="row">
-            <input type="hidden" name="persona" id="slPersonas" value="<?php echo $id; ?>">
+          <div class="col-md-6">
+              <span class="mb-3">Tipo de Identificacion (*)</span>
+              <select name="tipoIdentificacion" id="txtTipoId" class="form-control mb-3">
+                <option value="1" id="tipo1">Cedula de Identidad</option>
+                <option value="2" id="tipo2">Pasaporte</option>
+                <option value="3" id="tipo3">Cédula de Residencia</option>
+                <option value="4" id="tipo4">Número Interno</option>
+                <option value="5" id="tipo5">Número Asegurado</option>
+                <option value="6" id="tipo6">DIMEX</option>
+                <option value="7" id="tipo7">NITE</option>
+                <option value="8" id="tipo8">DIDI</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <span class="mb-3">Identificacion (*)</span>
+              <input type="text" class="form-control mb-3" name="identificacion" id="txtIdentificacion">
+            </div>
+            <div class="col-md-4">
+              <span class="mb-3">Nombre (*)</span>
+              <input type="text" class="form-control dataPersona mb-3" name="nombre" id="txtNombre">
+            </div>
+            <div class="col-md-4">
+              <span class="mb-3">Primer Apellido (*)</span>
+              <input type="text" class="form-control dataPersona mb-3" name="apellido1" id="txtApellido1">
+            </div>
+            <div class="col-md-4">
+              <span class="mb-3">Segundo Apellido</span>
+              <input type="text" class="form-control dataPersona mb-3" name="apellido2" id="txtApellido2">
+            </div>
+            <div class="col-12">
+              <span class="mb-3">Dirección (*)</span>
+              <input type="text" class="form-control dataPersona mb-3" name="direccion" id="txtDireccion">
+            </div>
+            <div class="col-md-6">
+              <span class="mb-3">Teléfono</span>
+              <input type="number" class="form-control dataPersona mb-3" name="telefono" id="txtTelefono">
+            </div>
+            <div class="col-md-6">
+              <span class="mb-3">Whatsapp</span>
+              <input type="number" class="form-control dataPersona mb-3" name="whatsapp" id="txtWhatsapp">
+            </div>
+            <div class="col-md-12">
+              <span class="mb-3">Correo (*)</span>
+              <input type="text" class="form-control dataPersona mb-3" name="correo" id="txtCorreo">
+            </div>
+            <div class="col-12">
+              <input type="hidden" class="form-control mb-3" name="situacion" id="txtSituacion">
+              <input type="hidden" class="form-control mb-3" name="montoMorosidad" id="txtMontoMorosidad">
+              <input type="hidden" class="form-control mb-3" name="montoAdeudado" id="txtMontoAdeudado">
+              <input type="hidden" class="form-control mb-3" name="propiedadFuera" id="txtPropiedadFuera">
+              <input type="hidden" name="consentimiento" value="0" id="valorConsentimiento">
+            </div>
+            <div class="col-md-4">
+              <span class="mb-3">Provincia (*)</span>
+              <select name="provincia" class="form-control" id="slProvincia">
+                <?php for ($i = 0; $i < sizeof($arrLocaciones[0]); $i++) {?>
+                  <option value="<?php echo $arrLocaciones[0][$i]->getId();?>" id="provincia<?php echo $arrLocaciones[0][$i]->getId();?>">
+                    <span><?php echo $arrLocaciones[0][$i]->getNombre();?></span>
+                  </option>
+                <?php } ?>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <span class="mb-3">Cantón (*)</span>
+              <select name="canton" class="form-control" id="slCanton">
+                <?php for ($i = 0; $i < sizeof($arrLocaciones[1]); $i++) {?>
+                  <option value="<?php echo $arrLocaciones[1][$i]->getId();?>" id="canton<?php echo $arrLocaciones[1][$i]->getId();?>">
+                    <span><?php echo $arrLocaciones[1][$i]->getNombre();?></span>
+                  </option>
+                <?php } ?>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <span class="mb-3">Distrito (*)</span>
+              <select name="distritoPersona" class="form-control" id="slDistrito">
+                <?php for ($i = 0; $i < sizeof($arrLocaciones[2]); $i++) {?>
+                  <option value="<?php echo $arrLocaciones[2][$i]->getId();?>" id="distrito<?php echo $arrLocaciones[2][$i]->getId();?>">
+                    <span><?php echo $arrLocaciones[2][$i]->getNombre();?></span>
+                  </option>
+                <?php } ?>
+              </select>
+            </div>
             <div class="col-12"><hr></div>
             <div class="col-12 mt-md-3">
               <span class="mb-3">Distrito (*)</span><br>
@@ -79,3 +160,9 @@
   </main>
   <script src="./Vista/assets/js/usosuelo.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
+  <script src="./Vista/assets/js/busquedaDinamicaCedula.js"></script>
+  <script>
+    $('#slCanton').select2();
+    $('#slProvincia').select2();
+    $('#slDistrito').select2();
+  </script>

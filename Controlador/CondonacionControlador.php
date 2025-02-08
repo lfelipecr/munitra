@@ -2,12 +2,23 @@
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/SolicitudM.php';
 require_once './Modelo/Metodos/PersonaM.php';
+require_once './Modelo/Metodos/ProvinciaM.php';
 require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class CondonacionControlador {
     private function LlamarVistaActualizar($msg, $id){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $provinciaM = new ProvinciaM();
+            $solicitudM = new SolicitudM();
+            $personaM = new PersonaM();
+            $personas = $personaM->ListadoPersonas();
+            $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
+            $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+            $arrLocaciones  = $provinciaM->BuscarLocaciones();
+            $distritos = $provinciaM->BuscarDistritos();
+            $personaM = new PersonaM();
             $id = $_SESSION['usuario']->getIdPersona();
+            $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
             $vista = './Vista/TramitesUsuario/Condonacion/actualizar.php';
             require_once './Vista/Utilidades/navbar.php';
         } else {
@@ -22,7 +33,9 @@ class CondonacionControlador {
     }
     private function LlamarVistaIngresar($msg){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            $provinciaM = new ProvinciaM();
             $id = $_SESSION['usuario']->getIdPersona();
+            $arrLocaciones  = $provinciaM->BuscarLocaciones();
             $vista = './Vista/TramitesUsuario/Condonacion/nuevo.php';
             require_once './Vista/Utilidades/navbar.php';
         } else {
@@ -58,7 +71,6 @@ class CondonacionControlador {
             $solicitud->setIdUsuario($_SESSION['usuario']->getId());
             $solicitud->setTipoSolicitud(4);
             $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-            $solicitud->setIdPersona($_POST['persona']);
             if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)){
                 $registrar = array();
                 $post = ['representante', 'identificacionRepresentante', 'direccion', 'notificaciones',
@@ -119,7 +131,45 @@ class CondonacionControlador {
             $solicitud->setIdUsuario($_SESSION['usuario']->getId());
             $solicitud->setTipoSolicitud(4);
             $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-            $solicitud->setIdPersona($_POST['persona']);
+            //si un administrador ingresa la persona, manda el id
+            //si un usuario externo lo hace, busca los datos de la persona
+            if (isset($_POST['persona'])){
+                $solicitud->setIdPersona($_POST['persona']);
+            } else {
+                $cedula = $_POST['identificacion'];
+                $personaM = new PersonaM();
+                //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
+                $persona = $personaM->BuscarPersonaCedula($cedula);
+                var_dump($persona);
+                if ($persona != null){
+                    $solicitud->setIdPersona($persona->getId());
+                } else {
+                    //genera el usuario
+                    session_start();
+                    $persona = new Persona();
+                    $persona->setIdTipoIdentificacion($_POST['tipoIdentificacion']);
+                    $persona->setIdentificacion(trim($_POST['identificacion']));
+                    $persona->setNombre(trim($_POST['nombre']));
+                    $persona->setPrimerApellido(trim($_POST['apellido1']));
+                    $persona->setSegundoApellido(trim($_POST['apellido2']));
+                    $persona->setDireccion(trim($_POST['direccion']));
+                    $persona->setTelefono(trim($_POST['telefono']));
+                    $persona->setWhatsapp(trim($_POST['whatsapp']));
+                    $persona->setCorreo(trim($_POST['correo']));
+                    $persona->setSituacion(trim($_POST['situacion']));
+                    $persona->setEstado(2);
+                    $persona->setMontoMorosidad($_POST['montoMorosidad']);
+                    $persona->setMontoAdeudado($_POST['montoAdeudado']);
+                    $persona->setPropiedadFuera($_POST['propiedadFuera']);
+                    $persona->setConsentimiento($_POST['consentimiento']);
+                    $persona->setIdProvincia($_POST['provincia']);
+                    $persona->setIdCanton($_POST['canton']);
+                    $persona->setIdDistrito($_POST['distritoPersona']);
+                    $persona->setUsuarioCreacion($_SESSION['usuario']->getId());
+                    $idUsuario = $personaM->IngresarPersona($persona);
+                    $solicitud->setIdPersona($idUsuario);
+                }
+            }            
             $idSolicitud = $solicitudM->IngresarSolicitud($solicitud);
             if ($idSolicitud != 0){
                 $registrar = array();

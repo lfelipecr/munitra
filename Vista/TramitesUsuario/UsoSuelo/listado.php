@@ -17,7 +17,6 @@
       </div>
       <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
       <input type="hidden" id="controlador" value="Usosuelo">
-      <input type="hidden" id="idUsuario" value='<?php echo $idUsuario; ?>'>
       <div class="row" id="tbodyListadoPersonas"></div>
     </div>
     <form action="index.php?controlador=Bitacora&metodo=EnviarEmail" id="frmEmail" method="post">

@@ -109,7 +109,7 @@ class SolicitudM {
     function BuscarSolicitudes($idTipo){
         $conexion= new Conexion();
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
-            $idUsuario = $_SESSION['usuario']->getIdPersona();
+            $idUsuario = $_SESSION['usuario']->getId();
             $sql="CALL SpConsultarTodasSolicitudesUsuario($idTipo, $idUsuario);";
         } else {
             $sql="CALL SpConsultarTodasSolicitudes($idTipo);";

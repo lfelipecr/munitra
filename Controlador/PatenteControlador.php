@@ -4,7 +4,6 @@ require_once './Modelo/Metodos/SolicitudM.php';
 require_once './Modelo/Metodos/ProvinciaM.php';
 require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Entidades/DetalleSolicitud.php';
-require_once './Controlador/UsuarioControlador.php';
 
 class PatenteControlador {
     private function LlamarVistaActualizar($msg, $id){
@@ -32,10 +31,9 @@ class PatenteControlador {
     }
     private function LlamarVistaIngresar($msg){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
-            $locaciones = new ProvinciaM();
             $provinciaM = new ProvinciaM();
             $id = $_SESSION['usuario']->getIdPersona();
-            $arrLocaciones  = $locaciones->BuscarLocaciones();
+            $arrLocaciones  = $provinciaM->BuscarLocaciones();
             $distritos = $provinciaM->BuscarDistritos();
             $vista = './Vista/TramitesUsuario/Patentes/nuevo.php';
             require_once './Vista/Utilidades/navbar.php';
@@ -116,14 +114,13 @@ class PatenteControlador {
                             $persona->setConsentimiento($_POST['consentimiento']);
                             $persona->setIdProvincia($_POST['provincia']);
                             $persona->setIdCanton($_POST['canton']);
-                            $persona->setIdDistrito($_POST['distrito']);
+                            $persona->setIdDistrito($_POST['distritoPersona']);
                             $persona->setUsuarioCreacion($_SESSION['usuario']->getId());
                             $idUsuario = $personaM->IngresarPersona($persona);
                             $solicitud->setIdPersona($idUsuario);
                         }
                     }
                     $idSolicitud = $solicitudM->IngresarSolicitud($solicitud);
-                    var_dump($solicitud);
                     //Si el id es válido, genera un arreglo con los detalles
                     if ($idSolicitud != 0) {
                         $registrar = array();
