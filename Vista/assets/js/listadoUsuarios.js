@@ -29,7 +29,7 @@ $(document).ready(function (){
                     </td>
                 </tr>`;
             }
-            if (!activos && datos[i][30] != 1){
+            if (!activos && datos[i][30] == 4){
                 tabla += `<tr>
                 <td>${datos[i][0]}</td>
                 <td>${datos[i][3]} ${datos[i][4]}  ${datos[i][5]}</td>

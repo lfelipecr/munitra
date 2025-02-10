@@ -40,7 +40,7 @@
                         <label>Contraseña</label>
                     </div>
                     <div class="col-12 py-1 text-center">
-                        <span>¿No tiene una cuenta? Solicitela <a href="index.php?controlador=Login&metodo=Registro">acá</a></span>
+                        <span>¿No tiene una cuenta? Solicitela <a href="index.php?controlador=Login&metodo=Registro">aquí</a></span>
                     </div>
                     <div class="col-12 py-2">
                         <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>

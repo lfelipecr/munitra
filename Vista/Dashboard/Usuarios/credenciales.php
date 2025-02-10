@@ -69,7 +69,6 @@
             console.log(jsonData);
             $('#nombre').html(`Nombre: ${jsonData.NOMBRE} ${jsonData.PRIMER_APELLIDO} ${jsonData.SEGUNDO_APELLIDO}`);
             $('#cedula').html(`Nombre: ${jsonData.IDENTIFICACION}`);
-            document.getElementById('fotoCredencial').src = jsonData.URL_IMAGEN_CREDENCIAL;
             document.getElementById('firmaCredenciales').src = jsonData.FIRMA;
             document.getElementById('consentimiento').href = jsonData.URL_CONSENTIMIENTO;
             document.getElementById('denegar').href = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=false`;

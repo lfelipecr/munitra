@@ -38,37 +38,21 @@ class LoginControlador
             file_put_contents($archivo, $imagen);
             $credenciales->setFirma($archivo);
             $credenciales->setIdUsuario($_POST['idUsuario']);
-
-            if (isset($_FILES['consentimiento']) && $_FILES['consentimiento']['error'] === UPLOAD_ERR_OK) {
+            if($credencialesM->IngresarCredenciales($credenciales)){
                 session_start();
-                $rutaDestino = './repo/';
-                //Cambia el nombre para que sea unico
-                $urlArchivo = $rutaDestino.basename(time()."_".$_FILES['consentimiento']['name']);
-                if (!is_writable($rutaDestino)) {
-                    $idUsuario = $_SESSION['usuario']->getId();
-                    require_once './Vista/Login/credenciales.php';
-                }                
-                if (!is_dir($rutaDestino)) {
-                    mkdir($rutaDestino, 0777, true);
-                }
-                if (move_uploaded_file($_FILES['consentimiento']['tmp_name'], $urlArchivo)) {
-                    $credenciales->setUrlConsentimiento($urlArchivo);
-                    if($credencialesM->IngresarCredenciales($credenciales)){
-                        //modifica el estado del usuario
-                        $usuarioM = new UsuarioM();
-                        $usuario = $_SESSION['usuario'];
-                        $usuario->setIdEstado(4);
-                        $usuarioM->Actualizar($usuario);
-                        header('location: index.php?controlador=Tramites&metodo=ListadoTramites');
-                    } else {
-                        $idUsuario = $_SESSION['usuario']->getId();
-                        require_once './Vista/Login/credenciales.php';    
-                    }
-                } else {
-                    $idUsuario = $_SESSION['usuario']->getId();
-                    require_once './Vista/Login/credenciales.php';
-                }
-            }
+                //modifica el estado del usuario
+                $usuarioM = new UsuarioM();
+                $usuario = $_SESSION['usuario'];
+                $usuario->setIdEstado(4);
+                $usuarioM->Actualizar($usuario);
+                session_start();
+                session_unset();
+                session_destroy();
+                require_once './Vista/Login/aviso.php';
+            } else {
+                $idUsuario = $_SESSION['usuario']->getId();
+                require_once './Vista/Login/credenciales.php';    
+            }            
         } else {
             $idUsuario = $_POST['idUsuario'];
             require_once './Vista/Login/credenciales.php';
@@ -150,7 +134,11 @@ class LoginControlador
                 $usuario->setIdDepartamento($_POST['depto']);
                 $usuario->setIdEstado($_POST['estado']);
                 if ($usuarioM->IngresarUsuario($usuario)){
-                    require_once './Vista/Login/aviso.php';
+                    session_start();
+                    $idUsuario = $usuarioM->IdMax();
+                    $usuario->setId($idUsuario);
+                    $_SESSION['usuario'] = $usuario;
+                    require_once './Vista/Login/credenciales.php';
                 } else {
                     $personaM->EliminarPersona($idUsuario);
                     $this->LlamarVistaRegistro('Ha ocurrido un problema, verifique los datos');

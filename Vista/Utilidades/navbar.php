@@ -49,7 +49,7 @@
                 <div class="navbar-text px-md-5">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
+                            <a class="nav-link dropdown-toggle" style="color: #FEFEFE" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
                                 <li><a class="dropdown-item" href="index.php?controlador=Login&metodo=CerrarSesion">Cerrar Sesion</a></li>

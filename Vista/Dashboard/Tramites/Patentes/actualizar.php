@@ -24,7 +24,7 @@
               </select>
             </div>
             <div class="col-12 mt-md-3">
-                <span class="mb-3"> Los requisitos para la Solicitud de Patentes pueden ser descargados <a href="./repo/serverside/REQUISITOSPATENTECOMERCIAL.pdf" download>acá</a></span>
+                <span class="mb-3"> Los requisitos para la Solicitud de Patentes pueden ser descargados <a href="./repo/serverside/REQUISITOSPATENTECOMERCIAL.pdf" download>aquí</a></span>
             </div>
             <div class="col-12"><hr></div>
             <div class="col-12 mt-md-3">
