@@ -184,7 +184,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-body-emphasis">
+        <a href="index.php?controlador=Documentacion&metodo=Listado" class="nav-link link-body-emphasis">
           <p class="bi bi-speedometer2 colorWt" style="position:fixed;"> Documentación</p><br>
         </a>
       </li>

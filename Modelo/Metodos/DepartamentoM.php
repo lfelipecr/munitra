@@ -18,6 +18,15 @@ class DepartamentoM
         $conexion->Cerrar();
         return $registro;
     }
+    function BuscarDepartamento($id){
+        $departamentos =$this->BuscarDepartamentos();
+        for ($i = 0; $i < count($departamentos); $i++){
+            if ($departamentos[$i]->getId() == $id){
+                return $departamentos[$i];
+            }
+        }
+        return null;
+    }
     function BuscarDepartamentos()
     {
         $registro=array();

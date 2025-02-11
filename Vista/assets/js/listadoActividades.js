@@ -1,7 +1,6 @@
 $(document).ready(function (){
     let datos = JSON.parse($('#jsonData').val());
     let idUsuario = $('#idUsuario').val();
-    console.log(datos);
     $('#jsonData').val('');
     $('#idUsuario').val('');
     function RenderizarTabla() {

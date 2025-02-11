@@ -859,3 +859,33 @@ BEGIN
 END //
 
 DELIMITER ;
+
+/*Documentación Departamental*/
+DELIMITER //
+
+CREATE PROCEDURE SpListarDocumentos(IN idDepto INT)
+BEGIN
+    SELECT * FROM DOCUMENTACION WHERE DEPARTAMENTO = idDepto;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SpIngresarDocumento(IN idDepto INT, IN descrip VARCHAR(300),
+IN urlArchivo VARCHAR(1000), IN usuarioCreacion INT)
+BEGIN
+    INSERT INTO DOCUMENTACION (DESCRIPCION, URL_ARCHIVO, USUARIO_CREACION, DEPARTAMENTO)
+    VALUES(descrip, urlArchivo, usuarioCreacion, idDepto);
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SpEliminarDocumento(IN idDoc INT)
+BEGIN
+    DELETE FROM DOCUMENTACION WHERE ID = idDoc;
+END //
+
+DELIMITER ;

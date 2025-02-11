@@ -3,8 +3,17 @@ require_once './Modelo/Metodos/DepartamentoM.php';
 require_once './Modelo/Metodos/NoticiaM.php';
 require_once './Modelo/Metodos/SesionM.php';
 require_once './Modelo/Metodos/ActividadM.php';
+require_once './Modelo/Entidades/Documentacion.php';
+require_once './Modelo/Metodos/DocumentacionM.php';
+require_once './Modelo/Entidades/Departamento.php';
 
 class WebControlador {
+    function ListadoDocsWeb(){
+        $documentacionM = new DocumentacionM();
+        $idDepartamento = $_GET['idDepto'];
+        $jsonData = $documentacionM->ListarDocumentos($idDepartamento);
+        echo $jsonData;
+    }
     function Actividad(){
         $id = $_GET['id'];
         $actividadM = new ActividadM();

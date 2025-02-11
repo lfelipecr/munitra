@@ -278,6 +278,20 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="modalDocs" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Documentos Departamentales</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" id="docs">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Footer-->
         <footer class="text-center text-lg-start" style="background-color: #f3aa16;">
             <div class="container">
@@ -312,6 +326,7 @@
             <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
               © 2024 Copyright: Municipalidad de Río Cuarto
             </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="./Web/assets/js/conformaciones.js"></script>
         <script src="js/scripts.js"></script>
