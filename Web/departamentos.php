@@ -248,34 +248,60 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Nombre Completo *</label>
-                                <input type="email" class="form-control" id="">
-                            </div>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Telefono *</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Correo *</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Asunto *</label>
-                                <input type="text" class="form-control" id="">
-                            </div>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Consulta *</label>
-                                <textarea name="" class="form-control" id=""></textarea>
-                            </div>
+                        <input type="hidden" value="0" id="idConsultado">
+                        <div class="mb-2">
+                            <label for="" class="form-label">Identificación *</label>
+                            <input type="email" class="form-control" id="identificacionConsulta">
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Nombre Completo *</label>
+                            <input type="email" class="form-control" id="nombreConsulta">
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Telefono *</label>
+                            <input type="text" class="form-control" id="telefonoConsulta">
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Correo *</label>
+                            <input type="text" class="form-control" id="correoConsulta">
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Asunto *</label>
+                            <input type="text" class="form-control" id="asuntoConsulta">
+                        </div>
+                        <div class="mb-2">
+                            <label for="" class="form-label">Consulta *</label>
+                            <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-warning">
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha">
                             <span>Enviar</span>
                         </button>
                     </div>
-                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalCaptcha" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="titulo">Captcha</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="mb-2" id="infoModal">
+                                <label for="" class="form-label" id="catpchaInfo">Ingrese el siguiente código para enviar su consulta:</label>
+                                <span class="h6" id="captchaText"></span>
+                                <input type="email" class="form-control" id="captchaInput">
+                            </div>
+                            
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" id="btnEnviarCorreo">
+                            <span>Enviar</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -330,6 +356,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="./Web/assets/js/conformaciones.js"></script>
+        <script src="./Web/assets/js/correos.js"></script>
         <script src="js/scripts.js"></script>
     </body>
 </html>

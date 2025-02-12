@@ -1,6 +1,6 @@
 $(document).ready(function (){
     $('#txtIdentificacion').on('keyup', function(){
-        $('.form-control').removeAttr('disabled');
+        $('.form-control').removeAttr('readonly');
         $('.dataPersona').val('');
         let txtCedula = $('#txtIdentificacion').val().trim();
         $.ajax({

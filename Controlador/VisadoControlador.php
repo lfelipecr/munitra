@@ -134,6 +134,8 @@ class VisadoControlador {
                             $soliFirma->setCampoRequisito($archivo);
                             $soliFirma->setTipoRequisito(31);
                             $registrar[] = $soliFirma;
+                            var_dump($imagen);
+                            echo $archivo;
                         }
                     }
                     if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
@@ -186,9 +188,11 @@ class VisadoControlador {
                     $firma = $_POST['firma'];
                     $firma = str_replace("data:image/png;base64,", "", $firma);
                     $firma = str_replace(" ", "+", $firma);
-                    $imagen = base64_decode($firma);
+                    $imagen = base64_decode($firma);                    
                     $archivo = "repo/firmas/firma_" . time() . ".png";
-                    file_put_contents($archivo, $imagen);
+                    if (file_put_contents($archivo, $imagen) == false){
+                        error_log("Error al guardar la imagen.");
+                    }
                     $soliFirma = new DetalleSolicitud();
                     $soliFirma->setCumple(1);
                     $soliFirma->setCampoRequisito($archivo);
@@ -215,7 +219,6 @@ class VisadoControlador {
                     $personaM = new PersonaM();
                     //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
                     $persona = $personaM->BuscarPersonaCedula($cedula);
-                    var_dump($persona);
                     if ($persona != null){
                         $solicitud->setIdPersona($persona->getId());
                     } else {

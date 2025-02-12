@@ -122,12 +122,8 @@
             </div>
             <div class="col-12 mt-md-3 text-center">
               <span class="mb-3">Firma (*)</span><br>
-              <canvas id="canvas" class="w-100 mx-auto" style="max-width: 300px;" height="200"></canvas>
-
+              <img src="" class="img-fluid border rounded" id="firmaCredenciales" alt="">
               <br>
-              <input type="hidden" id="idFirma" name="idFirma">
-              <input type="hidden" name="firma" id="firma">
-              <button id="clear" class="btn btn-outline-danger">Limpiar</button>
             </div>
             <div class="col-12 mt-md-3">
               <span class="mb-3">Estado de Solicitud</span><br>
@@ -154,7 +150,7 @@
               <a class="btn btn-outline-warning mx-1" id="btnModi">
                 <span>Modificar</span>
               </a>
-              <a href="index.php?controlador=Tramites&metodo=Patentes" class="btn btn-outline-danger mx-1">
+              <a href="index.php?controlador=Tramites&metodo=Visado" class="btn btn-outline-danger mx-1">
                 <span>Cancelar x</span>
               </a>
             </div>

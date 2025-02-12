@@ -137,6 +137,6 @@
       </form>
     </div>
   </main>
-  <script src="./Vista/assets/js/visado.js"></script>
   <script src="./Vista/assets/js/firmas.js"></script>
+  <script src="./Vista/assets/js/visado.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>

@@ -77,8 +77,8 @@
               </div>
             </div>
         </nav>
-        <header class="hero text-center mt-md-5 mt-4 mx-3">
-            <div>
+        <header class="hero text-center">
+            <div class="mt-md-5 mt-4 mx-3">
                 <h1 class="display-3 fw-bold">Río Cuarto</h1>
                 <p class="lead">Naturaleza, aventura y tradición en Alajuela, Costa Rica.</p>
             </div>
@@ -91,32 +91,9 @@
                         <h2>Historia</h2>
                         <p>Río Cuarto es el cantón más joven de Costa Rica, fundado en 2017. Su historia está marcada por la agricultura y la convivencia con la biodiversidad de la región.</p>
                     </div>
-                    <div class="col-md-6">
-                        <img src="" class="img-fluid rounded" alt="Historia de Río Cuarto">
-                    </div>
-                </div>
-            </section>
-            
-            <section class="section">
-                <div class="row align-items-center">
                     <div class="col-md-6 order-md-2">
                         <h2>Atracciones Naturales</h2>
-                        <p>El cantón es famoso por sus ríos cristalinos, cataratas y una flora y fauna exuberante que lo convierten en un destino ecoturístico ideal.</p>
-                    </div>
-                    <div class="col-md-6 order-md-1">
-                        <img src="" class="img-fluid rounded" alt="Atracciones Naturales">
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <h2>Gastronomía</h2>
-                        <p>La comida típica de Río Cuarto resalta los sabores de la región, con platos basados en productos frescos como tilapia, arroz y frijoles.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="" class="img-fluid rounded" alt="Gastronomía">
+                        <p>El cantón es famoso por sus ríos cristalinos, cataratas y una flora y fauna exuberante que lo convierten en un destino ecoturístico ideal. Río Cuarto cuenta con la Laguna de Río Cuarto, la laguna volcánica <strong>más profunda de Costa Rica</strong></p>
                     </div>
                 </div>
             </section>

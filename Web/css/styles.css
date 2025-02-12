@@ -11023,9 +11023,9 @@ footer.footer {
   cursor: help;
 }
 .hero {
-  background: url('https://source.unsplash.com/1600x900/?nature,forest') no-repeat center center;
+  background: url('https://www.muniriocuarto.go.cr/web/image/2216-8b2d24ef/banner-rio-cuarto-valores.png') no-repeat center center;
   background-size: cover;
-  height: 60vh;
+  height: 30vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11033,10 +11033,10 @@ footer.footer {
   text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
 }
 .section {
-  padding: 80px 0;
+  padding: 40px 0;
 }
 .map-container {
-  height: 800px;
+  height: 400px;
   overflow: hidden;
   border-radius: 15px;
 }

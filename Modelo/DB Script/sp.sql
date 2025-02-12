@@ -914,3 +914,53 @@ BEGIN
 END //
 
 DELIMITER ;
+
+/*Contacto*/
+
+DELIMITER //
+
+CREATE PROCEDURE SpIngresarConsulta(
+    IN ident VARCHAR (300),
+    IN nombre VARCHAR (300),
+    IN corr VARCHAR (300),
+    IN tel VARCHAR (300),
+    IN asunt VARCHAR (300),
+    IN consul VARCHAR (300),
+    IN idConsultado INT
+)
+BEGIN
+    INSERT INTO CONSULTA (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, CORREO, ASUNTO, CONSULTA, ID_CONSULTADO, ATENDIDO, FECHA)
+    VALUES (ident, nombre, corr, tel, asunt, consul, idConsultado, 0, NOW());
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SpAtenderConsulta(IN idConsulta INT, IN resp VARCHAR(2000), IN usuario VARCHAR(300))
+BEGIN
+    UPDATE CONSULTA 
+    SET RESPUESTA = resp,
+    RESPONDIDO_POR = usuario,
+    ATENDIDO = 1 WHERE ID = idConsulta;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SpBuscarConsultas()
+BEGIN
+    SELECT * FROM CONSULTA ORDER BY FECHA ASC;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE SpBuscarConsulta(IN idConsulta INT)
+BEGIN
+    SELECT * FROM CONSULTA WHERE ID = idConsulta;
+END //
+
+DELIMITER ;

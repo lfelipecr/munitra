@@ -55,7 +55,9 @@ $(document).ready(function (){
                         $('#idCartaMOPT').val(datos[i][0]);
                         break;
                     case '31':
+                        document.getElementById('firmaCredenciales').src = datos[i][1];
                         $('#idFirma').val(datos[i][0]);
+                        console.log(datos[i])
                         break;
                 }
             }
@@ -64,33 +66,37 @@ $(document).ready(function (){
     RenderizarDatosJSON();
     $('#frmVisado').on('submit', function (){
         $('#alerta').show();
-        //Datos obligatorios
-        if ($('#txtNombre').val().trim() == '' || $('#txtApellido1').val().trim() == '' 
-        || $('#txtDireccion').val().trim() == '' || $('#txtIdentificacion').val() == ''){
-            $('#alerta').html('Debe proporcionar todos los datos marcados con asterisco (*)');
-            return false;
-        }
-        //Info de contacto 
-        //Debe llenar al menos un teléfono
-        if ($('#txtTelefono').val().trim() == '' && $('#txtWhatsapp').val().trim() == ''){
-            $('#alerta').html('Debe llenar al menos uno de los dos teléfonos');
-            return false;
-        }
-        //Correo
-        if (!$('#txtCorreo').val().trim().includes('@') 
-        || !$('#txtCorreo').val().trim().includes('.')){
-            $('#alerta').html('Debe verificar el correo');
-            return false;
+        if ($('#txtNombre').length){
+            //Datos obligatorios
+            if ($('#txtNombre').val().trim() == '' || $('#txtApellido1').val().trim() == '' 
+            || $('#txtDireccion').val().trim() == '' || $('#txtIdentificacion').val() == ''){
+                $('#alerta').html('Debe proporcionar todos los datos marcados con asterisco (*)');
+                return false;
+            }
+            //Info de contacto 
+            //Debe llenar al menos un teléfono
+            if ($('#txtTelefono').val().trim() == '' && $('#txtWhatsapp').val().trim() == ''){
+                $('#alerta').html('Debe llenar al menos uno de los dos teléfonos');
+                return false;
+            }
+            //Correo
+            if (!$('#txtCorreo').val().trim().includes('@') 
+            || !$('#txtCorreo').val().trim().includes('.')){
+                $('#alerta').html('Debe verificar el correo');
+                return false;
+            }
         }
         if ($('#direccionPropiedad').val().trim() == '' ||
         $('#numeroPlano').val().trim() == '' || $('#areaPlano').val().trim() == ''
         || $('#numeroFinca').val().trim() == '' || $('#areaRegistroPublico').val().trim() == ''
         || $('#frente').val().trim() == '' || $('#numeroContrato').val().trim() == ''){
+            
             $('#alerta').html('Debe proporcionar todos los datos obligatorios, marcados con (*)');
             return false;
         }
         let dataURL = canvas.toDataURL("image/png");
         $("#firma").val(dataURL);
+        console.log(dataURL);
         return true;
     });
 })

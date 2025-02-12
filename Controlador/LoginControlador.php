@@ -6,6 +6,8 @@ require_once './Modelo/Metodos/ProvinciaM.php';
 require_once './Modelo/Entidades/Credenciales.php';
 require_once './Modelo/Metodos/CredencialesM.php';
 require_once './Modelo/Metodos/PersonaM.php';
+require_once './Modelo/Entidades/Consulta.php';
+require_once './Modelo/Metodos/ConsultaM.php';
 
 class LoginControlador
 {   
@@ -23,7 +25,11 @@ class LoginControlador
     function AdminInicio(){
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
-            $u->LlamarVista('./Vista/Dashboard/inicio.php');
+            $consultaM = new ConsultaM();
+            $idUsuario = $_SESSION['usuario']->getId();
+            $jsonData = $consultaM->BuscarConsultas();
+            $vista = './Vista/Dashboard/inicio.php';
+            require_once './Vista/Utilidades/sidebar.php';
         }
     }
     function IngresarCredenciales(){
@@ -105,12 +111,12 @@ class LoginControlador
     }
     function RegistrarUsuario(){
         $personaM = new PersonaM();
-        $persona = new Persona();
         $cedula =  $_POST['identificacion'];
         $persona = $personaM->BuscarPersonaCedula($cedula);
-        if ($persona != null){
+        if ($persona != NULL){
             $idUsuario = $persona->getId();
         } else {
+            $persona = new Persona();
             $persona->setIdTipoIdentificacion($_POST['tipoIdentificacion']);
             $persona->setIdentificacion(trim($_POST['identificacion']));
             $persona->setNombre(trim($_POST['nombre']));
