@@ -21,6 +21,20 @@ class BitacoraSolicitudM {
         $conexion->Cerrar();
         return $retVal;
     }
+    function BuscarConversacion($id){
+        $registro=array();
+        $conexion= new Conexion();
+        $sql="CALL SpBuscarConversacion($id)";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            $registro = json_encode($resultado->fetch_all());
+        }
+        else
+            $registro=null;
+        $conexion->Cerrar();
+        return $registro;
+    }
     function CredencialesSMTP(){
         $registro=array();
         $conexion= new Conexion();

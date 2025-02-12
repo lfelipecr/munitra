@@ -746,6 +746,31 @@ DELIMITER ;
 
 DELIMITER //
 
+CREATE PROCEDURE SpBuscarConversacion(IN idSoli INT)
+BEGIN
+    SELECT 
+        bs.ID AS BitacoraID,
+        bs.ID_SOLICITUD,
+        bs.ID_ESTADO,
+        bs.FECHA,
+        bs.NOTA,
+        bs.DETALLE,
+        u.ID AS UsuarioID,
+        u.NOMBRE_USUARIO,
+        u.CORREO,
+        p.ID AS PersonaID,
+        p.NOMBRE,
+        p.PRIMER_APELLIDO,
+        p.SEGUNDO_APELLIDO,
+        p.IDENTIFICACION
+    FROM BITACORA_SOLICITUD bs
+    INNER JOIN USUARIO u ON bs.ID_USUARIO = u.ID
+    INNER JOIN PERSONA p ON u.ID_PERSONA = p.ID WHERE ID_SOLICITUD = idSoli;
+END //
+DELIMITER ;
+
+DELIMITER //
+
 CREATE PROCEDURE UsuariosDepartamento()
 BEGIN
     SELECT DISTINCT

@@ -1,13 +1,14 @@
 $(document).ready(function (){
     $('#txtIdentificacion').on('keyup', function(){
+        $('.form-control').removeAttr('disabled');
+        $('.dataPersona').val('');
         let txtCedula = $('#txtIdentificacion').val().trim();
         $.ajax({
             url: "index.php?controlador=Usuario&metodo=BuscarCedula",
             type: "GET",
             data: { cedula: txtCedula },
             success: function (response) {
-                $('.form-control').removeAttr('disabled');
-                $('.dataPersona').val('');
+                console.log(response);                
                 if (response != 'null'){
                     let json = JSON.parse(response, null, 2)
                     $('#tipo'+json['tipoId']).attr('selected','');
@@ -16,24 +17,24 @@ $(document).ready(function (){
                     $('#canton'+json['canton']).attr('selected','');
                     $('#provincia'+json['provincia']).attr('selected','');
                     
-                    $('#slCanton').attr('disabled','');
-                    $('#slDistrito').attr('disabled','');
-                    $('#slProvincia').attr('disabled','');
+                    $('#slCanton').attr('readonly','');
+                    $('#slDistrito').attr('readonly','');
+                    $('#slProvincia').attr('readonly','');
                     
-                    $('#txtTipoId').attr('disabled','');
-                    $('#txtNombre').attr('disabled','');
+                    $('#txtTipoId').attr('readonly','');
+                    $('#txtNombre').attr('readonly','');
                     $('#txtNombre').val(json['nombre']);
-                    $('#txtApellido1').attr('disabled','');
+                    $('#txtApellido1').attr('readonly','');
                     $('#txtApellido1').val(json['apellido1']);
-                    $('#txtApellido2').attr('disabled','');
+                    $('#txtApellido2').attr('readonly','');
                     $('#txtApellido2').val(json['apellido2']);
-                    $('#txtDireccion').attr('disabled','');
+                    $('#txtDireccion').attr('readonly','');
                     $('#txtDireccion').val(json['direccion']);
-                    $('#txtTelefono').attr('disabled','');
+                    $('#txtTelefono').attr('readonly','');
                     $('#txtTelefono').val(json['telefono']);
-                    $('#txtWhatsapp').attr('disabled','');
+                    $('#txtWhatsapp').attr('readonly','');
                     $('#txtWhatsapp').val(json['whatsapp']);
-                    $('#txtCorreo').attr('disabled','');
+                    $('#txtCorreo').attr('readonly','');
                     $('#txtCorreo').val(json['correo']);
                     console.log(json);
                 }                

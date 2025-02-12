@@ -298,7 +298,8 @@ class UsuarioControlador
                 $credenciales->setId($idCredencial);
                 $credencialesM->ModificarCredenciales($credenciales);
                 $asunto = 'Código de verificación | Municipalidad de Río Cuarto';
-                $msg = 'Sus credenciales han sido aceptadas! Su código de verificación es: '.$codigo;
+                $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Usa el siguiente código para completar tu proceso de verificación:</p><div class="code">'.$codigo.'</div><p>Si no solicitaste este código, ignora este mensaje.</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
+
                 
                 
             }
@@ -306,18 +307,17 @@ class UsuarioControlador
                 $credencialesM = new CredencialesM();
                 $credencialesM->EliminarCredenciales($idCredencial);
                 $asunto = 'Credenciales de Identificación | Municipalidad de Río Cuarto';
-                $msg = 'Sus credenciales no son correctas o no pudieron ser verificadas, intente de nuevo';
+                $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Sus credenciales no son correctas o no pudieron ser verificadas, intente de nuevo</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
                 $usuario->setIdEstado(3);
                 $usuarioM->Actualizar($usuario);
             }
             $mail = new PHPMailer();
             try{
                 session_start();
-                $bitacora = new BitacoraSolicitud();
                 $bitacoraM = new BitacoraSolicitudM();
                 $credenciales = $bitacoraM->CredencialesSMTP();
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
                 $mail->isSMTP();
+                $mail->CharSet = "UTF-8";
                 $mail->Encoding = "base64";
                 $mail->Host = $credenciales['host'];
                 $mail->SMTPAuth = true;
@@ -331,7 +331,7 @@ class UsuarioControlador
                 $mail->Subject = $asunto;
                 $mail->Body = $msg;
                 $mail->send();
-                header('location: index.php?controlador=Usuario&metodo=Listado');
+                $this->Listado();
                 
             } catch (Exception $ex){
                 var_dump($ex);
@@ -359,29 +359,25 @@ class UsuarioControlador
         }
     }
     function BuscarCedula(){
-        $u = new Utilidades();
-        if ($u->VerificarSesion()){
-            $personaM = new PersonaM();
-            $cedula = $_GET['cedula'];
-            $persona = $personaM->BuscarPersonaCedula($cedula);
-            if ($persona != null){
-                $arreglo = array();
-                $arreglo['nombre'] = $persona->getNombre();
-                $arreglo['tipoId'] = $persona->getIdTipoIdentificacion();
-                $arreglo['apellido1'] = $persona->getPrimerApellido();
-                $arreglo['apellido2'] = $persona->getSegundoApellido();
-                $arreglo['telefono'] = $persona->getTelefono();
-                $arreglo['whatsapp'] = $persona->getWhatsapp();
-                $arreglo['direccion'] = $persona->getDireccion();
-                $arreglo['correo'] = $persona->getCorreo();
-                $arreglo['provincia'] = $persona->getIdProvincia();
-                $arreglo['distrito'] = $persona->getIdDistrito();
-                $arreglo['canton'] = $persona->getIdCanton();
-                echo json_encode($arreglo);
-            } else {
-                echo 'null';
-            }
-            
+        $personaM = new PersonaM();
+        $cedula = $_GET['cedula'];
+        $persona = $personaM->BuscarPersonaCedula($cedula);
+        if ($persona != null){
+            $arreglo = array();
+            $arreglo['nombre'] = $persona->getNombre();
+            $arreglo['tipoId'] = $persona->getIdTipoIdentificacion();
+            $arreglo['apellido1'] = $persona->getPrimerApellido();
+            $arreglo['apellido2'] = $persona->getSegundoApellido();
+            $arreglo['telefono'] = $persona->getTelefono();
+            $arreglo['whatsapp'] = $persona->getWhatsapp();
+            $arreglo['direccion'] = $persona->getDireccion();
+            $arreglo['correo'] = $persona->getCorreo();
+            $arreglo['provincia'] = $persona->getIdProvincia();
+            $arreglo['distrito'] = $persona->getIdDistrito();
+            $arreglo['canton'] = $persona->getIdCanton();
+            echo json_encode($arreglo);
+        } else {
+            echo 'null';
         }
     }
 }

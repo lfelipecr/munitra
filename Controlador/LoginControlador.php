@@ -106,22 +106,28 @@ class LoginControlador
     function RegistrarUsuario(){
         $personaM = new PersonaM();
         $persona = new Persona();
-        $persona->setIdTipoIdentificacion($_POST['tipoIdentificacion']);
-        $persona->setIdentificacion(trim($_POST['identificacion']));
-        $persona->setNombre(trim($_POST['nombre']));
-        $persona->setPrimerApellido(trim($_POST['apellido1']));
-        $persona->setSegundoApellido(trim($_POST['apellido2']));
-        $persona->setDireccion(trim($_POST['direccion']));
-        $persona->setTelefono(trim($_POST['telefono']));
-        $persona->setWhatsapp(trim($_POST['whatsapp']));
-        $persona->setCorreo(trim($_POST['correo']));
-        $persona->setEstado($_POST['estado']);
-        $persona->setConsentimiento($_POST['consentimiento']);
-        $persona->setIdProvincia($_POST['provincia']);
-        $persona->setIdCanton($_POST['canton']);
-        $persona->setIdDistrito($_POST['distrito']);
-        $persona->setUsuarioCreacion(0);
-        $idUsuario = $personaM->IngresarPersona($persona);
+        $cedula =  $_POST['identificacion'];
+        $persona = $personaM->BuscarPersonaCedula($cedula);
+        if ($persona != null){
+            $idUsuario = $persona->getId();
+        } else {
+            $persona->setIdTipoIdentificacion($_POST['tipoIdentificacion']);
+            $persona->setIdentificacion(trim($_POST['identificacion']));
+            $persona->setNombre(trim($_POST['nombre']));
+            $persona->setPrimerApellido(trim($_POST['apellido1']));
+            $persona->setSegundoApellido(trim($_POST['apellido2']));
+            $persona->setDireccion(trim($_POST['direccion']));
+            $persona->setTelefono(trim($_POST['telefono']));
+            $persona->setWhatsapp(trim($_POST['whatsapp']));
+            $persona->setCorreo(trim($_POST['correo']));
+            $persona->setEstado($_POST['estado']);
+            $persona->setConsentimiento($_POST['consentimiento']);
+            $persona->setIdProvincia($_POST['provincia']);
+            $persona->setIdCanton($_POST['canton']);
+            $persona->setIdDistrito($_POST['distrito']);
+            $persona->setUsuarioCreacion(0);
+            $idUsuario = $personaM->IngresarPersona($persona);
+        }
         if ($idUsuario != 0){
             if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != ''){
                 $usuarioM = new UsuarioM();
@@ -141,11 +147,11 @@ class LoginControlador
                     require_once './Vista/Login/credenciales.php';
                 } else {
                     $personaM->EliminarPersona($idUsuario);
-                    $this->LlamarVistaRegistro('Ha ocurrido un problema, verifique los datos');
+                    $this->LlamarVistaRegistro('Ha ocurrido un problema con los datos de usuario, verifique los datos');
                 }
             } else {
                 $personaM->EliminarPersona($idUsuario);
-                $this->LlamarVistaRegistro('Ha ocurrido un problema, verifique los datos');
+                $this->LlamarVistaRegistro('Ha ocurrido un problema con sus datos, verifique los datos');
             }
         } else {
             $this->LlamarVistaRegistro('Ha ocurrido un problema, verifique los datos');

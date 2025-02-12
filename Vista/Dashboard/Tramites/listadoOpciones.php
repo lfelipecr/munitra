@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="col-12 mb-3">
-            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Declaraciones&metodo=Index';">
+            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Tramites&metodo=Declaraciones';">
                 <h4>Declaraciones - <a href="#" class="link-blog">Ir</a></h4>
                 <hr>
                 <p>Modifique la información sobre actividades cantonales y lugares de interés</p>

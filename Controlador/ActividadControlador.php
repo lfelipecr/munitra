@@ -23,16 +23,18 @@ class ActividadControlador {
                 $vista = './Vista/Dashboard/Blog/Actividades/nuevo.php';
                 require_once './Vista/Utilidades/sidebar.php';
             }                
-            foreach($_FILES['adjuntos']['tmp_name'] as $adjunto => $tmp_name){
-                $urlArchivo = $rutaDestino.basename($_FILES['adjuntos']['name'][$adjunto]);
-                if (move_uploaded_file($tmp_name, $urlArchivo)) {
-                    $adjuntos[] = $urlArchivo;
-                } else {
-                    $msg = 'Ha habido un error con la subida del archivo'.$_FILES['adjuntos']['name'][$adjunto].', intente con otro archivo';
-                    $vista = './Vista/Dashboard/Blog/Actividad/nuevo.php';
-                    require_once './Vista/Utilidades/sidebar.php';
+            if (!empty($_FILES['adjuntos']['name'][0])){
+                foreach($_FILES['adjuntos']['tmp_name'] as $adjunto => $tmp_name){
+                    $urlArchivo = $rutaDestino.basename($_FILES['adjuntos']['name'][$adjunto]);
+                    if (move_uploaded_file($tmp_name, $urlArchivo)) {
+                        $adjuntos[] = $urlArchivo;
+                    } else {
+                        $msg = 'Ha habido un error con la subida del archivo'.$_FILES['adjuntos']['name'][$adjunto].', intente con otro archivo';
+                        $vista = './Vista/Dashboard/Blog/Actividades/nuevo.php';
+                        require_once './Vista/Utilidades/sidebar.php';
+                    }
                 }
-            }
+            }            
             session_start();
             $actividad = new Actividad();
             $actividadM = new ActividadM();
@@ -107,7 +109,7 @@ class ActividadControlador {
         if ($u->VerificarSesion()){
             $actividadM = new ActividadM();
             $actividadM->Eliminar($_GET['id']);
-            
+            header('location: index.php?controlador=Blog&metodo=Actividades');
         }
     }
 }

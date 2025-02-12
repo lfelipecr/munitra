@@ -2,10 +2,17 @@ $(document).ready(function (){
     let jsonData = $('#jsonData').val();
     if (jsonData != ''){
         jsonData = JSON.parse(jsonData);
-        console.log(jsonData);
     }
     function MostrarActividades (){
-
+        if (jsonData.length < 1){
+            let listado = $('#actividades').html();
+            let html = `<div class="col-md-12 text-center d-flex justify-content-center"><div class="my-1" style="padding-bottom: 9rem;padding-top: 9rem;">
+                            <h5 class="card-title">No hay actividades disponibles!</h5>
+                        </div></div>`;
+            listado += html;
+            $('#actividades').html(listado);
+        }
+        console.log(jsonData.length)
         for (let i = 0; i < jsonData.length; i++){
             let listado = $('#actividades').html();
             let html = `<div class="col-md-4 text-center d-flex justify-content-center"><div class="card my-1" style="width: 18rem;">
@@ -34,9 +41,8 @@ $(document).ready(function (){
             }
         }
     }
-    if (jsonData == ''){
+    MostrarActividades();
+    if ($('#imagenes').val() != undefined){
         MostrarImagenes();
-    } else {
-        MostrarActividades();
-    }    
+    }
 });

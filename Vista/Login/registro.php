@@ -8,11 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="./Vista/assets/img/icon.png" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./Vista/assets/css/estilos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -68,31 +68,31 @@
                         </div>
                         <div class="col-md-4">
                             <span class="mb-3">Nombre (*)</span>
-                            <input type="text" class="form-control mb-3" name="nombre" id="txtNombre">
+                            <input type="text" class="form-control mb-3 dataPersona" name="nombre" id="txtNombre">
                         </div>
                         <div class="col-md-4">
                             <span class="mb-3">Primer Apellido (*)</span>
-                            <input type="text" class="form-control mb-3" name="apellido1" id="txtApellido1">
+                            <input type="text" class="form-control mb-3 dataPersona" name="apellido1" id="txtApellido1">
                         </div>
                         <div class="col-md-4">
                             <span class="mb-3">Segundo Apellido</span>
-                            <input type="text" class="form-control mb-3" name="apellido2" id="txtApellido2">
+                            <input type="text" class="form-control mb-3 dataPersona" name="apellido2" id="txtApellido2">
                         </div>
                         <div class="col-12">
                             <span class="mb-3">Dirección (*)</span>
-                            <input type="text" class="form-control mb-3" name="direccion" id="txtDireccion">
+                            <input type="text" class="form-control mb-3 dataPersona" name="direccion" id="txtDireccion">
                         </div>
                         <div class="col-md-6">
                             <span class="mb-3">Teléfono</span>
-                            <input type="number" class="form-control mb-3" name="telefono" id="txtTelefono">
+                            <input type="number" class="form-control mb-3 dataPersona" name="telefono" id="txtTelefono">
                         </div>
                         <div class="col-md-6">
                             <span class="mb-3">Whatsapp</span>
-                            <input type="number" class="form-control mb-3" name="whatsapp" id="txtWhatsapp">
+                            <input type="number" class="form-control mb-3 dataPersona" name="whatsapp" id="txtWhatsapp">
                         </div>
                         <div class="col-md-12">
                             <span class="mb-3">Correo (*)</span>
-                            <input type="text" class="form-control mb-3" name="correo" id="txtCorreo">
+                            <input type="text" class="form-control mb-3 dataPersona" name="correo" id="txtCorreo">
                         </div>
                         <div class="col-12">
                             <input type="hidden" name="consentimiento" value="0">
@@ -166,9 +166,10 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="./Vista/assets/js/registro.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./Vista/assets/js/busquedaDinamicaCedula.js"></script>
     <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
 </body>
 </html>

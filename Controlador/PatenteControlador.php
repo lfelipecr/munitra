@@ -90,7 +90,6 @@ class PatenteControlador {
                         $personaM = new PersonaM();
                         //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
                         $persona = $personaM->BuscarPersonaCedula($cedula);
-                        var_dump($persona);
                         if ($persona != null){
                             $solicitud->setIdPersona($persona->getId());
                         } else {

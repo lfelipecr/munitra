@@ -8,7 +8,7 @@
         <title>Municipalidad de Río Cuarto</title>
         <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
     integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
-        <link rel="icon" type="image/x-icon" href="assets/img/Municipalidad de Rio Cuarto.png" />
+        <link rel="icon" type="image/x-icon" href="./Web/assets/img/Municipalidad de Rio Cuarto.png" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
         <!-- Google fonts-->

@@ -86,6 +86,19 @@ class TramitesControlador {
             }
         }
     }
+    function Declaraciones(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            session_start();
+            if ($_SESSION['usuario']->getIdDepartamento() == 1){
+                $vista = './Vista/TramitesUsuario/Declaraciones/listado.php';
+                require_once './Vista/Utilidades/navbar.php';
+            } else {
+                $vista = './Vista/Dashboard/Tramites/Declaraciones/listado.php';
+                require_once './Vista/Utilidades/sidebar.php';
+            }
+        }
+    }
     function Credenciales(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
@@ -100,8 +113,5 @@ class TramitesControlador {
             $msg = '';
             require_once './Vista/Login/codigo.php';
         }
-    }
-    function Declaraciones(){
-
     }
 }

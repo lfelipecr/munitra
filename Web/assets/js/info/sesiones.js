@@ -37,6 +37,14 @@ $(document).ready(function (){
                 $('#sesiones').html(listado);
             }
         }
+        if ($('#sesiones').html() == ''){
+            let listado = $('#sesiones').html();
+            let html = `<div class="col-md-12 text-center d-flex justify-content-center"><div class="my-1" style="padding-bottom: 9rem;padding-top: 9rem;">
+                            <h5 class="card-title">No hay sesiones disponibles!</h5>
+                        </div></div>`;
+            listado += html;
+            $('#sesiones').html(listado);
+        }
     }
     $('#fecha').on('change', function (){
         fecha = $('#fecha').val();
