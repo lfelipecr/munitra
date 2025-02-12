@@ -31,6 +31,8 @@
               <span class="mb-3">Adjunte los requisitos para la solicitud de patentes</span> <br>
               <input type="file" class="form-control"  name="requisitos[]" multiple>
               <input type="hidden" id="idAdjuntos" name="idAdjuntos">
+              <hr>
+              <div class="text-center" id="requisitosEmbed"></div>
             </div>
             <div class="col-12 mt-md-3">
               <span class="mb-3">Uso de Patente (*)</span><br>
@@ -99,9 +101,15 @@
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
             </div>
             <div class="col-12 d-flex align-items-center mb-3">
-              <button type="submit" class="btn btn-outline-warning mx-1">
+              <button type="submit" class="btn btn-outline-warning mx-1" id="btnAct">
                 <span>Ingresar +</span>
               </button>
+              <a class="btn btn-outline-info mx-1" id="btnVer">
+                <span>Visualizar</span>
+              </a>
+              <a class="btn btn-outline-warning mx-1" id="btnModi">
+                <span>Modificar</span>
+              </a>
               <a href="index.php?controlador=Tramites&metodo=Patentes" class="btn btn-outline-danger mx-1">
                 <span>Cancelar x</span>
               </a>
@@ -113,3 +121,4 @@
   </main>
   <script src="./Vista/assets/js/patentes.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
+  <script src="./Vista/assets/js/visualizacionSolicitudes.js"></script>

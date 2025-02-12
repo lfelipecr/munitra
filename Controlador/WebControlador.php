@@ -64,4 +64,7 @@ class WebControlador {
         $jsonData = $sesionM->BuscarSesiones();
         require_once './Web/sesiones.php';
     }
+    function NuestroCanton(){
+        require_once './Web/inicio.php';
+    }
 }

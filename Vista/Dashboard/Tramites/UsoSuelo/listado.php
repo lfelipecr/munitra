@@ -31,25 +31,23 @@
       </div>
     </div>
     <form action="index.php?controlador=Bitacora&metodo=EnviarEmail" id="frmEmail" method="post">
-      <input type="hidden" name="idSolicitante" value="" id="idSolicitante">
+      <input type="hidden" name="idSolicitante" value="<?php echo $idUsuario; ?>" id="idSolicitante">
+      <input type="hidden" name="idSolicitud" value="" id="idSolicitud">
       <div class="modal fade" id="modalBitacora" tabindex="-1" aria-labelledby="modalBitacoraLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="modalBitacoraLabel">Bitácora de Solicitud</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <div class="mb-2">
-                  <label for="" class="form-label">Asunto *</label>
-                  <input type="text" class="form-control" id="txtAsunto" name="asuntoEmail">
-              </div>
-              <div class="mb-2">
-                  <label for="" class="form-label">Cuerpo *</label>
-                  <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
-              </div>
+              <div class="row" id="bitacora"></div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer d-block">
+              <div class="mb-2">
+                <label for="" class="form-label">Cuerpo *</label>
+                <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
+              </div>
               <div class="mb-2 text-end">
                   <button type="submit" class="btn btn-warning">
                       <span>Enviar</span>

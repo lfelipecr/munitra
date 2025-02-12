@@ -92,10 +92,16 @@
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
             </div>
             <div class="col-12 d-flex align-items-center mb-3">
-              <button type="submit" class="btn btn-outline-warning mx-1">
+              <button type="submit" class="btn btn-outline-warning mx-1" id="btnAct">
                 <span>Ingresar +</span>
               </button>
-              <a href="index.php?controlador=Tramites&metodo=UsoSuelo" class="btn btn-outline-danger mx-1">
+              <a class="btn btn-outline-info mx-1" id="btnVer">
+                <span>Visualizar</span>
+              </a>
+              <a class="btn btn-outline-warning mx-1" id="btnModi">
+                <span>Modificar</span>
+              </a>
+              <a href="index.php?controlador=Tramites&metodo=Patentes" class="btn btn-outline-danger mx-1">
                 <span>Cancelar x</span>
               </a>
             </div>
@@ -106,4 +112,4 @@
   </main>
   <script src="./Vista/assets/js/usosuelo.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
-  
+  <script src="./Vista/assets/js/visualizacionSolicitudes.js"></script>

@@ -11022,3 +11022,21 @@ footer.footer {
   background-color: white;
   cursor: help;
 }
+.hero {
+  background: url('https://source.unsplash.com/1600x900/?nature,forest') no-repeat center center;
+  background-size: cover;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+}
+.section {
+  padding: 80px 0;
+}
+.map-container {
+  height: 800px;
+  overflow: hidden;
+  border-radius: 15px;
+}

@@ -193,7 +193,7 @@ class PatenteControlador {
                         $adjunto->setCumple(1);
                         $adjunto->setId($_POST['idAdjuntos']);
                         $adjunto->setTipoRequisito(1);
-                        $adjunto->setCampoRequisito($urlArchivo);
+                        $adjunto->setCampoRequisito(json_encode($adjuntos));
                         $registrar[] = $adjunto;
                     }
                     //variables del post

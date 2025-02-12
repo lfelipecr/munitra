@@ -8,6 +8,14 @@ $(document).ready(function (){
                 switch  (datos[i][4]){
                     case '1':
                         $('#idAdjuntos').val(datos[i][0]);
+                        let adjuntos = JSON.parse(datos[i][1]);
+                        console.log(adjuntos);
+                        for (let i = 0; i < adjuntos.length; i++){
+                            let listado = $('#requisitosEmbed').html();
+                            let html = `<embed src="${adjuntos[i]}" type="application/pdf" width="100%" height="500px">`;
+                            listado += html;
+                            $('#requisitosEmbed').html(listado);
+                        }
                         break;
                     case '2':
                         $('#idUsoPatentes').val(datos[i][0]);

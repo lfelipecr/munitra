@@ -53,6 +53,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle pagActual" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Nuestro Cantón</a>
                                 <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=NuestroCanton">Nuestro Cantón</a></li>
                                     <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Noticias">Noticias</a></li>
                                     <li><a class="dropdown-item pagActual" href="index.php?controlador=Web&metodo=Actividades">¿Qué hacer?</a></li>
                                     <li><a class="dropdown-item" href="index.php?controlador=Web&metodo=Himno">Himno</a></li>
