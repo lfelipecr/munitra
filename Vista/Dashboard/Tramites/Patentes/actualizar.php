@@ -31,6 +31,8 @@
               <span class="mb-3">Adjunte los requisitos para la solicitud de patentes</span> <br>
               <input type="file" class="form-control"  name="requisitos[]" multiple>
               <input type="hidden" id="idAdjuntos" name="idAdjuntos">
+              <hr>
+              <div class="text-center" id="requisitosEmbed"></div>
             </div>
             <div class="col-12 mt-md-3">
               <span class="mb-3">Uso de Patente (*)</span><br>
@@ -99,11 +101,20 @@
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
             </div>
             <div class="col-12 d-flex align-items-center mb-3">
-              <button type="submit" class="btn btn-outline-warning mx-1">
+              <button type="submit" class="btn btn-outline-warning mx-1" id="btnAct">
                 <span>Ingresar +</span>
               </button>
+              <a class="btn btn-outline-info mx-1" id="btnVer">
+                <span>Ver</span>
+              </a>
+              <a class="btn btn-outline-info mx-1" id="btnBitacora" data-bs-toggle="modal" data-bs-target="#modalBitacora">
+                <span>Bitácora</span>
+              </a>
+              <a class="btn btn-outline-warning mx-1" id="btnModi">
+                <span>Modificar</span>
+              </a>
               <a href="index.php?controlador=Tramites&metodo=Patentes" class="btn btn-outline-danger mx-1">
-                <span>Cancelar x</span>
+                <span>Volver x</span>
               </a>
             </div>
           </div>
@@ -113,3 +124,55 @@
   </main>
   <script src="./Vista/assets/js/patentes.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
+  <script>
+    $('.form-control').attr('disabled', '');
+    $('#txtCuerpo').removeAttr('disabled');
+    $('#btnAct').hide();
+    $('#btnVer').hide();
+    $('#btnVer').on('click', function (){
+      $('#txtCuerpo').removeAttr('disabled');
+      $('.form-control').attr('disabled', '');
+      $('#btnAct').hide();
+      $('#btnVer').hide();
+      $('#btnBitacora').show();
+      $('#btnModi').show();
+      $('embed').show();
+    });
+    $('#btnModi').on('click', function (){
+      $('#btnAct').show();
+      $('#btnVer').show();
+      $('#btnBitacora').hide();
+      $('#btnModi').hide();
+      $('embed').hide();
+      $('.form-control').removeAttr('disabled');
+    });
+  </script>
+  <form action="index.php?controlador=Bitacora&metodo=EnviarEmail" id="frmEmail" method="post">
+      <input type="hidden" name="idSolicitante" value="<?php echo $solicitud->getIdUsuario(); ?>" id="idSolicitante">
+      <input type="hidden" name="idSolicitud" value="<?php echo $solicitud->getId(); ?>" id="idSolicitud">
+      <div class="modal fade" id="modalBitacora" tabindex="-1" aria-labelledby="modalBitacoraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="modalBitacoraLabel">Bitácora de Solicitud</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row" id="bitacora"></div>
+            </div>
+            <div class="modal-footer d-block">
+              <div class="mb-2">
+                <label for="" class="form-label">Cuerpo *</label>
+                <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
+              </div>
+              <div class="mb-2 text-end">
+                  <button type="submit" class="btn btn-warning">
+                      <span>Enviar</span>
+                  </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <script src="./Vista/assets/js/listadoSolicitudes.js"></script>
