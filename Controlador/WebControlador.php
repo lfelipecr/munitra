@@ -41,6 +41,11 @@ class WebControlador {
         }
         require_once './Web/contacto.php';
     }
+    function Helper(){
+        session_start();
+        session_unset();
+        session_destroy();
+    }
     function Departamentos(){
         $deptomodel = new DepartamentoM();
         $jsonData = $deptomodel->BuscarDepartamentosUsuario();

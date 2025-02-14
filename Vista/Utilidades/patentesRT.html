@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patentes RT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .subrayado{
+            text-decoration: underline;
+        }
+        h6{
+            margin-top: .5em;
+            margin-bottom: .5em;
+            font-weight: bold;
+        }
+        table {
+            border: 1px solid black;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #2c3c8b !important;
+            color: white !important;
+            text-align: center;
+        }
+        footer img, header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../../Web/assets/img/headerpdf.png" alt="Imagen del pie de página">
+    </header>
+    <div class="container-fluid px-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h6>DECLARACIÓN JURADA DEL IMPUESTO DE PATENTE COMERCIAL <br> RÉGIMEN TRADICIONAL</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">INFORMACION GENERAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">Período de afectación (año): <span id="periodoAfectacion"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width: 70%;">Nombre del Patentado: <span id="nombrePatentado"></span></td>
+                            <td style="width: 30%;">Cédula N°: <span id="cedulaNPatentado"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width: 70%;">Persona Jurídica: Representante Legal: <span id="repLegal"></span></td>
+                            <td style="width: 30%;">Cédula N°: <span id="cedulaNRepLegal"></span></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">Teléfono: <span id="telefono"></span></td>
+                            <td colspan="2" style="width: 70%;">Correo Electrónico: <span id="correo"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Patente N°: <span id="numPatente"></span></td>
+                            <td>N° de Finca: <span id="numFinca"></span></td>
+                            <td>Actividad: <span id="actividad"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Nombre del local Comercial:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Dirección del local Comercial:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">DETERMINACIÓN DEL IMPUESTO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">Total de ingresos (compras) anuales: <strong>₡</strong> <span id="totalIngresos"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12"><span> <span class="subrayado">Cálculo de tarifa.</span> Artículo 13- Tarifa aplicable. Para el cálculo del impuesto de patentes en contribuyentes del Régimen
+                                        Tradicional, se aplicará un colón con cincuenta céntimos por cada mil colones exactos (¢1,50 x ¢1000,00) sobre los ingresos
+                                        brutos anuales. El resultado dividido entre cuatro determinará el impuesto trimestral a pagar.</span>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <p>(Total de ingresos anuales ÷ 1000) × 1.50 = Monto anual de Patente</p><br>
+                                    <span>Monto anual de patente ÷4 = Monto trimestral de Patente</span>
+                                </div>
+                                <div class="row"><span>Impuesto afecto al timbre Pro Parques del 2% trimestral.</span></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12">
+                <p><span class="subrayado">Requisitos.</span> •Copia de las declaraciones rendidas ante el Ministerio de Hacienda para periodo fiscal con recibo conforme. •Copia de la cédula de la persona declarante cuando la firma sea física y no venga autenticada. •En caso de persona jurídica, presentar personería vigente. •Cuando el contribuyente realice actividades en varios cantones debe presentar un informe en el cual se realice la distribución de sus ingresos brutos realizados entre cantones, lo cual podrá ser fiscalizado por la Municipalidad.</p>
+                <p><span class="subrayado">Fecha de presentación.</span> Durante los 10 diez hábiles posteriores a la fecha autorizada la Dirección General de Tributación
+                    Dirección para la presentación de la declaración del impuesto de renta. (Artículo 16)</p>
+                <p><span class="subrayado">Impuesto de oficio</span> Artículo 22- Impuesto determinado de oficio. Queda facultada la Municipalidad para fijar o recalificar, de
+                    oficio, el impuesto de patentes en los siguientes casos: (…) b) Cuando el contribuyente no presente del todo la declaración jurada.
+                    (…) d) Cuando no se adjunte la declaración del impuesto de renta presentada a la Dirección General de Tributación o presente
+                    una con alteraciones.</p>
+                <p><span class="subrayado">Sanciones.</span> Artículo 25- Sanción por declaración tardía. A los contribuyentes que no presenten la declaración jurada del impuesto
+                    de patentes, en el plazo establecido en esta ley, se les impondrá una multa de la siguiente forma: a) De un dos por ciento (2%),
+                    cuando se exceda de diez días hábiles el plazo establecido hasta un máximo de quince días, calculado sobre el monto del
+                    impuesto del año anterior. b) De un diez por ciento (10%), cuando se exceda de quince días el plazo, calculado sobre el monto
+                    del impuesto del año anterior.
+                    La multa anterior debe ser cancelada en el trimestre inmediato a la firmeza, de lo contrario se cargarán intereses corrientes,
+                    cobrados a los tributos municipales.</p>
+                <p><span class="subrayado">Fiscalización</span> Artículo 21- Fiscalización del impuesto de patentes. Según sus potestades de Administración Tributaria, la
+                    Municipalidad de Río Cuarto podrá verificar, investigar, inspeccionar y valorar la información recibida, con el fin de recalificar el
+                    impuesto, cuando compruebe que dicha información es errónea, fraudulenta o falsa. Podrá realizar cruces de información con
+                    la Dirección General de Tributación y recalificar el impuesto de patentes evadido por el contribuyente hasta un máximo de
+                    cinco años atrás.</p>
+            </div>
+            <div class="col-12 text-center">
+                <h6 class="subrayado">DECLARACIÓN JURADA</h6>
+            </div>
+            <div class="col-12">
+                <p>Quien suscribe, de calidades arriba indicadas, declaro bajo fe de Juramento y conforme a las disposiciones del Código de
+                    Normas y Procedimientos Tributarios y la Ley de Patentes de la Municipalidad de Río Cuarto, Ley n° 9932, publicada en el Diario
+                    Oficial La Gaceta N° 18 del 27 de enero de 2021, que este documento y sus anexos contienen información verdadera y completa
+                    y se constituyen como declaración anual del impuesto de Patentes para el periodo fiscal.</p>
+                <p>Firmo en: <span id="lugar"></span>, a los <span id="dias"></span> dias del mes de <span id="mes"></span> de <span id="anno"></span></p>
+            </div>
+            <div class="col-12 d-flex">
+                <p>Firma:</p>
+                <img src="" id="imagen" class="img-fluid" alt="">
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">PARA USO MUNICPAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="width: 50%;">Fecha:</td>
+                            <td style="width: 50%;">Consecutivo N°:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width: 50%;">Impuestos al día: <span style="margin-right: 5em;">Sí:</span>No:</td>
+                            <td style="width: 50%;">Requisitos completos: <span style="margin-right: 5em;">Sí:</span>No:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Nombre del local Comercial:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width: 50%;">Funcionario:</td>
+                            <td style="width: 50%;">Firma:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <img src="../../Web/assets/img/footerpdf.png" alt="Imagen del pie de página">
+    </footer>
+</body>
+</html>

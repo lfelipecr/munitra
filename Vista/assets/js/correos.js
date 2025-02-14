@@ -10,11 +10,12 @@ function AbrirConversacion(indice){
         let consultas = JSON.parse(jsonData[indice][6].replace(/[\u0000-\u001F\u007F]/g, ""));
         let respuestas = JSON.parse(jsonData[indice][10].replace(/[\u0000-\u001F\u007F]/g, ""));
         chat = [...consultas, ...respuestas];
-        chat.sort((a, b) => {
-            let fechaA = new Date(a.split("-")[1]);
-            let fechaB = new Date(b.split("-")[1]);
-            return fechaA - fechaB;
-        });
+        //ambito abrir conversacion
+        function getFecha(str) {
+            const strFecha = str.match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/);
+            return strFecha ? new Date(strFecha[0]) : null;
+        }
+        chat.sort((a, b) => getFecha(a) - getFecha(b));
     } else {
         chat = JSON.parse(jsonData[indice][6].replace(/[\u0000-\u001F\u007F]/g, ""));
     }

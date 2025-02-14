@@ -40,13 +40,14 @@ class ConsultaControlador{
     }
     function ActualizarConsulta(){
         $idConsulta = $_POST['idConsulta'];
-        $consulta = $_POST['consulta'];
+        $consultaCuerpo = $_POST['consulta'];
         $consultaM = new ConsultaM();
         $consulta = new Consulta();
         $consulta = $consultaM->BuscarConsulta($idConsulta);
         $conv = json_decode($consulta->getConsulta());
-        $conv[] = $consulta->getConsulta().' - '.date("Y-m-d H:i:s").' - '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')';
+        $conv[] = $consultaCuerpo.' - '.date("Y-m-d H:i:s").' - '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')';
         $consulta->setConsulta(json_encode($conv));
+        var_dump($consulta);
         if ($consultaM->ActualizarConsulta($consulta)){
             echo 'OK';
         } else {

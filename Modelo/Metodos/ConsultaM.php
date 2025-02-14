@@ -39,7 +39,8 @@ class ConsultaM
     function AtenderConsulta(Consulta $consulta){
         $retVal=false;
         $conexion= new Conexion();
-        $sql = "CALL SpAtenderConsulta( '".$consulta->getConsulta()."', ".$consulta->getId().")";
+        $sql = "CALL SpAtenderConsulta( ".$consulta->getId().", '".$consulta->getRespuesta()."', '".$consulta->getRespondidoPor()."')";
+        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -67,7 +68,7 @@ class ConsultaM
     function ActualizarConsulta(Consulta $consulta){
         $retVal=false;
         $conexion= new Conexion();
-        $sql = "CALL SpActualizarConsulta( '".$consulta->getRespuesta()."', ".$consulta->getId().")";
+        $sql = "CALL SpActualizarConsulta( '".$consulta->getConsulta()."', ".$consulta->getId().")";
         echo $sql;
         try{
             if($conexion->Ejecutar($sql)){

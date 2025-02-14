@@ -1,17 +1,18 @@
 function MostrarConversacion(){
     let consultas = $('#consultas').val();
-    console.log(consultas)
     if (consultas != undefined){
         let respuestas = $('#respuestas').val();
         if (respuestas != ''){
             consultas = JSON.parse(consultas.replace(/[\u0000-\u001F\u007F]/g, ""));
             respuestas = JSON.parse(respuestas.replace(/[\u0000-\u001F\u007F]/g, ""));
             chat = [...consultas, ...respuestas];
-            chat.sort((a, b) => {
-                let fechaA = new Date(a.split("-")[1]);
-                let fechaB = new Date(b.split("-")[1]);
-                return fechaA - fechaB;
-            });
+            //ambito mostrar conversacion
+            function getFecha(str) {
+                const strFecha = str.match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/);
+                return strFecha ? new Date(strFecha[0]) : null;
+            }
+
+            chat.sort((a, b) => getFecha(a) - getFecha(b));
         } else {
             chat = JSON.parse(consultas.replace(/[\u0000-\u001F\u007F]/g, ""));
         }
