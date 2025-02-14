@@ -173,6 +173,20 @@ class PersonaM {
         }
         return null;
     }
+    function BuscarPersonaUsuario($idUsuario){
+        $listado = $this->ListadoPersonas();
+        if ($listado != 'null'){
+            for($i = 0; $i < count($listado); $i++)
+            {
+                if ($idUsuario == $listado[$i]->getId()){
+                    return $listado[$i];
+                }
+            }
+        } else {
+            return null;
+        }
+        return null;
+    }
     function ListadoPersonasJSON(){
         $conexion= new Conexion();
         $sql="CALL SpConsultarTodosUsuarios();";

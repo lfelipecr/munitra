@@ -11,12 +11,52 @@ require_once './Modelo/Entidades/Consulta.php';
 class ConsultaControlador{
     function ResponderConsulta()
     {
-
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $idUsuario = $_SESSION['usuario']->getIdPersona();
+            $idConsulta = $_POST['idConsulta'];
+            $cuerpo = $_POST['cuerpo'];
+            $consultaM = new ConsultaM();
+            $personaM = new PersonaM();
+            $consulta = new Consulta();
+            $persona = $personaM->BuscarPersonaUsuario($idUsuario);
+            $consulta = $consultaM->BuscarConsulta($idConsulta);
+            if ($consulta->getRespuesta() == NULL){
+                $conv = array();
+                $conv[] = $cuerpo.' - '.date("Y-m-d H:i:s").' - '.$persona->getNombre().' '.$persona->getPrimerApellido().' '.$persona->getSegundoApellido();
+            } else {
+                $conv = json_decode($consulta->getRespuesta());
+                $conv[] = $cuerpo.' - '.date("Y-m-d H:i:s").' - '.$persona->getNombre().' '.$persona->getPrimerApellido().' '.$persona->getSegundoApellido();
+            }
+            $consulta->setAtendido(1);
+            $consulta->setRespondidoPor($idUsuario);
+            $consulta->setRespuesta(json_encode($conv));
+            if ($consultaM->AtenderConsulta($consulta)){
+                echo 'OK';
+            } else {
+                echo 'ERROR';
+            }
+        }
+    }
+    function ActualizarConsulta(){
+        $idConsulta = $_POST['idConsulta'];
+        $consulta = $_POST['consulta'];
+        $consultaM = new ConsultaM();
+        $consulta = new Consulta();
+        $consulta = $consultaM->BuscarConsulta($idConsulta);
+        $conv = json_decode($consulta->getConsulta());
+        $conv[] = $consulta->getConsulta().' - '.date("Y-m-d H:i:s").' - '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')';
+        $consulta->setConsulta(json_encode($conv));
+        if ($consultaM->ActualizarConsulta($consulta)){
+            echo 'OK';
+        } else {
+            echo 'ERROR';
+        }
     }
     function EnviarConsulta()
     {
         $conv = array();
-        $conv[] = $_POST['consulta'].'-'.date("Y-m-d H:i:s");
+        $conv[] = $_POST['consulta'].' - '.date("Y-m-d H:i:s").' - '.$_POST['nombreCompleto'].' ('.$_POST['identificacion'].')';
         $consulta = new Consulta();
         $consultaM = new ConsultaM();
         $consulta->setIdentificacion($_POST['identificacion']);
@@ -28,7 +68,11 @@ class ConsultaControlador{
         $consulta->setIdConsultado($_POST['idConsultado']);
         if ($consultaM->IngresarConsulta($consulta)){
             //enviar correo
-            echo $consultaM->MaxId();
+            $id = $consultaM->MaxId();
+            echo $id;
+            session_start();
+            $consulta->setId($id);
+            $_SESSION['consulta'] = $consulta;
         } else {
             echo '0';
         }

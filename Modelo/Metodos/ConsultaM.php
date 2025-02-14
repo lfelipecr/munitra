@@ -39,7 +39,7 @@ class ConsultaM
     function AtenderConsulta(Consulta $consulta){
         $retVal=false;
         $conexion= new Conexion();
-        $sql = "CALL SpAtenderConsulta( ".$consulta->getId().", '".$consulta->getRespuesta()."', '".$consulta->getRespondidoPor()."')";
+        $sql = "CALL SpAtenderConsulta( '".$consulta->getConsulta()."', ".$consulta->getId().")";
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -63,6 +63,21 @@ class ConsultaM
             $registro=null;
         $conexion->Cerrar();
         return $registro;
+    }
+    function ActualizarConsulta(Consulta $consulta){
+        $retVal=false;
+        $conexion= new Conexion();
+        $sql = "CALL SpActualizarConsulta( '".$consulta->getRespuesta()."', ".$consulta->getId().")";
+        echo $sql;
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
     }
     function BuscarConsulta($id){
         $registro=null;

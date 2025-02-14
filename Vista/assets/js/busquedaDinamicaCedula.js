@@ -7,8 +7,7 @@ $(document).ready(function (){
             url: "index.php?controlador=Usuario&metodo=BuscarCedula",
             type: "GET",
             data: { cedula: txtCedula },
-            success: function (response) {
-                console.log(response);                
+            success: function (response) {   
                 if (response != 'null'){
                     let json = JSON.parse(response, null, 2)
                     $('#tipo'+json['tipoId']).attr('selected','');

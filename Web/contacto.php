@@ -81,39 +81,61 @@
             <div class="container-fluid p-0">
                 <div class="row g-0">
                     <div class="col-md-6 order-md-1 order-2 showcase-img d-flex align-items-center justify-content-center">
-                        <div class="card p-5 m-md-5 w-100">
-                            <span class="lead mb-1">Si tiene algún consulta o necesita ayuda, no dude en escribirnos Haremos todo lo posible por darle respuesta a la brevedad.</span>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Identificación *</label>
-                                <input type="email" class="form-control" id="identificacionConsulta">
+                        <?php if ($consulta == NULL) {?>    
+                            <div class="card p-5 m-md-5 w-100">
+                                <span class="lead mb-1">Si tiene algún consulta o necesita ayuda, no dude en escribirnos Haremos todo lo posible por darle respuesta a la brevedad.</span>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Identificación *</label>
+                                    <input type="email" class="form-control" id="identificacionConsulta">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Nombre Completo *</label>
+                                    <input type="email" class="form-control" id="nombreConsulta">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Telefono *</label>
+                                    <input type="text" class="form-control" id="telefonoConsulta">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Correo *</label>
+                                    <input type="text" class="form-control" id="correoConsulta">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Asunto *</label>
+                                    <input type="text" class="form-control" id="asuntoConsulta">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Consulta *</label>
+                                    <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                                </div>
+                                <input type="hidden" value="0" id="idConsultado">
+                                <div class="mb-2 text-end">
+                                    <?php if ($consulta == NULL) {?>
+                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha">
+                                            <span>Enviar</span>
+                                        </button>
+                                    <?php } ?>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Nombre Completo *</label>
-                                <input type="email" class="form-control" id="nombreConsulta">
+                        <?php } else {?>
+                            <div class="card p-5 m-md-5 w-100">
+                                <div class="row" id="bitacora" style="overflow: scroll; max-height: 400px"></div>
+                                <hr>
+                                <div class="mb-2">
+                                    <input type="hidden" value='<?php echo $consulta->getId(); ?>' id="idConsulta">
+                                    <input type="hidden" value='<?php echo $consulta->getConsulta(); ?>' id="consultas">
+                                    <input type="hidden" value='<?php echo $consulta->getRespuesta(); ?>' id="respuestas">
+                                    <label for="" class="form-label">Consulta *</label>
+                                    <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                                </div>
+                                <input type="hidden" value="0" id="idConsultado">
+                                <div class="mb-2 text-end">
+                                    <button class="btn btn-warning" id="btnActualizar">
+                                        <span>Enviar</span>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Telefono *</label>
-                                <input type="text" class="form-control" id="telefonoConsulta">
-                            </div>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Correo *</label>
-                                <input type="text" class="form-control" id="correoConsulta">
-                            </div>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Asunto *</label>
-                                <input type="text" class="form-control" id="asuntoConsulta">
-                            </div>
-                            <div class="mb-2">
-                                <label for="" class="form-label">Consulta *</label>
-                                <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
-                            </div>
-                            <input type="hidden" value="0" id="idConsultado">
-                            <div class="mb-2 text-end">
-                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha">
-                                    <span>Enviar</span>
-                                </button>
-                            </div>
-                        </div>                        
+                        <?php } ?>
                     </div>
                     <div class="col-md-6 order-md-2 order-1 my-auto showcase-text">
                         <h2>Contactenos!</h2>

@@ -59,7 +59,7 @@
             <p class="d-inline-flex gap-1">
                 <div class="row">
                     <div class="col-12 d-flex justify-content-between departamento"  data-bs-toggle="collapse" href="#collapseNotiPersona" role="button">
-                        <h4>Notificaciones {PERSONA}</h4>
+                        <h4>Notificaciones <?php echo $persona->getNombre().' '.$persona->getPrimerApellido().' '.$persona->getSegundoApellido(); ?></h4>
                     </div>
                 </div>
             </p>
@@ -86,9 +86,10 @@
             <div class="mb-2">
               <label for="" class="form-label">Cuerpo *</label>
               <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
+              <input type="hidden" id="idConsulta">
             </div>
             <div class="mb-2 text-end">
-                <button type="submit" class="btn btn-warning">
+                <button id="btnResponder" class="btn btn-warning">
                     <span>Enviar</span>
                 </button>
             </div>

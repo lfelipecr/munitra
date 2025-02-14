@@ -26,7 +26,9 @@ class LoginControlador
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
             $consultaM = new ConsultaM();
+            $personaM = new PersonaM();
             $idUsuario = $_SESSION['usuario']->getId();
+            $persona = $personaM->BuscarPersonaUsuario($_SESSION['usuario']->getIdPersona());
             $jsonData = $consultaM->BuscarConsultas();
             $vista = './Vista/Dashboard/inicio.php';
             require_once './Vista/Utilidades/sidebar.php';
@@ -82,7 +84,7 @@ class LoginControlador
                     $this->InicioTramites();
                 } else {
                     //Permisos
-                    $this->AdminInicio();
+                    header('location: index.php?controlador=Login&metodo=AdminInicio');
                 }
             } else {
                 $msg = 'El usuario se encuentra inactivo, </br> comuniquese con la municipalidad';
@@ -98,8 +100,7 @@ class LoginControlador
     function CerrarSesion()
     {
         session_start();
-        session_unset();
-        session_destroy();
+        unset($_SESSION['usuario']);
         header('Location: index.php');
     }
     function Registro()

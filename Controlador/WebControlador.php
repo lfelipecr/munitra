@@ -6,6 +6,8 @@ require_once './Modelo/Metodos/ActividadM.php';
 require_once './Modelo/Entidades/Documentacion.php';
 require_once './Modelo/Metodos/DocumentacionM.php';
 require_once './Modelo/Entidades/Departamento.php';
+require_once './Modelo/Entidades/Consulta.php';
+require_once './Modelo/Metodos/ConsultaM.php';
 
 class WebControlador {
     function ListadoDocsWeb(){
@@ -31,6 +33,12 @@ class WebControlador {
         require_once './Web/conformacion.php';
     }
     function Contacto(){
+        session_start();
+        $consultaM = new ConsultaM();
+        $consulta = null;
+        if (isset($_SESSION['consulta'])){
+            $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
+        }
         require_once './Web/contacto.php';
     }
     function Departamentos(){
