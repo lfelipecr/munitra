@@ -10988,6 +10988,11 @@ footer.footer {
 .departamento:hover{
   background-color: var(--orange-muni);
   color: white;
+  transition: .35s ease;
+}
+.departamento:hover path{
+  fill: #FAFAFA;
+  transition: .35s ease;
 }
 .iconDpto{
   width: 2em;

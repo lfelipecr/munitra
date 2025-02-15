@@ -7,6 +7,7 @@ class Noticia {
     private $urlImagen;
     private $urlAdjunto;
     private $inhabilitada;
+    private $fecha;
     
     public function getId() {
         return $this->id;
@@ -43,6 +44,12 @@ class Noticia {
     }
     public function setUrlAdjunto($urlAdjunto) {
         $this->urlAdjunto = $urlAdjunto;
+    }
+    public function getFecha(){
+        return $this->fecha;
+    }
+    public function setFecha($fecha){
+        $this->fecha = $fecha;
     }
     public function getInhabilitada() {
         return $this->inhabilitada;

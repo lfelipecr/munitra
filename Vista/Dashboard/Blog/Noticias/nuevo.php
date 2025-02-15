@@ -19,15 +19,20 @@
             </div>
             <div class="col-12">
                 <span class="mb-3">Descripción (*)</span>
-                <textarea name="descripcionLarga" class="form-control" id="txtDescripcion" rows="5"></textarea>
+                <div class="form-control" id="txtDescripcion"></div>
+                <input type="hidden" name="descripcionLarga" id="valDescripcion">
             </div>
-            <div class="col-12 mt-md-3">
-                <span class="mb-3">Imagen (jpg, png, jpeg)</span> <br>
+            <div class="col-12 mt-md-3" style="padding-top: 3.5em">
+                <span class="mb-3">Portada (jpg, png, jpeg)</span> <br>
                 <input type="file" class="form-control"  name="imagen">
             </div>
             <div class="col-12 mt-md-3">
                 <span class="mb-3">Archivo adjunto</span> <br>
                 <input type="file" class="form-control"  name="adjunto">
+            </div>
+            <div class="col-12 mt-md-3">
+                <span class="mb-3">Fecha (*)</span><br>
+                <input type="date" class="form-control"  name="fecha">
             </div>
             <div class="col-12 py-2">
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>

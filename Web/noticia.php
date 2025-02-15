@@ -91,6 +91,8 @@
         <div class="container mb-5">
             <hr class="mt-5">
             <p class="lead mb-3 mt-5"><?php echo $noticia->getDescripcionLarga();?></p>
+            <hr>
+            <p><?php echo $noticia->getFecha();?></p>
             <a class="btn btn-warning mb-5 mt-5" href="<?php echo $noticia->getUrlAdjunto(); ?>">
                 <span>Descargar Adjuntos</span>
             </a>

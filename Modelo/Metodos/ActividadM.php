@@ -47,7 +47,6 @@ class ActividadM {
             "', FECHA = '".$actividad->getFecha()."', ADJUNTOS = '"
             .$actividad->getUrlAdjunto()."' WHERE ID = ".$actividad->getId();;
         }
-        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;

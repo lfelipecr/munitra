@@ -20,15 +20,20 @@
             </div>
             <div class="col-12">
                 <span class="mb-3">Descripción (*)</span>
-                <textarea name="descripcionLarga" class="form-control" id="txtDescripcion" rows="5"><?php echo $noticia->getDescripcionLarga(); ?></textarea>
+                <div name="descripcionLarga" class="form-control" id="txtDescripcion" rows="5"><?php echo $noticia->getDescripcionLarga(); ?></div>
+                <input type="hidden" name="descripcionLarga" id="valDescripcion" value="<?php echo $noticia->getDescripcionLarga(); ?>">
             </div>
-            <div class="col-12 mt-md-3">
-                <span class="mb-3">Nueva Imagen (jpg, png, jpeg)</span> <br>
+            <div class="col-12 mt-md-3" style="padding-top: 3.5em">
+                <span class="mb-3">Nueva Portada (jpg, png, jpeg)</span> <br>
                 <input type="file" class="form-control"  name="imagen">
             </div>
             <div class="col-12 mt-md-3">
                 <span class="mb-3">Archivo adjunto</span> <br>
                 <input type="file" class="form-control"  name="adjunto">
+            </div>
+            <div class="col-12 mt-md-3">
+                <span class="mb-3">Fecha (*)</span><br>
+                <input type="date" class="form-control" value="<?php echo $noticia->getFecha(); ?>" name="fecha">
             </div>
             <div class="col-12 py-2">
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>

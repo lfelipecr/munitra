@@ -19,9 +19,10 @@
             </div>
             <div class="col-12">
                 <span class="mb-3">Descripción (*)</span>
-                <textarea name="descripcionLarga" class="form-control" id="txtDescripcion" rows="5"></textarea>
+                <div class="form-control" id="txtDescripcion" rows="5"></div>
+                <input type="hidden" name="descripcionLarga" id="valDescripcion">
             </div>
-            <div class="col-12 mt-md-3">
+            <div class="col-12 mt-md-3" style="padding-top: 3.5em">
                 <span class="mb-3">Fecha (*)</span><br>
                 <input type="date" class="form-control"  name="fecha">
             </div>

@@ -20,7 +20,8 @@
             <input type="hidden" id="" name="id" value="<?php echo $actividad->getId(); ?>">
             <div class="col-12">
                 <span class="mb-3">Descripción (*)</span>
-                <textarea name="descripcionLarga" class="form-control" id="txtDescripcion" rows="5"><?php echo $actividad->getDescripcionLarga(); ?></textarea>
+                <div class="form-control" id="txtDescripcion" rows="5"><?php echo $actividad->getDescripcionLarga(); ?></div>
+                <input type="hidden" name="descripcionLarga" id="valDescripcion">
             </div>
             <div class="col-12 mt-md-3">
                 <span class="mb-3">Fecha (*)</span><br>

@@ -53,7 +53,7 @@ $(document).ready(function (){
                     console.error("Error en la petición:", error);
                 }
             }).then(function () {
-                //location.reload();
+                location.reload();
             });
             $('#txtCuerpo').val('');
         }

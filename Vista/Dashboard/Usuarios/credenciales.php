@@ -35,6 +35,9 @@
                         <div class="col-md-12 text-center d-block">
                             <p id="nombre">Nombre: </p>
                             <p id="cedula">Cédula: </p>
+                            <p id="correo">Correo: </p>
+                            <p id="telefono">Teléfono: </p>
+                            <p id="whatsapp">Whatsapp: </p>
                         </div>
                     </div>
                     <div class="row justify-content-center mb-3 mt-1">
@@ -69,6 +72,9 @@
             console.log(jsonData);
             $('#nombre').html(`Nombre: ${jsonData.NOMBRE} ${jsonData.PRIMER_APELLIDO} ${jsonData.SEGUNDO_APELLIDO}`);
             $('#cedula').html(`Nombre: ${jsonData.IDENTIFICACION}`);
+            $('#correo').html(`Correo: ${jsonData.CORREO_USUARIO}`);
+            $('#telefono').html(`Telefono: ${jsonData.TELEFONO}`);
+            $('#whatsapp').html(`Whatsapp: ${jsonData.WHATSAPP}`);
             document.getElementById('firmaCredenciales').src = jsonData.FIRMA;
             document.getElementById('consentimiento').href = jsonData.URL_CONSENTIMIENTO;
             document.getElementById('denegar').href = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=false`;

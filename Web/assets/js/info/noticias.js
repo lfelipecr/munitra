@@ -19,7 +19,7 @@ $(document).ready(function (){
                             <!--<img src="..." class="card-img-top" alt="...">-->
                             <div class="card-body">
                             <h5 class="card-title">${jsonData[i][1]}</h5>
-                            <p class="card-text">${jsonData[i][2]}</p>
+                            <p>${jsonData[i][11]}</p>
                             <a href="index.php?controlador=Web&metodo=Noticia&id=${jsonData[i][0]}" class="btn btn-outline-warning">Información</a>
                             </div>
                         </div></div>`;

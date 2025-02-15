@@ -568,13 +568,14 @@ DELIMITER //
 CREATE PROCEDURE SpIngresarNoticia(
     IN idUsuario INT,
     IN n_titulo VARCHAR (100),
-    IN n_descripcionLarga VARCHAR(1000),
+    IN n_descripcionLarga LONGTEXT,
     IN n_urlAdjunto VARCHAR (200),
-    IN urlImagen VARCHAR(200)
+    IN urlImagen VARCHAR(200),
+    IN n_fecha DATE
 )
 BEGIN
-    INSERT INTO NOTICIA (ID_USUARIO, TITULO, DESCRIPCION_LARGA, URL_IMAGEN, INHABILITADA, URL_ADJUNTO) 
-    VALUES (idUsuario, n_titulo, n_descripcionLarga, urlImagen, 0, n_urlAdjunto);
+    INSERT INTO NOTICIA (ID_USUARIO, TITULO, DESCRIPCION_LARGA, URL_IMAGEN, INHABILITADA, URL_ADJUNTO, FECHA) 
+    VALUES (idUsuario, n_titulo, n_descripcionLarga, urlImagen, 0, n_urlAdjunto, n_fecha);
 END //
 DELIMITER ;
 --CALL SpIngresarNoticia(6, 'Noticia de Prueba', 'blablablablablablablabla', '');
@@ -592,7 +593,8 @@ SELECT
     PERSONA.ID AS PERSONA_ID,
     PERSONA.NOMBRE AS PERSONA_NOMBRE,
     PERSONA.PRIMER_APELLIDO AS PERSONA_PRIMER_APELLIDO,
-    PERSONA.SEGUNDO_APELLIDO AS PERSONA_SEGUNDO_APELLIDO
+    PERSONA.SEGUNDO_APELLIDO AS PERSONA_SEGUNDO_APELLIDO,
+    NOTICIA.FECHA AS FECHA
 FROM 
     NOTICIA
 INNER JOIN 
@@ -614,31 +616,36 @@ DELIMITER //
 CREATE PROCEDURE SpActualizarNoticia(
     IN idNoti INT,
     IN n_titulo VARCHAR(100),
-    IN n_descripcionLarga VARCHAR(1000),
+    IN n_descripcionLarga LONGTEXT,
     IN urlImagen VARCHAR(200),
-    IN urlAdjunto VARCHAR(200)
+    IN urlAdjunto VARCHAR(200),
+    IN n_fecha DATE
 )
 BEGIN
     IF urlImagen = '' AND urlAdjunto = '' THEN
         UPDATE NOTICIA
         SET TITULO = n_titulo,
+            FECHA = n_fecha
             DESCRIPCION_LARGA = n_descripcionLarga
         WHERE ID = idNoti;
     ELSEIF urlImagen = '' THEN
         UPDATE NOTICIA
         SET TITULO = n_titulo,
+            FECHA = n_fecha
             DESCRIPCION_LARGA = n_descripcionLarga,
             URL_ADJUNTO = urlAdjunto
         WHERE ID = idNoti;
     ELSEIF urlAdjunto = '' THEN
         UPDATE NOTICIA
         SET TITULO = n_titulo,
+            FECHA = n_fecha
             DESCRIPCION_LARGA = n_descripcionLarga,
             URL_IMAGEN = urlImagen
         WHERE ID = idNoti;
     ELSE
         UPDATE NOTICIA
         SET TITULO = n_titulo,
+            FECHA = n_fecha
             DESCRIPCION_LARGA = n_descripcionLarga,
             URL_IMAGEN = urlImagen,
             URL_ADJUNTO = urlAdjunto

@@ -12,7 +12,6 @@ $(document).ready(function (){
             listado += html;
             $('#actividades').html(listado);
         }
-        console.log(jsonData.length)
         for (let i = 0; i < jsonData.length; i++){
             let listado = $('#actividades').html();
             let html = `<div class="col-md-4 text-center d-flex justify-content-center"><div class="card my-1" style="width: 18rem;">
@@ -20,7 +19,7 @@ $(document).ready(function (){
                             <!--<img src="..." class="card-img-top" alt="...">-->
                             <div class="card-body">
                             <h5 class="card-title">${jsonData[i][2]}</h5>
-                            <p class="card-text">${jsonData[i][3]}</p>
+                            <p class="card-text">${jsonData[i][6]}</p>
                             <a href="index.php?controlador=Web&metodo=Actividad&id=${jsonData[i][0]}" class="btn btn-outline-warning">Información</a>
                             </div>
                         </div></div>`;

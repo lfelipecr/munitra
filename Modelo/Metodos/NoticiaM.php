@@ -10,7 +10,7 @@ class NoticiaM {
         $sql = "CALL SpActualizarNoticia(".$noticia->getId().
         ", '".$noticia->getTitulo().
         "', '".$noticia->getDescripcionLarga().
-        "', '".$noticia->getUrlImagen()."', '".$noticia->getUrlAdjunto()."')";
+        "', '".$noticia->getUrlImagen()."', '".$noticia->getUrlAdjunto()."', '".$noticia->getFecha()."')";
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -27,7 +27,7 @@ class NoticiaM {
         $sql = "CALL SpIngresarNoticia(".$noticia->getIdUsuario().
         ", '".$noticia->getTitulo().
         "', '".$noticia->getDescripcionLarga().
-        "', '".$noticia->getUrlAdjunto()."', '".$noticia->getUrlImagen()."')";
+        "', '".$noticia->getUrlAdjunto()."', '".$noticia->getUrlImagen()."', '".$noticia->getFecha()."')";
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -68,6 +68,7 @@ class NoticiaM {
                 $noticia->setDescripcionLarga($fila["DESCRIPCION_LARGA"]);
                 $noticia->setUrlImagen($fila["URL_IMAGEN"]);
                 $noticia->setUrlAdjunto($fila['URL_ADJUNTO']);
+                $noticia->setFecha($fila['FECHA']);
                 $noticia->setInhabilitada($fila["INHABILITADA"]);
                 $registro = $noticia;
             }

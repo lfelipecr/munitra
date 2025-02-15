@@ -3,6 +3,7 @@ require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Entidades/Actividad.php';
 require_once './Modelo/Metodos/ActividadM.php';
 require_once './Modelo/Metodos/UsuarioM.php';
+require_once './Controlador/BlogControlador.php';
 
 class ActividadControlador {
     function VIngresar(){
@@ -98,7 +99,8 @@ class ActividadControlador {
             $actividad->setIdUsuario($_SESSION['usuario']->getId());
             $actividad->setFecha($_POST['fecha']);
             if ($actividadM->Actualizar($actividad)){
-                header('location: index.php?controlador=Blog&metodo=Actividades');
+                $blog = new BlogControlador();
+                $blog->Actividades();
             } else {
                 $this->LlamarVistaActualizar($id, 'Ha ocurrido un problema, intente de nuevo');
             }           

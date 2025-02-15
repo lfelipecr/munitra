@@ -68,6 +68,7 @@ class NoticiaControlador {
                 $noticia->setIdUsuario($_SESSION['usuario']->getId());
                 $noticia->setTitulo(trim($_POST['titulo']));
                 $noticia->setDescripcionLarga(trim($_POST['descripcionLarga']));
+                $noticia->setFecha($_POST['fecha']);
                 $noticiaM = new NoticiaM();
                 if ($noticiaM->IngresarNoticia($noticia)){
                     header('location: index.php?controlador=Blog&metodo=Noticias');
@@ -94,6 +95,7 @@ class NoticiaControlador {
                 $noticia->setId($_POST['id']);
                 $noticia->setTitulo(trim($_POST['titulo']));
                 $noticia->setDescripcionLarga(trim($_POST['descripcionLarga']));
+                $noticia->setFecha($_POST['fecha']);
                 if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
                     $rutaDestino = './repo/';
                     $urlArchivo = $rutaDestino.basename($_FILES['imagen']['name']);

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patentes RS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .subrayado{
+            text-decoration: underline;
+        }
+        h6{
+            margin-top: .5em;
+            margin-bottom: .5em;
+            font-weight: bold;
+        }
+        table {
+            border: 1px solid black;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #2c3c8b !important;
+            color: white !important;
+            text-align: center;
+        }
+        footer img, header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../../Web/assets/img/headerpdf.png" alt="Imagen del pie de página">
+    </header>
+    <div class="container-fluid px-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h6>DECLARACIÓN JURADA DEL IMPUESTO POR LICENCIA DE COMERCIALIZACIÓN DE BEBIDAS CON CONTENIDO ALCOHOLICO</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">INFORMACION GENERAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">Período de afectación (año): <span id="periodoAfectacion"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width: 70%;">Nombre del Patentado: <span id="nombrePatentado"></span></td>
+                            <td style="width: 30%;">Cédula N°: <span id="cedulaNPatentado"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width: 70%;">Persona Jurídica: Representante Legal: <span id="repLegal"></span></td>
+                            <td style="width: 30%;">Cédula N°: <span id="cedulaNRepLegal"></span></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;">Teléfono: <span id="telefono"></span></td>
+                            <td colspan="2" style="width: 70%;">Correo Electrónico: <span id="correo"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Patente N°: <span id="numPatente"></span></td>
+                            <td>N° de Finca: <span id="numFinca"></span></td>
+                            <td>Actividad: <span id="actividad"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Nombre del local Comercial:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Dirección del local Comercial:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">DETERMINACIÓN DEL IMPUESTO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">Total personal empleado: <strong>₡</strong> <span id="totalPersonalEmpleado"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Valor de las ventas anuales netas del último período fiscal: <strong>₡</strong> <span id="ventasAnualesNetas"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Valo de los activos totales netos del último período fiscal: <strong>₡</strong> <span id="totalActivos"></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12"><span><span class="subrayado">Cálculo de tarifa.</span> Este impuesto se calculará con base a la tabla, fórmulas y disposiciones consignadas en el artículo 10
+                                        de la Nº 9047, Ley de regulación y comercialización de bebidas con contenido alcohólico, del 25 de junio de 2012 y sus
+                                        reformas. Utilizando la información contenida en las tres casillas anteriores.</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-4">
+                                    <span>Impuesto que se encuentra afecto al pago de timbre anual de ₡5000.00 y del 2% trimestral del timbre Pro-Parques.</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12">
+                <p><span class="subrayado">Requisitos.</span> •Copia de las declaraciones rendidas ante el Ministerio de Hacienda para periodo fiscal con recibo conforme.
+                    •Copia de la cédula de la persona declarante cuando la firma sea física y no venga autenticada. •En caso de persona
+                    jurídica, presentar personería vigente. •Cuando el contribuyente realice actividades en varios cantones debe presentar
+                    un informe en el cual se realice la distribución de sus ingresos brutos realizados entre cantones, lo cual podrá ser
+                    fiscalizado por la Municipalidad.</p>
+                <p><span class="subrayado">Fecha de presentación.</span> Durante los 10 diez hábiles posteriores a la fecha autorizada la Dirección General de Tributación
+                    Dirección para la presentación de la declaración del impuesto de renta.</p>
+            </div>
+            <div class="col-12 text-center">
+                <h6 class="subrayado">DECLARACIÓN JURADA</h6>
+            </div>
+            <div class="col-12">
+                <p>Quien suscribe, de calidades antes mencionadas, apercibido/a de las penas con que la legislación castiga los delitos de
+                    falso testimonio y perjurio, declaro bajo fe de juramento que toda la información anotada anteriormente es verdadera y
+                    real, en cumplimiento de la Ley N. º 9047, Ley de regulación y comercialización de bebidas con contenido alcohólico, del
+                    25 de junio de 2012 y sus reformas. Además, tengo conocimiento que la Municipalidad de Río Cuarto, puede iniciar el
+                    proceso administrativo respectivo con el fin de suspender, revocar o cancelar las licencias en el inmueble, si se llegase a
+                    comprobar alguna falsedad de la presente declaración, errores u omisiones en los documentos o información aportada.
+                    Es todo.
+                </p>
+                <p>Firmo en: <span id="lugar"></span>, a los <span id="dias"></span> dias del mes de <span id="mes"></span> de <span id="anno"></span></p>
+            </div>
+            <div class="col-12 d-flex">
+                <p>Firma:</p>
+                <img src="" id="imagen" class="img-fluid" alt="">
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="3">PARA USO MUNICPAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="width: 50%;">Fecha:</td>
+                            <td style="width: 50%;">Consecutivo N°:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width: 50%;">Impuestos al día: <span style="margin-right: 5em;">Sí:</span>No:</td>
+                            <td style="width: 50%;">Requisitos completos: <span style="margin-right: 5em;">Sí:</span>No:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Nombre del local Comercial:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="width: 50%;">Funcionario:</td>
+                            <td style="width: 50%;">Firma:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <img src="../../Web/assets/img/footerpdf.png" alt="Imagen del pie de página">
+    </footer>
+</body>
+</html>
