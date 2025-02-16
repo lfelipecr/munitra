@@ -64,7 +64,7 @@ class VisadoControlador {
         $u = new Utilidades();
         if ($u->VerificarSesion()){
             if (!isset($_POST['firma'])){
-                $this->LlamarVistaActualizar('La firma es requerida', $_GET['idSolicitud']);
+                $this->LlamarVistaActualizar('La firma es requerida', $_POST['idSolicitud']);
             } else {
                 $solicitudM = new SolicitudM();
                 $solicitud = new Solicitud();

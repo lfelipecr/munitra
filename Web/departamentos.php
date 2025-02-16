@@ -79,6 +79,7 @@
         </nav>
         <div class="container">
             <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
+            <input type="hidden" id="tramites" value='<?php echo $tiposSolicitud; ?>'>
             <section class="testimonials text-center">
                 <div class="container">
                     <h2 class="mb-4">Departamentos</h2>

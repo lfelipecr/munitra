@@ -1,3 +1,6 @@
+function Redirigir (id){
+    window.location.href = 'index.php?controlador=Web&metodo=SolicitarTramite&tramite='+id;
+}
 function ObtenerDatos(idDepto){
     $('#docs').html('<div class="col-md-12 text-center d-flex justify-content-center"><p>Este departamento aún no ha subido nada</p></div>');
     $.ajax({
@@ -28,7 +31,7 @@ function ObtenerDatos(idDepto){
     });
 }
 function ModificarFormulario(id){
-    let datosJSON = JSON.parse($('#jsonData').val());   
+    let datosJSON = JSON.parse($('#jsonData').val());
     let comunicado = datosJSON[id];
     $('#nombreComunicar').html(`${comunicado[1]} ${comunicado[2]} ${comunicado[3]}`);
     $('#puestoComunicar').html(comunicado[14]);
@@ -37,6 +40,7 @@ function ModificarFormulario(id){
 $(document).ready(function () {
     function DatosDepartamento(){
         let datosJSON = JSON.parse($('#jsonData').val());
+        let tramites = JSON.parse($('#tramites').val());
         if (datosJSON != ''){
             let ultimoIdDom = '';
             for (let i = 0; i < datosJSON.length; i++){
@@ -50,6 +54,15 @@ $(document).ready(function () {
                                 <span style="font-size: 1em;">Documentos Departamentales</span>
                             </button>
                         </div>`;
+                    for (let j = 0; j < tramites.length; j++){
+                        if (tramites[j][2] == datosJSON[i][17]){
+                            html += `<div class="col-lg-12 text-center">
+                                    <button class="btn btn-outline-warning mx-1 mt-md-none mb-1 mt-1" onclick="Redirigir(${tramites[j][0]});">
+                                        <span style="font-size: 1em;">${tramites[j][1]}</span>
+                                    </button>
+                                </div>`;
+                        }
+                    }
                 }
                 html += `<div class="col-lg-4">
                             <div class="testimonial-item mx-auto mb-5 mb-lg-0">

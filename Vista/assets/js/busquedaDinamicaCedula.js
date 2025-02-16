@@ -1,4 +1,4 @@
-$(document).ready(function (){
+$(document).ready(function (){    
     $('#txtIdentificacion').on('keyup', function(){
         $('.form-control').removeAttr('readonly');
         $('.dataPersona').val('');

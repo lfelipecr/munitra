@@ -10,6 +10,7 @@ require_once './Modelo/Entidades/Consulta.php';
 require_once './Modelo/Metodos/ConsultaM.php';
 require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Metodos/UsuarioM.php';
+require_once './Controlador/LoginControlador.php';
 
 class WebControlador {
     function ListadoDocsWeb(){
@@ -84,6 +85,7 @@ class WebControlador {
         $consultaM = new ConsultaM();
         $deptomodel = new DepartamentoM();
         $personaM = new PersonaM();
+        $tiposSolicitud = $deptomodel->BuscarTiposSolicitud();
         $consulta = null;
         if (isset($_SESSION['consulta'])){
             $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
@@ -124,5 +126,14 @@ class WebControlador {
     }
     function NuestroCanton(){
         require_once './Web/inicio.php';
+    }
+    function SolicitarTramite()
+    {
+        session_start();
+        $idTramite = $_GET['tramite'];
+        $_SESSION['tramite'] = $idTramite;
+        $login = new LoginControlador();
+        $msg = 'Será redirigido al trámite solicitado pronto, ingrese a su cuenta';
+        require_once './Vista/Login/login.php';
     }
 }

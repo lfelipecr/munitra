@@ -13,7 +13,7 @@ $(document).ready(function (){
             let fechaRegistro = jsonData[i][1].split("-")[0];
             if (fecha == fechaRegistro){
                 if (jsonData[i][3] == '1'){
-                    html += `<div class="col-md-6 text-center d-flex justify-content-center">
+                    html += `<div class="col-12 text-center d-flex justify-content-center">
                                 <div class="card w-100 my-1">
                                     <div class="card-body">
                                     <h5 class="card-title mb-3">${jsonData[i][2]} - ${jsonData[i][1]}</h5>

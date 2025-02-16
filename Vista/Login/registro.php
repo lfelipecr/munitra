@@ -111,7 +111,7 @@
                             <span class="mb-3">Cantón (*)</span>
                             <select name="canton" class="form-control" id="slCanton">
                                 <?php for ($i = 0; $i < sizeof($arrLocaciones[1]); $i++) {?>
-                                <option value="<?php echo $arrLocaciones[1][$i]->getId();?>">
+                                <option value="<?php echo $arrLocaciones[1][$i]->getId();?>" data-provinciaCanton="<?php echo $arrLocaciones[1][$i]->getIdProvincia();?>" class="cantones">
                                     <span><?php echo $arrLocaciones[1][$i]->getNombre();?></span>
                                 </option>
                                 <?php } ?>
@@ -121,7 +121,7 @@
                             <span class="mb-3">Distrito (*)</span>
                             <select name="distrito" class="form-control" id="slDistrito">
                                 <?php for ($i = 0; $i < sizeof($arrLocaciones[2]); $i++) {?>
-                                <option value="<?php echo $arrLocaciones[2][$i]->getId();?>">
+                                <option value="<?php echo $arrLocaciones[2][$i]->getId();?>" data-provinciaDistrito="<?php echo $arrLocaciones[2][$i]->getIdProvincia();?>" data-canton="<?php echo $arrLocaciones[2][$i]->getIdCanton();?>" class="distritos">
                                     <span><?php echo $arrLocaciones[2][$i]->getNombre();?></span>
                                 </option>
                                 <?php } ?>
@@ -171,5 +171,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./Vista/assets/js/busquedaDinamicaCedula.js"></script>
     <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
+    <script src="./Vista/assets/js/dashboardDependencia/locaciones.js"></script>
 </body>
 </html>

@@ -27,7 +27,6 @@ class BitacoraControlador{
             $persona = $personaM->BuscarPersona($_POST['idSolicitante']);
             $solicitud = $solicitudM->BuscarCabeceraSolicitud($_POST['idSolicitud']);
             $cuerpoEmail = $_POST['cuerpoEmail'];
-            $controlador = $_POST['controlador'];
             $asuntoEmail = "Bitacora Solicitud Río Cuarto - ".time();
             $mail = new PHPMailer();
             try{
@@ -49,17 +48,13 @@ class BitacoraControlador{
                 $mail->isHTML(true);
                 $mail->Subject = $asuntoEmail;
                 $mail->Body = $cuerpoEmail;
-                $mail->send();
+                //$mail->send();
                 $bitacora->setIdSolicitud($solicitud->getId());
                 $bitacora->setIdUsuario($_SESSION['usuario']->getId());
                 $bitacora->setIdEstado($solicitud->getEstadoSolicitud());
                 $bitacora->setNota($asuntoEmail);
                 $bitacora->setDetalle($cuerpoEmail);
                 $bitacoraM->IngresarBitacora($bitacora);
-                echo $controlador;
-                $url = 'location: index.php?controlador=Tramites&metodo='.$_POST['controlador'];
-                echo $url;
-                //header($url);
             } catch (Exception $ex){
                 var_dump($ex);
             }

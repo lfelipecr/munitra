@@ -14,8 +14,34 @@ class TramitesControlador {
         session_start();
         $usuario = $_SESSION['usuario']->getIdPersona();
         $estado = $_SESSION['usuario']->getIdEstado();
-        $vista = './Vista/TramitesUsuario/listadoTramites.php';
-        require_once './Vista/Utilidades/navbar.php';
+        $tramite = 0;
+        if (isset($_SESSION['tramite'])){
+            $tramite = $_SESSION['tramite'];
+            unset($_SESSION['tramite']);
+        }
+        switch ($tramite){
+            case '1':
+                $this->Patentes();
+                break;
+            case '2':
+                $this->UsoSuelo();
+                break;
+            case '3':
+                $this->Visado();
+                break;
+            case '4':
+                $this->Condonacion();
+                break;
+            case '5':
+            case '6':
+                $this->Declaraciones();
+                break;
+            default:
+                $vista = './Vista/TramitesUsuario/listadoTramites.php';
+                require_once './Vista/Utilidades/navbar.php';
+                break;
+        }
+        
     }
     function Patentes(){
         $u = new Utilidades();
