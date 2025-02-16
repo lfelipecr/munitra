@@ -14,6 +14,7 @@ class ConsultaControlador{
         $u = new Utilidades();
         if ($u->VerificarSesion()){
             $idUsuario = $_SESSION['usuario']->getIdPersona();
+            unset($_SESSION['consulta']);
             $idConsulta = $_POST['idConsulta'];
             $cuerpo = $_POST['cuerpo'];
             $consultaM = new ConsultaM();
@@ -67,6 +68,7 @@ class ConsultaControlador{
         $consulta->setAsunto($_POST['asunto']);
         $consulta->setConsulta(json_encode($conv));
         $consulta->setIdConsultado($_POST['idConsultado']);
+        $consulta->setTipoConsulta(1);
         if ($consultaM->IngresarConsulta($consulta)){
             //enviar correo
             $id = $consultaM->MaxId();

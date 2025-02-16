@@ -34,8 +34,7 @@
                 <input type="text" class="form-control" name="urlVideo" id="ipUrlVideo">
             </div>
             <div class="col-12 mt-md-2">
-              <span class="mb-3">Acta Aprobada</span>
-              <input type="checkbox" id="cbxActa">
+              <input type="hidden" id="cbxActa">
               <input type="hidden" name="valorActa" value="" id="valorActa">
             </div>
             <div class="col-12 py-2">

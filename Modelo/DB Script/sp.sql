@@ -932,19 +932,20 @@ CREATE PROCEDURE SpIngresarConsulta(
     IN corr VARCHAR (300),
     IN tel VARCHAR (300),
     IN asunt VARCHAR (300),
-    IN consul VARCHAR (300),
-    IN idConsultado INT
+    IN consul LONGTEXT,
+    IN idConsultado INT,
+    IN tipoConsulta INT
 )
 BEGIN
-    INSERT INTO CONSULTA (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, CORREO, ASUNTO, CONSULTA, ID_CONSULTADO, ATENDIDO, FECHA)
-    VALUES (ident, nombre, corr, tel, asunt, consul, idConsultado, 0, NOW());
+    INSERT INTO CONSULTA (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, CORREO, ASUNTO, CONSULTA, ID_CONSULTADO, ATENDIDO, FECHA, ID_TIPO)
+    VALUES (ident, nombre, corr, tel, asunt, consul, idConsultado, 0, NOW(), tipoConsulta);
 END //
 
 DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE SpAtenderConsulta(IN idConsulta INT, IN resp VARCHAR(2000), IN usuario VARCHAR(300))
+CREATE PROCEDURE SpAtenderConsulta(IN idConsulta INT, IN resp LONGTEXT, IN usuario VARCHAR(300))
 BEGIN
     UPDATE CONSULTA 
     SET RESPUESTA = resp,
@@ -956,7 +957,7 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE SpActualizarConsulta(IN cons VARCHAR(2000), IN idConsulta INT)
+CREATE PROCEDURE SpActualizarConsulta(IN cons LONGTEXT, IN idConsulta INT)
 BEGIN
     UPDATE CONSULTA 
     SET CONSULTA = cons WHERE ID = idConsulta;

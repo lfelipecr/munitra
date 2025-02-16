@@ -15,7 +15,7 @@ $(document).ready(function (){
         for (let i = 0; i < jsonData.length; i++){
             let listado = $('#noticias').html();
             let html = `<div class="col-md-4 text-center d-flex justify-content-center"><div class="card my-1" style="width: 18rem;">
-                            <div class="bgNoticiaNoPic"></div>
+                            <div class="bgNoticiaNoPic" style="background: url('${jsonData[i][3]}') no-repeat center center;background-size: cover;"></div>
                             <!--<img src="..." class="card-img-top" alt="...">-->
                             <div class="card-body">
                             <h5 class="card-title">${jsonData[i][1]}</h5>

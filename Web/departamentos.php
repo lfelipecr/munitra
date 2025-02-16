@@ -244,40 +244,51 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5"><span id="nombreComunicar"></span></h1>
+                        <h1 class="modal-title fs-5"><?php if ($consulta == NULL) {?>   Comunicarse con <span id="nombreComunicar"></span><?php } else { echo 'Consulta en proceso'; } ?></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" value="0" id="idConsultado">
-                        <div class="mb-2">
-                            <label for="" class="form-label">Identificación *</label>
-                            <input type="email" class="form-control" id="identificacionConsulta">
-                        </div>
-                        <div class="mb-2">
-                            <label for="" class="form-label">Nombre Completo *</label>
-                            <input type="email" class="form-control" id="nombreConsulta">
-                        </div>
-                        <div class="mb-2">
-                            <label for="" class="form-label">Telefono *</label>
-                            <input type="text" class="form-control" id="telefonoConsulta">
-                        </div>
-                        <div class="mb-2">
-                            <label for="" class="form-label">Correo *</label>
-                            <input type="text" class="form-control" id="correoConsulta">
-                        </div>
-                        <div class="mb-2">
-                            <label for="" class="form-label">Asunto *</label>
-                            <input type="text" class="form-control" id="asuntoConsulta">
-                        </div>
-                        <div class="mb-2">
-                            <label for="" class="form-label">Consulta *</label>
-                            <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha">
-                            <span>Enviar</span>
-                        </button>
+                    <?php if ($consulta == NULL) {?>    
+                            <div class="mb-2">
+                                <label for="" class="form-label">Identificación *</label>
+                                <input type="email" class="form-control" id="identificacionConsulta">
+                            </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Nombre Completo *</label>
+                                <input type="email" class="form-control" id="nombreConsulta">
+                            </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Telefono *</label>
+                                <input type="text" class="form-control" id="telefonoConsulta">
+                            </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Correo *</label>
+                                <input type="text" class="form-control" id="correoConsulta">
+                            </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Asunto *</label>
+                                <input type="text" class="form-control" id="asuntoConsulta">
+                            </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Consulta *</label>
+                                <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                            </div>
+                            <input type="hidden" value="0" id="idConsultado">
+                            <div class="mb-2 text-end">
+                                <?php if ($consulta == NULL) {?>
+                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha">
+                                        <span>Enviar</span>
+                                    </button>
+                                <?php } ?>
+                            </div>
+                        <?php } else {?>
+                            <?php if ($consulta->getIdConsultado() != 0) {?>
+                                <p>Su consulta al funcionario(a) <?php echo $persona->getNombre().' '.$persona->getPrimerApellido().' '.$persona->getSegundoApellido();?> 
+                                está siendo <strong>procesada</strong>, una vez sea respondida, podrá realizar nuevas consultas. <strong>Gracias  por su paciencia</strong></p>
+                            <?php } else { ?>
+                                <p>Su consulta a la Municipalidad de Río Cuarto está siendo <strong>procesada</strong>, una vez sea respondida, podrá realizar nuevas consultas. <strong>Gracias  por su paciencia</strong></p>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

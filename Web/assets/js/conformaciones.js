@@ -36,8 +36,7 @@ function ModificarFormulario(id){
 }
 $(document).ready(function () {
     function DatosDepartamento(){
-        let datosJSON = JSON.parse($('#jsonData').val());   
-        console.log(datosJSON);
+        let datosJSON = JSON.parse($('#jsonData').val());
         if (datosJSON != ''){
             let ultimoIdDom = '';
             for (let i = 0; i < datosJSON.length; i++){
@@ -59,6 +58,8 @@ $(document).ready(function () {
                                     <h5 class="mt-1">${datosJSON[i][1]} ${datosJSON[i][2]} ${datosJSON[i][3]}</h5>
                                 </button>
                                 <h6 class="mt-1">${datosJSON[i][14]}</h6>
+                                <p class="mt-1">Correo: ${datosJSON[i][8]}</p>
+                                <p class="mt-1">Tel: 4000-1600 Ext: ${datosJSON[i][5]}</p>
                             </div>
                         </div>`;
                 listado = listado + html;

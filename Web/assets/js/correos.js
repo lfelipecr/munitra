@@ -106,7 +106,6 @@ $(document).ready(function (){
                             $('#btnEnviarCorreo').hide();
                             $('#titulo').html('Solicitud Enviada!');
                             $('#infoModal').html('<span>Su solicitud ha sido enviada y su código de solicitud es: '+response+'.<br><strong>No envíe más solicitudes!</strong> La respuesta a su consulta llegará a su whatsapp y correo electrónico, agradecemos su paciencia</span>');
-                            console.log(response);
                         }
                     },
                     error: function (xhr, status, error) {

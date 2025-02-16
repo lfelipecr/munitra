@@ -118,21 +118,54 @@
                                 </div>
                             </div>
                         <?php } else {?>
-                            <div class="card p-5 m-md-5 w-100">
-                                <div class="row" id="bitacora" style="overflow: scroll; max-height: 400px"></div>
-                                <hr>
-                                <div class="mb-2">
-                                    <input type="hidden" value='<?php echo $consulta->getId(); ?>' id="idConsulta">
-                                    <input type="hidden" value='<?php echo $consulta->getConsulta(); ?>' id="consultas">
-                                    <input type="hidden" value='<?php echo $consulta->getRespuesta(); ?>' id="respuestas">
-                                    <label for="" class="form-label">Consulta *</label>
-                                    <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                            <div class="d-block">
+                                <div class="card p-5 m-md-2 mx-md-5 w-100">
+                                <?php if ($consulta->getIdConsultado() != 0) {?>
+                                    <p>Su consulta al funcionario(a) <?php echo $persona->getNombre().' '.$persona->getPrimerApellido().' '.$persona->getSegundoApellido();?> 
+                                    está siendo <strong>procesada</strong>, una vez sea respondida, podrá realizar nuevas consultas. <strong>Gracias  por su paciencia</strong></p>
+                                <?php } else { ?>
+                                    <p>Su consulta a la Municipalidad de Río Cuarto está siendo <strong>procesada</strong>, una vez sea respondida, podrá realizar nuevas consultas. <strong>Gracias  por su paciencia</strong></p>
+                                <?php } ?>
                                 </div>
-                                <input type="hidden" value="0" id="idConsultado">
-                                <div class="mb-2 text-end">
-                                    <button class="btn btn-warning" id="btnActualizar">
-                                        <span>Enviar</span>
-                                    </button>
+                                <div class="card p-5 m-md-2 mx-md-5 w-100">
+                                    <div class="row">
+                                        <div class="col-md-4 text-center">
+                                            <h4>
+                                            <?php 
+                                                if($estadisticas != null){
+                                                    echo $estadisticas['Totales'];
+                                                } else {
+                                                    echo '0';
+                                                }
+                                            ?>
+                                            </h4>
+                                            <p>Consultas Totales</p>
+                                        </div>
+                                        <div class="col-md-4 text-center">
+                                            <h4>
+                                            <?php 
+                                                if($estadisticas != null){
+                                                    echo $estadisticas['FechaHoy'];
+                                                } else {
+                                                    echo '0';
+                                                }
+                                            ?>
+                                            </h4>
+                                            <p>Consultas Recibidas Hoy</p>
+                                        </div>
+                                        <div class="col-md-4 text-center">
+                                            <h4>
+                                            <?php 
+                                                if($estadisticas != null){
+                                                    echo $estadisticas['Pendientes'];
+                                                } else {
+                                                    echo '0';
+                                                }
+                                            ?>
+                                            </h4>
+                                            <p>Pendientes de atención</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         <?php } ?>
@@ -156,6 +189,48 @@
                         <div class="rsIframeCont">
                             <iframe class="rsIframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.948169697563!2d-84.2143088526766!3d10.346029570340656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa089e9cbb4f8d9%3A0x9bb3964132b8b8c9!2sMunicipalidad%20de%20R%C3%ADo%20Cuarto!5e0!3m2!1ses-419!2scr!4v1737221591371!5m2!1ses-419!2scr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
+                        <?php if ($consulta == NULL) {?>
+                            <div class="card p-5 mt-1">
+                                <div class="row">
+                                    <div class="col-md-4 text-center">
+                                        <h4>
+                                        <?php 
+                                            if($estadisticas != null){
+                                                echo $estadisticas['Totales'];
+                                            } else {
+                                                echo '0';
+                                            }
+                                        ?>
+                                        </h4>
+                                        <p>Consultas Totales</p>
+                                    </div>
+                                    <div class="col-md-4 text-center">
+                                        <h4>
+                                        <?php 
+                                            if($estadisticas != null){
+                                                echo $estadisticas['FechaHoy'];
+                                            } else {
+                                                echo '0';
+                                            }
+                                        ?>
+                                        </h4>
+                                        <p>Consultas Recibidas Hoy</p>
+                                    </div>
+                                    <div class="col-md-4 text-center">
+                                        <h4>
+                                        <?php 
+                                            if($estadisticas != null){
+                                                echo $estadisticas['Pendientes'];
+                                            } else {
+                                                echo '0';
+                                            }
+                                        ?>
+                                        </h4>
+                                        <p>Pendientes de atención</p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

@@ -21,12 +21,12 @@ class SesionControlador{
             if (isset($_POST['descripcion']) && isset($_POST['fechaSesion'])){
                 $sesion = new Sesion();
                 $sesion->setDescripcion($_POST['descripcion']);
-                $sesion->setFecha(str_replace('T', ' ', $_POST['fechaSesion']));
-                $sesion->setActaAprobada($_POST['valorActa']);
+                $sesion->setFecha(str_replace('T', ' ', $_POST['fechaSesion']));                
                 $sesion->setUrlVideo($_POST['urlVideo']);
                 $rutaDestino = './repo/';
                 //Archivo de acta
                 if (isset($_FILES['acta']) && $_FILES['acta']['error'] === UPLOAD_ERR_OK) {
+                    $sesion->setActaAprobada(1);
                     $urlArchivo = $rutaDestino.basename($_FILES['acta']['name']);
                     if (!is_writable($rutaDestino)) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
@@ -43,6 +43,8 @@ class SesionControlador{
                         $vista = './Vista/Dashboard/Blog/Sesiones/nuevo.php';
                         require_once './Vista/Utilidades/sidebar.php';
                     }
+                } else {
+                    $sesion->setActaAprobada(0);
                 }
                 //Archivo de agenda
                 if (isset($_FILES['agenda']) && $_FILES['agenda']['error'] === UPLOAD_ERR_OK) {
@@ -104,6 +106,7 @@ class SesionControlador{
                 $rutaDestino = './repo/';
                 //Archivo de acta
                 if (isset($_FILES['acta']) && $_FILES['acta']['error'] === UPLOAD_ERR_OK) {
+                    $sesion->setActaAprobada(1);
                     $urlArchivo = $rutaDestino.basename($_FILES['acta']['name']);
                     if (!is_writable($rutaDestino)) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
@@ -120,6 +123,8 @@ class SesionControlador{
                         $vista = './Vista/Dashboard/Blog/Sesiones/actualizar.php';
                         require_once './Vista/Utilidades/sidebar.php';
                     }
+                } else {
+                    $sesion->setActaAprobada(0);
                 }
                 //Archivo de agenda
                 if (isset($_FILES['agenda']) && $_FILES['agenda']['error'] === UPLOAD_ERR_OK) {

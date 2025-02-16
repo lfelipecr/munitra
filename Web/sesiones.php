@@ -91,7 +91,7 @@
                 <div class="col-md-9"></div>
             </div>
             <hr>
-            <div class="row mb-3" id="sesiones">
+            <div class="row mb-3" id="sesiones" style="padding-top: 5em; padding-bottom: 5em">
             </div>
         </div>
         <!-- Footer-->

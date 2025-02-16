@@ -14,6 +14,7 @@ class Consulta
     private $atendido;
     private $respuesta;
     private $respondidoPor;
+    private $tipoConsulta;
     
     public function getId() {
         return $this->id;
@@ -104,10 +105,17 @@ class Consulta
     }
 
     public function getRespondidoPor() {
-        return $this->atendido;
+        return $this->respondidoPor;
     }
 
-    public function setRespondidoPor($atendido) {
-        $this->atendido = $atendido;
+    public function setRespondidoPor($respondidoPor) {
+        $this->respondidoPor = $respondidoPor;
+    }
+    public function getTipoConsulta() {
+        return $this->tipoConsulta;
+    }
+
+    public function setTipoConsulta($tipoConsulta) {
+        $this->tipoConsulta = $tipoConsulta;
     }
 }

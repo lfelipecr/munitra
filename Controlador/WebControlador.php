@@ -8,6 +8,8 @@ require_once './Modelo/Metodos/DocumentacionM.php';
 require_once './Modelo/Entidades/Departamento.php';
 require_once './Modelo/Entidades/Consulta.php';
 require_once './Modelo/Metodos/ConsultaM.php';
+require_once './Modelo/Metodos/PersonaM.php';
+require_once './Modelo/Metodos/UsuarioM.php';
 
 class WebControlador {
     function ListadoDocsWeb(){
@@ -23,12 +25,36 @@ class WebControlador {
         require_once './Web/actividad.php';
     }
     function Alcaldia(){
+        session_start();
         $deptomodel = new DepartamentoM();
+        $consultaM = new ConsultaM();
+        $personaM = new PersonaM();
         $jsonData = $deptomodel->BuscarDepartamentosUsuario();
+        $consulta = null;
+        if (isset($_SESSION['consulta'])){
+            $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
+            if ($consulta->getIdConsultado() != 0){
+                $usuarioM = new UsuarioM();
+                $usuario = $usuarioM->BuscarUsuarioId($consulta->getIdConsultado());
+                $persona = $personaM->BuscarPersonaUsuario($usuario->getIdPersona());
+            }
+        }
         require_once './Web/alcaldia.php';
     }
     function Conformacion(){
+        session_start();
+        $consultaM = new ConsultaM();
         $deptomodel = new DepartamentoM();
+        $personaM = new PersonaM();
+        $consulta = null;
+        if (isset($_SESSION['consulta'])){
+            $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
+            if ($consulta->getIdConsultado() != 0){
+                $usuarioM = new UsuarioM();
+                $usuario = $usuarioM->BuscarUsuarioId($consulta->getIdConsultado());
+                $persona = $personaM->BuscarPersonaUsuario($usuario->getIdPersona());
+            }
+        }
         $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         require_once './Web/conformacion.php';
     }
@@ -36,8 +62,15 @@ class WebControlador {
         session_start();
         $consultaM = new ConsultaM();
         $consulta = null;
+        $personaM = new PersonaM();
+        $estadisticas = $consultaM->GenerarEstadisticas();
         if (isset($_SESSION['consulta'])){
             $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
+            if ($consulta->getIdConsultado() != 0){
+                $usuarioM = new UsuarioM();
+                $usuario = $usuarioM->BuscarUsuarioId($consulta->getIdConsultado());
+                $persona = $personaM->BuscarPersonaUsuario($usuario->getIdPersona());
+            }
         }
         require_once './Web/contacto.php';
     }
@@ -47,7 +80,19 @@ class WebControlador {
         session_destroy();
     }
     function Departamentos(){
+        session_start();
+        $consultaM = new ConsultaM();
         $deptomodel = new DepartamentoM();
+        $personaM = new PersonaM();
+        $consulta = null;
+        if (isset($_SESSION['consulta'])){
+            $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
+            if ($consulta->getIdConsultado() != 0){
+                $usuarioM = new UsuarioM();
+                $usuario = $usuarioM->BuscarUsuarioId($consulta->getIdConsultado());
+                $persona = $personaM->BuscarPersonaUsuario($usuario->getIdPersona());
+            }
+        }
         $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         require_once './Web/departamentos.php';
     }

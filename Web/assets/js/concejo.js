@@ -2,11 +2,12 @@ function ModificarFormulario(id){
     let datosJSON = JSON.parse($('#jsonData').val());   
     let comunicado = datosJSON[id];
     $('#nombreComunicar').html(`${comunicado[1]} ${comunicado[2]} ${comunicado[3]}`);
+    $('#puestoComunicar').html(comunicado[14]);
+    $('#idConsultado').val(comunicado[13]);
 }
 $(document).ready(function () {
     function DatosDepartamento(){
-        let datosJSON = JSON.parse($('#jsonData').val());   
-        console.log(datosJSON);
+        let datosJSON = JSON.parse($('#jsonData').val());
         if (datosJSON != ''){
             for (let i = 0; i < datosJSON.length; i++){
                 switch(datosJSON[i][17]){
@@ -24,6 +25,8 @@ $(document).ready(function () {
                                     <h5 class="mt-1">${datosJSON[i][1]} ${datosJSON[i][2]} ${datosJSON[i][3]}</h5>
                                 </button>
                                 <p class="font-weight-light mb-0">${datosJSON[i][23]}</p>
+                                <h6 class="mt-1">Correo: ${datosJSON[i][8]}</h6>
+                                <h6 class="mt-1">Tel: 4000-1600 Ext: ${datosJSON[i][5]}</h6>
                             </div>
                         </div>`;
                         if (i == 23 || i  ==  24){

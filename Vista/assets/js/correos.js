@@ -6,9 +6,9 @@ function AbrirConversacion(indice){
     $("#modalConversacion").modal("show");
     $('#idConsulta').val(jsonData[indice][0]);
     let chat;
-    if (jsonData[indice][10] != null){
+    if (jsonData[indice][11] != null){
         let consultas = JSON.parse(jsonData[indice][6].replace(/[\u0000-\u001F\u007F]/g, ""));
-        let respuestas = JSON.parse(jsonData[indice][10].replace(/[\u0000-\u001F\u007F]/g, ""));
+        let respuestas = JSON.parse(jsonData[indice][11].replace(/[\u0000-\u001F\u007F]/g, ""));
         chat = [...consultas, ...respuestas];
         //ambito abrir conversacion
         function getFecha(str) {
@@ -44,7 +44,11 @@ $(document).ready(function (){
         {
             if (jsonData[i][7] == idUsuario)
                 id = '#listadoNotiPersona';
-            else id = '#listadoNotiMuni';            
+            else if (jsonData[i][7] == 0) {
+                id = '#listadoNotiMuni';
+            } else {
+                id = '';
+            }
             let cuerpo = JSON.parse(jsonData[i][6]);
             let listado = $(id).html();
             listado += `<div class="col-12 m-1">

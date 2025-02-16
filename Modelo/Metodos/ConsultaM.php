@@ -25,7 +25,7 @@ class ConsultaM
         "', '".$consulta->getTelefono().
         "', '".$consulta->getAsunto().
         "', '".$consulta->getConsulta().
-        "', ".$consulta->getIdConsultado().")";
+        "', ".$consulta->getIdConsultado().", ".$consulta->getTipoConsulta().")";
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -50,6 +50,57 @@ class ConsultaM
         }
         $conexion->Cerrar();
         return $retVal;
+    }
+    function GenerarEstadisticas(){
+        $registro=array();
+        $datos = array();
+        $conexion= new Conexion();
+        $sql="CALL SpBuscarConsultas()";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            while($fila=$resultado->fetch_assoc())
+            {
+                $consulta = new Consulta();
+                $consulta->setId($fila['ID']);
+                $consulta->setIdentificacion($fila['IDENTIFICACION']);
+                $consulta->setNombreCompleto($fila['NOMBRE_COMPLETO']);
+                $consulta->setTelefono($fila['TELEFONO']);
+                $consulta->setCorreo($fila['CORREO']);
+                $consulta->setAsunto($fila['ASUNTO']);
+                $consulta->setConsulta($fila['CONSULTA']);
+                $consulta->setIdConsultado($fila['ID_CONSULTADO']);
+                $consulta->setFecha($fila['FECHA']);
+                $consulta->setAtendido($fila['ATENDIDO']);
+                $consulta->setRespuesta($fila['RESPUESTA']);
+                $consulta->setRespondidoPor($fila['RESPONDIDO_POR']);
+                $registro[] = $consulta;
+            }
+        }
+        else{
+            $datos=null;
+        }
+        //Total
+        $datos['Totales'] = mysqli_num_rows($resultado);
+        //Pendientes
+        $pendientes = 0;
+        //Fecha
+        date_default_timezone_set('America/Mexico_City');
+        $fechaHoy = date("Y-m-d");
+        $consultasHoy = 0;
+        for ($i = 0; $i < count($registro); $i++)
+        {
+            if ($registro[$i]->getAtendido() == 0){
+                $pendientes++;
+            }
+            if (date('Y-m-d', strtotime($registro[$i]->getFecha())) == $fechaHoy){
+                $consultasHoy++;
+            }
+        }
+        $datos['Pendientes'] = $pendientes;
+        $datos['FechaHoy'] = $consultasHoy;
+        $conexion->Cerrar();
+        return $datos;
     }
     function BuscarConsultas(){
         $registro=null;

@@ -38,6 +38,7 @@
         <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
         <input type="hidden" id="idUsuario" value="<?php echo $idUsuario; ?>">
       </div>
+      <?php if ($depto == DEPARTAMENTO_CONSULTOR) { ?>
       <div class="row mx-3">
         <div class="udDepartamento">
             <p class="d-inline-flex gap-1">
@@ -54,6 +55,7 @@
             </div>
         </div>
       </div>
+      <?php } ?>
       <div class="row mx-3">
         <div class="udDepartamento">
             <p class="d-inline-flex gap-1">

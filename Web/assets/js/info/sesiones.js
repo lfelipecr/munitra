@@ -15,22 +15,18 @@ $(document).ready(function (){
                 if (jsonData[i][3] == '1'){
                     html += `<div class="col-md-6 text-center d-flex justify-content-center">
                                 <div class="card w-100 my-1">
-                                    <div class="bgNoticiaNoPic"></div>
-                                    <!--<img src="..." class="card-img-top" alt="...">-->
                                     <div class="card-body">
                                     <h5 class="card-title mb-3">${jsonData[i][2]} - ${jsonData[i][1]}</h5>
-                                    <a href="${jsonData[i][5]}" class="btn btn-outline-warning">Agenda</a>
                                     <a href="${jsonData[i][4]}" class="btn btn-outline-warning">Acta</a>`;
                 } else {
                     html += `<div class="col-md-6 text-center d-flex justify-content-center">
                     <div class="card w-100 my-1">
-                        <div class="bgNoticiaNoPic"></div>
-                        <!--<img src="..." class="card-img-top" alt="...">-->
                         <div class="card-body">
                         <h5 class="card-title mb-3">${jsonData[i][2]} - ${jsonData[i][1]}</h5>`;
                 }
                 if (jsonData[i][6] != ''){
-                    html += `<a href="${jsonData[i][6]}" class="btn btn-outline-warning">Ver Sesión</a>`;
+                    html += `<a href="${jsonData[i][5]}" class="btn btn-outline-warning">Agenda</a>
+                            <a href="${jsonData[i][6]}" class="btn btn-outline-warning">Ver Sesión</a>`;
                 }
                 html += '</div></div></div>';
                 listado += html;

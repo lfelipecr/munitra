@@ -28,6 +28,7 @@ class LoginControlador
             $consultaM = new ConsultaM();
             $personaM = new PersonaM();
             $idUsuario = $_SESSION['usuario']->getId();
+            $depto = $_SESSION['usuario']->getIdDepartamento();
             $persona = $personaM->BuscarPersonaUsuario($_SESSION['usuario']->getIdPersona());
             $jsonData = $consultaM->BuscarConsultas();
             $vista = './Vista/Dashboard/inicio.php';

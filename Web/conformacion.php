@@ -161,34 +161,48 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                    <?php if ($consulta == NULL) {?>    
+                            <div class="mb-2">
+                                <label for="" class="form-label">Identificación *</label>
+                                <input type="email" class="form-control" id="identificacionConsulta">
+                            </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Nombre Completo *</label>
-                                <input type="email" class="form-control" id="">
+                                <input type="email" class="form-control" id="nombreConsulta">
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Telefono *</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="telefonoConsulta">
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Correo *</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="correoConsulta">
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Asunto *</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="asuntoConsulta">
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Consulta *</label>
-                                <textarea name="" class="form-control" id=""></textarea>
+                                <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
                             </div>
+                            <input type="hidden" value="0" id="idConsultado">
+                            <div class="mb-2 text-end">
+                                <?php if ($consulta == NULL) {?>
+                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha">
+                                        <span>Enviar</span>
+                                    </button>
+                                <?php } ?>
+                            </div>
+                        <?php } else {?>
+                            <?php if ($consulta->getIdConsultado() != 0) {?>
+                                <p>Su consulta al funcionario(a) <?php echo $persona->getNombre().' '.$persona->getPrimerApellido().' '.$persona->getSegundoApellido();?> 
+                                está siendo <strong>procesada</strong>, una vez sea respondida, podrá realizar nuevas consultas. <strong>Gracias  por su paciencia</strong></p>
+                            <?php } else { ?>
+                                <p>Su consulta a la Municipalidad de Río Cuarto está siendo <strong>procesada</strong>, una vez sea respondida, podrá realizar nuevas consultas. <strong>Gracias  por su paciencia</strong></p>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-warning">
-                            <span>Enviar</span>
-                        </button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -227,10 +241,33 @@
             <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
               © 2024 Copyright: Municipalidad de Río Cuarto
             </div>
-        <!-- Bootstrap core JS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
         <script src="./Web/assets/js/concejo.js"></script>
+        <script src="./Web/assets/js/correos.js"></script>
+        <div class="modal fade" id="modalCaptcha" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="titulo">Captcha</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <div class="mb-2" id="infoModal">
+                                <label for="" class="form-label" id="catpchaInfo">Ingrese el siguiente código para enviar su consulta:</label>
+                                <span class="h6" id="captchaText"></span>
+                                <input type="email" class="form-control" id="captchaInput">
+                            </div>
+                            
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" id="btnEnviarCorreo">
+                            <span>Enviar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

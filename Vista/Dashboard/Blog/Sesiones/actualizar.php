@@ -35,8 +35,7 @@
                 <input type="text" class="form-control" name="urlVideo" id="ipUrlVideo" value="<?php echo $sesion->getUrlVideo();?>">
             </div>
             <div class="col-12 mt-md-2">
-              <span class="mb-3">Acta Aprobada</span>
-              <input type="checkbox" id="cbxActa" <?php if ($sesion->getActaAprobada() == 1){ echo 'checked'; } ?>>
+              <input type="hidden" id="cbxActa" <?php if ($sesion->getActaAprobada() == 1){ echo 'checked'; } ?>>
               <input type="hidden" name="valorActa" value="<?php echo $sesion->getActaAprobada();?>" id="valorActa">
             </div>
             <div class="col-12 py-2">
