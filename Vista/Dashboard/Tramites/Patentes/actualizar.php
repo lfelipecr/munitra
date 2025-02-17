@@ -86,16 +86,18 @@
               <input type="hidden" id="idDimensiones" name="idDimensiones">
               <input type="text" class="form-control" name="dimensiones" id="txtDimensiones">
             </div>
+            <input type="hidden" id="idEstado" value="<?php echo $solicitud->getEstadoSolicitud() ?>">
             <div class="col-12 mt-md-3">
               <span class="mb-3">Estado de Solicitud</span><br>
               <select name="estadoSolicitud" id="slEstado" class="form-control">
-                <?php if ($solicitud->getEstadoSolicitud() == 1) { ?>
-                    <option value="1" selected>Aprobada</option>
-                    <option value="2">No Aprobada</option>
-                <?php } else { ?>
-                    <option value="1">Aprobada</option>
-                    <option value="2" selected>No Aprobada</option>
-                <?php }?>
+                <option id="estado1" value="1">Nueva</option>
+                <option id="estado2" value="2">En proceso</option>
+                <option id="estado3" value="3">Prevención 1</option>
+                <option id="estado4" value="4">Prevención 2</option>
+                <option id="estado5" value="5" selected>Aprobada</option>
+                <option id="estado6" value="6">Rechazada</option>
+                <option id="estado7" value="7">Cancelada</option>
+                <option id="estado8" value="8">Retirada</option>
               </select>
             </div>
             <div class="col-12 py-2">
@@ -114,8 +116,11 @@
               <a href="index.php?controlador=Tramites&metodo=Patentes" class="btn btn-outline-danger mx-1">
                 <span>Cancelar x</span>
               </a>
-              <a class="btn btn-outline-info mx-1" id="btnVer" data-bs-toggle="modal" data-bs-target="#modalBitacora" onclick="CambiarFormulario()">
+              <a class="btn btn-outline-info mx-1" id="btnVer" data-bs-toggle="modal" data-bs-target="#modalBitacora" onclick="CambiarFormulario(0)">
                 <span><svg style="width: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></span>
+              </a>
+              <a class="btn btn-outline-info mx-1" id="btnVer" data-bs-toggle="modal" data-bs-target="#modalBitacora" onclick="CambiarFormulario(1)">
+                <span class="my-1">Interno <svg style="width: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></span>
               </a>
             </div>
           </div>

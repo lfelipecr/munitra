@@ -741,19 +741,20 @@ CREATE PROCEDURE SpIngresarBitacora(
     IN idUsuario INT, 
     IN idEstado INT,
     IN b_nota VARCHAR (200),
-    IN b_detalle VARCHAR (1000)
+    IN b_detalle VARCHAR (1000),
+    IN tipoInterno bit,
 )
 BEGIN
     INSERT INTO BITACORA_SOLICITUD (ID_SOLICITUD, ID_USUARIO,
-    ID_ESTADO, FECHA, NOTA, DETALLE)
-    VALUES (idSolicitud, idUsuario, idEstado, NOW(), b_nota, b_detalle);
+    ID_ESTADO, FECHA, NOTA, DETALLE, INTERNO)
+    VALUES (idSolicitud, idUsuario, idEstado, NOW(), b_nota, b_detalle, tipoInterno);
 END //
 
 DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE SpBuscarConversacion(IN idSoli INT)
+CREATE PROCEDURE SpBuscarConversacion(IN idSoli INT, IN tipoBitacora BIT)
 BEGIN
     SELECT 
         bs.ID AS BitacoraID,
@@ -772,7 +773,7 @@ BEGIN
         p.IDENTIFICACION
     FROM BITACORA_SOLICITUD bs
     INNER JOIN USUARIO u ON bs.ID_USUARIO = u.ID
-    INNER JOIN PERSONA p ON u.ID_PERSONA = p.ID WHERE ID_SOLICITUD = idSoli;
+    INNER JOIN PERSONA p ON u.ID_PERSONA = p.ID WHERE ID_SOLICITUD = idSoli AND INTERNO = tipoBitacora;
 END //
 DELIMITER ;
 

@@ -6,6 +6,18 @@ require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class VisadoControlador {
+    function Imprimir(){
+        $id = $_GET['id'];
+        $solicitudM = new SolicitudM();
+        $personaM = new PersonaM();
+        $provinciaM = new ProvinciaM();
+        $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
+        $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+        $personas = $personaM->ListadoPersonas();
+        $distritos = $provinciaM->BuscarDistritos();
+        var_dump($solicitud);
+        //require_once './Vista/Utilidades/sidebar.php';
+    }
     private function LlamarVistaActualizar($msg, $id){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
             $personaM = new PersonaM();

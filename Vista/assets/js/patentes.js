@@ -9,7 +9,6 @@ $(document).ready(function (){
                     case '1':
                         $('#idAdjuntos').val(datos[i][0]);
                         let adjuntos = JSON.parse(datos[i][1]);
-                        console.log(adjuntos);
                         for (let i = 0; i < adjuntos.length; i++){
                             let listado = $('#requisitosEmbed').html();
                             let html = `<embed src="${adjuntos[i]}" type="application/pdf" width="100%" height="500px">`;
@@ -113,4 +112,6 @@ $(document).ready(function (){
     });
     $('#slPersonas').select2();
     $('#slDistrito').select2();
+    let estado = $('#idEstado').val();
+    $('#estado'+estado).attr('selected', '');
 });

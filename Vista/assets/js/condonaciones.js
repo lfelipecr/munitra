@@ -250,4 +250,6 @@ $(document).ready(function () {
         return true;
     });
     $('#slFuncionarios').select2();
+    let estado = $('#idEstado').val();
+    $('#estado'+estado).attr('selected', '');
 })

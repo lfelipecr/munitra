@@ -15,7 +15,8 @@ class BitacoraControlador{
         if ($u->VerificarSesion()){
             $bitacoraM = new BitacoraSolicitudM();
             $id = $_GET['idConv'];
-            echo $bitacoraM->BuscarConversacion($id);
+            $tipo = $_GET['interno'];
+            echo $bitacoraM->BuscarConversacion($id, $tipo);
         }
     }
     function EnviarEmail(){
@@ -54,6 +55,7 @@ class BitacoraControlador{
                 $bitacora->setIdEstado($solicitud->getEstadoSolicitud());
                 $bitacora->setNota($asuntoEmail);
                 $bitacora->setDetalle($cuerpoEmail);
+                $bitacora->setInterno($_POST['interno']);
                 $bitacoraM->IngresarBitacora($bitacora);
             } catch (Exception $ex){
                 var_dump($ex);

@@ -83,4 +83,6 @@ $(document).ready(function (){
         }
         return true;
     });
+    let estado = $('#idEstado').val();
+    $('#estado'+estado).attr('selected', '');
 })

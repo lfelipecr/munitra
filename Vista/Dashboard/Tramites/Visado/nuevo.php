@@ -117,8 +117,14 @@
             <div class="col-12 mt-md-3">
               <span class="mb-3">Estado de Solicitud</span><br>
               <select name="estadoSolicitud" id="slEstado" class="form-control">
-                <option value="1">Aprobada</option>
-                <option value="2">No Aprobada</option>
+                <option value="1">Nueva</option>
+                <option value="2">En proceso</option>
+                <option value="3">Prevención 1</option>
+                <option value="4">Prevención 2</option>
+                <option value="5">Aprobada</option>
+                <option value="6">Rechazada</option>
+                <option value="7">Cancelada</option>
+                <option value="8">Retirada</option>
               </select>
             </div>
             <div class="col-12 py-2">

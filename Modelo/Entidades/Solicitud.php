@@ -6,6 +6,7 @@ class Solicitud{
     private $idPersona;
     private $idUsuario;
     private $estadoSolicitud;
+    private $descripEstadoSolicitud;
     private $tipoSolicitud;
     public function getId()
     {
@@ -55,6 +56,16 @@ class Solicitud{
     public function setEstadoSolicitud($estadoSolicitud): void
     {
         $this->estadoSolicitud = $estadoSolicitud;
+    }
+
+    public function getDescripEstadoSolicitud()
+    {
+        return $this->descripEstadoSolicitud;
+    }
+
+    public function setDescripEstadoSolicitud($descripEstadoSolicitud): void
+    {
+        $this->descripEstadoSolicitud = $descripEstadoSolicitud;
     }
 
     public function getTipoSolicitud()

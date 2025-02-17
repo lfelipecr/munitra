@@ -6,6 +6,16 @@ require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class PatenteControlador {
+    function Imprimir(){
+        $id = $_GET['id'];
+        $solicitudM = new SolicitudM();
+        $personaM = new PersonaM();
+        $provinciaM = new ProvinciaM();
+        $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
+        $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+        $distritos = $provinciaM->BuscarDistritos();
+        require_once './Vista/Dashboard/Tramites/Patentes/impresion.php';
+    }
     private function LlamarVistaActualizar($msg, $id){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
             $solicitudM = new SolicitudM();

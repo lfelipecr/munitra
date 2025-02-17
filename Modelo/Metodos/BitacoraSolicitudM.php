@@ -10,8 +10,7 @@ class BitacoraSolicitudM {
         ", ".$bitacora->getIdUsuario().
         ", ".$bitacora->getIdEstado().
         ", '".$bitacora->getNota().
-        "', '".$bitacora->getDetalle()."')";
-        echo $sql;
+        "', '".$bitacora->getDetalle()."', ".$bitacora->getInterno().")";
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -22,10 +21,10 @@ class BitacoraSolicitudM {
         $conexion->Cerrar();
         return $retVal;
     }
-    function BuscarConversacion($id){
+    function BuscarConversacion($id, $tipo){
         $registro=array();
         $conexion= new Conexion();
-        $sql="CALL SpBuscarConversacion($id)";
+        $sql="CALL SpBuscarConversacion($id, $tipo)";
         $resultado=$conexion->Ejecutar($sql);
         if(mysqli_num_rows($resultado)>0)
         {

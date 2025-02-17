@@ -16,6 +16,7 @@ class SolicitudM {
                 $solicitud->setId($fila["ID"]);
                 $solicitud->setFecha($fila['FECHA']);
                 $solicitud->setEstadoSolicitud($fila['ESTADO_SOLICITUD']);
+                $solicitud->setDescripEstadoSolicitud($fila['ESTADO_SOLICITUD_DESCRIPCION']);
                 $solicitud->setTipoSolicitud($fila['TIPO_SOLICITUD']);
                 $solicitud->setIdPersona($fila['PERSONA_ID']);
                 $registro = $solicitud;

@@ -99,4 +99,6 @@ $(document).ready(function (){
         console.log(dataURL);
         return true;
     });
+    let estado = $('#idEstado').val();
+    $('#estado'+estado).attr('selected', '');
 })
