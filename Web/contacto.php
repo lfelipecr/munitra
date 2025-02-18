@@ -103,10 +103,14 @@
                                 <div class="mb-2">
                                     <label for="" class="form-label">Asunto *</label>
                                     <input type="text" class="form-control" id="asuntoConsulta">
-                                </div>
+                                </div>                                
                                 <div class="mb-2">
                                     <label for="" class="form-label">Consulta *</label>
                                     <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                                </div>
+                                <div class="mb-2 d-flex">
+                                    <label for="" class="form-label">Generar Denuncia</label>
+                                    <input type="checkbox" class="mb-1 mx-1" id="cbxDenuncia">
                                 </div>
                                 <input type="hidden" value="0" id="idConsultado">
                                 <div class="mb-2 text-end">

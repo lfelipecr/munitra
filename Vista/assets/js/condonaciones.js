@@ -13,7 +13,6 @@ $(document).ready(function () {
         let datos = $('#jsonData').val();
         if (datos != ''){
             datos = JSON.parse(datos);
-            console.log(datos);
             let html;
             for (let i = 0; i < datos.length; i++)
             {

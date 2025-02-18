@@ -27,7 +27,7 @@ class SesionControlador{
                 //Archivo de acta
                 if (isset($_FILES['acta']) && $_FILES['acta']['error'] === UPLOAD_ERR_OK) {
                     $sesion->setActaAprobada(1);
-                    $urlArchivo = $rutaDestino.basename($_FILES['acta']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['acta']['name']);
                     if (!is_writable($rutaDestino)) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Sesiones/nuevo.php';
@@ -48,7 +48,7 @@ class SesionControlador{
                 }
                 //Archivo de agenda
                 if (isset($_FILES['agenda']) && $_FILES['agenda']['error'] === UPLOAD_ERR_OK) {
-                    $urlArchivo = $rutaDestino.basename($_FILES['agenda']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['agenda']['name']);
                     if (!is_writable($rutaDestino)) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Sesiones/nuevo.php';
@@ -107,7 +107,7 @@ class SesionControlador{
                 //Archivo de acta
                 if (isset($_FILES['acta']) && $_FILES['acta']['error'] === UPLOAD_ERR_OK) {
                     $sesion->setActaAprobada(1);
-                    $urlArchivo = $rutaDestino.basename($_FILES['acta']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['acta']['name']);
                     if (!is_writable($rutaDestino)) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Sesiones/actualizar.php';
@@ -128,7 +128,7 @@ class SesionControlador{
                 }
                 //Archivo de agenda
                 if (isset($_FILES['agenda']) && $_FILES['agenda']['error'] === UPLOAD_ERR_OK) {
-                    $urlArchivo = $rutaDestino.basename($_FILES['agenda']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['agenda']['name']);
                     if (!is_writable($rutaDestino)) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Sesiones/actualizar.php';

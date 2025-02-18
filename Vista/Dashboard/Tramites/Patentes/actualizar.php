@@ -19,9 +19,13 @@
             <div class="col-12">
               <span class="mb-3">Solicitante (*)</span>
               <select name="persona" id="slPersonas" class="form-control">
-                <?php for ($i = 0; $i < count($personas); $i++) {?>
-                  <option <?php if ($personas[$i]->getId() == $solicitud->getIdPersona()) { echo 'selected'; } ?> id="" value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
+                <?php for ($i = 0; $i < count($personas); $i++) {
+                  if ($personas[$i]->getId() == $solicitud->getIdPersona()){ ?>
+                    <option selected value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
+                  <?php } else {?>
+                    <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
                   <?php }?>
+                <?php }?>
               </select>
             </div>
             <div class="col-12 mt-md-3">
@@ -33,7 +37,9 @@
               <input type="file" class="form-control"  name="requisitos[]" multiple>
               <input type="hidden" id="idAdjuntos" name="idAdjuntos">
               <hr>
-              <div class="text-center" id="requisitosEmbed"></div>
+              <div class="text-center" id="requisitosEmbed">
+                <h4 class="mb-3">Requisitos</h4>
+              </div>
             </div>
             <div class="col-12 mt-md-3">
               <span class="mb-3">Uso de Patente (*)</span><br>

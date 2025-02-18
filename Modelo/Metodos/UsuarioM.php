@@ -114,4 +114,20 @@ class UsuarioM {
         $conexion->Cerrar();
         return $retVal;
     }
+    function CambiarContra($contra, $id){
+        $retVal = false;
+        $conexion= new Conexion();
+        $passHash = password_hash($contra, PASSWORD_DEFAULT);
+        $sql = "UPDATE USUARIO SET PASS = '$passHash' WHERE ID = $id";
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal = false;
+        }
+        
+        $conexion->Cerrar();
+        return $retVal;
+    }
 }

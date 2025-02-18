@@ -23,7 +23,6 @@ function AbrirConversacion(indice){
     for (let i = 0; i < chat.length; i++){
         let listado = $('#bitacora').html();
         datos = chat[i].split('-');
-
         listado +=`<div class="col-12 my-1">
                     <div class="card py-2 px-5 text-end">
                         <h6><strong>${datos[4]}</strong> - ${datos[1]} ${datos[2]} ${datos[3]}</h6>
@@ -40,6 +39,7 @@ $(document).ready(function (){
         jsonData = JSON.parse(jsonData);
     }
     function MostrarConsultas(){
+        console.log(jsonData);
         for (let i = 0; i < jsonData.length; i++)
         {
             if (jsonData[i][7] == idUsuario)
@@ -49,14 +49,18 @@ $(document).ready(function (){
             } else {
                 id = '';
             }
+            let tipo = 'Consulta';
+            if (jsonData[i][8] == 2){
+                tipo = 'Denuncia';
+            }
             let cuerpo = JSON.parse(jsonData[i][6]);
             let listado = $(id).html();
             listado += `<div class="col-12 m-1">
                             <div class="card chat p-5" onclick='AbrirConversacion(${i})'>
-                                <h5>${jsonData[i][1]} - ${jsonData[i][2]} - ${jsonData[i][8]}</h5>
+                                <h5>${jsonData[i][1]} - ${jsonData[i][2]} - ${jsonData[i][9]}</h5>
+                                <h6>${tipo}</h6>
                                 <hr>
                                 <strong>${jsonData[i][5]}</strong>
-                                <p>${cuerpo[0].split("-")[0]}</p>
                             </div>
                         </div>`;
             $(id).html(listado);

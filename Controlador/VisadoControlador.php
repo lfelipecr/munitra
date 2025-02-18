@@ -7,16 +7,20 @@ require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class VisadoControlador {
     function Imprimir(){
+        $provinciaM = new ProvinciaM();
         $id = $_GET['id'];
         $solicitudM = new SolicitudM();
         $personaM = new PersonaM();
         $provinciaM = new ProvinciaM();
         $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
         $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
-        $personas = $personaM->ListadoPersonas();
+        $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
         $distritos = $provinciaM->BuscarDistritos();
-        var_dump($solicitud);
-        //require_once './Vista/Utilidades/sidebar.php';
+        //Datos de impresión
+        $tiposId = ['n/a', 'Cédula de Identidad', 'Pasaporte', 'Cédula de Residencia',
+        'Número Interno', 'Número asegurado', 'DIMEX', 'NITE', 'DIDI'];
+        $locaciones = $provinciaM->LocacionesId($persona->getIdProvincia(), $persona->getIdCanton(), $persona->getIdDistrito());
+        require_once './Vista/Dashboard/Tramites/Visado/impresion.php';
     }
     private function LlamarVistaActualizar($msg, $id){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
@@ -119,7 +123,7 @@ class VisadoControlador {
                         //carta de disponibilidad
                         for ($i = 0; $i < count($post); $i++){
                             if (isset($_FILES[$post[$i]]) && $_FILES[$post[$i]]['error'] === UPLOAD_ERR_OK) {
-                                $urlArchivo = $rutaDestino.basename($_FILES[$post[$i]]['name']);
+                                $urlArchivo = $rutaDestino.time().basename($_FILES[$post[$i]]['name']);
                                 if (move_uploaded_file($_FILES[$post[$i]]['tmp_name'], $urlArchivo)) {
                                     $cartaDisponibilidad = new DetalleSolicitud();
                                     $cartaDisponibilidad->setId($_POST[$postIds[$i]]);
@@ -181,7 +185,7 @@ class VisadoControlador {
                 for($i = 0; $i < 5; $i++)
                 {
                     if (isset($_FILES[$filePost[$i]]) && $_FILES[$filePost[$i]]['error'] === UPLOAD_ERR_OK){
-                        $urlArchivo = $rutaDestino.basename($_FILES[$filePost[$i]]['name']);
+                        $urlArchivo = $rutaDestino.time().basename($_FILES[$filePost[$i]]['name']);
                         if (move_uploaded_file($_FILES[$filePost[$i]]['tmp_name'], $urlArchivo)) {
                             $adjunto = new DetalleSolicitud();
                             $adjunto->setCumple(1);

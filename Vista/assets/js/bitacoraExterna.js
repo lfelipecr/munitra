@@ -1,17 +1,12 @@
 let interno;
-function CambiarFormulario(conv){
+function CambiarFormulario(){
     $('#txtCuerpo').removeAttr('disabled');
     $('#bitacora').html('');
-    if (conv == 0){
-        interno = 0;
-    } else {
-        interno = 1;
-    }
     let idSoli = $('#idSolicitud').val();
     $.ajax({
         url: "index.php?controlador=Bitacora&metodo=BuscarConversacion",
         type: "GET",
-        data: { idConv: idSoli, interno: interno},
+        data: { idConv: idSoli, interno: 0},
         success: function (response) {
             if (response == ''){
                 let html = `<div class="col-12 my-1"><div class="py-2 px-5 text-center"><h6><strong>No hay mensajes</strong></h6></div>`;
@@ -50,10 +45,11 @@ $('#btnEnviarExterno').on('click', function (){
                 idSolicitante: $('#idSolicitante').val(),
                 idSolicitud: $('#idSolicitud').val(),
                 cuerpoEmail: $('#txtCuerpo').val(),
-                interno: interno
+                interno: 0
              },
             success: function (response) {
-                CambiarFormulario(interno);
+                console.log(response);
+                CambiarFormulario();
             },
             error: function (xhr, status, error) {
                 console.error("Error en la petición:", error);
@@ -63,3 +59,4 @@ $('#btnEnviarExterno').on('click', function (){
     $('#txtCuerpo').val('')
     return false;
 });
+CambiarFormulario();

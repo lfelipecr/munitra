@@ -19,9 +19,13 @@
             <div class="col-12">
               <span class="mb-3">Solicitante (*)</span>
               <select name="persona" id="slPersonas" class="form-control">
-                <?php for ($i = 0; $i < count($personas); $i++) {?>
-                  <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
+                <?php for ($i = 0; $i < count($personas); $i++) {
+                  if ($personas[$i]->getId() == $solicitud->getIdPersona()){ ?>
+                    <option selected value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
+                  <?php } else {?>
+                    <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
                   <?php }?>
+                <?php }?>
               </select>
             </div>
             <div class="col-12"><hr></div>
@@ -71,11 +75,14 @@
               <input type="hidden" id="idPlanoCatastro" name="idPlanoCatastro">
               <input type="file" class="form-control" name="planoCatastro" id="txtPlanoCatastro">
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-md-3" id="requisitosEmbed">
+              <span class="mb-3">Plano Catastro:</span>
+            </div>
+            <div class="col-12 mt-md-3">
                 <span class="mb-3">Uso de Suelo Digital</span>
                 <input type="checkbox" id="cbxDigital">
                 <input type="hidden" id="idDigital" name="idDigital">
-                <input type="hidden" name="digital" value="" id="valorDigital">
+                <input type="hidden" name="digital" id="valorDigital">
             </div>
             <input type="hidden" id="idEstado" value="<?php echo $solicitud->getEstadoSolicitud() ?>">
             <div class="col-12 mt-md-3">
@@ -85,7 +92,7 @@
                 <option id="estado2" value="2">En proceso</option>
                 <option id="estado3" value="3">Prevención 1</option>
                 <option id="estado4" value="4">Prevención 2</option>
-                <option id="estado5" value="5" selected>Aprobada</option>
+                <option id="estado5" value="5">Aprobada</option>
                 <option id="estado6" value="6">Rechazada</option>
                 <option id="estado7" value="7">Cancelada</option>
                 <option id="estado8" value="8">Retirada</option>

@@ -7,13 +7,19 @@ require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class PatenteControlador {
     function Imprimir(){
+        $provinciaM = new ProvinciaM();
         $id = $_GET['id'];
         $solicitudM = new SolicitudM();
         $personaM = new PersonaM();
         $provinciaM = new ProvinciaM();
         $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
         $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
+        $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
         $distritos = $provinciaM->BuscarDistritos();
+        //Datos de impresión
+        $tiposId = ['n/a', 'Cédula de Identidad', 'Pasaporte', 'Cédula de Residencia',
+        'Número Interno', 'Número asegurado', 'DIMEX', 'NITE', 'DIDI'];
+        $locaciones = $provinciaM->LocacionesId($persona->getIdProvincia(), $persona->getIdCanton(), $persona->getIdDistrito());
         require_once './Vista/Dashboard/Tramites/Patentes/impresion.php';
     }
     private function LlamarVistaActualizar($msg, $id){
@@ -73,7 +79,7 @@ class PatenteControlador {
                 $rutaDestino = './repo/';
                 foreach($_FILES['requisitos']['tmp_name'] as $adjunto => $tmp_name){
                     $archivo = true;
-                    $urlArchivo = $rutaDestino.basename($_FILES['requisitos']['name'][$adjunto]);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['requisitos']['name'][$adjunto]);
                     if (move_uploaded_file($tmp_name, $urlArchivo)) {
                         $adjuntos[] = $urlArchivo;
                     } else {
@@ -187,7 +193,7 @@ class PatenteControlador {
                         $archivos = true;
                         $adjuntos = array();
                         foreach($_FILES['requisitos']['tmp_name'] as $adjunto => $tmp_name){
-                            $urlArchivo = $rutaDestino.basename($_FILES['requisitos']['name'][$adjunto]);
+                            $urlArchivo = $rutaDestino.time().basename($_FILES['requisitos']['name'][$adjunto]);
                             if (move_uploaded_file($tmp_name, $urlArchivo)) {
                                 $archivos = true;
                                 $adjuntos[] = $urlArchivo;

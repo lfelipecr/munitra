@@ -11,6 +11,45 @@ require_once './Modelo/Metodos/ConsultaM.php';
 
 class LoginControlador
 {   
+    function CambiarContra(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()) {
+            $contra = $_POST['contra'];
+            $id = $_SESSION['usuario']->getId();
+            $usuarioM = new UsuarioM();
+            if ($usuarioM->CambiarContra($contra, $id)) 
+                echo '200';
+            else
+                echo '401';
+        }
+    }
+    function VerificarCodigo(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()) {
+            if (isset($_SESSION['codigo'])){
+                $codigo = $_SESSION['codigo'];
+                $codigoEnviado = $_POST['codigo'];
+                if ($codigo == $codigoEnviado){
+                    unset($_SESSION['codigo']);
+                    echo '200';
+                } else {
+                    echo '401';   
+                }
+            } else {
+                echo '404';
+            }
+        }
+    }
+    function GenerarCodigo(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()) {
+            $codigo = substr(bin2hex(random_bytes(8)), 0, 8);
+            $correo = $_SESSION['usuario']->getCorreo();
+            $_SESSION['codigo'] = $codigo;
+            echo $codigo;
+            //enviar correo
+        }
+    }
     function Index(){
         $msg = '';
         session_start();

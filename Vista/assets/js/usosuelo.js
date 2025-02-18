@@ -31,6 +31,7 @@ $(document).ready(function (){
                         break;
                     case '16':
                         $('#idPlanoCatastro').val(datos[i][0]);
+                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
                         break;
                     case '17':
                         $('#idDigital').val(datos[i][0]);
@@ -42,6 +43,9 @@ $(document).ready(function (){
     }
 
     function CheckboxDigital(){
+        if ($('#valorDigital').val() == '1'){
+            $('#cbxDigital').attr('checked', '');
+        }
         if ($('#cbxDigital').prop('checked')) {
             $('#valorDigital').val('1');
         } else {

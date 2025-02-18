@@ -70,6 +70,10 @@ $(document).ready(function (){
     $('#btnEnviarCorreo').on('click', function(){
         let captchaGenerado = $('#captchaInput').val();
         if (captcha == captchaGenerado){
+            let tipo = 1;
+            if ($('#cbxDenuncia').prop('checked')){
+                tipo = 2;
+            }
             if ($('#identificacionConsulta').val().trim() != '' && $('#nombreConsulta').val().trim() != '' &&
             $('#telefonoConsulta').val().trim() != '' && $('#correoConsulta').val().trim() != '' &&
             $('#asuntoConsulta').val().trim() != '' && $('#cuerpoConsulta').val().trim() != '')
@@ -84,7 +88,8 @@ $(document).ready(function (){
                         correo: $('#correoConsulta').val().trim(),
                         asunto: $('#asuntoConsulta').val().trim(),
                         consulta: $('#cuerpoConsulta').val().trim(),
-                        idConsultado: $('#idConsultado').val()
+                        idConsultado: $('#idConsultado').val(),
+                        tipo : tipo
                     },
                     success: function (response) {
                         $('#identificacionConsulta').val('');

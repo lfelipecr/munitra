@@ -68,7 +68,7 @@ class ConsultaControlador{
         $consulta->setAsunto($_POST['asunto']);
         $consulta->setConsulta(json_encode($conv));
         $consulta->setIdConsultado($_POST['idConsultado']);
-        $consulta->setTipoConsulta(1);
+        $consulta->setTipoConsulta($_POST['tipo']);
         if ($consultaM->IngresarConsulta($consulta)){
             //enviar correo
             $id = $consultaM->MaxId();

@@ -19,8 +19,10 @@
       </div>
       <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
       <input type="hidden" id="msg" value="<?php echo $msg; ?>">
+      <!--Aquí potencialmente puede ir el encargado de la solicitud-->
+      <input type="hidden" id="idSolicitante" value="<?php echo $persona->getId();?>">
       <form action="index.php?controlador=Condonacion&metodo=Actualizar" id="frmCondonacion" method="post" enctype="multipart/form-data">
-        <input type="hidden" value="<?php echo $id; ?>" name="idSolicitud">  
+        <input type="hidden" id="idSolicitud" value="<?php echo $solicitud->getId(); ?>" name="idSolicitud">
         <div class="my-3 p-3 bg-body rounded shadow-sm">
           <div class="row mt-3">
           <div class="col-md-6">
@@ -169,6 +171,21 @@
                 <span>Cancelar x</span>
               </a>
             </div>
+            <div class="col-12">
+              <div class="card p-md-5 p-2">
+                <div class="row" id="bitacora"></div>
+                <hr>
+                <div class="mb-2">
+                  <label for="" class="">Cuerpo *</label>
+                  <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
+                </div>
+                <div class="mb-2 text-end">
+                    <a class="btn btn-warning" id="btnEnviarExterno">
+                        <span>Enviar</span>
+                    </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </form>
@@ -177,3 +194,4 @@
   <script src="./Vista/assets/js/condonaciones.js"></script>
   <script src="./Vista/assets/js/firmas.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
+  <script src="./Vista/assets/js/bitacoraExterna.js"></script>

@@ -78,4 +78,26 @@ class ProvinciaM
         $registros[] = $this->BuscarDistritos();
         return $registros;
     }
+    function LocacionesId($provincia, $canton, $distrito){
+        $descripciones = array();
+        $registros = $this->BuscarProvincias();
+        for ($i = 0; $i < count($registros); $i++){
+            if ($registros[$i]->getId() == $provincia){
+                $descripciones['provincia'] = $registros[$i]->getNombre();
+            }
+        }
+        $registros = $this->BuscarCantones();
+        for ($i = 0; $i < count($registros); $i++){
+            if ($registros[$i]->getId() == $canton){
+                $descripciones['canton'] = $registros[$i]->getNombre();
+            }
+        }
+        $registros = $this->BuscarDistritos();
+        for ($i = 0; $i < count($registros); $i++){
+            if ($registros[$i]->getId() == $distrito){
+                $descripciones['distrito'] = $registros[$i]->getNombre();
+            }
+        }
+        return $descripciones;
+    }
 }

@@ -26,7 +26,7 @@ class ActividadControlador {
             }                
             if (!empty($_FILES['adjuntos']['name'][0])){
                 foreach($_FILES['adjuntos']['tmp_name'] as $adjunto => $tmp_name){
-                    $urlArchivo = $rutaDestino.basename($_FILES['adjuntos']['name'][$adjunto]);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['adjuntos']['name'][$adjunto]);
                     if (move_uploaded_file($tmp_name, $urlArchivo)) {
                         $adjuntos[] = $urlArchivo;
                     } else {
@@ -81,7 +81,7 @@ class ActividadControlador {
             if (!empty($_FILES['adjuntos']['name'][0])){
                 $adjuntos = array();
                 foreach($_FILES['adjuntos']['tmp_name'] as $adjunto => $tmp_name){
-                    $urlArchivo = $rutaDestino.basename($_FILES['adjuntos']['name'][$adjunto]);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['adjuntos']['name'][$adjunto]);
                     if (move_uploaded_file($tmp_name, $urlArchivo)) {
                         $adjuntos[] = $urlArchivo;
                     } else {

@@ -27,9 +27,13 @@
             <div class="col-12">
               <span class="mb-3">Solicitante (*)</span>
               <select name="persona" id="slPersonas" class="form-control">
-                <?php for ($i = 0; $i < count($personas); $i++) {?>
-                  <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
+                <?php for ($i = 0; $i < count($personas); $i++) {
+                  if ($personas[$i]->getId() == $solicitud->getIdPersona()){ ?>
+                    <option selected value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
+                  <?php } else {?>
+                    <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre()." ".$personas[$i]->getPrimerApellido()." ".$personas[$i]->getSegundoApellido(); ?></option>
                   <?php }?>
+                <?php }?>
               </select>
             </div>
             <div class="col-12"><hr></div>
@@ -126,6 +130,7 @@
               <img src="" class="img-fluid border rounded" id="firmaCredenciales" alt="">
               <br>
             </div>
+            <div class="col-12 mt-md-3" id="requisitosEmbed"></div>
             <input type="hidden" id="idEstado" value="<?php echo $solicitud->getEstadoSolicitud() ?>">
             <div class="col-12 mt-md-3">
               <span class="mb-3">Estado de Solicitud</span><br>

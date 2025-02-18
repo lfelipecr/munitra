@@ -31,7 +31,7 @@ class UsuarioControlador
             if ($_FILES['foto']['type'] == 'image/jpeg' ||
             $_FILES['foto']['type'] == 'image/jpg' || $_FILES['foto']['type'] == 'image/png'){
                 $rutaDestino = './repo/';
-                $urlArchivo = $rutaDestino.basename($_FILES['foto']['name']);
+                $urlArchivo = $rutaDestino.time().basename($_FILES['foto']['name']);
                 if (!is_writable($rutaDestino)) {
                     $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                     $vista = './Vista/Dashboard/usuario.php';

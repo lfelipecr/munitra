@@ -29,7 +29,7 @@ class NoticiaControlador {
                 session_start();
                 if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
                     $rutaDestino = './repo/';
-                    $urlArchivo = $rutaDestino.basename($_FILES['imagen']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['imagen']['name']);
                     if (!is_writable('./repo/')) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Noticias/nuevo.php';
@@ -48,7 +48,7 @@ class NoticiaControlador {
                 }
                 if (isset($_FILES['adjunto']) && $_FILES['adjunto']['error'] === UPLOAD_ERR_OK) {
                     $rutaDestino = './repo/';
-                    $urlArchivo = $rutaDestino.basename($_FILES['adjunto']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['adjunto']['name']);
                     if (!is_writable('./repo/')) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Noticias/nuevo.php';
@@ -98,7 +98,7 @@ class NoticiaControlador {
                 $noticia->setFecha($_POST['fecha']);
                 if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
                     $rutaDestino = './repo/';
-                    $urlArchivo = $rutaDestino.basename($_FILES['imagen']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['imagen']['name']);
                     if (!is_writable('./repo/')) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Noticias/actualizar.php';
@@ -121,7 +121,7 @@ class NoticiaControlador {
                 }
                 if (isset($_FILES['adjunto']) && $_FILES['adjunto']['error'] === UPLOAD_ERR_OK) {
                     $rutaDestino = './repo/';
-                    $urlArchivo = $rutaDestino.basename($_FILES['adjunto']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['adjunto']['name']);
                     if (!is_writable('./repo/')) {
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Noticias/actualizar.php';

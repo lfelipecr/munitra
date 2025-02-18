@@ -36,7 +36,7 @@ class DocumentacionControlador {
             if (isset($_POST['descripcion'])){
                 if (isset($_FILES['flSubir']) && $_FILES['flSubir']['error'] === UPLOAD_ERR_OK) {
                     $rutaDestino = './repo/';
-                    $urlArchivo = $rutaDestino.basename($_FILES['flSubir']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['flSubir']['name']);
                     if (move_uploaded_file($_FILES['flSubir']['tmp_name'], $urlArchivo)) {
                         $documentacionM = new DocumentacionM();
                         $documentacion = new Documentacion();

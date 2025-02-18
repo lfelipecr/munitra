@@ -7,16 +7,20 @@ require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class UsosueloControlador {
     function Imprimir(){
+        $provinciaM = new ProvinciaM();
         $id = $_GET['id'];
         $solicitudM = new SolicitudM();
         $personaM = new PersonaM();
         $provinciaM = new ProvinciaM();
         $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
         $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
-        $personas = $personaM->ListadoPersonas();
+        $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
         $distritos = $provinciaM->BuscarDistritos();
-        var_dump($solicitud);
-        //require_once './Vista/Utilidades/sidebar.php';
+        //Datos de impresión
+        $tiposId = ['n/a', 'Cédula de Identidad', 'Pasaporte', 'Cédula de Residencia',
+        'Número Interno', 'Número asegurado', 'DIMEX', 'NITE', 'DIDI'];
+        $locaciones = $provinciaM->LocacionesId($persona->getIdProvincia(), $persona->getIdCanton(), $persona->getIdDistrito());
+        require_once './Vista/Dashboard/Tramites/UsoSuelo/impresion.php';
     }
     private function LlamarVistaActualizar($msg, $id){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
@@ -80,7 +84,7 @@ class UsosueloControlador {
             isset($_POST['usoSolicitado'])){
                 if (isset($_FILES['planoCatastro']) && $_FILES['planoCatastro']['error'] === UPLOAD_ERR_OK) {
                     $rutaDestino = './repo/';
-                    $urlArchivo = $rutaDestino.basename($_FILES['planoCatastro']['name']);
+                    $urlArchivo = $rutaDestino.time().basename($_FILES['planoCatastro']['name']);
                     if (!is_writable('./repo/')) {
                         $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
                     }                
@@ -136,7 +140,7 @@ class UsosueloControlador {
                         if ($idSolicitud != 0) {
                             $registrar = array();
                             //variables del POST 
-                            $post = ['distrito', 'direccionPropiedad', 'finca', 'plano', 'motivoUso', 'usoSolicitado', 'adjunto', 'digital'];
+                            $post = ['distrito', 'direccionPropiedad', 'finca', 'plano', 'motivoUso', 'usoSolicitado', 'planoCatastro', 'digital'];
                             $contador = 10;
                             for ($i = 0; $i < 8; $i++){
                                 if ($contador == 16){
@@ -190,18 +194,17 @@ class UsosueloControlador {
                 $solicitud->setIdUsuario($_SESSION['usuario']->getId());
                 $solicitud->setTipoSolicitud(2);
                 $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-                $solicitud->setIdPersona($_POST['persona']);
                 if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)) {
                     $registrar = array();
                     //variables del POST 
-                    $post = ['distrito', 'direccionPropiedad', 'finca', 'plano', 'motivoUso', 'usoSolicitado', 'adjunto', 'digital'];
+                    $post = ['distrito', 'direccionPropiedad', 'finca', 'plano', 'motivoUso', 'usoSolicitado', 'planoCatastro', 'digital'];
                     $ids = ['idDistrito', 'idDireccionPropiedad', 'idFinca', 'idPlano', 'idMotivoUso', 'idUsoSolicitado', 'idPlanoCatastro', 'idDigital'];
                     $contador = 10;
                     for($i = 0; $i < 8; $i++){
                         if ($contador == 16){
                             if (isset($_FILES['planoCatastro']) && $_FILES['planoCatastro']['error'] === UPLOAD_ERR_OK) {
                                 $rutaDestino = './repo/';
-                                $urlArchivo = $rutaDestino.basename($_FILES['planoCatastro']['name']);
+                                $urlArchivo = $rutaDestino.time().basename($_FILES['planoCatastro']['name']);
                                 if (!is_writable('./repo/')) {
                                     $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
                                 }                
@@ -209,6 +212,7 @@ class UsosueloControlador {
                                     mkdir($rutaDestino, 0777, true);
                                 }
                                 if (move_uploaded_file($_FILES['planoCatastro']['tmp_name'], $urlArchivo)) {
+                                    var_dump($urlArchivo);
                                     //archivo adjunto
                                     $adjunto = new DetalleSolicitud();
                                     $adjunto->setId($_POST['idPlanoCatastro']);
@@ -230,6 +234,7 @@ class UsosueloControlador {
                             $detalle->setTipoRequisito($contador);
                             $registrar[] = $detalle;
                         }
+                        $contador++;
                     }
                     if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
                         header('location: index.php?controlador=Tramites&metodo=UsoSuelo');

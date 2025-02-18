@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patentes RS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         .subrayado{
             text-decoration: underline;
@@ -27,16 +29,18 @@
             text-align: center;
         }
         footer img, header img {
-            object-fit: contain !important;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
 <body>
-    <header class="text-center">
+    <header>
         <img src="./Web/assets/img/headerpdf.png" class="img-fluid" alt="Imagen del pie de página">
     </header>
     <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
-    <div class="container-fluid px-5">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center">
                 <h6>SOLICITUD DE PATENTES</h6>
@@ -52,28 +56,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="2">Tipo de Identificación: <span id="tipoId"></span></td>
-                            <td>Cédula N°: <span id="numeroCedula"></span></td>
+                            <td colspan="2">Tipo de Identificación: <?php echo $tiposId[$persona->getIdTipoIdentificacion()];?></td>
+                            <td>Cédula N°: <?php echo $persona->getIdentificacion();?></td>
                         </tr>
                         <tr>
-                            <td colspan="3">Dirección: <span id="direccion"></span></td>
+                            <td colspan="3">Dirección: <?php echo $persona->getDireccion();?></td>
                         </tr>
                         <tr>
-                            <td colspan="3">Correo Electrónico: <span id="correo"></span></td>
+                            <td colspan="3">Correo Electrónico: <?php echo $persona->getCorreo();?></td>
                         </tr>
                         <tr>
-                            <td>Nombre: <span id="nombre"></span></td>
-                            <td>Primer Apellido: <span id="apellido1"></span></td>
-                            <td>Segundo Apellido: <span id="apellido2"></span></td>
+                            <td>Nombre: <?php echo $persona->getNombre();?></td>
+                            <td>Primer Apellido: <?php echo $persona->getPrimerApellido();?></td>
+                            <td>Segundo Apellido: <?php echo $persona->getSegundoApellido();?></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Teléfono: <span id="telefono"></span></td>
-                            <td>Whatsapp: <span id="whatsapp"></span></td>
+                            <td colspan="2">Teléfono: <?php echo $persona->getTelefono();?></td>
+                            <td>Whatsapp: <?php echo $persona->getWhatsapp();?></td>
                         </tr>
                         <tr>
-                            <td>Provincia: <span id="provincia"></span></td>
-                            <td>Cantón: <span id="canton"></span></td>
-                            <td>Distrito: <span id="distrito"></span></td>
+                            <td>Provincia: <?php echo $locaciones['provincia'];?></td>
+                            <td>Cantón: <?php echo $locaciones['canton'];?></td>
+                            <td>Distrito: <?php echo $locaciones['distrito'];?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -111,7 +115,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th colspan="3">PARA USO MUNICPAL</th>
+                            <th colspan="3">PARA USO MUNICIPAL</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -125,9 +129,12 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-12">
+                <iframe id="visorPDF" style="width: 100%;"></iframe>
+            </div>
         </div>
     </div>
-    <footer class="text-center">
+    <footer>
         <img src="./Web/assets/img/footerpdf.png" alt="Imagen del pie de página">
     </footer>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
@@ -137,7 +144,6 @@
             let datos = $('#jsonData').val();
             if (datos != ''){
                 datos = JSON.parse(datos);
-                console.log(datos);
                 for (let i = 0; i < datos.length; i++)
                 {
                     switch  (datos[i][4]){
@@ -155,7 +161,22 @@
                             break;
                         case '6': 
                             $('#idDistrito').html(datos[i][0]);
-                            $('#distrito'+datos[i][0]).attr('selected', '');
+                            let distrito = '';
+                            switch (datos[i][1]){
+                                case '172':
+                                    distrito = 'Río Cuarto';
+                                    break;
+                                case '173':
+                                    distrito = 'La Cuesta';
+                                    break;
+                                case '174':
+                                    distrito = 'El Rosario';
+                                    break;
+                                default: 
+                                    distrito = 'Externo - Codigo: '+datos[i][1];
+                                    break;
+                            }
+                            $('#distrito').html(distrito);
                             break;
                         case '7':
                             $('#txtDireccionExacta').html(datos[i][1]);
@@ -170,7 +191,28 @@
                 }
             }
         }
+        function mostrarPDFEnPagina() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+                orientation: "portrait",
+                unit: "mm",
+                format: "a4"
+            });
+
+            doc.html(document.body, {
+                callback: function (doc) {
+                    const pdfBlob = doc.output("blob");
+                    const pdfUrl = URL.createObjectURL(pdfBlob);
+                    document.getElementById("visorPDF").src = pdfUrl;
+                },
+                x: 10,
+                y: 10,
+                width: 180,
+                windowWidth: 800
+            });
+        }
         RenderizarDatosJSON();
+        mostrarPDFEnPagina();
     </script>
 </body>
 </html>

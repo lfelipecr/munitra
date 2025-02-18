@@ -56,7 +56,9 @@ class BitacoraControlador{
                 $bitacora->setNota($asuntoEmail);
                 $bitacora->setDetalle($cuerpoEmail);
                 $bitacora->setInterno($_POST['interno']);
-                $bitacoraM->IngresarBitacora($bitacora);
+                if ($bitacoraM->IngresarBitacora($bitacora))
+                    echo 'OK';
+                else echo 'ERROR';
             } catch (Exception $ex){
                 var_dump($ex);
             }

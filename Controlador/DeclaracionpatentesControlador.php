@@ -14,7 +14,7 @@ class DeclaracionpatenteControlador {
             $rutaDestino = './repo/';
             foreach($_FILES['requisitos']['tmp_name'] as $adjunto => $tmp_name){
                 $archivo = true;
-                $urlArchivo = $rutaDestino.basename($_FILES['requisitos']['name'][$adjunto]);
+                $urlArchivo = $rutaDestino.time().basename($_FILES['requisitos']['name'][$adjunto]);
                 if (move_uploaded_file($tmp_name, $urlArchivo)) {
                     $adjuntos[] = $urlArchivo;
                 } else {

@@ -7,16 +7,20 @@ require_once './Modelo/Entidades/DetalleSolicitud.php';
 
 class CondonacionControlador {
     function Imprimir(){
+        $provinciaM = new ProvinciaM();
         $id = $_GET['id'];
         $solicitudM = new SolicitudM();
         $personaM = new PersonaM();
         $provinciaM = new ProvinciaM();
         $jsonData = $solicitudM->BuscarDetallesSolicitud($id);
         $solicitud = $solicitudM->BuscarCabeceraSolicitud($id);
-        $personas = $personaM->ListadoPersonas();
+        $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
         $distritos = $provinciaM->BuscarDistritos();
-        var_dump($solicitud);
-        //require_once './Vista/Utilidades/sidebar.php';
+        //Datos de impresión
+        $tiposId = ['n/a', 'Cédula de Identidad', 'Pasaporte', 'Cédula de Residencia',
+        'Número Interno', 'Número asegurado', 'DIMEX', 'NITE', 'DIDI'];
+        $locaciones = $provinciaM->LocacionesId($persona->getIdProvincia(), $persona->getIdCanton(), $persona->getIdDistrito());
+        require_once './Vista/Dashboard/Tramites/Condonacion/impresion.php';
     }
     private function LlamarVistaActualizar($msg, $id){
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
