@@ -31,7 +31,6 @@ $(document).ready(function (){
         let imagenes = $('#imagenes').val();
         if (imagenes != ''){
             imagenes = JSON.parse(imagenes);
-            console.log(imagenes);
             for (let i = 0; i < imagenes.length; i++){
                 let listado = $('#carousel').html();
                 let html = `<div class="carousel-item active"><img src="${imagenes[i]}" class="d-block w-100 h-25 img-fluid border rounded" alt="Imagen ${i}"></div>`;

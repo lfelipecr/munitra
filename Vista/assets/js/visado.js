@@ -41,12 +41,10 @@ $(document).ready(function (){
                     case '26':
                         $('#idCartaDisponibilidad').val(datos[i][0]);
                         $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3">Carta de Disponibilidad:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
-                        console.log(datos[i][1]);
                         break;
                     case '27':
                         $('#idCroquis').val(datos[i][0]);
                         $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3">Croquis:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
-                        console.log(datos[i][1]);
                         break;
                     case '28':
                         $('#idPlanoCorregido').val(datos[i][0]);
@@ -63,7 +61,6 @@ $(document).ready(function (){
                     case '31':
                         document.getElementById('firmaCredenciales').src = datos[i][1];
                         $('#idFirma').val(datos[i][0]);
-                        console.log(datos[i])
                         break;
                 }
             }

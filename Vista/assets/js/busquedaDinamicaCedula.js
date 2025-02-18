@@ -35,7 +35,6 @@ $(document).ready(function (){
                     $('#txtWhatsapp').val(json['whatsapp']);
                     $('#txtCorreo').attr('readonly','');
                     $('#txtCorreo').val(json['correo']);
-                    console.log(json);
                 }                
             },
             error: function (xhr, status, error) {

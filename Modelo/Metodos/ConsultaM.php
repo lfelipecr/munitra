@@ -21,8 +21,8 @@ class ConsultaM
         $conexion= new Conexion();
         $sql = "CALL SpIngresarConsulta('".$consulta->getIdentificacion().
         "', '".$consulta->getNombreCompleto().
-        "', '".$consulta->getCorreo().
         "', '".$consulta->getTelefono().
+        "', '".$consulta->getCorreo().
         "', '".$consulta->getAsunto().
         "', '".$consulta->getConsulta().
         "', ".$consulta->getIdConsultado().", ".$consulta->getTipoConsulta().")";
@@ -40,7 +40,6 @@ class ConsultaM
         $retVal=false;
         $conexion= new Conexion();
         $sql = "CALL SpAtenderConsulta( ".$consulta->getId().", '".$consulta->getRespuesta()."', '".$consulta->getRespondidoPor()."')";
-        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -120,7 +119,6 @@ class ConsultaM
         $retVal=false;
         $conexion= new Conexion();
         $sql = "CALL SpActualizarConsulta( '".$consulta->getConsulta()."', ".$consulta->getId().")";
-        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;

@@ -110,10 +110,8 @@
         $.ajax({
             url: "index.php?controlador=Login&metodo=GenerarCodigo",
             type: "GET",
-            success: function (response) {   
-                if (response != ''){
-                    console.log(response);
-                } else {
+            success: function (response) {
+                if (response == ''){
                     $('#contenido').html('Ha ocurrido un error, intente nuevamente');
                 }
             },
@@ -152,7 +150,6 @@
             type: "POST",
             data: {contra : $('#contra').val()},
             success: function (response) {
-                console.log(response);
                 if (response != ''){
                     if (response ==  '200'){
                         $('#contraTag').html('Cambio de Contraseña Exitoso');

@@ -1,6 +1,5 @@
 $(document).ready(function (){
     function CheckboxActa(){
-        console.log($('#cbxActa').prop('checked'));
         if ($('#cbxActa').prop('checked')) {
             $('#valorActa').val('1');
         } else {

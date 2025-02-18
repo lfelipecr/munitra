@@ -39,7 +39,6 @@ $(document).ready(function (){
         jsonData = JSON.parse(jsonData);
     }
     function MostrarConsultas(){
-        console.log(jsonData);
         for (let i = 0; i < jsonData.length; i++)
         {
             if (jsonData[i][7] == idUsuario)
@@ -53,12 +52,16 @@ $(document).ready(function (){
             if (jsonData[i][8] == 2){
                 tipo = 'Denuncia';
             }
+            let estado = 'Pendiente';
+            if (jsonData[i][10] == 1){
+                estado = 'Atendido';
+            }
             let cuerpo = JSON.parse(jsonData[i][6]);
             let listado = $(id).html();
             listado += `<div class="col-12 m-1">
                             <div class="card chat p-5" onclick='AbrirConversacion(${i})'>
                                 <h5>${jsonData[i][1]} - ${jsonData[i][2]} - ${jsonData[i][9]}</h5>
-                                <h6>${tipo}</h6>
+                                <h6>${tipo} - ${estado}</h6>
                                 <hr>
                                 <strong>${jsonData[i][5]}</strong>
                             </div>

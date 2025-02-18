@@ -1,11 +1,9 @@
 function CambiarModal(id){
     let datos = JSON.parse($('#jsonData').val());
-    console.log(datos[id]);
 }
 $(document).ready(function (){
     let activos = true;
     let datos = JSON.parse($('#jsonData').val());
-    console.log(datos);
     function RenderizarTabla() {
         let tabla = "";
         for(let i = 0; i < datos.length; i++){

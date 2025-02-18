@@ -1,6 +1,11 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 require_once './Modelo/Entidades/Solicitud.php';
 require_once './Modelo/Entidades/DetalleSolicitud.php';
+require_once './Modelo/Metodos/BitacoraSolicitudM.php';
+require_once './Modelo/Metodos/UsuarioM.php';
 require_once './Modelo/Conexion.php';
 
 class SolicitudM {
@@ -19,6 +24,7 @@ class SolicitudM {
                 $solicitud->setDescripEstadoSolicitud($fila['ESTADO_SOLICITUD_DESCRIPCION']);
                 $solicitud->setTipoSolicitud($fila['TIPO_SOLICITUD']);
                 $solicitud->setIdPersona($fila['PERSONA_ID']);
+                $solicitud->setIdUsuario($fila['ID_USUARIO']);
                 $registro = $solicitud;
             }
         }
@@ -125,6 +131,69 @@ class SolicitudM {
         $conexion->Cerrar();
         return $registro;
     }
+    function EnviarEstado($idUsuario, $idEstado, $codigo){
+        $estado = '';
+        switch ($idEstado){
+            case '1':
+                $estado = 'Nueva';
+                break;
+            case '2':
+                $estado = 'En proceso';
+                break;
+            case '3':
+                $estado = 'Prevención 1';
+                break;
+            case '4':
+                $estado = 'Prevención 2';
+                break;
+            case '5':
+                $estado = 'Aprobada';
+                break;
+            case '6':
+                $estado = 'Rechazada';
+                break;
+            case '7':
+                $estado = 'Cancelada';
+                break;
+            case '8':
+                $estado = 'Retirada';
+                break;
+        }
+        $usuarioM = new UsuarioM();
+        echo $idUsuario;
+        $email = $usuarioM->BuscarUsuarioId($idUsuario)->getCorreo();
+        $cuerpoEmail = '<html><head><meta charset="UTF-8"><style>body {font-family: Arial, sans-serif; line-height: 1.6;color: #333;}.container { max-width: 600px; margin: 0 auto;padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: #f9f9f9; }.title {font-size: 18px;font-weight: bold; color: #555;}.content {margin-top: 10px;}.info {margin-top: 15px;padding: 10px; background-color: #eef;border-left: 4px solidrgb(10, 41, 75);}</style></head><body><div class="container">';
+        $cuerpoEmail = $cuerpoEmail.'<p class="title">Municipalidad de Río Cuarto</p>';
+        $cuerpoEmail = $cuerpoEmail.'<div class="content">">
+                                <p><strong>Estimado Usuario</strong> </br></p>
+                                <p id="consulta">Se ha actualizado su solicitud (codigo: #'.$codigo.') por parte de la Municipalidad de Río Cuarto, el estado actual de su solicitud es '.$estado.'</p>
+                                </div>
+                            </div>
+                        </body>
+                        </html>';
+        try{
+            $bitacoraM = new BitacoraSolicitudM();
+            $credenciales = $bitacoraM->CredencialesSMTP();
+            $mail = new PHPMailer();
+            $mail->isSMTP();
+            $mail->Encoding = "base64";
+            $mail->CharSet = "UTF-8";
+            $mail->Host = $credenciales['host'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $credenciales['user'];
+            $mail->Password = $credenciales['key'];
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+            $mail->setFrom($credenciales['from']);
+            $mail->addAddress($email);
+            $mail->isHTML(true);
+            $mail->Subject = 'Municipalidad de Río Cuarto - Estado de Solicitud';
+            $mail->Body = $cuerpoEmail;
+            $mail->send();
+        } catch(Exception $e){
+            var_dump($e);
+        }
+    }
     function ActualizarCabeceraSolicitud(Solicitud $solicitud){
         $retVal=false;
         $conexion= new Conexion();
@@ -138,6 +207,12 @@ class SolicitudM {
             $retVal=false;
         }        
         $conexion->Cerrar();
+        if ($retVal){
+            var_dump($solicitud->getId());
+            $solicitud = $this->BuscarCabeceraSolicitud($solicitud->getId());
+            var_dump($solicitud);
+            $this->EnviarEstado($solicitud->getIdUsuario(), $solicitud->getEstadoSolicitud(), $solicitud->getId());
+        }
         return $retVal;
     }
     function ActualizarDetallesSolicitud($arregloDetalles){

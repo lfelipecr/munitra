@@ -69,7 +69,6 @@
     <script>
         $(document).ready(function (){
             let jsonData = JSON.parse($('#jsonData').val());
-            console.log(jsonData);
             $('#nombre').html(`Nombre: ${jsonData.NOMBRE} ${jsonData.PRIMER_APELLIDO} ${jsonData.SEGUNDO_APELLIDO}`);
             $('#cedula').html(`Nombre: ${jsonData.IDENTIFICACION}`);
             $('#correo').html(`Correo: ${jsonData.CORREO_USUARIO}`);

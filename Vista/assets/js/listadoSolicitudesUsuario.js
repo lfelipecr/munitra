@@ -10,7 +10,6 @@ $(document).ready(function (){
     function RenderizarTabla() {
         let tabla = "";
         for(let i = 0; i < datos.length; i++){
-            console.log(datos);
             tabla += `<div class="col-12 mb-3">
                 <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=${controlador}&metodo=VActualizar&id=${datos[i][0]}';">
                     <div class="d-flex justify-content-between">

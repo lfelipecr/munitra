@@ -48,7 +48,6 @@ $('#btnEnviarExterno').on('click', function (){
                 interno: 0
              },
             success: function (response) {
-                console.log(response);
                 CambiarFormulario();
             },
             error: function (xhr, status, error) {

@@ -3,7 +3,6 @@ $(document).ready(function (){
     let jsonData = $('#jsonData').val();
     if (jsonData != ''){
         jsonData = JSON.parse(jsonData);
-        console.log(jsonData);
     }
     function MostrarSesiones (){
         $('#sesiones').html('');

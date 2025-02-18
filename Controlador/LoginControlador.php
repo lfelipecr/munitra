@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/UsuarioM.php';
 require_once './Modelo/Entidades/Usuario.php';
@@ -8,6 +11,7 @@ require_once './Modelo/Metodos/CredencialesM.php';
 require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Entidades/Consulta.php';
 require_once './Modelo/Metodos/ConsultaM.php';
+require_once './Modelo/Metodos/BitacoraSolicitudM.php';
 
 class LoginControlador
 {   
@@ -48,6 +52,31 @@ class LoginControlador
             $_SESSION['codigo'] = $codigo;
             echo $codigo;
             //enviar correo
+            $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Usa el siguiente código para completar tu proceso de verificación:</p><div class="code">'.$codigo.'</div><p>Si no solicitaste este código, ignora este mensaje.</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
+            $mail = new PHPMailer();
+            try{
+                session_start();
+                $bitacoraM = new BitacoraSolicitudM();
+                $credenciales = $bitacoraM->CredencialesSMTP();
+                $mail->isSMTP();
+                $mail->CharSet = "UTF-8";
+                $mail->Encoding = "base64";
+                $mail->Host = $credenciales['host'];
+                $mail->SMTPAuth = true;
+                $mail->Username = $credenciales['user'];
+                $mail->Password = $credenciales['key'];
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+                $mail->setFrom($credenciales['from']);
+                $mail->addAddress($correo);
+                $mail->isHTML(true);
+                $mail->Subject = 'Municipalidad de Río Cuarto | Cambiar Contraseña';
+                $mail->Body = $msg;
+                $mail->send();
+                
+            } catch (Exception $ex){
+                var_dump($ex);
+            }
         }
     }
     function Index(){

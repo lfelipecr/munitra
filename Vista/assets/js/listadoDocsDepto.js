@@ -1,6 +1,5 @@
 $(document).ready(function (){
     let jsonData = JSON.parse($('#jsonData').val());
-    console.log(jsonData);
     function MostrarDatos(){
         for (let i = 0; i < jsonData.length; i++){
             let listado = $('#docs').html();

@@ -37,7 +37,6 @@ class DocumentacionM
         $retVal=false;
         $conexion= new Conexion();
         $sql="CALL SpEliminarDocumento($id)";
-        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
