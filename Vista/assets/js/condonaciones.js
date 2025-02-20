@@ -45,6 +45,7 @@ $(document).ready(function () {
                         break;
                     case '37':
                         $('#idFirma').val(datos[i][0]);
+                        document.getElementById('firmaCredenciales').src = datos[i][1];
                         break;
                     case '38':
                         $('#idRecibido').val(datos[i][0]);
@@ -57,7 +58,9 @@ $(document).ready(function () {
                     case '40':
                         id = datos[i][1].replaceAll(' ','_');
                         $('#idFuncionario').val(datos[i][0]);
-                        $('#'+id).attr('selected', '');
+                        if ('#'+id != '#'){
+                            $('#'+id).attr('selected', '');
+                        }
                         break;
                     case '41':
                         $('#idConsecutivo').val(datos[i][0]);

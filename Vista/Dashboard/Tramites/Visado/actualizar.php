@@ -126,7 +126,7 @@
               <input type="file" class="form-control" id="flCartaMOPT" name="flCartaMOPT">
             </div>
             <div class="col-12 mt-md-3 text-center">
-              <span class="mb-3">Firma (*)</span><br>
+              <span class="mb-3 embedTxt">Firma (*)</span><br>
               <img src="" class="img-fluid border rounded" id="firmaCredenciales" alt="">
               <br>
             </div>

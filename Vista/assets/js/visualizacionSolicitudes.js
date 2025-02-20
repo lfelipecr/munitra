@@ -10,6 +10,7 @@ $('#btnVer').on('click', function (){
     $('#btnAct').hide();
     $('#btnVer').hide();
     $('#btnModi').show();
+    $('#embedTxt').show();
 });
 $('#btnModi').on('click', function (){
     $('embed').hide();
@@ -19,4 +20,5 @@ $('#btnModi').on('click', function (){
     $('#btnAct').show();
     $('#btnVer').show();
     $('#btnModi').hide();
+    $('.embedTxt').hide();
 });

@@ -149,7 +149,7 @@
               <span class="mb-3">Dimensiones (*)</span><br>
               <input type="text" class="form-control" name="dimensiones" id="txtDimensiones">
             </div>
-            <input type="hidden" name="estadoSolicitud" id="slEstado" value="2">
+            <input type="hidden" name="estadoSolicitud" id="slEstado" value="1">
             <div class="col-12 py-2">
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
             </div>

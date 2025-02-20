@@ -90,7 +90,10 @@
                     <div class="col-md-6 order-md-1 order-2 text-white d-flex align-items-center justify-content-center">
                         <div class="p-5 w-100 text-center">
                             <div class="rsIframeCont">
-                                <iframe class="rsIframe" src="//www.youtube.com/embed/vr0uA3MmCTU?autoplay=0&amp;rel=0" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                                <video class="rsIframe" controls>
+                                    <source src="./repo/serverside/riocuarto.mp4" type="video/mp4">
+                                    Tu navegador no soporta la reproducción de video.
+                                </video>
                             </div>
                         </div>                        
                     </div>

@@ -6,28 +6,26 @@ $(document).ready(function (){
     }
     function MostrarSesiones (){
         $('#sesiones').html('');
+        console.log(jsonData);
         for (let i = 0; i < jsonData.length; i++){
             let listado = $('#sesiones').html();
             let html = '';
             let fechaRegistro = jsonData[i][1].split("-")[0];
             if (fecha == fechaRegistro){
-                if (jsonData[i][3] == '1'){
-                    html += `<div class="col-12 text-center d-flex justify-content-center">
-                                <div class="card w-100 my-1">
-                                    <div class="card-body">
-                                    <h5 class="card-title mb-3">${jsonData[i][2]} - ${jsonData[i][1]}</h5>
-                                    <a href="${jsonData[i][4]}" class="btn btn-outline-warning">Acta</a>`;
+                if (jsonData[i][4] != ''){
+                    html += `<tr>
+                            <th scope="">${jsonData[i][2]} - ${jsonData[i][1]}</th>
+                            <td class="text-end"><a href="${jsonData[i][4]}" class="btn btn-outline-warning">Acta</a>
+                            <a href="${jsonData[i][5]}" class="btn btn-outline-warning">Agenda</a>`;
                 } else {
-                    html += `<div class="col-md-6 text-center d-flex justify-content-center">
-                    <div class="card w-100 my-1">
-                        <div class="card-body">
-                        <h5 class="card-title mb-3">${jsonData[i][2]} - ${jsonData[i][1]}</h5>`;
+                    html += `<tr>
+                            <th scope="">${jsonData[i][2]} - ${jsonData[i][1]}</th>
+                            <a href="${jsonData[i][5]}" class="btn btn-outline-warning">Agenda</a>`;
                 }
                 if (jsonData[i][6] != ''){
-                    html += `<a href="${jsonData[i][5]}" class="btn btn-outline-warning">Agenda</a>
-                            <a href="${jsonData[i][6]}" class="btn btn-outline-warning">Ver Sesión</a>`;
+                    html += `<a href="${jsonData[i][6]}" class="btn btn-outline-warning mx-1">Ver Sesión</a>`;
                 }
-                html += '</div></div></div>';
+                html += '</td></tr>';
                 listado += html;
                 $('#sesiones').html(listado);
             }

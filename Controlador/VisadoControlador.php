@@ -79,86 +79,82 @@ class VisadoControlador {
     function Actualizar(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
-            if (!isset($_POST['firma'])){
-                $this->LlamarVistaActualizar('La firma es requerida', $_POST['idSolicitud']);
-            } else {
-                $solicitudM = new SolicitudM();
-                $solicitud = new Solicitud();
-                session_start();
-                $idSolicitud = $_POST['idSolicitud'];
-                $solicitud->setId($idSolicitud);
-                $solicitud->setIdUsuario($_SESSION['usuario']->getId());
-                $solicitud->setTipoSolicitud(3);
-                $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-                $solicitud->setIdPersona($_POST['persona']);
-                if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)){
-                    $registrar = array();
-                    //datos de inputs
-                    //variables del POST
-                    $post = ['direccionPropiedad', 'distrito', 'numeroPlano', 'areaPlano', 'numeroFinca', 'areaRegistroPublico', 'frente', 'numeroContrato'];
-                    $postIds = ['idDireccionPropiedad', 'idDistrito', 'idNumeroPlano', 'idAreaPlano', 'idNumeroFinca', 'idAreaRegistroPublico', 'idFrente', 'idNumeroContrato'];
-                    $tipoRequisito = 18;
+            $solicitudM = new SolicitudM();
+            $solicitud = new Solicitud();
+            session_start();
+            $idSolicitud = $_POST['idSolicitud'];
+            $solicitud->setId($idSolicitud);
+            $solicitud->setIdUsuario($_SESSION['usuario']->getId());
+            $solicitud->setTipoSolicitud(3);
+            $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
+            $solicitud->setIdPersona($_POST['persona']);
+            if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)){
+                $registrar = array();
+                //datos de inputs
+                //variables del POST
+                $post = ['direccionPropiedad', 'distrito', 'numeroPlano', 'areaPlano', 'numeroFinca', 'areaRegistroPublico', 'frente', 'numeroContrato'];
+                $postIds = ['idDireccionPropiedad', 'idDistrito', 'idNumeroPlano', 'idAreaPlano', 'idNumeroFinca', 'idAreaRegistroPublico', 'idFrente', 'idNumeroContrato'];
+                $tipoRequisito = 18;
+                for ($i = 0; $i < count($post); $i++){
+                    $detalle = new DetalleSolicitud();
+                    $detalle->setId($_POST[$postIds[$i]]);
+                    $detalle->setCumple(1);
+                    $detalle->setCampoRequisito($_POST[$post[$i]]);
+                    $detalle->setIdSolicitud($idSolicitud);
+                    $detalle->setTipoRequisito($tipoRequisito);
+                    $registrar[] = $detalle;
+                    $tipoRequisito++;
+                }
+                //archivos
+                $rutaDestino = './repo/';
+                if (!is_writable('./repo/')) {
+                    $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
+                    $validacionArchivos = false;
+                }  else {
+                    if (!is_dir($rutaDestino)) {
+                        mkdir($rutaDestino, 0777, true);
+                    }
+                    $post = ['flCartaDisponibilidad', 'flCroquis', 'flPlanoCorregido', 'flMinuta', 'flCartaMOPT'];
+                    $postIds = ['idCartaDisponibilidad', 'idCroquis', 'idPlanoCorregido', 'idMinuta', 'idCartaMOPT'];
+                    $tipoRequisito = 26;
+                    //carta de disponibilidad
                     for ($i = 0; $i < count($post); $i++){
-                        $detalle = new DetalleSolicitud();
-                        $detalle->setId($_POST[$postIds[$i]]);
-                        $detalle->setCumple(1);
-                        $detalle->setCampoRequisito($_POST[$post[$i]]);
-                        $detalle->setIdSolicitud($idSolicitud);
-                        $detalle->setTipoRequisito($tipoRequisito);
-                        $registrar[] = $detalle;
-                        $tipoRequisito++;
+                        if (isset($_FILES[$post[$i]]) && $_FILES[$post[$i]]['error'] === UPLOAD_ERR_OK) {
+                            $urlArchivo = $rutaDestino.time().basename($_FILES[$post[$i]]['name']);
+                            if (move_uploaded_file($_FILES[$post[$i]]['tmp_name'], $urlArchivo)) {
+                                $cartaDisponibilidad = new DetalleSolicitud();
+                                $cartaDisponibilidad->setId($_POST[$postIds[$i]]);
+                                $cartaDisponibilidad->setCumple(1);
+                                $cartaDisponibilidad->setCampoRequisito($urlArchivo);
+                                $cartaDisponibilidad->setIdSolicitud($idSolicitud);
+                                $cartaDisponibilidad->setTipoRequisito($tipoRequisito);
+                                $registrar[] = $cartaDisponibilidad;
+                            }
+                        }    
                     }
-                    //archivos
-                    $rutaDestino = './repo/';
-                    if (!is_writable('./repo/')) {
-                        $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
-                        $validacionArchivos = false;
-                    }  else {
-                        if (!is_dir($rutaDestino)) {
-                            mkdir($rutaDestino, 0777, true);
-                        }
-                        $post = ['flCartaDisponibilidad', 'flCroquis', 'flPlanoCorregido', 'flMinuta', 'flCartaMOPT'];
-                        $postIds = ['idCartaDisponibilidad', 'idCroquis', 'idPlanoCorregido', 'idMinuta', 'idCartaMOPT'];
-                        $tipoRequisito = 26;
-                        //carta de disponibilidad
-                        for ($i = 0; $i < count($post); $i++){
-                            if (isset($_FILES[$post[$i]]) && $_FILES[$post[$i]]['error'] === UPLOAD_ERR_OK) {
-                                $urlArchivo = $rutaDestino.time().basename($_FILES[$post[$i]]['name']);
-                                if (move_uploaded_file($_FILES[$post[$i]]['tmp_name'], $urlArchivo)) {
-                                    $cartaDisponibilidad = new DetalleSolicitud();
-                                    $cartaDisponibilidad->setId($_POST[$postIds[$i]]);
-                                    $cartaDisponibilidad->setCumple(1);
-                                    $cartaDisponibilidad->setCampoRequisito($urlArchivo);
-                                    $cartaDisponibilidad->setIdSolicitud($idSolicitud);
-                                    $cartaDisponibilidad->setTipoRequisito($tipoRequisito);
-                                    $registrar[] = $cartaDisponibilidad;
-                                }
-                            }    
-                        }
-                        //Firma
-                        if (isset($_POST['firma'])){
-                            $firma = $_POST['firma'];
-                            $firma = str_replace("data:image/png;base64,", "", $firma);
-                            $firma = str_replace(" ", "+", $firma);
-                            $imagen = base64_decode($firma);
-                            $archivo = "repo/firmas/firma_" . time() . ".png";
-                            file_put_contents($archivo, $imagen);
-                            $soliFirma = new DetalleSolicitud();
-                            $soliFirma->setId($_POST['idFirma']);
-                            $soliFirma->setCumple(1);
-                            $soliFirma->setIdSolicitud($idSolicitud);
-                            $soliFirma->setCampoRequisito($archivo);
-                            $soliFirma->setTipoRequisito(31);
-                            $registrar[] = $soliFirma;
-                            var_dump($imagen);
-                            echo $archivo;
-                        }
+                    //Firma
+                    if (isset($_POST['firma'])){
+                        $firma = $_POST['firma'];
+                        $firma = str_replace("data:image/png;base64,", "", $firma);
+                        $firma = str_replace(" ", "+", $firma);
+                        $imagen = base64_decode($firma);
+                        $archivo = "repo/firmas/firma_" . time() . ".png";
+                        file_put_contents($archivo, $imagen);
+                        $soliFirma = new DetalleSolicitud();
+                        $soliFirma->setId($_POST['idFirma']);
+                        $soliFirma->setCumple(1);
+                        $soliFirma->setIdSolicitud($idSolicitud);
+                        $soliFirma->setCampoRequisito($archivo);
+                        $soliFirma->setTipoRequisito(31);
+                        $registrar[] = $soliFirma;
+                        var_dump($imagen);
+                        echo $archivo;
                     }
-                    if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
-                        header('location: index.php?controlador=Tramites&metodo=Visado');
-                    } else {
-                        $this->Actualizar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI', $idSolicitud);
-                    }
+                }
+                if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
+                    header('location: index.php?controlador=Tramites&metodo=Visado');
+                } else {
+                    $this->Actualizar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI', $idSolicitud);
                 }
             }
         }
@@ -195,7 +191,17 @@ class VisadoControlador {
                             $tipoRequisito++;
                         }
                     } else {
-                        $validacionArchivos = false;
+                        if ($filePost[$i] == 'flCartaMOPT'){
+                            $adjunto = new DetalleSolicitud();
+                            $adjunto->setCumple(1);
+                            $adjunto->setCampoRequisito('');
+                            $adjunto->setTipoRequisito($tipoRequisito);
+                            $registrar[] = $adjunto;
+                            $tipoRequisito++;
+                            $validacionArchivos = true;
+                        } else {
+                            $validacionArchivos = false;
+                        }
                         break;
                     }
                 }

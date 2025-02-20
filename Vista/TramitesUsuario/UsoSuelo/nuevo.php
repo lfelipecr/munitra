@@ -136,7 +136,7 @@
               <span class="mb-3">Plano Catastro</span><br>
               <input type="file" class="form-control" name="planoCatastro" id="txtPlanoCatastro">
             </div>
-            <input type="hidden" name="estadoSolicitud" id="slEstado" value="2">
+            <input type="hidden" name="estadoSolicitud" id="slEstado" value="1">
             <div class="col-12">
                 <span class="mb-3">Uso de Suelo Digital</span>
                 <input type="checkbox" id="cbxDigital">

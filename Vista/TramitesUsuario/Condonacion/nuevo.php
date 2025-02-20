@@ -159,7 +159,7 @@
                 <input type="hidden" class="form-control" name="plazo" id="plazo">
                 <input type="hidden" class="form-control" name="fechaNotificacion" id="fechaNotificacion">
                 <input type="hidden" name="cumple" value="0" id="valorCumple">
-                <input type="hidden" value="2" name="estadoSolicitud">
+                <input type="hidden" value="1" name="estadoSolicitud">
             </div>
             <div class="col-12 py-2">
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>

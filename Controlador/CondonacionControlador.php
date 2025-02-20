@@ -77,7 +77,6 @@ class CondonacionControlador {
     function Actualizar(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
-            //if
             //Si todos los datos están correctos, guarda la solicitud y obtiene el id
             $solicitudM = new SolicitudM();
             $solicitud = new Solicitud();
@@ -96,25 +95,27 @@ class CondonacionControlador {
                 'pagoPorCuota', 'resolucion', 'plazo', 'fechaNotificacion', 'cumple'];
                 $postIds = ['idRepresentante', 'idIdentificacionRepresentante', 'idDireccion', 'idNotificaciones',
                 'idTipoSolicitud', 'idFirma', 'idRecibido', 'idFecha', 'idFuncionario', 'idConsecutivo',
-                'totalCondonado', 'montoCondonarContado', 'fechaPago', 'totalArreglo',
-                'montoCondonarArreglo', 'fechaInicio', 'plazoMeses', 'cantidadCuotas', 'adelanto',
-                'pagoPorCuota', 'resolucion', 'plazo', 'fechaNotificacion', 'cumple'];
+                'idTotalContado', 'idMontoCondonarContado', 'idFechaPago', 'idTotalArreglo',
+                'idMontoCondonarArreglo', 'idFechaInicio', 'idPlazoMeses', 'idCantidadCuotas', 'idAdelanto',
+                'idPagoPorCuota', 'idResolucion', 'idPlazo', 'idFechaNotificacion', 'idCumple'];
                 $tipoRequisito = 32;
                 for ($i = 0; $i < count($post); $i++){
                     if ($tipoRequisito == 37){
-                        $firma = $_POST['firma'];
-                        $firma = str_replace("data:image/png;base64,", "", $firma);
-                        $firma = str_replace(" ", "+", $firma);
-                        $imagen = base64_decode($firma);
-                        $archivo = "repo/firmas/firma_" . time() . ".png";
-                        file_put_contents($archivo, $imagen);
-                        $soliFirma = new DetalleSolicitud();
-                        $soliFirma->setId($_POST['idFirma']);
-                        $soliFirma->setCumple(1);
-                        $soliFirma->setIdSolicitud($idSolicitud);
-                        $soliFirma->setCampoRequisito($archivo);
-                        $soliFirma->setTipoRequisito(37);
-                        $registrar[] = $soliFirma;
+                        if (isset($_POST['firma'])){
+                            $firma = $_POST['firma'];
+                            $firma = str_replace("data:image/png;base64,", "", $firma);
+                            $firma = str_replace(" ", "+", $firma);
+                            $imagen = base64_decode($firma);
+                            $archivo = "repo/firmas/firma_" . time() . ".png";
+                            file_put_contents($archivo, $imagen);
+                            $soliFirma = new DetalleSolicitud();
+                            $soliFirma->setId($_POST['idFirma']);
+                            $soliFirma->setCumple(1);
+                            $soliFirma->setIdSolicitud($idSolicitud);
+                            $soliFirma->setCampoRequisito($archivo);
+                            $soliFirma->setTipoRequisito(37);
+                            $registrar[] = $soliFirma;
+                        }
                     } else {
                         $detalle = new DetalleSolicitud();
                         $detalle->setId($_POST[$postIds[$i]]);
@@ -198,19 +199,21 @@ class CondonacionControlador {
                 
                 for ($i = 0; $i < count($post); $i++){
                     if ($tipoRequisito == 37){
-                        //firma
-                        $firma = $_POST['firma'];
-                        $firma = str_replace("data:image/png;base64,", "", $firma);
-                        $firma = str_replace(" ", "+", $firma);
-                        $imagen = base64_decode($firma);
-                        $archivo = "repo/firmas/firma_" . time() . ".png";
-                        file_put_contents($archivo, $imagen);
-                        $soliFirma = new DetalleSolicitud();
-                        $soliFirma->setCumple(1);
-                        $soliFirma->setIdSolicitud($idSolicitud);
-                        $soliFirma->setCampoRequisito($archivo);
-                        $soliFirma->setTipoRequisito($tipoRequisito);
-                        $registrar[] = $soliFirma;
+                        if (isset($_POST['firma'])){
+                            //firma
+                            $firma = $_POST['firma'];
+                            $firma = str_replace("data:image/png;base64,", "", $firma);
+                            $firma = str_replace(" ", "+", $firma);
+                            $imagen = base64_decode($firma);
+                            $archivo = "repo/firmas/firma_" . time() . ".png";
+                            file_put_contents($archivo, $imagen);
+                            $soliFirma = new DetalleSolicitud();
+                            $soliFirma->setCumple(1);
+                            $soliFirma->setIdSolicitud($idSolicitud);
+                            $soliFirma->setCampoRequisito($archivo);
+                            $soliFirma->setTipoRequisito($tipoRequisito);
+                            $registrar[] = $soliFirma;
+                        }
                     } else {
                         $detalle = new DetalleSolicitud();
                         $detalle->setCumple(1);

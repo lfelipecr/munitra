@@ -100,7 +100,7 @@
                 <input type="hidden" id="idDigital" name="idDigital">
                 <input type="hidden" name="digital" value="" id="valorDigital">
             </div>    
-            <input type="hidden" name="estadoSolicitud" id="slEstado" value="2">      
+            <input type="hidden" name="estadoSolicitud" id="slEstado" value="1">      
             <div class="col-12 py-2">
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
             </div>

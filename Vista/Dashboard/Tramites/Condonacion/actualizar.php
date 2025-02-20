@@ -70,14 +70,10 @@
               <input type="hidden" id="idRecibido" name="idRecibido">
               <input type="text" name="recibido" id="txtRecibido" class="form-control">
             </div>
-            <div class="col-md-12 mt-md-3 text-center">
-              <span class="mb-3">Firma (*)</span><br>
-              <canvas id="canvas" class="w-100 mx-auto" style="max-width: 300px;" height="200"></canvas>
-
+            <div class="col-12 mt-md-3 text-center">
+              <span class="mb-3 embedTxt">Firma (*)</span><br>
+              <img src="" class="img-fluid border rounded" id="firmaCredenciales" alt="">
               <br>
-              <input type="hidden" id="idFirma" name="idFirma">
-              <input type="hidden" name="firma" id="firma">
-              <button id="clear" class="btn btn-outline-danger">Limpiar</button>
             </div>
             <div class="col-12"><hr></div>
             <div class="col-12 text-center">
@@ -103,24 +99,24 @@
                 </select>
             </div>
             <div id="pagoContado" class="row">
-                <div class="col-md-12 mt-3">
-                    <span><strong>Modalidad: Pago de Contado</strong></span>
-                </div>
-                <div class="col-md-6 mt-md-3">
-                    <span class="mb-3">Total</span><br>  
-                    <input type="hidden" id="idTotalContado" name="idTotalContado">
-                    <input type="number" class="form-control" name="totalContado" id="totalContado">
-                </div>
-                <div class="col-md-6 mt-md-3">
-                    <span class="mb-3">Monto a Condonar</span><br>  
-                    <input type="hidden" id="idMontoCondonarContado" name="idMontoCondonarContado">
-                    <input type="number" class="form-control" name="montoCondonarContado" id="montoCondonarContado">
-                </div>
-                <div class="col-md-12 mt-md-3">
-                    <span class="mb-3">Fecha de pago</span><br>  
-                    <input type="hidden" id="idFechaPago" name="idFechaPago">
-                    <input type="date" class="form-control" name="fechaPago" id="fechaPago">
-                </div>
+              <div class="col-md-12 mt-3">
+                  <span><strong>Modalidad: Pago de Contado</strong></span>
+              </div>
+              <div class="col-md-6 mt-md-3">
+                  <span class="mb-3">Total</span><br>  
+                  <input type="hidden" id="idTotalContado" name="idTotalContado">
+                  <input type="number" class="form-control" name="totalContado" id="totalContado">
+              </div>
+              <div class="col-md-6 mt-md-3">
+                  <span class="mb-3">Monto a Condonar</span><br>  
+                  <input type="hidden" id="idMontoCondonarContado" name="idMontoCondonarContado">
+                  <input type="number" class="form-control" name="montoCondonarContado" id="montoCondonarContado">
+              </div>
+              <div class="col-md-12 mt-md-3">
+                  <span class="mb-3">Fecha de pago</span><br>  
+                  <input type="hidden" id="idFechaPago" name="idFechaPago">
+                  <input type="date" class="form-control" name="fechaPago" id="fechaPago">
+              </div>
             </div>
             <div id="pagoArreglo" class="row">
                 <div class="col-md-12 mt-3">
@@ -257,7 +253,6 @@
     </div>
   </main>
   <script src="./Vista/assets/js/condonaciones.js"></script>
-  <script src="./Vista/assets/js/firmas.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
   <script src="./Vista/assets/js/visualizacionSolicitudes.js"></script>
   <script src="./Vista/assets/js/bitacoraInterna.js"></script>

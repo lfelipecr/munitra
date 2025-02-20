@@ -72,7 +72,7 @@ class ConsultaControlador{
                                     </html>';
                     $mail->Body = $cuerpoEmail;
                     $mail->send();
-                    $_SESSION['consulta'] = $consulta;
+                    //$_SESSION['consulta'] = $consulta;
                     echo 'OK';
                 } catch(Exception $e){
                     var_dump($e);
@@ -168,7 +168,7 @@ class ConsultaControlador{
                                 </html>';
                 $mail->Body = $cuerpoEmail;
                 $mail->send();
-                $_SESSION['consulta'] = $consulta;
+                //$_SESSION['consulta'] = $consulta;
                 echo $id;
             } catch(Exception $e){
                 var_dump($e);

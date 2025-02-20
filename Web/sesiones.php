@@ -91,7 +91,18 @@
                 <div class="col-md-9"></div>
             </div>
             <hr>
-            <div class="row mb-3" id="sesiones" style="padding-top: 5em; padding-bottom: 5em">
+            <div class="row mb-3">
+                <div class="col-12" style="padding-top: 5em; padding-bottom: 5em">
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Sesión</th>
+                        <th scope="col" class="text-end">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sesiones"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- Footer-->

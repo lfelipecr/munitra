@@ -40,23 +40,23 @@ $(document).ready(function (){
                         break;
                     case '26':
                         $('#idCartaDisponibilidad').val(datos[i][0]);
-                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3">Carta de Disponibilidad:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
+                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3 embedTxt">Carta de Disponibilidad:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
                         break;
                     case '27':
                         $('#idCroquis').val(datos[i][0]);
-                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3">Croquis:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
+                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3 embedTxt">Croquis:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
                         break;
                     case '28':
                         $('#idPlanoCorregido').val(datos[i][0]);
-                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3">Plano Corregido:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
+                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3 embedTxt">Plano Corregido:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
                         break;
                     case '29':
                         $('#idMinuta').val(datos[i][0]);
-                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3">Copia de la Minuta:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
+                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3 embedTxt">Copia de la Minuta:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
                         break;
                     case '30':
                         $('#idCartaMOPT').val(datos[i][0]);
-                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3"> Carta de certificación MOPT:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
+                        $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3 embedTxt"> Carta de certificación MOPT:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
                         break;
                     case '31':
                         document.getElementById('firmaCredenciales').src = datos[i][1];
