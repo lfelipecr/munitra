@@ -53,6 +53,7 @@ class DepartamentoM
                 $departamento = new Departamento();
                 $departamento->setId($fila["ID"]);
                 $departamento->setDescripcion($fila["DESCRIPCION"]);
+                $departamento->setJefe($fila['JEFE']);
                 $registro[] = $departamento;
             }
         }

@@ -81,98 +81,95 @@
             <div class="container-fluid p-0">
                 <div class="row g-0">
                     <div class="col-md-6 order-md-1 order-2 showcase-img d-flex align-items-center justify-content-center">
-                        <?php if ($consulta == NULL) {?>    
-                            <div class="card p-5 m-md-5 w-100">
-                                <span class="lead mb-1">Si tiene algún consulta o necesita ayuda, no dude en escribirnos Haremos todo lo posible por darle respuesta a la brevedad.</span>
+                        <div class="card p-5 m-md-5 w-100">
+                            <span class="lead mb-1">Si tiene algún consulta o necesita ayuda, no dude en escribirnos Haremos todo lo posible por darle respuesta a la brevedad.</span>
+                            <div class="udDepartamento" id="consulta">
+                                <p class="d-inline-flex gap-1">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between departamento"  data-bs-toggle="collapse" href="#collapseConsulta" role="button">
+                                            <h4>Consultas</h4>
+                                            <span><svg class="iconDpto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#f3aa16" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></span>                                            
+                                        </div>
+                                    </div>
+                                </p>
+                                <div class="collapse" id="collapseConsulta">
                                 <div class="mb-2">
-                                    <label for="" class="form-label">Identificación *</label>
-                                    <input type="email" class="form-control" id="identificacionConsulta">
-                                </div>
-                                <div class="mb-2">
-                                    <label for="" class="form-label">Nombre Completo *</label>
-                                    <input type="email" class="form-control" id="nombreConsulta">
-                                </div>
-                                <div class="mb-2">
-                                    <label for="" class="form-label">Telefono *</label>
-                                    <input type="text" class="form-control" id="telefonoConsulta">
-                                </div>
-                                <div class="mb-2">
-                                    <label for="" class="form-label">Correo *</label>
-                                    <input type="text" class="form-control" id="correoConsulta">
-                                </div>
-                                <div class="mb-2">
-                                    <label for="" class="form-label">Asunto *</label>
-                                    <input type="text" class="form-control" id="asuntoConsulta">
-                                </div>                                
-                                <div class="mb-2">
-                                    <label for="" class="form-label">Consulta *</label>
-                                    <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
-                                </div>
-                                <div class="mb-2 d-flex">
-                                    <label for="" class="form-label">Generar Denuncia</label>
-                                    <input type="checkbox" class="mb-1 mx-1" id="cbxDenuncia">
-                                </div>
-                                <input type="hidden" value="0" id="idConsultado">
-                                <div class="mb-2 text-end">
-                                    <?php if ($consulta == NULL) {?>
-                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha">
+                                        <label for="" class="form-label">Identificación *</label>
+                                        <input type="email" class="form-control" id="identificacionConsulta">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Nombre Completo *</label>
+                                        <input type="email" class="form-control" id="nombreConsulta">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Telefono *</label>
+                                        <input type="text" class="form-control" id="telefonoConsulta">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Correo *</label>
+                                        <input type="text" class="form-control" id="correoConsulta">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Asunto *</label>
+                                        <input type="text" class="form-control" id="asuntoConsulta">
+                                    </div>                                
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Consulta *</label>
+                                        <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                                    </div>
+                                    <input type="hidden" id="tipoConsulta" value="2">
+                                    <input type="hidden" value="0" id="idConsultado">
+                                    <div class="mb-2 text-end">
+                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha" onclick="EnviarCaptcha();">
                                             <span>Enviar</span>
                                         </button>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        <?php } else {?>
-                            <div class="d-block">
-                                <div class="card p-5 m-md-2 mx-md-5 w-100">
-                                <?php if ($consulta->getIdConsultado() != 0) {?>
-                                    <p>Su consulta al funcionario(a) <?php echo $persona->getNombre().' '.$persona->getPrimerApellido().' '.$persona->getSegundoApellido();?> 
-                                    está siendo <strong>procesada</strong>, una vez sea respondida, podrá realizar nuevas consultas. <strong>Gracias  por su paciencia</strong></p>
-                                <?php } else { ?>
-                                    <p>Su consulta a la Municipalidad de Río Cuarto está siendo <strong>procesada</strong>, una vez sea respondida, podrá realizar nuevas consultas. <strong>Gracias  por su paciencia</strong></p>
-                                <?php } ?>
-                                </div>
-                                <div class="card p-5 m-md-2 mx-md-5 w-100">
-                                    <div class="row">
-                                        <div class="col-md-4 text-center">
-                                            <h4>
-                                            <?php 
-                                                if($estadisticas != null){
-                                                    echo $estadisticas['Totales'];
-                                                } else {
-                                                    echo '0';
-                                                }
-                                            ?>
-                                            </h4>
-                                            <p>Consultas Totales</p>
-                                        </div>
-                                        <div class="col-md-4 text-center">
-                                            <h4>
-                                            <?php 
-                                                if($estadisticas != null){
-                                                    echo $estadisticas['FechaHoy'];
-                                                } else {
-                                                    echo '0';
-                                                }
-                                            ?>
-                                            </h4>
-                                            <p>Consultas Recibidas Hoy</p>
-                                        </div>
-                                        <div class="col-md-4 text-center">
-                                            <h4>
-                                            <?php 
-                                                if($estadisticas != null){
-                                                    echo $estadisticas['Pendientes'];
-                                                } else {
-                                                    echo '0';
-                                                }
-                                            ?>
-                                            </h4>
-                                            <p>Pendientes de atención</p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        <?php } ?>
+                            <div class="udDepartamento" id="denuncias">
+                                <p class="d-inline-flex gap-1">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between departamento"  data-bs-toggle="collapse" href="#collapseDenuncias" role="button">
+                                            <h4>Denuncias</h4>
+                                            <span><svg class="iconDpto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#f3aa16" d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32L0 64 0 368 0 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-128 64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30l0-247.7c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48l0-16z"/></svg></span>
+                                        </div>
+                                    </div>
+                                </p>
+                                <div class="collapse" id="collapseDenuncias">                                        
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Identificación *</label>
+                                        <input type="email" class="form-control" id="identificacionConsulta">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Nombre Completo *</label>
+                                        <input type="email" class="form-control" id="nombreConsulta">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Telefono *</label>
+                                        <input type="text" class="form-control" id="telefonoConsulta">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Correo *</label>
+                                        <input type="text" class="form-control" id="correoConsulta">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Asunto *</label>
+                                        <input type="text" class="form-control" id="asuntoConsulta">
+                                    </div>                                
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Consulta *</label>
+                                        <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                                    </div>
+                                    <input type="hidden" id="tipoConsulta" value="1">
+                                    <input type="hidden" value="0" id="idConsultado">
+                                    <div class="mb-2 text-end">
+                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha" onclick="EnviarCaptcha();">
+                                            <span>Enviar</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6 order-md-2 order-1 my-auto showcase-text">
                         <h2>Contactenos!</h2>

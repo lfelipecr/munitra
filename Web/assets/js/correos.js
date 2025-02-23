@@ -1,3 +1,12 @@
+function EnviarCaptcha(){
+    $('#btnEnviarCorreo').show();
+    $('#captchaInput').val('');
+    $('#catpchaInfo').html('Ingrese el siguiente código para enviar su consulta:');
+    $('#captchaInput').removeAttr('disabled');
+    captchaGenerado = Math.random().toString(36).substring(2, 8).toUpperCase();
+    captcha = captchaGenerado;
+    document.getElementById("captchaText").innerText = captchaGenerado;
+}
 function MostrarConversacion(){
     let consultas = $('#consultas').val();
     if (consultas != undefined){
@@ -58,22 +67,10 @@ $(document).ready(function (){
             $('#txtCuerpo').val('');
         }
     });
-    $('#btnEnviarCaptcha').on('click', function(){
-        $('#btnEnviarCorreo').show();
-        $('#captchaInput').val('');
-        $('#catpchaInfo').html('Ingrese el siguiente código para enviar su consulta:');
-        $('#captchaInput').removeAttr('disabled');
-        captchaGenerado = Math.random().toString(36).substring(2, 8).toUpperCase();
-        captcha = captchaGenerado;
-        document.getElementById("captchaText").innerText = captchaGenerado;
-    });
     $('#btnEnviarCorreo').on('click', function(){
         let captchaGenerado = $('#captchaInput').val();
         if (captcha == captchaGenerado){
-            let tipo = 1;
-            if ($('#cbxDenuncia').prop('checked')){
-                tipo = 2;
-            }
+            let tipo = $('#tipoConsulta').val(); 
             if ($('#identificacionConsulta').val().trim() != '' && $('#nombreConsulta').val().trim() != '' &&
             $('#telefonoConsulta').val().trim() != '' && $('#correoConsulta').val().trim() != '' &&
             $('#asuntoConsulta').val().trim() != '' && $('#cuerpoConsulta').val().trim() != '')
@@ -131,5 +128,21 @@ $(document).ready(function (){
             document.getElementById("captchaText").innerText = captchaGenerado;
         }
     });
-    MostrarConversacion();
+    $('#consulta').on('click', function (){
+        let html = $('#collapseDenuncias').html();
+        if (html != ''){
+            $('#collapseDenuncias').html('');
+            $('#collapseConsulta').html(html);
+        }
+        $('#tipoConsulta').val(1);
+    });
+    $('#denuncias').on('click', function (){
+        let html = $('#collapseConsulta').html();
+        if (html != ''){
+            $('#collapseConsulta').html('');
+            $('#collapseDenuncias').html(html);
+        }
+        $('#tipoConsulta').val(2);
+        
+    });
 });

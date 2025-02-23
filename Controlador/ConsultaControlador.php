@@ -55,15 +55,14 @@ class ConsultaControlador{
                     $mail->addAddress(trim($consulta->getCorreo()));
                     $mail->isHTML(true);
                     //Trata la string para que sea solo el contenido y no todo el JSON
-                    preg_match('/^(.*?) - \d{4}-\d{2}-\d{2}/', substr($consulta->getRespuesta(), 2, -2), $matches);
-                    $consultaTrim = trim($matches[1]);
+                    //preg_match('/^(.*?) - \d{4}-\d{2}-\d{2}/', substr($cuerpo, 2, -2), $matches);
                     $cuerpoEmail = '<html><head><meta charset="UTF-8"><style>body {font-family: Arial, sans-serif; line-height: 1.6;color: #333;}.container { max-width: 600px; margin: 0 auto;padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: #f9f9f9; }.title {font-size: 18px;font-weight: bold; color: #555;}.content {margin-top: 10px;}.info {margin-top: 15px;padding: 10px; background-color: #eef;border-left: 4px solidrgb(10, 41, 75);}</style></head><body><div class="container">';
                     $mail->Subject = 'Respuesta - Municipalidad de Río Cuarto: '.$consulta->getAsunto();
                     $cuerpoEmail = $cuerpoEmail.'<p class="title">Municipalidad de Río Cuarto</p>';
                     $cuerpoEmail = $cuerpoEmail.'<div class="content">">
                                             <p><strong>Respuesta:</strong> </br></p>
                                             <p id="consulta">
-                                                '.$consultaTrim.'
+                                                '.$cuerpo.'
                                             </p>
                                             <p><strong>Atte:</strong> '.$persona->getNombre().' '.$persona->getPrimerApellido().' '.$persona->getSegundoApellido().'</p>
                                             </div>

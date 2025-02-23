@@ -37,8 +37,7 @@ class TramitesControlador {
                 $this->Declaraciones();
                 break;
             default:
-                $vista = './Vista/TramitesUsuario/listadoTramites.php';
-                require_once './Vista/Utilidades/navbar.php';
+                header('location: index.php?controlador=Externo&metodo=Index');
                 break;
         }
         

@@ -85,6 +85,7 @@ class WebControlador {
         $consultaM = new ConsultaM();
         $deptomodel = new DepartamentoM();
         $personaM = new PersonaM();
+        $deptos = json_encode($deptomodel->BuscarDepartamentos());
         $tiposSolicitud = $deptomodel->BuscarTiposSolicitud();
         $consulta = null;
         if (isset($_SESSION['consulta'])){

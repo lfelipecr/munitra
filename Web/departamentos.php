@@ -80,6 +80,7 @@
         <div class="container">
             <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
             <input type="hidden" id="tramites" value='<?php echo $tiposSolicitud; ?>'>
+            <input type="hidden" id="deptos" value='<?php echo $deptos; ?>'>
             <section class="testimonials text-center">
                 <div class="container">
                     <h2 class="mb-4">Departamentos</h2>
@@ -326,6 +327,20 @@
                     </div>
                     <div class="modal-body">
                         <div class="row" id="docs">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalTramites" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Trámites Departamentales</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" id="tramitesModal">
                         </div>
                     </div>
                 </div>
