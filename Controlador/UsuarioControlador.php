@@ -350,7 +350,7 @@ class UsuarioControlador
                 $usuarioM = new UsuarioM();
                 $usuario->setIdEstado(1);
                 if ($usuarioM->Actualizar($usuario)){
-                    header('location: index.php?controlador=Tramites&metodo=ListadoTramites');
+                    header('location: index.php?controlador=Tramites&metodo=InicioExterno');
                 }
             } else {
                 $msg = 'El código proporcionado no es el correcto, intente de nuevo o reciba otro código';

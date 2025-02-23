@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    //Librería Selects
-    $('#slProvincia').select2();
-    $('#slCanton').select2();
-    $('#slDistrito').select2();
     //Formulario de creacion de cuenta en plataforma
     function CheckboxUsuario(){
         if ($('#cbxGenerarUsuario').prop('checked')) {

@@ -54,7 +54,7 @@
                             <button class="btn-outline-warning btn w-100" type="submit">
                                 <span class="p-1 px-md-5 p-1">Ingresar</span>
                             </button>
-                            <a href="index.php?controlador=Tramites&metodo=ListadoTramites" class="btn-outline-danger btn w-100">
+                            <a href="index.php?controlador=Tramites&metodo=InicioExterno" class="btn-outline-danger btn w-100">
                                 <span class="p-1 px-md-5 p-1">Cancelar</span>
                             </a>
                         </div>

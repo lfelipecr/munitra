@@ -84,9 +84,9 @@
               <span class="mb-3">Provincia (*)</span>
               <select name="provincia" class="form-control" id="slProvincia">
                 <?php for ($i = 0; $i < sizeof($arrLocaciones[0]); $i++) {?>
-                  <option value="<?php echo $arrLocaciones[0][$i]->getId();?>">
+                <option value="<?php echo $arrLocaciones[0][$i]->getId();?>">
                     <span><?php echo $arrLocaciones[0][$i]->getNombre();?></span>
-                  </option>
+                </option>
                 <?php } ?>
               </select>
             </div>
@@ -94,9 +94,9 @@
               <span class="mb-3">Cantón (*)</span>
               <select name="canton" class="form-control" id="slCanton">
                 <?php for ($i = 0; $i < sizeof($arrLocaciones[1]); $i++) {?>
-                  <option value="<?php echo $arrLocaciones[1][$i]->getId();?>">
+                <option value="<?php echo $arrLocaciones[1][$i]->getId();?>" data-provinciaCanton="<?php echo $arrLocaciones[1][$i]->getIdProvincia();?>" class="cantones">
                     <span><?php echo $arrLocaciones[1][$i]->getNombre();?></span>
-                  </option>
+                </option>
                 <?php } ?>
               </select>
             </div>
@@ -104,9 +104,9 @@
               <span class="mb-3">Distrito (*)</span>
               <select name="distrito" class="form-control" id="slDistrito">
                 <?php for ($i = 0; $i < sizeof($arrLocaciones[2]); $i++) {?>
-                  <option value="<?php echo $arrLocaciones[2][$i]->getId();?>">
+                <option value="<?php echo $arrLocaciones[2][$i]->getId();?>" data-provinciaDistrito="<?php echo $arrLocaciones[2][$i]->getIdProvincia();?>" data-canton="<?php echo $arrLocaciones[2][$i]->getIdCanton();?>" class="distritos">
                     <span><?php echo $arrLocaciones[2][$i]->getNombre();?></span>
-                  </option>
+                </option>
                 <?php } ?>
               </select>
             </div>
@@ -172,3 +172,4 @@
   </main>
   <script src="./Vista/assets/js/usuarios.js"></script>
   <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
+  <script src="./Vista/assets/js/dashboardDependencia/locaciones.js"></script>

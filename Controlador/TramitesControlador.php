@@ -14,6 +14,13 @@ class TramitesControlador {
         session_start();
         $usuario = $_SESSION['usuario']->getIdPersona();
         $estado = $_SESSION['usuario']->getIdEstado();
+        $vista = './Vista/TramitesUsuario/listadoTramites.php';
+        require_once './Vista/Utilidades/navbar.php';
+    }
+    function InicioExterno(){
+        session_start();
+        $usuario = $_SESSION['usuario']->getIdPersona();
+        $estado = $_SESSION['usuario']->getIdEstado();
         $tramite = 0;
         if (isset($_SESSION['tramite'])){
             $tramite = $_SESSION['tramite'];

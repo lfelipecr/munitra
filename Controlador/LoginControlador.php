@@ -87,7 +87,7 @@ class LoginControlador
     function InicioTramites(){
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
-            header('location: index.php?controlador=Tramites&metodo=ListadoTramites');
+            header('location: index.php?controlador=Tramites&metodo=InicioExterno');
         }
     }
     function AdminInicio(){

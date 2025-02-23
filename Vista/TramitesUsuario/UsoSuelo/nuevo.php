@@ -79,21 +79,21 @@
             <div class="col-md-4">
               <span class="mb-3">Cantón (*)</span>
               <select name="canton" class="form-control" id="slCanton">
-                <?php for ($i = 0; $i < sizeof($arrLocaciones[1]); $i++) {?>
-                  <option value="<?php echo $arrLocaciones[1][$i]->getId();?>" id="canton<?php echo $arrLocaciones[1][$i]->getId();?>">
-                    <span><?php echo $arrLocaciones[1][$i]->getNombre();?></span>
+                  <?php for ($i = 0; $i < sizeof($arrLocaciones[1]); $i++) {?>
+                  <option value="<?php echo $arrLocaciones[1][$i]->getId();?>" id="canton<?php echo $arrLocaciones[1][$i]->getId();?>" data-provinciaCanton="<?php echo $arrLocaciones[1][$i]->getIdProvincia();?>" class="cantones">
+                      <span><?php echo $arrLocaciones[1][$i]->getNombre();?></span>
                   </option>
-                <?php } ?>
+                  <?php } ?>
               </select>
             </div>
             <div class="col-md-4">
               <span class="mb-3">Distrito (*)</span>
-              <select name="distritoPersona" class="form-control" id="slDistrito">
-                <?php for ($i = 0; $i < sizeof($arrLocaciones[2]); $i++) {?>
-                  <option value="<?php echo $arrLocaciones[2][$i]->getId();?>" id="distrito<?php echo $arrLocaciones[2][$i]->getId();?>">
-                    <span><?php echo $arrLocaciones[2][$i]->getNombre();?></span>
+              <select name="distrito" class="form-control" id="slDistrito">
+                  <?php for ($i = 0; $i < sizeof($arrLocaciones[2]); $i++) {?>
+                  <option value="<?php echo $arrLocaciones[2][$i]->getId();?>" id="distrito<?php echo $arrLocaciones[2][$i]->getId();?>" data-provinciaDistrito="<?php echo $arrLocaciones[2][$i]->getIdProvincia();?>" data-canton="<?php echo $arrLocaciones[2][$i]->getIdCanton();?>" class="distritos">
+                      <span><?php echo $arrLocaciones[2][$i]->getNombre();?></span>
                   </option>
-                <?php } ?>
+                  <?php } ?>
               </select>
             </div>
             <div class="col-12"><hr></div>
@@ -159,10 +159,6 @@
     </div>
   </main>
   <script src="./Vista/assets/js/usosuelo.js"></script>
-  <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
+  <script src="./Vista/assets/js/dashboardDependencia/locaciones.js"></script>
   <script src="./Vista/assets/js/busquedaDinamicaCedula.js"></script>
-  <script>
-    $('#slCanton').select2();
-    $('#slProvincia').select2();
-    $('#slDistrito').select2();
-  </script>
+  <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>

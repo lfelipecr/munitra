@@ -74,25 +74,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="2">Nombre: <span id="nombre"></span></td>
-                            <td>Cédula N°: <span id="numeroCedula"></span></td>
+                            <td colspan="2">Nombre: <span id="nombre"><?php echo $persona->getNombre().' '.$persona->getPrimerApellido().' '.$persona->getSegundoApellido()?></span></td>
+                            <td>Cédula N°: <span id="numeroCedula"><?php echo $persona->getIdentificacion();?></span></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Representante Legal: <span id="representante"></span></td>
-                            <td>Cédula N°: <span id="numeroCedulaRepre"></span></td>
+                            <td colspan="2">Representante Legal: <span id="txtRepresentante"></span></td>
+                            <td>Cédula N°: <span id="txtIdentificacionRepresentante"></span></td>
                         </tr>
                         <tr>
-                            <td colspan="3">Dirección: <span id="direccion"></span></td>
+                            <td colspan="3">Dirección: <span id="txtDireccion"></span></td>
                         </tr>
                         <tr>
-                            <td colspan="3">Notificaciones: <span id="pagoContado" style="padding-right: 5em;padding-left: 3.5em;"><div class="checkbox"></div>Pago  de Contado</span> <span><div class="checkbox"></div>Arreglo de Pago</span> </td>
+                            <td colspan="3">Notificaciones: <span id="txtNotificaciones"></span></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Firma: <span id="firma"></span></td>
-                            <td>Fecha: <span id="fecha"></span></td>
+                            <td colspan="3">Tipo de Solicitud: <span id="txtNotificaciones"></span> <span id="pagoContado" style="padding-right: 5em;padding-left: 3.5em;"><div class="checkbox" id="cbxPagoContado"></div>Pago de Contado</span> <span><div class="checkbox" id="cbxArregloPago"></div>Arreglo de Pago</span> </td>
                         </tr>
                         <tr>
-                            <td style="height: 8em;" colspan="2">Recibido por: <span id="recibido"></span></td>
+                            <td colspan="2">Firma: <img class="img-fluid" id="firma"></img></td>
+                            <td>Fecha: <span id="fecha"><?php echo $solicitud->getFecha();?></span></td>
+                        </tr>
+                        <tr>
+                            <td style="height: 8em;" colspan="2">Recibido por: <span id="txtRecibido"></span></td>
                             <td style="height: 8em;" class="d-flex justify-content-center align-items-center">Sello</td>
                         </tr>
                     </tbody>
@@ -107,39 +110,42 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="1" width="70%">Fecha: <span id="fecha"></span> <hr> Funcionario(a): <span id="funcionario"></span></td>
+                            <td colspan="1" width="70%">Fecha: <span id="fechaInterno"></span> <hr> Funcionario(a): <span id="funcionario"></span></td>
                             <td width="30%"><br> Consecutivo: <span id="consecutivo"></span></td>
                         </tr>
                         <tr class="text-center">
                             <td colspan="2"><h6>MODALIDAD: PAGO DE CONTADO</h6></td>
                         </tr>
                         <tr>
-                            <td>Total: ₡ <span id="total"></span></td>
-                            <td>Monto a condonar: ₡ <span id="montoCondonar"></span></td>
+                            <td>Total: ₡ <span id="totalContado"></span></td>
+                            <td>Monto a condonar: ₡ <span id="montoCondonarContado"></span></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2">Fecha de Pago: <span id="fechaPago"></span></td>
                         </tr>
                         <tr class="text-center">
                             <td colspan="2"><h6>MODALIDAD: ARREGLO DE PAGO</h6></td>
                         </tr>
                         <tr>
-                            <td>Total: ₡ <span id="totalAP"></span></td>
-                            <td>Monto a condonar: ₡ <span id="montoCondonarAP"></span></td>
+                            <td>Total: ₡ <span id="totalArregloPago"></span></td>
+                            <td>Monto a condonar: ₡ <span id="montoCondonarArregloPago"></span></td>
                         </tr>
                         <tr>
-                            <td width="70%">Plazo: <span id="plazo"></span> meses. Del <span id="fechaDesde"></span> hasta <span id="fechaHasta"></span></td>
+                            <td width="70%">Plazo: <span id="plazoMeses"></span> meses. Del <span id="fechaDesde"></span> hasta <span id="fechaHasta"></span></td>
                             <td width="30%">Cantidad de Cuotas <span id="cantidadCuotas"></span></td>
                         </tr>
                         <tr>
-                            <td width="50%">Adelanto 20%: <span id="adelanto20"></span></td>
+                            <td width="50%">Adelanto 20%: <span id="adelanto"></span></td>
                             <td width="50%">Pago por cuota: ₡<span id="pagoCuota"></span></td>
                         </tr>
                         <tr class="text-center">
                             <td colspan="2"><h6>RESOLUCIÓN</h6></td>
                         </tr>
                         <tr class="text-center">
-                            <td colspan="2"><div class="checkbox mx-2"></div><span>Aprobación</span><div class="checkbox mx-2"></div><span>Denegatoria</span></td>
+                            <td colspan="2"><div class="checkbox mx-2" id="cbxAprobacion"></div><span>Aprobación</span><div class="checkbox mx-2" id="cbxDenegatoria"></div><span>Denegatoria</span></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><div class="checkbox"></div><span>Prevención.</span> Plazo: <span id="plazo"></span> Fecha de Notificación <span id="fechaNotificacion"></span><span style="margin-left: 35em;">Cumple:</span><div class="checkbox mx-2"></div><span>Sí</span><div class="checkbox mx-1"></div><span>No</span></td>
+                            <td colspan="2"><div class="checkbox" id="cbxPrevencion"></div><span>Prevención.</span> Plazo: <span id="plazo"></span> Fecha de Notificación <span id="fechaNotificacion"></span><span style="margin-left: 35em;">Cumple:</span><div class="checkbox mx-2" id="cbxCumple"></div><span>Sí</span><div class="checkbox mx-1" id="cbxNoCumple"></div><span>No</span></td>
                         </tr>
                         <tr>
                             <td style="height: 8em;" colspan="">Firma: <span id="firmaMuni"></span></td>
@@ -147,6 +153,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <input type="hidden" id="jsonData" value='<?php echo $jsonData; ?>'>
             </div>
         </div>
     </div>
@@ -156,7 +163,9 @@
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
 <script>
         function RenderizarDatosJSON(){
-            let datos = $('#jsonData').val();
+            let fechaInicio = '';
+            let plazo = 0;
+            let datos = $('#jsonData').val();            
             if (datos != ''){
                 datos = JSON.parse(datos);
                 for (let i = 0; i < datos.length; i++)
@@ -164,6 +173,7 @@
                     switch  (datos[i][4]){
                     case '32':
                         $('#txtRepresentante').html(datos[i][1]);
+                        console.log(datos[i][1])
                         break;
                     case '33':
                         $('#txtIdentificacionRepresentante').html(datos[i][1]);
@@ -176,20 +186,22 @@
                         break;
                     case '36':
                         $('#tipoSolicitud').html(datos[i][1]);
+                        if (datos[i][1] == 'Arreglo de pago'){
+                            $('#cbxArregloPago').addClass('checked');
+                        } else {
+                            $('#cbxPagoContado').addClass('checked');
+                        }
+                        console.log(datos[i][1]);
                         break;
                     case '37':
                         $('#idFirma').html(datos[i][0]);
+                        document.getElementById('firma').src = datos[i][1];
                         break;
                     case '38':
                         $('#txtRecibido').html(datos[i][1]);
                         break;
                     case '39':
-                        $('#fecha').html(datos[i][1]);
-                        break;
-                    case '40':
-                        id = datos[i][1].replaceAll(' ','_');
-                        $('#idFuncionario').html(datos[i][0]);
-                        $('#'+id).attr('selected', '');
+                        $('#fechaInterno').html(datos[i][1]);
                         break;
                     case '41':
                         $('#consecutivo').html(datos[i][1]);
@@ -204,16 +216,23 @@
                         $('#fechaPago').html(datos[i][1]);
                         break;
                     case '45':
-                        $('#totalArreglo').html(datos[i][1]);
+                        $('#totalArregloPago').html(datos[i][1]);
                         break;
                     case '46':
-                        $('#montoCondonarArreglo').html(datos[i][1]);
+                        $('#montoCondonarArregloPago').html(datos[i][1]);
                         break;
                     case '47':
-                        $('#fechaInicio').html(datos[i][1]);
+                        $('#fechaDesde').html(datos[i][1]);
+                        fechaInicio = datos[i][1];
                         break;
                     case '48':
                         $('#plazoMeses').html(datos[i][1]);
+                        console.log(datos[i][1]);
+                        console.log($('#plazoMeses').html())
+                        plazo = datos[i][1];
+                        let fecha = new Date(fechaInicio);
+                        fecha.setMonth(fecha.getMonth() + plazo);
+                        $('#fechaHasta').html(fecha.toISOString().split("T")[0]);
                         break;
                     case '49':
                         $('#cantidadCuotas').html(datos[i][1]);
@@ -226,6 +245,17 @@
                         break;
                     case '52':
                         $('#resolucion').html(datos[i][1]);
+                        switch(datos[i][1]){
+                            case 'Aprobación':
+                                $('#cbxAprobacion').addClass('checked');
+                                break;
+                            case 'Denegatoria':
+                                $('#cbxDenegatoria').addClass('checked');
+                                break;
+                            default: 
+                                $('#cbxPrevencion').addClass('checked');
+                                break;
+                        }
                         break;
                     case '53':
                         $('#plazo').html(datos[i][1]);
@@ -235,6 +265,12 @@
                         break;
                     case '55':
                         $('#valorCumple').html(datos[i][1]);
+                        if (datos[i][1] == '1'){
+                            $('#cbxCumple').addClass('checked');
+                        } else {
+                            $('#cbxNoCumple').addClass('checked');
+                        }
+                        console.log(datos[i][1])
                         break;
                 }
                 }
