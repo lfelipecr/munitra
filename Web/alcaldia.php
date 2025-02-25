@@ -124,7 +124,7 @@
                             </div>
                             <div class="mb-2">
                                 <label for="" class="form-label">Adjuntos</label>
-                                <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
+                                <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAdjuntos">
                             </div>
                             <input type="hidden" value="0" id="idConsultado">
                             <input type="hidden" id="tipoConsulta" value="1">

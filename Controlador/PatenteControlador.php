@@ -207,7 +207,7 @@ class PatenteControlador {
                     if ($archivos){
                         $adjunto = new DetalleSolicitud();
                         $adjunto->setCumple(1);
-                        $adjunto->setId($_POST['idAdjuntos']);
+                        $adjunto->setId($_POST['idRequisitos']);
                         $adjunto->setTipoRequisito(1);
                         $adjunto->setCampoRequisito(json_encode($adjuntos));
                         $registrar[] = $adjunto;

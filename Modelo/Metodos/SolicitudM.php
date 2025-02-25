@@ -208,9 +208,7 @@ class SolicitudM {
         }        
         $conexion->Cerrar();
         if ($retVal){
-            var_dump($solicitud->getId());
             $solicitud = $this->BuscarCabeceraSolicitud($solicitud->getId());
-            var_dump($solicitud);
             $this->EnviarEstado($solicitud->getIdUsuario(), $solicitud->getEstadoSolicitud(), $solicitud->getId());
         }
         return $retVal;
@@ -222,15 +220,18 @@ class SolicitudM {
             $sql = "CALL SpActualizarDetalleSolicitud( ".$arregloDetalles[$i]->getId().
             ", '".$arregloDetalles[$i]->getCampoRequisito().
             "', ".$arregloDetalles[$i]->getCumple().")";
-            try{
-                if($conexion->Ejecutar($sql)){
-                    $retVal = true;
-                } else {
-                    $retVal = false;
-                    break;
+            echo $sql.' - ';
+            if ($sql != "CALL SpActualizarDetalleSolicitud( , '', 1)"){
+                try{
+                    if($conexion->Ejecutar($sql)){
+                        $retVal = true;
+                    } else {
+                        $retVal = false;
+                        break;
+                    }
+                } catch (Exception $ex){                
+                    $retVal=false;
                 }
-            } catch (Exception $ex){
-                $retVal=false;
             }
         }
         $conexion->Cerrar();

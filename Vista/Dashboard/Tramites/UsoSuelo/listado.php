@@ -48,20 +48,33 @@
                 <label for="" class="form-label">Cuerpo *</label>
                 <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
               </div>
+              <div class="mb-2">
+                <label for="" class="form-label">Adjuntos</label>
+                <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAdjuntos">
+              </div>
               <div class="mb-2 text-end">
                 <button type="submit" class="btn btn-warning">
                   <span>Enviar</span>
                 </button>
-              </div>
-              <div class="mb-2">
-                <label for="" class="form-label">Adjuntos</label>
-                <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
               </div>
             </div>
           </div>
         </div>
       </div>
     </form>
+    <div class="modal fade" id="modalDocs" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalBitacoraLabel">Adjuntos</h1>
+            <button type="button" class="btn-close" id="btnCerrarAdjuntos"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row" id="docs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="./Vista/assets/js/listadoSolicitudes.js"></script>
     <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
   </main>

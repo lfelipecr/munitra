@@ -2,6 +2,7 @@ let jsonData = $('#jsonData').val();
 let idUsuario = $('#idUsuario').val();
 let indiceGlobal = 0;
 function Adjuntos(jsonAdjuntos){
+    $('#docs').html('');
     let adjuntos = JSON.parse(jsonAdjuntos);
     for (let i = 0; i < adjuntos.length; i++){
         let docs = $('#docs').html();
@@ -99,7 +100,7 @@ $(document).ready(function (){
             let formData = new FormData();
             formData.append('idConsulta', idConsulta);
             formData.append('cuerpo', cuerpo);
-            let archivos = document.getElementById("idAjuntos").files;
+            let archivos = document.getElementById("idAdjuntos").files;
             for (let i = 0; i < archivos.length; i++) {
                 formData.append("adjuntos[]", archivos[i]);
             }

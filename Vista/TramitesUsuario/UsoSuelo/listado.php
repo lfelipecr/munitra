@@ -39,7 +39,7 @@
               </div>
               <div class="mb-2">
                 <label for="" class="form-label">Adjuntos</label>
-                <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
+                <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAdjuntos">
               </div>
             </div>
             <div class="modal-footer">

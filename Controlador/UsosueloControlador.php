@@ -212,7 +212,6 @@ class UsosueloControlador {
                                     mkdir($rutaDestino, 0777, true);
                                 }
                                 if (move_uploaded_file($_FILES['planoCatastro']['tmp_name'], $urlArchivo)) {
-                                    var_dump($urlArchivo);
                                     //archivo adjunto
                                     $adjunto = new DetalleSolicitud();
                                     $adjunto->setId($_POST['idPlanoCatastro']);

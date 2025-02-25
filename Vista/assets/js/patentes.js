@@ -7,7 +7,7 @@ $(document).ready(function (){
             {
                 switch  (datos[i][4]){
                     case '1':
-                        $('#idAdjuntos').val(datos[i][0]);
+                        $('#idRequisitos').val(datos[i][0]);
                         let adjuntos = JSON.parse(datos[i][1]);
                         for (let i = 0; i < adjuntos.length; i++){
                             let listado = $('#requisitosEmbed').html();

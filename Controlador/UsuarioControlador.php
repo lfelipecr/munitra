@@ -344,7 +344,6 @@ class UsuarioControlador
             $credencialesM = new CredencialesM();
             $codigo = $_POST['codigo'];
             $usuario = $_SESSION['usuario'];
-            var_dump($codigo);
             $datos = $credencialesM->ValidarCodigo($codigo);
             if ($datos != NULL){
                 $usuarioM = new UsuarioM();

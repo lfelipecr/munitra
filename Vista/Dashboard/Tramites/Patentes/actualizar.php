@@ -35,7 +35,7 @@
             <div class="col-12 mt-md-3">
               <span class="mb-3">Adjunte los requisitos para la solicitud de patentes</span> <br>
               <input type="file" class="form-control"  name="requisitos[]" multiple>
-              <input type="hidden" id="idAdjuntos" name="idAdjuntos">
+              <input type="hidden" id="idRequisitos" name="idRequisitos">
               <hr>
               <div class="text-center" id="requisitosEmbed">
                 <h4 class="mb-3">Requisitos</h4>
@@ -150,13 +150,26 @@
             </div>
             <div class="mb-2">
               <label for="" class="form-label">Adjuntos</label>
-              <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
+              <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAdjuntos">
             </div>
             <div class="mb-2 text-end">
                 <a class="btn btn-warning" id="btnEnviarExterno">
                     <span>Enviar</span>
                 </a>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalDocs" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalBitacoraLabel">Adjuntos</h1>
+            <button type="button" class="btn-close" id="btnCerrarAdjuntos"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row" id="docs"></div>
           </div>
         </div>
       </div>

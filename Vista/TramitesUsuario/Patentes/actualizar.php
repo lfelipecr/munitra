@@ -54,7 +54,7 @@
             <div class="col-12 mt-md-3">
               <span class="mb-3">Adjunte los requisitos para la solicitud de patentes</span> <br>
               <input type="file" class="form-control"  name="requisitos[]" multiple>
-              <input type="hidden" id="idAdjuntos" name="idAdjuntos">
+              <input type="hidden" id="idRequisitos" name="idRequisitos">
             </div>
             <div class="col-12 mt-md-3">
               <span class="mb-3">Uso de Patente (*)</span><br>
@@ -129,6 +129,10 @@
                   <label for="" class="">Cuerpo *</label>
                   <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
                 </div>
+                <div class="mb-2">
+                  <label for="" class="form-label">Adjuntos</label>
+                  <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAdjuntos">
+                </div>
                 <div class="mb-2 text-end">
                     <a class="btn btn-warning" id="btnEnviarExterno">
                         <span>Enviar</span>
@@ -139,6 +143,19 @@
           </div>
         </div>
       </form>
+    </div>
+    <div class="modal fade" id="modalDocs" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalBitacoraLabel">Adjuntos</h1>
+            <button type="button" class="btn-close" id="btnCerrarAdjuntos"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row" id="docs"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <script src="./Vista/assets/js/patentes.js"></script>

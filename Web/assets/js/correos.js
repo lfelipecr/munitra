@@ -54,7 +54,7 @@ $(document).ready(function (){
                 formData.append("consulta", $('#cuerpoConsulta').val().trim());
                 formData.append("idConsultado", $('#idConsultado').val());
                 formData.append("tipo", tipo);
-                let archivos = document.getElementById("idAjuntos").files;
+                let archivos = document.getElementById("idAdjuntos").files;
                 for (let i = 0; i < archivos.length; i++) {
                     formData.append("adjuntos[]", archivos[i]);
                 }

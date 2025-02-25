@@ -45,11 +45,14 @@ $(document).ready(function () {
                         break;
                     case '37':
                         $('#idFirma').val(datos[i][0]);
-                        document.getElementById('firmaCredenciales').src = datos[i][1];
+                        if (document.getElementById('firmaCredenciales')){
+                            document.getElementById('firmaCredenciales').src = datos[i][1];
+                        }
                         break;
                     case '38':
                         $('#idRecibido').val(datos[i][0]);
                         $('#txtRecibido').val(datos[i][1]);
+                        console.log(datos[i]);
                         break;
                     case '39':
                         $('#idFecha').val(datos[i][0]);

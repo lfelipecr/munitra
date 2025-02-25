@@ -59,7 +59,9 @@ $(document).ready(function (){
                         $('#requisitosEmbed').html($('#requisitosEmbed').html()+`<span class="mb-3 embedTxt"> Carta de certificación MOPT:</span><embed src="${datos[i][1]}" type="application/pdf" width="100%" height="500px">`);
                         break;
                     case '31':
-                        document.getElementById('firmaCredenciales').src = datos[i][1];
+                        if (document.getElementById('firmaCredenciales')){
+                            document.getElementById('firmaCredenciales').src = datos[i][1];
+                        }
                         $('#idFirma').val(datos[i][0]);
                         break;
                 }

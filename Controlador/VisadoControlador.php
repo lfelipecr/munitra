@@ -147,7 +147,6 @@ class VisadoControlador {
                         $soliFirma->setCampoRequisito($archivo);
                         $soliFirma->setTipoRequisito(31);
                         $registrar[] = $soliFirma;
-                        var_dump($imagen);
                         echo $archivo;
                     }
                 }
