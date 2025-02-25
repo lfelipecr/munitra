@@ -8,6 +8,7 @@ class BitacoraSolicitud {
     private $nota;
     private $detalle;
     private $interno;
+    private $adjuntos;
 
     public function getId()
     {
@@ -87,6 +88,16 @@ class BitacoraSolicitud {
     public function setInterno($interno): void
     {
         $this->interno = $interno;
+    }
+
+    public function getAdjuntos()
+    {
+        return $this->adjuntos;
+    }
+
+    public function setAdjuntos($adjuntos): void
+    {
+        $this->adjuntos = $adjuntos;
     }
 
 }

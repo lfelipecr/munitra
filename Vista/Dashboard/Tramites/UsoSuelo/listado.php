@@ -49,9 +49,13 @@
                 <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
               </div>
               <div class="mb-2 text-end">
-                  <button type="submit" class="btn btn-warning">
-                      <span>Enviar</span>
-                  </button>
+                <button type="submit" class="btn btn-warning">
+                  <span>Enviar</span>
+                </button>
+              </div>
+              <div class="mb-2">
+                <label for="" class="form-label">Adjuntos</label>
+                <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
               </div>
             </div>
           </div>

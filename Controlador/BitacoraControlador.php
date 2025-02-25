@@ -56,6 +56,26 @@ class BitacoraControlador{
                 $bitacora->setNota($asuntoEmail);
                 $bitacora->setDetalle($cuerpoEmail);
                 $bitacora->setInterno($_POST['interno']);
+                $bitacora->setAdjuntos('');
+                if (isset($_FILES['adjuntos'])){
+                    $adjuntos = array();
+                    $archivo = false;
+                    $rutaDestino = './repo/';
+                    foreach($_FILES['adjuntos']['tmp_name'] as $adjunto => $tmp_name){
+                        $archivo = true;
+                        $urlArchivo = $rutaDestino.time().basename($_FILES['adjuntos']['name'][$adjunto]);
+                        if (move_uploaded_file($tmp_name, $urlArchivo)) {
+                            $adjuntos[] = $urlArchivo;
+                        } else {
+                            echo 'Ha habido un error con la subida del archivo'.$_FILES['adjuntos']['name'][$adjunto].', intente con otro archivo';
+                            $archivo = false;
+                            break;
+                        }
+                    }
+                    if ($archivo){
+                        $bitacora->setAdjuntos(json_encode($adjuntos));
+                    }
+                }
                 if ($bitacoraM->IngresarBitacora($bitacora))
                     echo 'OK';
                 else echo 'ERROR';

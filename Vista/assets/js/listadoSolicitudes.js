@@ -62,16 +62,22 @@ $(document).ready(function (){
         if ($('#txtCuerpo').val().trim() == ''){
             return false;
         } else {
+            let formData = new FormData();
+            formData.append('controlador', $('#controlador').val());
+            formData.append('idSolicitante', $('#idSolicitante').val());
+            formData.append('idSolicitud', $('#idSolicitud').val());
+            formData.append('cuerpoEmail', $('#txtCuerpo').val());
+            formData.append('interno', 0);
+            let archivos = document.getElementById("idAjuntos").files;
+            for (let i = 0; i < archivos.length; i++) {
+                formData.append("adjuntos[]", archivos[i]);
+            }
             $.ajax({
                 url: "index.php?controlador=Bitacora&metodo=EnviarEmail",
                 type: "POST",
-                data: {
-                    controlador: $('#controlador').val(),
-                    idSolicitante: $('#idSolicitante').val(),
-                    idSolicitud: $('#idSolicitud').val(),
-                    cuerpoEmail: $('#txtCuerpo').val(),
-                    interno: 0
-                 },
+                data: formData,
+                contentType: false,
+                processData: false,
                 success: function (response) {
                     CambiarFormulario(indiceActivo);
                 },

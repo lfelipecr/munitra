@@ -10,7 +10,8 @@ class BitacoraSolicitudM {
         ", ".$bitacora->getIdUsuario().
         ", ".$bitacora->getIdEstado().
         ", '".$bitacora->getNota().
-        "', '".$bitacora->getDetalle()."', ".$bitacora->getInterno().")";
+        "', '".$bitacora->getDetalle()."', ".$bitacora->getInterno().",
+        '".$bitacora->getAdjuntos()."')";
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;

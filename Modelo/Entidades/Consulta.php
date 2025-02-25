@@ -8,12 +8,9 @@ class Consulta
     private $telefono;
     private $correo;
     private $asunto;
-    private $consulta;
     private $idConsultado;
     private $fecha;
     private $atendido;
-    private $respuesta;
-    private $respondidoPor;
     private $tipoConsulta;
     
     public function getId() {
@@ -64,14 +61,6 @@ class Consulta
         $this->asunto = $asunto;
     }
 
-    public function getConsulta() {
-        return $this->consulta;
-    }
-
-    public function setConsulta($consulta) {
-        $this->consulta = $consulta;
-    }
-
     public function getIdConsultado() {
         return $this->idConsultado;
     }
@@ -95,22 +84,7 @@ class Consulta
     public function setAtendido($atendido) {
         $this->atendido = $atendido;
     }
-
-    public function getRespuesta() {
-        return $this->respuesta;
-    }
-
-    public function setRespuesta($respuesta) {
-        $this->respuesta = $respuesta;
-    }
-
-    public function getRespondidoPor() {
-        return $this->respondidoPor;
-    }
-
-    public function setRespondidoPor($respondidoPor) {
-        $this->respondidoPor = $respondidoPor;
-    }
+    
     public function getTipoConsulta() {
         return $this->tipoConsulta;
     }

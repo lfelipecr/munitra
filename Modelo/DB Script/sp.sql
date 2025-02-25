@@ -744,11 +744,12 @@ CREATE PROCEDURE SpIngresarBitacora(
     IN b_nota VARCHAR (200),
     IN b_detalle VARCHAR (1000),
     IN tipoInterno bit,
+    IN adjunt LONGTEXT
 )
 BEGIN
     INSERT INTO BITACORA_SOLICITUD (ID_SOLICITUD, ID_USUARIO,
-    ID_ESTADO, FECHA, NOTA, DETALLE, INTERNO)
-    VALUES (idSolicitud, idUsuario, idEstado, NOW(), b_nota, b_detalle, tipoInterno);
+    ID_ESTADO, FECHA, NOTA, DETALLE, INTERNO, ADJUNTOS)
+    VALUES (idSolicitud, idUsuario, idEstado, NOW(), b_nota, b_detalle, tipoInterno, adjunt);
 END //
 
 DELIMITER ;
@@ -771,7 +772,8 @@ BEGIN
         p.NOMBRE,
         p.PRIMER_APELLIDO,
         p.SEGUNDO_APELLIDO,
-        p.IDENTIFICACION
+        p.IDENTIFICACION,
+        bs.ADJUNTOS
     FROM BITACORA_SOLICITUD bs
     INNER JOIN USUARIO u ON bs.ID_USUARIO = u.ID
     INNER JOIN PERSONA p ON u.ID_PERSONA = p.ID WHERE ID_SOLICITUD = idSoli AND INTERNO = tipoBitacora;
@@ -934,35 +936,23 @@ CREATE PROCEDURE SpIngresarConsulta(
     IN corr VARCHAR (300),
     IN tel VARCHAR (300),
     IN asunt VARCHAR (300),
-    IN consul LONGTEXT,
     IN idConsultado INT,
     IN tipoConsulta INT
 )
 BEGIN
-    INSERT INTO CONSULTA (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, CORREO, ASUNTO, CONSULTA, ID_CONSULTADO, ATENDIDO, FECHA, ID_TIPO)
-    VALUES (ident, nombre, corr, tel, asunt, consul, idConsultado, 0, NOW(), tipoConsulta);
+    INSERT INTO CONSULTA (IDENTIFICACION, NOMBRE_COMPLETO, TELEFONO, CORREO, ASUNTO, ID_CONSULTADO, ATENDIDO, FECHA, ID_TIPO)
+    VALUES (ident, nombre, corr, tel, asunt, idConsultado, 0, NOW(), tipoConsulta);
 END //
 
 DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE SpAtenderConsulta(IN idConsulta INT, IN resp LONGTEXT, IN usuario VARCHAR(300))
+CREATE PROCEDURE SpAtenderConsulta(IN idConsulta INT, IN resp LONGTEXT, IN usuario VARCHAR(300), IN adjunto LONGTEXT)
 BEGIN
-    UPDATE CONSULTA 
-    SET RESPUESTA = resp,
-    RESPONDIDO_POR = usuario,
-    ATENDIDO = 1 WHERE ID = idConsulta;
-END //
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE PROCEDURE SpActualizarConsulta(IN cons LONGTEXT, IN idConsulta INT)
-BEGIN
-    UPDATE CONSULTA 
-    SET CONSULTA = cons WHERE ID = idConsulta;
+    INSERT INTO INTERACCION_CONSULTA (TEXTO, ADJUNTOS, FECHA, INTERACTOR, RESPUESTA, ID_CONSULTA)
+    VALUES(resp, adjunto, NOW(), usuario, 1, idConsulta);
+    UPDATE CONSULTA SET ATENDIDO = 1 WHERE ID = idConsulta;
 END //
 
 DELIMITER ;
@@ -976,6 +966,7 @@ END //
 
 DELIMITER ;
 
+/*El orden cambia en los JSON, eso se debe revisar*/
 DELIMITER //
 
 CREATE PROCEDURE SpBuscarConsulta(IN idConsulta INT)
@@ -983,4 +974,19 @@ BEGIN
     SELECT * FROM CONSULTA WHERE ID = idConsulta;
 END //
 
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SpBuscarInteracciones(IN idConsulta INT)
+BEGIN
+    SELECT * FROM INTERACCION_CONSULTA WHERE ID_CONSULTA = idConsulta;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SpIngresarConsultaInteraccion(IN idConsulta INT, IN resp LONGTEXT, IN usuario VARCHAR(300), IN adjunto LONGTEXT)
+BEGIN
+    INSERT INTO INTERACCION_CONSULTA (TEXTO, ADJUNTOS, FECHA, INTERACTOR, RESPUESTA, ID_CONSULTA)
+    VALUES(resp, adjunto, NOW(), usuario, 0, idConsulta);
+END //
 DELIMITER ;

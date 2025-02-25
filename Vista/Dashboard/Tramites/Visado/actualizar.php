@@ -187,6 +187,10 @@
               <label for="" class="form-label">Cuerpo *</label>
               <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
             </div>
+            <div class="mb-2">
+              <label for="" class="form-label">Adjuntos</label>
+              <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
+            </div>
             <div class="mb-2 text-end">
                 <a class="btn btn-warning" id="btnEnviarExterno">
                     <span>Enviar</span>

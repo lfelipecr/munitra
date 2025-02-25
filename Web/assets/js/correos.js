@@ -7,39 +7,6 @@ function EnviarCaptcha(){
     captcha = captchaGenerado;
     document.getElementById("captchaText").innerText = captchaGenerado;
 }
-function MostrarConversacion(){
-    let consultas = $('#consultas').val();
-    if (consultas != undefined){
-        let respuestas = $('#respuestas').val();
-        if (respuestas != ''){
-            consultas = JSON.parse(consultas.replace(/[\u0000-\u001F\u007F]/g, ""));
-            respuestas = JSON.parse(respuestas.replace(/[\u0000-\u001F\u007F]/g, ""));
-            chat = [...consultas, ...respuestas];
-            //ambito mostrar conversacion
-            function getFecha(str) {
-                const strFecha = str.match(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/);
-                return strFecha ? new Date(strFecha[0]) : null;
-            }
-
-            chat.sort((a, b) => getFecha(a) - getFecha(b));
-        } else {
-            chat = JSON.parse(consultas.replace(/[\u0000-\u001F\u007F]/g, ""));
-        }
-        $('#bitacora').html('');
-        for (let i = 0; i < chat.length; i++){
-            let listado = $('#bitacora').html();
-            datos = chat[i].split('-');
-            listado +=`<div class="col-12 my-1">
-                        <div class="card py-2 p-1 px-5 text-end">
-                            <h6><strong>${datos[4]}</strong> - ${datos[1]} ${datos[2]} ${datos[3]}</h6>
-                            <hr>
-                            <p>${datos[0]}</p>
-                        </div>
-                    </div>`;
-            $('#bitacora').html(listado);
-        }
-    }
-} 
 $(document).ready(function (){
     let intentos = 0;
     let captcha = '';
@@ -67,6 +34,9 @@ $(document).ready(function (){
             $('#txtCuerpo').val('');
         }
     });
+    $('#btnEnviarCaptcha').on('click', function(){
+        EnviarCaptcha();
+    });
     $('#btnEnviarCorreo').on('click', function(){
         let captchaGenerado = $('#captchaInput').val();
         if (captcha == captchaGenerado){
@@ -75,20 +45,27 @@ $(document).ready(function (){
             $('#telefonoConsulta').val().trim() != '' && $('#correoConsulta').val().trim() != '' &&
             $('#asuntoConsulta').val().trim() != '' && $('#cuerpoConsulta').val().trim() != '')
             {
+                let formData = new FormData();
+                formData.append("identificacion", $('#identificacionConsulta').val().trim());
+                formData.append("nombreCompleto", $('#nombreConsulta').val().trim());
+                formData.append("telefono", $('#telefonoConsulta').val().trim());
+                formData.append("correo", $('#correoConsulta').val().trim());
+                formData.append("asunto", $('#asuntoConsulta').val().trim());
+                formData.append("consulta", $('#cuerpoConsulta').val().trim());
+                formData.append("idConsultado", $('#idConsultado').val());
+                formData.append("tipo", tipo);
+                let archivos = document.getElementById("idAjuntos").files;
+                for (let i = 0; i < archivos.length; i++) {
+                    formData.append("adjuntos[]", archivos[i]);
+                }
                 $.ajax({
                     url: "index.php?controlador=Consulta&metodo=EnviarConsulta",
                     type: "POST",
-                    data: {
-                        identificacion: $('#identificacionConsulta').val().trim(),
-                        nombreCompleto: $('#nombreConsulta').val().trim(),
-                        telefono: $('#telefonoConsulta').val().trim(),
-                        correo: $('#correoConsulta').val().trim(),
-                        asunto: $('#asuntoConsulta').val().trim(),
-                        consulta: $('#cuerpoConsulta').val().trim(),
-                        idConsultado: $('#idConsultado').val(),
-                        tipo : tipo
-                    },
+                    data: formData,
+                    contentType: false,
+                    processData:false,
                     success: function (response) {
+                        console.log(response);
                         $('#identificacionConsulta').val('');
                         $('#nombreConsulta').val('');
                         $('#telefonoConsulta').val('');

@@ -32,14 +32,6 @@ class WebControlador {
         $personaM = new PersonaM();
         $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         $consulta = null;
-        if (isset($_SESSION['consulta'])){
-            $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
-            if ($consulta->getIdConsultado() != 0){
-                $usuarioM = new UsuarioM();
-                $usuario = $usuarioM->BuscarUsuarioId($consulta->getIdConsultado());
-                $persona = $personaM->BuscarPersonaUsuario($usuario->getIdPersona());
-            }
-        }
         require_once './Web/alcaldia.php';
     }
     function Conformacion(){
@@ -48,14 +40,6 @@ class WebControlador {
         $deptomodel = new DepartamentoM();
         $personaM = new PersonaM();
         $consulta = null;
-        if (isset($_SESSION['consulta'])){
-            $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
-            if ($consulta->getIdConsultado() != 0){
-                $usuarioM = new UsuarioM();
-                $usuario = $usuarioM->BuscarUsuarioId($consulta->getIdConsultado());
-                $persona = $personaM->BuscarPersonaUsuario($usuario->getIdPersona());
-            }
-        }
         $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         require_once './Web/conformacion.php';
     }
@@ -65,14 +49,6 @@ class WebControlador {
         $consulta = null;
         $personaM = new PersonaM();
         $estadisticas = $consultaM->GenerarEstadisticas();
-        if (isset($_SESSION['consulta'])){
-            $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
-            if ($consulta->getIdConsultado() != 0){
-                $usuarioM = new UsuarioM();
-                $usuario = $usuarioM->BuscarUsuarioId($consulta->getIdConsultado());
-                $persona = $personaM->BuscarPersonaUsuario($usuario->getIdPersona());
-            }
-        }
         require_once './Web/contacto.php';
     }
     function Helper(){
@@ -88,14 +64,6 @@ class WebControlador {
         $deptos = json_encode($deptomodel->BuscarDepartamentos());
         $tiposSolicitud = $deptomodel->BuscarTiposSolicitud();
         $consulta = null;
-        if (isset($_SESSION['consulta'])){
-            $consulta = $consultaM->BuscarConsulta($_SESSION['consulta']->getId());
-            if ($consulta->getIdConsultado() != 0){
-                $usuarioM = new UsuarioM();
-                $usuario = $usuarioM->BuscarUsuarioId($consulta->getIdConsultado());
-                $persona = $personaM->BuscarPersonaUsuario($usuario->getIdPersona());
-            }
-        }
         $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         require_once './Web/departamentos.php';
     }

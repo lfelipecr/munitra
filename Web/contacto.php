@@ -117,6 +117,10 @@
                                         <label for="" class="form-label">Consulta *</label>
                                         <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
                                     </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Adjuntos</label>
+                                        <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
+                                    </div>
                                     <input type="hidden" id="tipoConsulta" value="2">
                                     <input type="hidden" value="0" id="idConsultado">
                                     <div class="mb-2 text-end">
@@ -159,6 +163,10 @@
                                     <div class="mb-2">
                                         <label for="" class="form-label">Consulta *</label>
                                         <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="" class="form-label">Adjuntos</label>
+                                        <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
                                     </div>
                                     <input type="hidden" id="tipoConsulta" value="1">
                                     <input type="hidden" value="0" id="idConsultado">

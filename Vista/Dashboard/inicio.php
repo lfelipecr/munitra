@@ -75,7 +75,7 @@
     </div>
     <script src="./Vista/assets/js/correos.js"></script>
     <div class="modal fade" id="modalConversacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="modalBitacoraLabel">Consulta</h1>
@@ -90,11 +90,28 @@
               <textarea name="cuerpoEmail" class="form-control" id="txtCuerpo"></textarea>
               <input type="hidden" id="idConsulta">
             </div>
-            <div class="mb-2 text-end">
-                <button id="btnResponder" class="btn btn-warning">
-                    <span>Enviar</span>
-                </button>
+            <div class="mb-2">
+              <label for="" class="form-label">Adjuntos</label>
+              <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
             </div>
+            <div class="mb-2 text-end">
+              <button id="btnResponder" class="btn btn-warning">
+                <span>Enviar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalDocs" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalBitacoraLabel">Adjuntos</h1>
+            <button type="button" class="btn-close" id="btnCerrarAdjuntos"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row" id="docs"></div>
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 <?php
 require_once './Modelo/Conexion.php';
 require_once './Modelo/Entidades/Consulta.php';
+require_once './Modelo/Entidades/InteraccionConsulta.php';
+
 class ConsultaM
 {
     function MaxId(){
@@ -24,7 +26,6 @@ class ConsultaM
         "', '".$consulta->getTelefono().
         "', '".$consulta->getCorreo().
         "', '".$consulta->getAsunto().
-        "', '".$consulta->getConsulta().
         "', ".$consulta->getIdConsultado().", ".$consulta->getTipoConsulta().")";
         try{
             if($conexion->Ejecutar($sql)){
@@ -36,10 +37,29 @@ class ConsultaM
         $conexion->Cerrar();
         return $retVal;
     }
-    function AtenderConsulta(Consulta $consulta){
+    function IngresarDatosConsulta(InteraccionConsulta $consulta){
         $retVal=false;
         $conexion= new Conexion();
-        $sql = "CALL SpAtenderConsulta( ".$consulta->getId().", '".$consulta->getRespuesta()."', '".$consulta->getRespondidoPor()."')";
+        $sql = "CALL SpIngresarConsultaInteraccion(".$consulta->getIdConsulta().
+        ", '".$consulta->getTexto().
+        "', '".$consulta->getInteractor()."', '".$consulta->getAdjuntos()."')";
+        try{
+            if($conexion->Ejecutar($sql)){
+                $retVal = true;
+            }
+        } catch (Exception $ex){
+            $retVal=false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
+    }
+    function AtenderConsulta(InteraccionConsulta $consulta){
+        $retVal=false;
+        $conexion= new Conexion();
+        $sql = "CALL SpAtenderConsulta( ".$consulta->getIdConsulta().", '".$consulta->getTexto()."', '".$consulta->getInteractor().
+        "', '".$consulta->getAdjuntos()."')";
+        //BORRAR
+        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -67,12 +87,9 @@ class ConsultaM
                 $consulta->setTelefono($fila['TELEFONO']);
                 $consulta->setCorreo($fila['CORREO']);
                 $consulta->setAsunto($fila['ASUNTO']);
-                $consulta->setConsulta($fila['CONSULTA']);
                 $consulta->setIdConsultado($fila['ID_CONSULTADO']);
                 $consulta->setFecha($fila['FECHA']);
                 $consulta->setAtendido($fila['ATENDIDO']);
-                $consulta->setRespuesta($fila['RESPUESTA']);
-                $consulta->setRespondidoPor($fila['RESPONDIDO_POR']);
                 $registro[] = $consulta;
             }
         }
@@ -115,24 +132,10 @@ class ConsultaM
         $conexion->Cerrar();
         return $registro;
     }
-    function ActualizarConsulta(Consulta $consulta){
-        $retVal=false;
-        $conexion= new Conexion();
-        $sql = "CALL SpActualizarConsulta( '".$consulta->getConsulta()."', ".$consulta->getId().")";
-        try{
-            if($conexion->Ejecutar($sql)){
-                $retVal = true;
-            }
-        } catch (Exception $ex){
-            $retVal=false;
-        }
-        $conexion->Cerrar();
-        return $retVal;
-    }
     function BuscarConsulta($id){
         $registro=null;
         $conexion= new Conexion();
-        $sql="CALL SpBuscarConsultas()";
+        $sql="CALL SpBuscarConsulta($id)";
         $resultado=$conexion->Ejecutar($sql);
         if(mysqli_num_rows($resultado)>0)
         {
@@ -145,14 +148,25 @@ class ConsultaM
                 $consulta->setTelefono($fila['TELEFONO']);
                 $consulta->setCorreo($fila['CORREO']);
                 $consulta->setAsunto($fila['ASUNTO']);
-                $consulta->setConsulta($fila['CONSULTA']);
                 $consulta->setIdConsultado($fila['ID_CONSULTADO']);
                 $consulta->setFecha($fila['FECHA']);
                 $consulta->setAtendido($fila['ATENDIDO']);
-                $consulta->setRespuesta($fila['RESPUESTA']);
-                $consulta->setRespondidoPor($fila['RESPONDIDO_POR']);
                 $registro = $consulta;
             }
+        }
+        else
+            $registro=null;
+        $conexion->Cerrar();
+        return $registro;
+    }
+    function BuscarInteracciones($id){
+        $registro=null;
+        $conexion= new Conexion();
+        $sql="CALL SpBuscarInteracciones($id)";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            $registro = json_encode($resultado->fetch_all());
         }
         else
             $registro=null;

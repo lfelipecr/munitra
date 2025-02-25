@@ -186,7 +186,12 @@
                                 <label for="" class="form-label">Consulta *</label>
                                 <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
                             </div>
+                            <div class="mb-2">
+                                <label for="" class="form-label">Adjuntos</label>
+                                <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAjuntos">
+                            </div>
                             <input type="hidden" value="0" id="idConsultado">
+                            <input type="hidden" id="tipoConsulta" value="1">
                             <div class="mb-2 text-end">
                                 <?php if ($consulta == NULL) {?>
                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha">

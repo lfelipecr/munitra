@@ -17,6 +17,7 @@ function AbrirModalTramites(id){
 function Redirigir (id){
     window.location.href = 'index.php?controlador=Web&metodo=SolicitarTramite&tramite='+id;
 }
+//Documentos asociados a departamento
 function ObtenerDatos(idDepto){
     $('#docs').html('<div class="col-md-12 text-center d-flex justify-content-center"><p>Este departamento aún no ha subido nada</p></div>');
     $.ajax({
