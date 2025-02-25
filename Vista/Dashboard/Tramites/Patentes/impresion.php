@@ -33,18 +33,6 @@
             height: 100%;
             object-fit: cover;
         }
-        #contenidoPDF {
-            width: 794px;
-            height: 1123px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
     </style>
 </head>
 <body id="contenidoPDF">
@@ -146,11 +134,8 @@
     <footer>
         <img src="./Web/assets/img/footerpdf.png" alt="Imagen del pie de página">
     </footer>
-    <div class="col-12">
-        <button onclick="mostrarPDFEnPagina()"></button>
-        <iframe id="visorPDF" width="100%" height="500px"></iframe>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
     <script>
         function RenderizarDatosJSON(){
@@ -204,50 +189,21 @@
                 }
             }
         }
-        async function mostrarPDFEnPagina() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({
-                orientation: "portrait",
-                unit: "px",
-                format: [794, 1123] 
-            });
-            const elemento = document.getElementById("contenidoPDF");
-            const canvas = await html2canvas(elemento, { 
-                scale: 2, 
-                backgroundColor: null,
-                logging: false,
-                useCORS: true
-            });
-            const imgData = canvas.toDataURL("image/png");
-            const imgWidth = 794;  
-            const imgHeight = (canvas.height * imgWidth) / canvas.width; 
-            doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-            const pdfBlob = doc.output("blob");
-            const pdfUrl = URL.createObjectURL(pdfBlob);
-            document.getElementById("visorPDF").src = pdfUrl;
-        }
-        
-        function mostrarPDFEnPagina1() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({
-                orientation: "portrait",
-                unit: "mm",
-                format: "a4"
-            });
-
-            doc.html(document.body, {
-                callback: function (doc) {
-                    const pdfBlob = doc.output("blob");
-                    const pdfUrl = URL.createObjectURL(pdfBlob);
-                    document.getElementById("visorPDF").src = pdfUrl;
-                },
-                x: 10,
-                y: 10,
-                width: 180,
-                windowWidth: 800
-            });
-        }
         RenderizarDatosJSON();
+        $(document).ready(function (){
+            let doc = document.documentElement.outerHTML;
+            $.ajax({
+                url: "index.php?controlador=Tramites&metodo=ImprimirPDF",
+                type: "POST",
+                data: {html : doc},
+                success: function (response) {
+                    window.location.href = response;
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error en la petición:", error);
+                }
+            });
+        });
     </script>
 </body>
 </html>

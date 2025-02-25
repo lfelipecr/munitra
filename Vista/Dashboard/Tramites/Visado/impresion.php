@@ -136,7 +136,7 @@
     <footer>
         <img src="./Web/assets/img/footerpdf.png" alt="Imagen del pie de página">
     </footer>
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
     <script>
         function RenderizarDatosJSON(){
@@ -193,6 +193,20 @@
             }
         }
         RenderizarDatosJSON();
+        $(document).ready(function (){
+            let doc = document.documentElement.outerHTML;
+            $.ajax({
+                url: "index.php?controlador=Tramites&metodo=ImprimirPDF",
+                type: "POST",
+                data: {html : doc},
+                success: function (response) {
+                    window.location.href = response;
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error en la petición:", error);
+                }
+            });
+        });
     </script>
 </body>
 </html>

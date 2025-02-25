@@ -2,6 +2,9 @@
 require_once './Modelo/Entidades/Usuario.php';
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/SolicitudM.php';
+require_once './Libraries/dompdf-3.1.0/dompdf/autoload.inc.php';
+use Dompdf\Dompdf;
+use FontLib\Table\Type\head;
 
 class TramitesControlador {
     function Index(){
@@ -144,6 +147,34 @@ class TramitesControlador {
         if ($u->VerificarSesion()){
             $msg = '';
             require_once './Vista/Login/codigo.php';
+        }
+    }
+    function Descargar(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $ruta = $_SESSION['archivo'];
+            unset($_SESSION['archivo']);
+            echo $ruta;
+            //header('location: '.$ruta);
+        }
+    }
+    function ImprimirPDF(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $baseUrl = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . "/";
+            $html = $_POST['html'];
+            $html = str_replace('src="./Web/assets/img/', 'src="' . $baseUrl . 'Web/assets/img/', $html);
+            $dompdf = new Dompdf();
+            $options = $dompdf->getOptions();
+            $options->set(array('isRemoteEnabled' => true));
+            $dompdf->setOptions($options);
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('letter');
+            $dompdf->render();
+            $ruta ='./repo/'.time().'solicitud.pdf';
+            file_put_contents($ruta, $dompdf->output());
+            echo $ruta;
+            exit;
         }
     }
 }
