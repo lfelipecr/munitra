@@ -32,6 +32,7 @@
                     <span class="h5"><strong>Su cuenta ha sido creada exitosamente!</strong></span>
                     <p>A continuación, deberá ingresar a su cuenta <a href="index.php?controlador=Login&metodo=Index" style="text-decoration: none;">aquí</a>, donde podrá ver los requisitos para sus trámites y utilizar la plataforma</p>
                     <p>Sus trámites no entrarán en vigencia hasta que su cuenta sea validada por un funcionario de la <strong>Municipalidad de Río Cuarto</strong>, una vez sea validada su cuenta, se le enviará a su correo electrónico un código y verá en la plataforma el espacio para ingresarlo</p>
+                    <a href="index.php?controlador=Tramites&metodo=InicioExterno" class="btn btn-warning">Continuar</a>
                 </div>
             </div>
         </div>

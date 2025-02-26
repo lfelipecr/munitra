@@ -122,9 +122,6 @@ class LoginControlador
                 $usuario = $_SESSION['usuario'];
                 $usuario->setIdEstado(4);
                 $usuarioM->Actualizar($usuario);
-                session_start();
-                session_unset();
-                session_destroy();
                 require_once './Vista/Login/aviso.php';
             } else {
                 $idUsuario = $_SESSION['usuario']->getId();

@@ -88,7 +88,7 @@
             </div>
             <div class="col-md-4">
               <span class="mb-3">Distrito (*)</span>
-              <select name="distrito" class="form-control" id="">
+              <select name="distritoPersona" class="form-control" id="">
                   <?php for ($i = 0; $i < sizeof($arrLocaciones[2]); $i++) {?>
                   <option value="<?php echo $arrLocaciones[2][$i]->getId();?>" id="distrito<?php echo $arrLocaciones[2][$i]->getId();?>" data-provinciaDistrito="<?php echo $arrLocaciones[2][$i]->getIdProvincia();?>" data-canton="<?php echo $arrLocaciones[2][$i]->getIdCanton();?>" class="distritos">
                       <span><?php echo $arrLocaciones[2][$i]->getNombre();?></span>
