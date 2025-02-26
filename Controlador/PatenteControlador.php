@@ -49,6 +49,8 @@ class PatenteControlador {
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
             $provinciaM = new ProvinciaM();
             $id = $_SESSION['usuario']->getIdPersona();
+            $personaM = new PersonaM();
+            $identificacion = $personaM->BuscarPersona($id)->getIdentificacion();
             $arrLocaciones  = $provinciaM->BuscarLocaciones();
             $distritos = $provinciaM->BuscarDistritos();
             $vista = './Vista/TramitesUsuario/Patentes/nuevo.php';

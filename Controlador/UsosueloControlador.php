@@ -57,6 +57,8 @@ class UsosueloControlador {
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
             $id = $_SESSION['usuario']->getIdPersona();
             $provinciaM = new ProvinciaM();
+            $personaM = new PersonaM();
+            $identificacion = $personaM->BuscarPersona($id)->getIdentificacion();
             $arrLocaciones = $provinciaM->BuscarLocaciones();
             $distritos = $provinciaM->BuscarDistritos();
             $vista = './Vista/TramitesUsuario/UsoSuelo/nuevo.php';

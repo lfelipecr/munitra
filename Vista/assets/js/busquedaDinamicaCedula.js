@@ -1,5 +1,5 @@
 $(document).ready(function (){    
-    $('#txtIdentificacion').on('keyup', function(){
+    function BuscarCedula(){
         $('.form-control').removeAttr('readonly');
         $('.dataPersona').val('');
         let txtCedula = $('#txtIdentificacion').val().trim();
@@ -41,5 +41,13 @@ $(document).ready(function (){
                 console.error("Error en la petición:", error);
             }
         });
+    }
+    $('#txtIdentificacion').on('keyup', function(){
+        BuscarCedula();
     });
+    let cedula = $('#cedulaUsuarioSesion').val();
+    if (cedula != '' && cedula != undefined){
+        $('#txtIdentificacion').val(cedula);
+        BuscarCedula();
+    }
 });

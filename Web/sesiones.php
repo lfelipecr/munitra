@@ -97,7 +97,9 @@
                     <thead>
                         <tr>
                         <th scope="col">Sesión</th>
-                        <th scope="col" class="text-end">Opciones</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th scope="col" class="text-end"></th>
                         </tr>
                     </thead>
                     <tbody id="sesiones"></tbody>

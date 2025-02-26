@@ -51,6 +51,8 @@ class VisadoControlador {
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
             $provinciaM = new ProvinciaM();
             $id = $_SESSION['usuario']->getIdPersona();
+            $personaM = new PersonaM();
+            $identificacion = $personaM->BuscarPersona($id)->getIdentificacion();
             $distritos = $provinciaM->BuscarDistritos();
             $arrLocaciones  = $provinciaM->BuscarLocaciones();
             $vista = './Vista/TramitesUsuario/Visado/nuevo.php';

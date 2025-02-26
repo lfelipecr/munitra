@@ -6,24 +6,30 @@ $(document).ready(function (){
     }
     function MostrarSesiones (){
         $('#sesiones').html('');
-        console.log(jsonData);
         for (let i = 0; i < jsonData.length; i++){
             let listado = $('#sesiones').html();
             let html = '';
             let fechaRegistro = jsonData[i][1].split("-")[0];
             if (fecha == fechaRegistro){
+                fechaRegistro = jsonData[i][1].replace(' ', 'T');
+                fechaRegistro = new Date(fechaRegistro);
+                console.log(fechaRegistro)
                 if (jsonData[i][4] != ''){
                     html += `<tr>
-                            <th scope="">${jsonData[i][2]} - ${jsonData[i][1]}</th>
-                            <td class="text-end"><a href="${jsonData[i][4]}" class="btn btn-outline-warning">Acta</a>
-                            <a href="${jsonData[i][5]}" class="btn btn-outline-warning">Agenda</a>`;
+                            <td scope="">${jsonData[i][2]}</td>
+                            <td scope="">${fechaRegistro.toISOString().split("T")[0]}</td>
+                            <td scope="">${fechaRegistro.getHours()}: ${fechaRegistro.getMinutes()}</td>
+                            <td class="text-end"><a href="${jsonData[i][4]}" target="_blank" class="btn btn-outline-warning">Acta</a>
+                            <a href="${jsonData[i][5]}" target="_blank" class="btn btn-outline-warning">Agenda</a>`;
                 } else {
                     html += `<tr>
-                            <th scope="">${jsonData[i][2]} - ${jsonData[i][1]}</th>
-                            <a href="${jsonData[i][5]}" class="btn btn-outline-warning">Agenda</a>`;
+                            <td scope="">${jsonData[i][2]}</td>
+                            <td scope="">${fechaRegistro.toISOString().split("T")[0]}</td>
+                            <td scope="">${fechaRegistro.getHours()}: ${fechaRegistro.getMinutes()}</td>
+                            <a href="${jsonData[i][5]}" target="_blank" class="btn btn-outline-warning">Agenda</a>`;
                 }
                 if (jsonData[i][6] != ''){
-                    html += `<a href="${jsonData[i][6]}" class="btn btn-outline-warning mx-1">Ver Sesión</a>`;
+                    html += `<a href="${jsonData[i][6]}" target="_blank" class="btn btn-outline-warning mx-1">Transmisión</a>`;
                 }
                 html += '</td></tr>';
                 listado += html;

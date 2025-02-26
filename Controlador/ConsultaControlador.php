@@ -164,16 +164,22 @@ class ConsultaControlador{
                     }
                     
                     $mail->isHTML(true);
-                    //Trata la string para que sea solo el contenido y no todo el JSON
                     $cuerpoEmail = '<html><head><meta charset="UTF-8"><title>Nueva Consulta</title><style>body {font-family: Arial, sans-serif; line-height: 1.6;color: #333;}.container { max-width: 600px; margin: 0 auto;padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: #f9f9f9; }.title {font-size: 18px;font-weight: bold; color: #555;}.content {margin-top: 10px;}.info {margin-top: 15px;padding: 10px; background-color: #eef;border-left: 4px solidrgb(10, 41, 75);}</style></head><body><div class="container">';
-                    if ($consulta->getTipoConsulta() == 1){
-                        $mail->Subject = 'Consulta: '.$consulta->getAsunto();
-                        $cuerpoEmail = $cuerpoEmail.'<p class="title">Nueva Consulta de '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')</p>';
-                    } else {
-                        $mail->Subject = 'Denuncia: '.$consulta->getAsunto();
-                        $cuerpoEmail = $cuerpoEmail.'<p class="title">Nueva Denuncia de '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')</p>';
+                    switch ($consulta->getTipoConsulta()){
+                        case 1:
+                            $mail->Subject = 'Consulta: '.$consulta->getAsunto();
+                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Nueva Consulta de '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')</p>';
+                            break;
+                        case 2:
+                            $mail->Subject = 'Denuncia: '.$consulta->getAsunto();
+                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Nueva Denuncia de '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')</p>';
+                            break;
+                        case 3:
+                            $mail->Subject = 'Queja: '.$consulta->getAsunto();
+                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Nueva Queja de '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')</p>';
+                            break;
                     }
-                    $cuerpoEmail = $cuerpoEmail.'<div class="content">">
+                    $cuerpoEmail = $cuerpoEmail.'<div class="content">
                                             <p><strong>Asunto:</strong> '.$consulta->getAsunto().'</p>
                                             <p><strong>Consulta:</strong> </br></p>
                                             <p id="consulta">'.$_POST['consulta'].'</p>
@@ -194,6 +200,41 @@ class ConsultaControlador{
                             $mail->addAttachment($_FILES['adjuntos']['tmp_name'][$i], $_FILES['adjuntos']['name'][$i]);
                         }
                     }
+                    $mail->send();
+                    //correo de confirmación
+                    //html
+                    $cuerpoEmail = '<html><head><meta charset="UTF-8"><title>Nueva Consulta</title><style>body {font-family: Arial, sans-serif; line-height: 1.6;color: #333;}.container { max-width: 600px; margin: 0 auto;padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: #f9f9f9; }.title {font-size: 18px;font-weight: bold; color: #555;}.content {margin-top: 10px;}.info {margin-top: 15px;padding: 10px; background-color: #eef;border-left: 4px solidrgb(10, 41, 75);}</style></head><body><div class="container">';
+                    switch ($consulta->getTipoConsulta()){
+                        case 1:
+                            $mail->Subject = 'Consulta: '.$consulta->getAsunto();
+                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Confirmación de Consulta</p>';
+                            break;
+                        case 2:
+                            $mail->Subject = 'Denuncia: '.$consulta->getAsunto();
+                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Confirmación de Denuncia</p>';
+                            break;
+                        case 3:
+                            $mail->Subject = 'Queja: '.$consulta->getAsunto();
+                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Confirmación de Queja</p>';
+                            break;
+                    }
+                    $cuerpoEmail = $cuerpoEmail.'<div class="content">
+                                            <p>Su consulta ha sido enviada a la Municipalidad de Río Cuarto. Su ID de consulta es '.$id.' y su información es la siguiente</p>
+                                            <div class="info">
+                                                <h3 class="">Información del remitente:</h3>
+                                                <p><strong>Identificación:</strong> '.$consulta->getIdentificacion().'</p>
+                                                <p><strong>Nombre Completo:</strong> '.$consulta->getNombreCompleto().'</p>
+                                                <p><strong>Teléfono:</strong> '.$consulta->getTelefono().'</p>
+                                                <p><strong>Correo:</strong> '.$consulta->getCorreo().'</p>
+                                            </div>
+                                            <p>¡Agradecemos su paciencia! Su consulta será respondida pronto</p>
+                                            </div>
+                                        </div>
+                                    </body>
+                                    </html>';
+                    $mail->clearAddresses();
+                    $mail->addAddress($consulta->getCorreo());
+                    $mail->Body = $cuerpoEmail;
                     $mail->send();
                     echo $id;
                 } catch(Exception $e){

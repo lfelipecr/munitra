@@ -66,7 +66,10 @@ $(document).ready(function (){
             let tipo = 'Consulta';
             if (jsonData[i][7] == 2){
                 tipo = 'Denuncia';
+            } else if (jsonData[i][7] == 3){
+                tipo = 'Queja';
             }
+            
             let estado = 'Pendiente';
             if (jsonData[i][9] == 1){
                 estado = 'Atendido';

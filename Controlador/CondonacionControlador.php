@@ -51,6 +51,8 @@ class CondonacionControlador {
         if ($_SESSION['usuario']->getIdDepartamento() == 1){
             $provinciaM = new ProvinciaM();
             $id = $_SESSION['usuario']->getIdPersona();
+            $personaM = new PersonaM();
+            $identificacion = $personaM->BuscarPersona($id)->getIdentificacion();
             $arrLocaciones  = $provinciaM->BuscarLocaciones();
             $vista = './Vista/TramitesUsuario/Condonacion/nuevo.php';
             require_once './Vista/Utilidades/navbar.php';

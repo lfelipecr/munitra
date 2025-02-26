@@ -11,6 +11,7 @@
       </div>
       <input type="hidden" id="jsonData" value="">
       <input type="hidden" id="msg" value="<?php echo $msg; ?>">
+      <input type="hidden" id="cedulaUsuarioSesion" value='<?php echo $identificacion; ?>'>
       <form action="index.php?controlador=Patente&metodo=Ingresar" id="frmPatente" method="post" enctype="multipart/form-data">
         <div class="my-2 p-3 bg-body rounded shadow-sm">
           <div class="row">

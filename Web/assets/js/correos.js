@@ -111,6 +111,11 @@ $(document).ready(function (){
             $('#collapseDenuncias').html('');
             $('#collapseConsulta').html(html);
         }
+        html = $('#collapseQuejas').html();
+        if (html != ''){
+            $('#collapseQuejas').html('');
+            $('#collapseConsulta').html(html);
+        }
         $('#tipoConsulta').val(1);
     });
     $('#denuncias').on('click', function (){
@@ -119,7 +124,24 @@ $(document).ready(function (){
             $('#collapseConsulta').html('');
             $('#collapseDenuncias').html(html);
         }
+        html = $('#collapseQuejas').html();
+        if (html != ''){
+            $('#collapseQuejas').html('');
+            $('#collapseDenuncias').html(html);
+        }
         $('#tipoConsulta').val(2);
-        
+    });
+    $('#quejas').on('click', function (){
+        let html = $('#collapseDenuncias').html();
+        if (html != ''){
+            $('#collapseDenuncias').html('');
+            $('#collapseQuejas').html(html);
+        }
+        html = $('#collapseConsulta').html();
+        if (html != ''){
+            $('#collapseConsulta').html('');
+            $('#collapseQuejas').html(html);
+        }
+        $('#tipoConsulta').val(3);
     });
 });

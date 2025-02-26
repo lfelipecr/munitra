@@ -19,6 +19,7 @@
       </div>
       <input type="hidden" id="jsonData" value="">
       <input type="hidden" id="msg" value="<?php echo $msg; ?>">
+      <input type="hidden" id="cedulaUsuarioSesion" value='<?php echo $identificacion; ?>'>
       <form action="index.php?controlador=Visado&metodo=Ingresar" id="frmVisado" method="post" enctype="multipart/form-data">
         <div class="my-3 p-3 bg-body rounded shadow-sm">
           <div class="row">
