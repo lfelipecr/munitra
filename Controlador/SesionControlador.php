@@ -9,7 +9,9 @@ class SesionControlador{
     function VIngresar(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
+            $sesionM = new SesionM();
             $personaM = new PersonaM();
+            $comisiones = $sesionM->Comisiones();
             $msg = '';
             $vista = './Vista/Dashboard/Blog/Sesiones/nuevo.php';
             require_once './Vista/Utilidades/sidebar.php';
@@ -23,6 +25,7 @@ class SesionControlador{
                 $sesion->setDescripcion($_POST['descripcion']);
                 $sesion->setFecha(str_replace('T', ' ', $_POST['fechaSesion']));                
                 $sesion->setUrlVideo($_POST['urlVideo']);
+                $sesion->setIdComision($_POST['idComision']);
                 $rutaDestino = './repo/';
                 //Archivo de acta
                 if (isset($_FILES['acta']) && $_FILES['acta']['error'] === UPLOAD_ERR_OK) {
@@ -88,6 +91,7 @@ class SesionControlador{
             $sesion = $sesionM->BuscarSesion($id);
             $fecha = $sesion->getFecha();
             $sesion->setFecha(str_replace(' ', 'T', $fecha));
+            $comisiones = $sesionM->Comisiones();
             $msg = '';
             $vista = './Vista/Dashboard/Blog/Sesiones/actualizar.php';
             require_once './Vista/Utilidades/sidebar.php';           
@@ -103,6 +107,7 @@ class SesionControlador{
                 $sesion->setFecha(str_replace('T', ' ', $_POST['fechaSesion']));
                 $sesion->setActaAprobada($_POST['valorActa']);
                 $sesion->setUrlVideo($_POST['urlVideo']);
+                $sesion->setIdComision($_POST['idComision']);
                 $rutaDestino = './repo/';
                 //Archivo de acta
                 if (isset($_FILES['acta']) && $_FILES['acta']['error'] === UPLOAD_ERR_OK) {

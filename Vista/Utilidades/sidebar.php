@@ -197,7 +197,7 @@
       </li>
       <li>
         <a href="index.php?controlador=Blog&metodo=Index" class="nav-link link-body-emphasis">
-          <p class="bi bi-grid colorWt" style="position:fixed;"> Blog</p><br>
+          <p class="bi bi-grid colorWt" style="position:fixed;"> Sitio Web</p><br>
         </a>
       </li>
       <li>
@@ -237,28 +237,28 @@
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="index.php?controlador=Login&metodo=Login#" class="nav-link link-body-emphasis" aria-current="page">
-            <p class="bi bi-house-door" style="position:fixed;"> Inicio</p><br>
+          <a href="index.php?controlador=Login&metodo=AdminInicio#" class="nav-link link-body-emphasis" aria-current="page">
+            <p class="bi bi-house-door colorWt" style="position:fixed;"> Inicio</p><br>
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link link-body-emphasis">
-            <p class="bi bi-speedometer2" style="position:fixed;"> Documentación</p><br>
+          <a href="index.php?controlador=Documentacion&metodo=Listado" class="nav-link link-body-emphasis">
+            <p class="bi bi-speedometer2 colorWt" style="position:fixed;"> Documentación</p><br>
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link link-body-emphasis">
-            <p class="bi bi-table" style="position:fixed;"> Trámites</p><br>
+          <a href="index.php?controlador=Tramites&metodo=Index" class="nav-link link-body-emphasis">
+            <p class="bi bi-table colorWt" style="position:fixed;"> Trámites</p><br>
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link link-body-emphasis">
-            <p class="bi bi-grid" style="position:fixed;"> Blog</p><br>
+          <a href="index.php?controlador=Blog&metodo=Index" class="nav-link link-body-emphasis">
+            <p class="bi bi-grid colorWt" style="position:fixed;"> Sitio Web</p><br>
           </a>
         </li>
         <li>
           <a href="index.php?controlador=Usuario&metodo=Listado" class="nav-link link-body-emphasis">
-            <p class="bi bi-person-circle" style="position:fixed;"> Usuarios</p><br>
+            <p class="bi bi-person-circle colorWt" style="position:fixed;"> Usuarios</p><br>
           </a>
         </li>
       </ul>

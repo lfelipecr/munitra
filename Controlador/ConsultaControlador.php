@@ -165,20 +165,9 @@ class ConsultaControlador{
                     
                     $mail->isHTML(true);
                     $cuerpoEmail = '<html><head><meta charset="UTF-8"><title>Nueva Consulta</title><style>body {font-family: Arial, sans-serif; line-height: 1.6;color: #333;}.container { max-width: 600px; margin: 0 auto;padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: #f9f9f9; }.title {font-size: 18px;font-weight: bold; color: #555;}.content {margin-top: 10px;}.info {margin-top: 15px;padding: 10px; background-color: #eef;border-left: 4px solidrgb(10, 41, 75);}</style></head><body><div class="container">';
-                    switch ($consulta->getTipoConsulta()){
-                        case 1:
-                            $mail->Subject = 'Consulta: '.$consulta->getAsunto();
-                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Nueva Consulta de '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')</p>';
-                            break;
-                        case 2:
-                            $mail->Subject = 'Denuncia: '.$consulta->getAsunto();
-                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Nueva Denuncia de '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')</p>';
-                            break;
-                        case 3:
-                            $mail->Subject = 'Queja: '.$consulta->getAsunto();
-                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Nueva Queja de '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')</p>';
-                            break;
-                    }
+                    $tipoConsulta = ['', 'Sugerencia', 'Petición', 'Solicitud de Información', 'Denuncia'];
+                    $mail->Subject = $tipoConsulta[$consulta->getTipoConsulta()].': '.$consulta->getAsunto();
+                    $cuerpoEmail = $cuerpoEmail.'<p class="title">Nueva '.$tipoConsulta[$consulta->getTipoConsulta()].' de '.$consulta->getNombreCompleto().' ('.$consulta->getIdentificacion().')</p>';
                     $cuerpoEmail = $cuerpoEmail.'<div class="content">
                                             <p><strong>Asunto:</strong> '.$consulta->getAsunto().'</p>
                                             <p><strong>Consulta:</strong> </br></p>
@@ -203,21 +192,9 @@ class ConsultaControlador{
                     $mail->send();
                     //correo de confirmación
                     //html
-                    $cuerpoEmail = '<html><head><meta charset="UTF-8"><title>Nueva Consulta</title><style>body {font-family: Arial, sans-serif; line-height: 1.6;color: #333;}.container { max-width: 600px; margin: 0 auto;padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: #f9f9f9; }.title {font-size: 18px;font-weight: bold; color: #555;}.content {margin-top: 10px;}.info {margin-top: 15px;padding: 10px; background-color: #eef;border-left: 4px solidrgb(10, 41, 75);}</style></head><body><div class="container">';
-                    switch ($consulta->getTipoConsulta()){
-                        case 1:
-                            $mail->Subject = 'Consulta: '.$consulta->getAsunto();
-                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Confirmación de Consulta</p>';
-                            break;
-                        case 2:
-                            $mail->Subject = 'Denuncia: '.$consulta->getAsunto();
-                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Confirmación de Denuncia</p>';
-                            break;
-                        case 3:
-                            $mail->Subject = 'Queja: '.$consulta->getAsunto();
-                            $cuerpoEmail = $cuerpoEmail.'<p class="title">Confirmación de Queja</p>';
-                            break;
-                    }
+                    $cuerpoEmail = '<html><head><meta charset="UTF-8"><title>Nueva '.$tipoConsulta[$consulta->getTipoConsulta()].'</title><style>body {font-family: Arial, sans-serif; line-height: 1.6;color: #333;}.container { max-width: 600px; margin: 0 auto;padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: #f9f9f9; }.title {font-size: 18px;font-weight: bold; color: #555;}.content {margin-top: 10px;}.info {margin-top: 15px;padding: 10px; background-color: #eef;border-left: 4px solidrgb(10, 41, 75);}</style></head><body><div class="container">';
+                    $mail->Subject = $tipoConsulta[$consulta->getTipoConsulta()].': '.$consulta->getAsunto();
+                    $cuerpoEmail = $cuerpoEmail.'<p class="title">Confirmación de '.$tipoConsulta[$consulta->getTipoConsulta()].'</p>';
                     $cuerpoEmail = $cuerpoEmail.'<div class="content">
                                             <p>Su consulta ha sido enviada a la Municipalidad de Río Cuarto. Su ID de consulta es '.$id.' y su información es la siguiente</p>
                                             <div class="info">

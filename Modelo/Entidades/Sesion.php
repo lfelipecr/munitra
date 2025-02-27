@@ -7,6 +7,7 @@ class Sesion{
     private $urlActa;
     private $urlAgenda;
     private $urlVideo;
+    private $idComision;
     
     public function getId()
     {
@@ -78,5 +79,13 @@ class Sesion{
         $this->urlVideo = $urlVideo;
     }
 
+    public function getIdComision()
+    {
+        return $this->idComision;
+    }
 
+    public function setIdComision($idComision): void
+    {
+        $this->idComision = $idComision;
+    }
 }

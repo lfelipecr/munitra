@@ -1,4 +1,23 @@
 $(document).ready(function () {
+    $('#txtIdentificacion').on('keyup', function(){
+        let txtCedula = $('#txtIdentificacion').val().trim();
+        $.ajax({
+            url: "index.php?controlador=Usuario&metodo=BuscarCedulaCuenta",
+            type: "GET",
+            data: { cedula: txtCedula },
+            success: function (response) {
+                if (response == '1'){
+                    $('#alerta').show();
+                    $('#alerta').html('Usted ya tiene una cuenta en la plataforma, ingrese a <a href="index.php?controlador=Login&metodo=Index">este enlace</a> para ingresar al sistema con su cuenta o a <a href="index.php?controlador=Usuario&metodo=RecuperarCuenta">este enlace</a> para recuperar su cuenta');
+                } else {
+                    $('#alerta').hide();
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error en la petición:", error);
+            }
+        });
+    });
     $('#frmIngresar').on('submit', function () {
         $('#alerta').show();
         //Datos obligatorios

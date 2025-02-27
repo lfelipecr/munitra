@@ -1,6 +1,7 @@
 <?php
 require_once './Modelo/Entidades/Sesion.php';
 require_once './Modelo/Conexion.php';
+require_once './Modelo/Entidades/Comision.php';
 
 class SesionM {
     function BuscarSesiones(){
@@ -33,6 +34,7 @@ class SesionM {
                 $sesion->setUrlActa($fila["URL_ACTA"]);
                 $sesion->setUrlAgenda($fila["URL_AGENDA"]);
                 $sesion->setUrlVideo($fila["URL_VIDEO"]);
+                $sesion->setIdComision($fila['ID_COMISION']);
             }
         }
         else
@@ -49,7 +51,7 @@ class SesionM {
         "', ".$sesion->getActaAprobada().
         ", '".$sesion->getUrlActa().
         "', '".$sesion->getUrlAgenda().
-        "', '".$sesion->getUrlVideo()."')";
+        "', '".$sesion->getUrlVideo()."', ".$sesion->getIdComision().")";
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -70,7 +72,8 @@ class SesionM {
         "', ".$sesion->getActaAprobada().
         ", '".$sesion->getUrlActa().
         "', '".$sesion->getUrlAgenda().
-        "', '".$sesion->getUrlVideo()."')";
+        "', '".$sesion->getUrlVideo()."', ".$sesion->getIdComision().")";
+        echo $sql;
         try{
             if($conexion->Ejecutar($sql)){
                 $retVal = true;
@@ -81,5 +84,25 @@ class SesionM {
         
         $conexion->Cerrar();
         return $retVal;
+    }
+    function Comisiones(){
+        $comisiones = array();
+        $conexion= new Conexion();
+        $sql="SELECT * FROM COMISIONES";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            while($fila=$resultado->fetch_assoc())
+            {
+                $comision = new Comision();
+                $comision->setId($fila["ID"]);
+                $comision->setDescripcion($fila["DESCRIPCION"]);
+                $comisiones[] = $comision;
+            }
+        }
+        else
+            $comisiones=null;
+        $conexion->Cerrar();
+        return $comisiones;       
     }
 }

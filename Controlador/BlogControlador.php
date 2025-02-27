@@ -16,6 +16,7 @@ class BlogControlador {
         if ($u->VerificarSesion()){
             $sesionM = new SesionM();
             $jsonData = $sesionM->BuscarSesiones();
+            $comisiones = json_encode($sesionM->Comisiones());
             $vista = './Vista/Dashboard/Blog/Sesiones/listado.php';
             require_once './Vista/Utilidades/sidebar.php';
         }

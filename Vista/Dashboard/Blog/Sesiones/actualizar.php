@@ -34,6 +34,15 @@
                 <span class="mb-4">Link Sesión</span>
                 <input type="text" class="form-control" name="urlVideo" id="ipUrlVideo" value="<?php echo $sesion->getUrlVideo();?>">
             </div>
+            <div class="col-12 pt-2">
+                <span class="mb-4">Comisión</span>
+                <select name="idComision" id="idComision" class="form-control">
+                  <?php for ($i = 0 ; $i < count($comisiones); $i++) {?>
+                    
+                      <option <?php if ($comisiones[$i]->getId() == $sesion->getIdComision()) { echo 'selected'; }?>  value="<?php echo $comisiones[$i]->getId(); ?>"><?php echo $comisiones[$i]->getDescripcion(); ?></option>
+                    <?php } ?>
+                </select>
+            </div>
             <div class="col-12 mt-md-2">
               <input type="hidden" id="cbxActa" <?php if ($sesion->getActaAprobada() == 1){ echo 'checked'; } ?>>
               <input type="hidden" name="valorActa" value="<?php echo $sesion->getActaAprobada();?>" id="valorActa">

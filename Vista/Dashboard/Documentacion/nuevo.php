@@ -10,6 +10,7 @@
         </a>
       </div>
       <input type="hidden" id="msg" value="<?php echo $msg; ?>">
+      <input type="hidden" id="tipos" value="<?php echo $tipos; ?>">
       <form action="index.php?controlador=Documentacion&metodo=Ingresar" id="frmDoc" method="post" enctype="multipart/form-data">
         <div class="my-3 p-3 bg-body rounded shadow-sm">
           <div class="row mt-3">
@@ -20,6 +21,14 @@
             <div class="col-md-12">
                 <span class="mb-4">Documento</span>
                 <input type="file" class="form-control" name="flSubir" id="ipSubir">
+            </div>
+            <div class="col-md-12">
+                <span class="mb-4">Categoría</span>
+                <select name="tipoDoc" id="tipoDoc" class="form-control">
+                    <?php for ($i = 0 ; $i < count($tipos); $i++) {?>
+                      <option value="<?php echo $tipos[$i]->getId(); ?>"><?php echo $tipos[$i]->getDescripcion(); ?></option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="col-12 py-2">
               <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>

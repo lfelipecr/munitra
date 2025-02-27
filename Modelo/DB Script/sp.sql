@@ -666,11 +666,12 @@ CREATE PROCEDURE SpIngresarSesion(
     IN s_aprobada BIT,
     IN urlActa VARCHAR(200),
     IN urlAgenda VARCHAR(200),
-    IN urlVideo VARCHAR(200)
+    IN urlVideo VARCHAR(200),
+    IN idComision INT
 )
 BEGIN
-    INSERT INTO SESION (FECHA, DESCRIPCION, ACTA_APROBADA, URL_ACTA, URL_AGENDA, URL_VIDEO)
-    VALUES (s_fecha, s_descrip, s_aprobada, urlActa, urlAgenda, urlVideo);
+    INSERT INTO SESION (FECHA, DESCRIPCION, ACTA_APROBADA, URL_ACTA, URL_AGENDA, URL_VIDEO, ID_COMISION)
+    VALUES (s_fecha, s_descrip, s_aprobada, urlActa, urlAgenda, urlVideo, idComision);
 END //
 
 DELIMITER ;
@@ -684,14 +685,16 @@ CREATE PROCEDURE SpActualizarSesion(
     IN s_aprobada BIT,
     IN urlActa VARCHAR(200),
     IN urlAgenda VARCHAR(200),
-    IN urlVideo VARCHAR(200)
+    IN urlVideo VARCHAR(200),
+    IN idComision INT
 )
 BEGIN
     UPDATE SESION
     SET 
         FECHA = s_fecha,
         DESCRIPCION = s_descrip,
-        ACTA_APROBADA = s_aprobada
+        ACTA_APROBADA = s_aprobada,
+        ID_COMISION = idComision
     WHERE ID = s_id;
 
     IF urlActa <> '' THEN
@@ -909,10 +912,10 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE SpIngresarDocumento(IN idDepto INT, IN descrip VARCHAR(300),
-IN urlArchivo VARCHAR(1000), IN usuarioCreacion INT)
+IN urlArchivo VARCHAR(1000), IN usuarioCreacion INT, IN idTipo INT)
 BEGIN
-    INSERT INTO DOCUMENTACION (DESCRIPCION, URL_ARCHIVO, USUARIO_CREACION, DEPARTAMENTO)
-    VALUES(descrip, urlArchivo, usuarioCreacion, idDepto);
+    INSERT INTO DOCUMENTACION (DESCRIPCION, URL_ARCHIVO, USUARIO_CREACION, DEPARTAMENTO, TIPO_DOCUMENTO)
+    VALUES(descrip, urlArchivo, usuarioCreacion, idDepto, idTipo);
 END //
 
 DELIMITER ;

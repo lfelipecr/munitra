@@ -83,74 +83,50 @@
                     <div class="col-md-6 order-md-1 order-2 showcase-img d-flex align-items-center justify-content-center">
                         <div class="card p-5 m-md-5 w-100">
                             <span class="lead mb-1">Si tiene algún consulta o necesita ayuda, no dude en escribirnos Haremos todo lo posible por darle respuesta a la brevedad.</span>
-                            <div class="udDepartamento" id="consulta">
-                                <p class="d-inline-flex gap-1">
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-between departamento"  data-bs-toggle="collapse" href="#collapseConsulta" role="button">
-                                            <h4>Consultas</h4>
-                                            <span><svg class="iconDpto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#f3aa16" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></span>                                            
-                                        </div>
-                                    </div>
-                                </p>
-                                <div class="collapse" id="collapseConsulta"></div>
-                            </div>
-                            <div class="udDepartamento" id="denuncias">
-                                <p class="d-inline-flex gap-1">
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-between departamento"  data-bs-toggle="collapse" href="#collapseDenuncias" role="button">
-                                            <h4>Denuncias</h4>
-                                            <span><svg class="iconDpto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#f3aa16" d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32L0 64 0 368 0 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-128 64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30l0-247.7c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48l0-16z"/></svg></span>
-                                        </div>
-                                    </div>
-                                </p>
-                                <div class="collapse" id="collapseDenuncias">                                        
-                                    <div class="mb-2">
-                                        <label for="" class="form-label">Identificación *</label>
-                                        <input type="email" class="form-control" id="identificacionConsulta">
-                                    </div>
-                                    <div class="mb-2">
-                                        <label for="" class="form-label">Nombre Completo *</label>
-                                        <input type="email" class="form-control" id="nombreConsulta">
-                                    </div>
-                                    <div class="mb-2">
-                                        <label for="" class="form-label">Telefono *</label>
-                                        <input type="text" class="form-control" id="telefonoConsulta">
-                                    </div>
-                                    <div class="mb-2">
-                                        <label for="" class="form-label">Correo *</label>
-                                        <input type="text" class="form-control" id="correoConsulta">
-                                    </div>
-                                    <div class="mb-2">
-                                        <label for="" class="form-label">Asunto *</label>
-                                        <input type="text" class="form-control" id="asuntoConsulta">
-                                    </div>                                
-                                    <div class="mb-2">
-                                        <label for="" class="form-label">Consulta *</label>
-                                        <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
-                                    </div>
-                                    <div class="mb-2">
-                                        <label for="" class="form-label">Adjuntos</label>
-                                        <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAdjuntos">
-                                    </div>
-                                    <input type="hidden" id="tipoConsulta" value="1">
-                                    <input type="hidden" value="0" id="idConsultado">
-                                    <div class="mb-2 text-end">
-                                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha" onclick="EnviarCaptcha();">
-                                            <span>Enviar</span>
-                                        </button>
-                                    </div>
+                            <div class="p-1">
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Motivo de consulta:</label>
+                                    <select name="" class="form-control" id="tipoConsulta">
+                                        <option value="1">Sugerencia</option>
+                                        <option value="2">Petición</option>
+                                        <option value="3">Solicitud de información</option>
+                                        <option value="4">Denuncia</option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="udDepartamento" id="quejas">
-                                <p class="d-inline-flex gap-1">
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-between departamento"  data-bs-toggle="collapse" href="#collapseQuejas" role="button">
-                                            <h4>Quejas</h4>
-                                            <span><svg class="iconDpto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#f3aa16" d="M544 248l0 3.3 69.7-69.7c21.9-21.9 21.9-57.3 0-79.2L535.6 24.4c-21.9-21.9-57.3-21.9-79.2 0L416.3 64.5c-2.7-.3-5.5-.5-8.3-.5L296 64c-37.1 0-67.6 28-71.6 64l-.4 0 0 120c0 22.1 17.9 40 40 40s40-17.9 40-40l0-72c0 0 0-.1 0-.1l0-15.9 16 0 136 0c0 0 0 0 .1 0l7.9 0c44.2 0 80 35.8 80 80l0 8zM336 192l0 56c0 39.8-32.2 72-72 72s-72-32.2-72-72l0-118.6c-35.9 6.2-65.8 32.3-76 68.2L99.5 255.2 26.3 328.4c-21.9 21.9-21.9 57.3 0 79.2l78.1 78.1c21.9 21.9 57.3 21.9 79.2 0l37.7-37.7c.9 0 1.8 .1 2.7 .1l160 0c26.5 0 48-21.5 48-48c0-5.6-1-11-2.7-16l2.7 0c26.5 0 48-21.5 48-48c0-12.8-5-24.4-13.2-33c25.7-5 45.1-27.6 45.2-54.8l0-.4c-.1-30.8-25.1-55.8-56-55.8c0 0 0 0 0 0l-120 0z"/></svg></span>
-                                        </div>
-                                    </div>
-                                </p>
-                                <div class="collapse" id="collapseQuejas"></div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Identificación *</label>
+                                    <input type="email" class="form-control" id="identificacionConsulta">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Nombre Completo *</label>
+                                    <input type="email" class="form-control" id="nombreConsulta">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Telefono *</label>
+                                    <input type="text" class="form-control" id="telefonoConsulta">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Correo *</label>
+                                    <input type="text" class="form-control" id="correoConsulta">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Asunto *</label>
+                                    <input type="text" class="form-control" id="asuntoConsulta">
+                                </div>                                
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Consulta *</label>
+                                    <textarea name="" class="form-control" id="cuerpoConsulta"></textarea>
+                                </div>
+                                <div class="mb-2">
+                                    <label for="" class="form-label">Adjuntos (opcional)</label>
+                                    <input type="file" class="form-control"  name="adjuntos[]" multiple id="idAdjuntos">
+                                </div>
+                                <input type="hidden" value="0" id="idConsultado">                                
+                                <div class="mb-2 text-end">
+                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCaptcha" id="btnEnviarCaptcha" onclick="EnviarCaptcha();">
+                                        <span>Enviar</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

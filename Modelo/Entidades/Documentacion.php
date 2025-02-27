@@ -7,6 +7,7 @@ class Documentacion
     private $urlArchivo;
     private $usuarioCreacion;
     private $departamento;
+    private $tipoDocumento;
     
     public function getId() {
         return $this->id;
@@ -46,5 +47,13 @@ class Documentacion
 
     public function setDepartamento($departamento) {
         $this->departamento = $departamento;
+    }
+
+    public function getTipoDocumento() {
+        return $this->tipoDocumento;
+    }
+
+    public function setTipoDocumento($tipoDocumento) {
+        $this->tipoDocumento = $tipoDocumento;
     }
 }

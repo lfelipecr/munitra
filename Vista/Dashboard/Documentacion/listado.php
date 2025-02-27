@@ -10,7 +10,11 @@
     <div class="container-fluid">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" id="title">
         <h1 class="h2">Documentación Departamental - <?php echo $departamento->getDescripcion();?></h1>
-        <div class="form-floating"></div>
+        <div class="form-floating">
+          <a href="index.php?controlador=Documentacion&metodo=Categorias" class="btn btn-outline-secondary">
+            <span>Categorías</span>
+          </a>
+        </div>
         <a href="index.php?controlador=Documentacion&metodo=VIngresar" class="btn btn-outline-primary">
           <span>Agregar +</span>
         </a>

@@ -92,6 +92,30 @@ class UsuarioM {
         $conexion->Cerrar();
         return $usuario;
     }
+    function BuscarUsuarioIdPersona($idPersona)
+    {
+        $usuario=null;
+        $conexion= new Conexion();
+        $sql="SELECT * FROM USUARIO WHERE ID_PERSONA = $idPersona";
+        $resultado=$conexion->Ejecutar($sql);
+        if(mysqli_num_rows($resultado)>0)
+        {
+            while($fila=$resultado->fetch_assoc())
+            {
+                $usuario = new Usuario();
+                $usuario->setId($fila["ID"]);
+                $usuario->setNombreUsuario($fila["NOMBRE_USUARIO"]);
+                $usuario->setCorreo($fila['CORREO']);
+                $usuario->setPass($fila["PASS"]);
+                $usuario->setResponsable($fila["RESPONSABLE"]);
+                $usuario->setIdPersona($fila["ID_PERSONA"]);
+                $usuario->setIdDepartamento($fila["ID_DEPARTAMENTO"]);
+                $usuario->setIdEstado($fila["ID_ESTADO"]);
+            }
+        }
+        $conexion->Cerrar();
+        return $usuario;
+    }
     function Actualizar($usuario){
         $retVal = false;
         $conexion= new Conexion();

@@ -25,7 +25,9 @@ class DocumentacionControlador {
     function VIngresar(){
         $u = new Utilidades();
         if ($u->VerificarSesion()){
+            $documentacionM = new DocumentacionM();
             $msg = '';
+            $tipos = $documentacionM->TiposDocumento();
             $vista = './Vista/Dashboard/Documentacion/nuevo.php';
             require_once './Vista/Utilidades/sidebar.php';
         }
@@ -45,6 +47,7 @@ class DocumentacionControlador {
                         $documentacion->setUrlArchivo($urlArchivo);
                         $documentacion->setDepartamento($usuario->getIdDepartamento());
                         $documentacion->setUsuarioCreacion($usuario->getId());
+                        $documentacion->setTipoDocumento($_POST['tipoDoc']);
                         if ($documentacionM->IngresarDocumento($documentacion)){
                             header('location: index.php?controlador=Documentacion&metodo=Listado');
                         } else {
@@ -75,6 +78,39 @@ class DocumentacionControlador {
             $id = $_GET['id'];
             $documentacionM = new DocumentacionM();
             $documentacionM->EliminarDocumento($id);
+            $this->Listado();
+        }
+    }
+    function CrearCategoria(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $descripcion = $_POST['descripcion'];
+            $documentacionM = new DocumentacionM();
+            $documentacionM->CrearCategoria($descripcion);
+            $this->Categorias();
+        }
+    }
+
+    function Categorias(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $documentacionM = new DocumentacionM();
+            $tipos = $documentacionM->TiposDocumento();
+            $vista = './Vista/Dashboard/Documentacion/categorias.php';
+            require_once './Vista/Utilidades/sidebar.php';
+        }
+    }
+    function EliminarCategoria(){
+        $u = new Utilidades();
+        if ($u->VerificarSesion()){
+            $id = $_GET['id'];
+            $documentacionM = new DocumentacionM();
+            if ($documentacionM->EliminarCategoria($id)){
+                $this->Categorias();
+            } else {
+                echo '0';
+            }
+            
         }
     }
 }
