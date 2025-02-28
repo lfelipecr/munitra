@@ -15,6 +15,24 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="./Web/css/styles.css" rel="stylesheet"/>
+        <style>
+            header.masthead {
+                position: relative;
+                background-color: #343a40;
+                background-size: cover;
+                padding-top: 8rem;
+                padding-bottom: 8rem;
+            }
+            header.masthead:before {
+                background: url("assets/img/<?php echo 'banner-rio-cuarto.png';?>") no-repeat center center;
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+        </style>
     </head>
     <body>
         <!-- Navigation-->

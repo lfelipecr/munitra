@@ -19,11 +19,18 @@
                 <p>Publique acontecimientos y proyectos municipales de valor para la población cantonal</p>
             </div>
         </div>
-        <div class="col-12 mb-3">
+        <div class="col-12 mb-3 col-md-6">
             <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Blog&metodo=Actividades';">
                 <h4>Actividades - <a href="#" class="link-blog">Ir</a></h4>
                 <hr>
                 <p>Modifique la información sobre actividades cantonales y lugares de interés</p>
+            </div>
+        </div>
+        <div class="col-12 mb-3 col-md-6">
+            <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Blog&metodo=Banner';">
+                <h4>Banner - <a href="#" class="link-blog">Ir</a></h4>
+                <hr>
+                <p>Modifique el banner, para dar avisos o renovar el sitio web</p>
             </div>
         </div>
       </div>
