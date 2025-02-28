@@ -1,7 +1,9 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/ProvinciaM.php';
 require_once './Modelo/Metodos/DepartamentoM.php';
@@ -15,7 +17,8 @@ require_once './Modelo/Metodos/BitacoraSolicitudM.php';
 
 class UsuarioControlador
 {
-    function Perfil(){
+    function Perfil()
+    {
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
             $personaM = new PersonaM();
@@ -26,12 +29,15 @@ class UsuarioControlador
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function CambiarFotoPerfil(){
+    function CambiarFotoPerfil()
+    {
         if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-            if ($_FILES['foto']['type'] == 'image/jpeg' ||
-            $_FILES['foto']['type'] == 'image/jpg' || $_FILES['foto']['type'] == 'image/png'){
+            if (
+                $_FILES['foto']['type'] == 'image/jpeg' ||
+                $_FILES['foto']['type'] == 'image/jpg' || $_FILES['foto']['type'] == 'image/png'
+            ) {
                 $rutaDestino = './repo/';
-                $urlArchivo = $rutaDestino.time().basename($_FILES['foto']['name']);
+                $urlArchivo = $rutaDestino . time() . basename($_FILES['foto']['name']);
                 if (!is_writable($rutaDestino)) {
                     $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                     $vista = './Vista/Dashboard/usuario.php';
@@ -39,13 +45,13 @@ class UsuarioControlador
                 }
                 if (move_uploaded_file($_FILES['foto']['tmp_name'], $urlArchivo)) {
                     session_start();
-                    
+
                     $personaM = new PersonaM();
                     $imagen = new ImagenUsuario();
                     $imagen->setId($_POST['idFoto']);
                     $imagen->setIdUsuario($_SESSION['usuario']->getIdPersona());
                     $imagen->setUrlImagen($urlArchivo);
-                    if ($personaM->ActualizarImagen($imagen)){
+                    if ($personaM->ActualizarImagen($imagen)) {
                         $this->Perfil();
                     }
                 } else {
@@ -57,7 +63,8 @@ class UsuarioControlador
         }
     }
     //Llama a la vista de ingresar GET
-    private function LlamarVistaIngresar($msg){
+    private function LlamarVistaIngresar($msg)
+    {
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
             $locaciones = new ProvinciaM();
@@ -70,7 +77,8 @@ class UsuarioControlador
         }
     }
     //Llama a la vista de actualizar GET 
-    private function LlamarVistaActualizar($msg, $usuario, $persona){
+    private function LlamarVistaActualizar($msg, $usuario, $persona)
+    {
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
             $locaciones = new ProvinciaM();
@@ -83,7 +91,8 @@ class UsuarioControlador
         }
     }
     //Valida un array de campos y devuelve un mensaje
-    private function ValidarCampos(array $campos){
+    private function ValidarCampos(array $campos)
+    {
         $msg = "";
         foreach ($campos as $campo) {
             if (empty($_POST[$campo])) {
@@ -104,7 +113,8 @@ class UsuarioControlador
         }
     }
     //Vista de actualizar GET
-    function VActualizar(){
+    function VActualizar()
+    {
         //Id de URL
         $id = $_GET['id'];
         $idUsuario = $_GET['idUsuario'];
@@ -113,7 +123,7 @@ class UsuarioControlador
         $persona = new Persona();
         $usuarioM = new UsuarioM();
         $personaM = new PersonaM();
-        if ($idUsuario != 'null'){
+        if ($idUsuario != 'null') {
             $usuario = $usuarioM->BuscarUsuarioId($idUsuario);
         } else {
             $usuario->setId('');
@@ -127,7 +137,8 @@ class UsuarioControlador
         }
     }
     //Actualizar POST
-    function Actualizar(){
+    function Actualizar()
+    {
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
             session_start();
@@ -154,10 +165,21 @@ class UsuarioControlador
             $persona->setIdDistrito($_POST['distrito']);
             $persona->setUsuarioCreacion($_SESSION['usuario']->getId());
             //Verifica si se está creando cuenta de usuario
-            if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != ''){
+            if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != '') {
                 //Array de campos obligatorios usuario
-                $camposObligatorios = ['identificacion','nombre', 'apellido1', 'direccion', 'correo',
-                'provincia', 'canton', 'distrito', 'nombreUsuario', 'depto', 'estado'];
+                $camposObligatorios = [
+                    'identificacion',
+                    'nombre',
+                    'apellido1',
+                    'direccion',
+                    'correo',
+                    'provincia',
+                    'canton',
+                    'distrito',
+                    'nombreUsuario',
+                    'depto',
+                    'estado'
+                ];
                 //Si se va a trabajar con usuarios, se instancia el usuario
                 $usuario = new Usuario();
                 $usuario->setId($_POST['idUsuario']);
@@ -169,26 +191,35 @@ class UsuarioControlador
                 $usuario->setIdEstado($_POST['estado']);
             } else {
                 //Array de campos obligatorios solo persona
-                $camposObligatorios = ['identificacion','nombre', 'apellido1', 'direccion', 'correo',
-                'provincia', 'canton', 'distrito', 'depto'];
+                $camposObligatorios = [
+                    'identificacion',
+                    'nombre',
+                    'apellido1',
+                    'direccion',
+                    'correo',
+                    'provincia',
+                    'canton',
+                    'distrito',
+                    'depto'
+                ];
             }
             $msg = $this->ValidarCampos($camposObligatorios);
-            if ($msg == ''){
+            if ($msg == '') {
                 $personaM = new PersonaM();
-                if ($personaM->Actualizar($persona)){
-                    if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != ''){
+                if ($personaM->Actualizar($persona)) {
+                    if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != '') {
                         $usuarioM = new UsuarioM();
-                        if ($usuarioM->Actualizar($usuario)){
-                            $this->Listado('Usuario registrado correctamente');    
+                        if ($usuarioM->Actualizar($usuario)) {
+                            $this->Listado('Usuario registrado correctamente');
                         } else {
-                            $msg = 'Ha habido un problema con los datos de usuario de '.$persona->getNombre();
-                            $this->LlamarVistaActualizar($msg, $usuario, $persona);        
+                            $msg = 'Ha habido un problema con los datos de usuario de ' . $persona->getNombre();
+                            $this->LlamarVistaActualizar($msg, $usuario, $persona);
                         }
                     } else {
                         $this->Listado('Persona registrada correctamente');
                     }
                 } else {
-                    $msg = 'Ha habido un problema con los datos de '.$persona->getNombre();
+                    $msg = 'Ha habido un problema con los datos de ' . $persona->getNombre();
                     $this->LlamarVistaActualizar($msg, $usuario, $persona);
                 }
             } else {
@@ -196,23 +227,46 @@ class UsuarioControlador
             }
         }
     }
-    function VIngresar(){
+    function VIngresar()
+    {
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
             $msg = "";
             $this->LlamarVistaIngresar($msg);
         }
     }
-    function Ingresar(){
-        if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != ''){
-            $camposObligatorios = ['identificacion','nombre', 'apellido1', 'direccion', 'correo',
-            'provincia', 'canton', 'distrito', 'nombreUsuario', 'pass', 'depto', 'estado'];
+    function Ingresar()
+    {
+        if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != '') {
+            $camposObligatorios = [
+                'identificacion',
+                'nombre',
+                'apellido1',
+                'direccion',
+                'correo',
+                'provincia',
+                'canton',
+                'distrito',
+                'nombreUsuario',
+                'pass',
+                'depto',
+                'estado'
+            ];
         } else {
-            $camposObligatorios = ['identificacion','nombre', 'apellido1', 'direccion', 'correo',
-            'provincia', 'canton', 'distrito', 'depto'];
+            $camposObligatorios = [
+                'identificacion',
+                'nombre',
+                'apellido1',
+                'direccion',
+                'correo',
+                'provincia',
+                'canton',
+                'distrito',
+                'depto'
+            ];
         }
         $msg = $this->ValidarCampos($camposObligatorios);
-        if ($msg == ''){
+        if ($msg == '') {
             session_start();
             $personaM = new PersonaM();
             $persona = new Persona();
@@ -236,8 +290,8 @@ class UsuarioControlador
             $persona->setIdDistrito($_POST['distrito']);
             $persona->setUsuarioCreacion($_SESSION['usuario']->getId());
             $idUsuario = $personaM->IngresarPersona($persona);
-            if ($idUsuario != 0){
-                if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != ''){
+            if ($idUsuario != 0) {
+                if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != '') {
                     $usuarioM = new UsuarioM();
                     $usuario = new Usuario();
                     $usuario->setNombreUsuario(trim($_POST['nombreUsuario']));
@@ -247,16 +301,16 @@ class UsuarioControlador
                     $usuario->setIdPersona($idUsuario);
                     $usuario->setIdDepartamento($_POST['depto']);
                     $usuario->setIdEstado($_POST['estado']);
-                    if ($usuarioM->IngresarUsuario($usuario)){
+                    if ($usuarioM->IngresarUsuario($usuario)) {
                         $imagen = new ImagenUsuario();
                         $imagen->setIdUsuario($idUsuario);
                         $imagen->setUrlImagen('./repo/serverside/placeholder.jpg');
-                        if ($personaM->IngresarImagen($imagen)){
+                        if ($personaM->IngresarImagen($imagen)) {
                             header('location: index.php?controlador=Usuario&metodo=Listado');
                         }
                     } else {
                         $personaM->EliminarPersona($idUsuario);
-                        $this->LlamarVistaIngresar('Credenciales de usuario ya existen');    
+                        $this->LlamarVistaIngresar('Credenciales de usuario ya existen');
                     }
                 } else {
                     $this->Listado('Persona registrada correctamente');
@@ -269,18 +323,20 @@ class UsuarioControlador
             $this->LlamarVistaIngresar($msg);
         }
     }
-    function VerCredenciales(){
+    function VerCredenciales()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $id = $_GET['id'];
             $credencialesM = new CredencialesM();
             $jsonData = $credencialesM->BuscarCredenciales($id);
             require_once './Vista/Dashboard/Usuarios/credenciales.php';
         }
     }
-    function ValidarCredenciales(){
+    function ValidarCredenciales()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $id = $_GET['id'];
             $idCredencial = $_GET['idCredencial'];
             $usuarioM = new UsuarioM();
@@ -288,7 +344,7 @@ class UsuarioControlador
             $msg = '';
             $asunto = '';
             $codigo = bin2hex(random_bytes(4));
-            if ($_GET['validar'] == 'true'){
+            if ($_GET['validar'] == 'true') {
                 //base de datos
                 $usuario->setIdEstado(5);
                 $usuarioM->Actualizar($usuario);
@@ -298,12 +354,9 @@ class UsuarioControlador
                 $credenciales->setId($idCredencial);
                 $credencialesM->ModificarCredenciales($credenciales);
                 $asunto = 'Código de verificación | Municipalidad de Río Cuarto';
-                $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Usa el siguiente código para completar tu proceso de verificación:</p><div class="code">'.$codigo.'</div><p>Si no solicitaste este código, ignora este mensaje.</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
-
-                
-                
+                $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Usa el siguiente código para completar tu proceso de verificación:</p><div class="code">' . $codigo . '</div><p>Si no solicitaste este código, ignora este mensaje.</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
             }
-            if ($_GET['validar'] == 'false'){
+            if ($_GET['validar'] == 'false') {
                 $credencialesM = new CredencialesM();
                 $credencialesM->EliminarCredenciales($idCredencial);
                 $asunto = 'Credenciales de Identificación | Municipalidad de Río Cuarto';
@@ -312,7 +365,7 @@ class UsuarioControlador
                 $usuarioM->Actualizar($usuario);
             }
             $mail = new PHPMailer();
-            try{
+            try {
                 session_start();
                 $bitacoraM = new BitacoraSolicitudM();
                 $credenciales = $bitacoraM->CredencialesSMTP();
@@ -332,23 +385,23 @@ class UsuarioControlador
                 $mail->Body = $msg;
                 $mail->send();
                 $this->Listado();
-                
-            } catch (Exception $ex){
+            } catch (Exception $ex) {
                 var_dump($ex);
             }
         }
     }
-    function ValidarCodigo(){
+    function ValidarCodigo()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $credencialesM = new CredencialesM();
             $codigo = $_POST['codigo'];
             $usuario = $_SESSION['usuario'];
             $datos = $credencialesM->ValidarCodigo($codigo);
-            if ($datos != NULL){
+            if ($datos != NULL) {
                 $usuarioM = new UsuarioM();
                 $usuario->setIdEstado(1);
-                if ($usuarioM->Actualizar($usuario)){
+                if ($usuarioM->Actualizar($usuario)) {
                     header('location: index.php?controlador=Tramites&metodo=InicioExterno');
                 }
             } else {
@@ -357,11 +410,12 @@ class UsuarioControlador
             }
         }
     }
-    function BuscarCedula(){
+    function BuscarCedula()
+    {
         $personaM = new PersonaM();
         $cedula = $_GET['cedula'];
         $persona = $personaM->BuscarPersonaCedula($cedula);
-        if ($persona != null){
+        if ($persona != null) {
             $arreglo = array();
             $arreglo['nombre'] = $persona->getNombre();
             $arreglo['tipoId'] = $persona->getIdTipoIdentificacion();
@@ -379,35 +433,37 @@ class UsuarioControlador
             echo 'null';
         }
     }
-    function BuscarCedulaCuenta(){
+    function BuscarCedulaCuenta()
+    {
         $personaM = new PersonaM();
         $usuarioM = new UsuarioM();
         $cedula = $_GET['cedula'];
         $persona = $personaM->BuscarPersonaCedula($cedula);
-        if ($persona != null){
+        if ($persona != null) {
             $usuario = $usuarioM->BuscarUsuarioIdPersona($persona->getId());
-            if ($usuario != null){
+            if ($usuario != null) {
                 echo '1';
             } else {
-                echo '0';    
+                echo '0';
             }
         } else {
             echo '0';
         }
     }
-    function RecuperarCuenta(){
+    function RecuperarCuenta()
+    {
         $codigo = '0';
-        if (isset($_POST['identificacion'])){
+        if (isset($_POST['identificacion'])) {
             $personaM = new PersonaM();
             $identificacion = $_POST['identificacion'];
             $usuario = $personaM->BuscarPersonaCedula($identificacion);
-            if ($usuario != null){
+            if ($usuario != null) {
                 $correo = $usuario->getCorreo();
                 $mail = new PHPMailer();
                 $codigo = substr(bin2hex(random_bytes(8)), 0, 8);
                 $_SESSION['codigo'] = $codigo;
-                $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Usa el siguiente código para completar tu proceso de verificación:</p><div class="code">'.$codigo.'</div><p>Si no solicitaste este código, ignora este mensaje.</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
-                try{
+                $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Usa el siguiente código para completar tu proceso de verificación:</p><div class="code">' . $codigo . '</div><p>Si no solicitaste este código, ignora este mensaje.</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
+                try {
                     session_start();
                     $bitacoraM = new BitacoraSolicitudM();
                     $credenciales = $bitacoraM->CredencialesSMTP();
@@ -426,8 +482,7 @@ class UsuarioControlador
                     $mail->Subject = 'Municipalidad de Río Cuarto | Cambiar Contraseña';
                     $mail->Body = $msg;
                     $mail->send();
-                    
-                } catch (Exception $ex){
+                } catch (Exception $ex) {
                     var_dump($ex);
                 }
             } else {

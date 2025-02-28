@@ -19,10 +19,11 @@ class BannerM
         $conexion->Cerrar();
         return $banner;
     }
-    function BuscarBannerActivo(){
+    function BuscarBannerActivo()
+    {
         $listado = $this->BuscarBanners();
-        while ($fila = $listado->fetch_assoc()){
-            if ($fila['ACTIVO'] == '1'){
+        while ($fila = $listado->fetch_assoc()) {
+            if ($fila['ACTIVO'] == '1') {
                 return $fila['URL_BANNER'];
             }
         }
@@ -66,7 +67,7 @@ class BannerM
         $sql = "UPDATE BANNER SET ACTIVO = 0;";
         try {
             $conexion->Ejecutar($sql);
-            $sql = 'UPDATE BANNER SET ACTIVO = 1 WHERE ID = '.$id;
+            $sql = 'UPDATE BANNER SET ACTIVO = 1 WHERE ID = ' . $id;
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
             }

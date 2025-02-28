@@ -1,35 +1,40 @@
-<?php 
+<?php
 require_once './Modelo/Entidades/Usuario.php';
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/SolicitudM.php';
 require_once './Libraries/dompdf-3.1.0/dompdf/autoload.inc.php';
+
 use Dompdf\Dompdf;
 use FontLib\Table\Type\head;
 
-class TramitesControlador {
-    function Index(){
+class TramitesControlador
+{
+    function Index()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $u->LlamarVista('./Vista/Dashboard/Tramites/listadoOpciones.php');
         }
     }
-    function ListadoTramites(){
+    function ListadoTramites()
+    {
         session_start();
         $usuario = $_SESSION['usuario']->getIdPersona();
         $estado = $_SESSION['usuario']->getIdEstado();
         $vista = './Vista/TramitesUsuario/listadoTramites.php';
         require_once './Vista/Utilidades/navbar.php';
     }
-    function InicioExterno(){
+    function InicioExterno()
+    {
         session_start();
         $usuario = $_SESSION['usuario']->getIdPersona();
         $estado = $_SESSION['usuario']->getIdEstado();
         $tramite = 0;
-        if (isset($_SESSION['tramite'])){
+        if (isset($_SESSION['tramite'])) {
             $tramite = $_SESSION['tramite'];
             unset($_SESSION['tramite']);
         }
-        switch ($tramite){
+        switch ($tramite) {
             case '1':
                 $this->Patentes();
                 break;
@@ -50,13 +55,13 @@ class TramitesControlador {
                 header('location: index.php?controlador=Externo&metodo=Index');
                 break;
         }
-        
     }
-    function Patentes(){
+    function Patentes()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             session_start();
-            if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            if ($_SESSION['usuario']->getIdDepartamento() == 1) {
                 $solicitudM = new SolicitudM();
                 $jsonData = $solicitudM->BuscarSolicitudes(1);
                 $usuario = $_SESSION['usuario']->getId();
@@ -68,13 +73,13 @@ class TramitesControlador {
                 $vista = './Vista/Dashboard/Tramites/Patentes/listado.php';
                 require_once './Vista/Utilidades/sidebar.php';
             }
-            
         }
     }
-    function UsoSuelo(){
+    function UsoSuelo()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
-            if ($_SESSION['usuario']->getIdDepartamento() == 1){
+        if ($u->VerificarSesion()) {
+            if ($_SESSION['usuario']->getIdDepartamento() == 1) {
                 $solicitudM = new SolicitudM();
                 $jsonData = $solicitudM->BuscarSolicitudes(2);
                 $vista = './Vista/TramitesUsuario/UsoSuelo/listado.php';
@@ -87,11 +92,12 @@ class TramitesControlador {
             }
         }
     }
-    function Visado (){
+    function Visado()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             session_start();
-            if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            if ($_SESSION['usuario']->getIdDepartamento() == 1) {
                 $solicitudM = new SolicitudM();
                 $jsonData = $solicitudM->BuscarSolicitudes(3);
                 $vista = './Vista/TramitesUsuario/Visado/listado.php';
@@ -104,11 +110,12 @@ class TramitesControlador {
             }
         }
     }
-    function Condonacion(){
+    function Condonacion()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             session_start();
-            if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            if ($_SESSION['usuario']->getIdDepartamento() == 1) {
                 $solicitudM = new SolicitudM();
                 $jsonData = $solicitudM->BuscarSolicitudes(4);
                 $vista = './Vista/TramitesUsuario/Condonacion/listado.php';
@@ -121,11 +128,12 @@ class TramitesControlador {
             }
         }
     }
-    function Declaraciones(){
+    function Declaraciones()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             session_start();
-            if ($_SESSION['usuario']->getIdDepartamento() == 1){
+            if ($_SESSION['usuario']->getIdDepartamento() == 1) {
                 $vista = './Vista/TramitesUsuario/Declaraciones/listado.php';
                 require_once './Vista/Utilidades/navbar.php';
             } else {
@@ -134,33 +142,37 @@ class TramitesControlador {
             }
         }
     }
-    function Credenciales(){
+    function Credenciales()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             session_start();
             $idUsuario = $_SESSION['usuario']->getId();
             require_once './Vista/Login/credenciales.php';
-        }       
+        }
     }
-    function IngresarCodigo(){
+    function IngresarCodigo()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $msg = '';
             require_once './Vista/Login/codigo.php';
         }
     }
-    function Descargar(){
+    function Descargar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $ruta = $_SESSION['archivo'];
             unset($_SESSION['archivo']);
             echo $ruta;
             //header('location: '.$ruta);
         }
     }
-    function ImprimirPDF(){
+    function ImprimirPDF()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $baseUrl = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']) . "/";
             $html = $_POST['html'];
             $html = str_replace('src="./Web/assets/img/', 'src="' . $baseUrl . 'Web/assets/img/', $html);
@@ -171,7 +183,7 @@ class TramitesControlador {
             $dompdf->loadHtml($html);
             $dompdf->setPaper('letter');
             $dompdf->render();
-            $ruta ='./repo/'.time().'solicitud.pdf';
+            $ruta = './repo/' . time() . 'solicitud.pdf';
             file_put_contents($ruta, $dompdf->output());
             echo $ruta;
             exit;

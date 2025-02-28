@@ -4,13 +4,12 @@ class Rutas
 {
     function CargarControlador($controlador)
     {
-        $nombreControlador=ucwords(strtolower($controlador))."Controlador";
-        $archivoControlador="./Controlador/".$nombreControlador.".php";
+        $nombreControlador = ucwords(strtolower($controlador)) . "Controlador";
+        $archivoControlador = "./Controlador/" . $nombreControlador . ".php";
 
-        if(!is_file($archivoControlador))
-        {
-            $nombreControlador="IndexControlador";
-            $archivoControlador=RUTA_FIJA;
+        if (!is_file($archivoControlador)) {
+            $nombreControlador = "IndexControlador";
+            $archivoControlador = RUTA_FIJA;
         }
 
         require_once $archivoControlador;
@@ -18,16 +17,13 @@ class Rutas
         return $controladorObjeto;
     }
 
-    function CargarMetodo($controlador,$metodo)
+    function CargarMetodo($controlador, $metodo)
     {
-        if(isset($metodo) && method_exists($controlador,$metodo))
-        {
+        if (isset($metodo) && method_exists($controlador, $metodo)) {
             $controlador->$metodo();
-        }
-        else
-        {
+        } else {
             require_once RUTA_FIJA;
-            $controlador=new IndexControlador();
+            $controlador = new IndexControlador();
             $controlador->Index();
         }
     }

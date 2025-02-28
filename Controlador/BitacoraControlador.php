@@ -1,7 +1,9 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Entidades/BitacoraSolicitud.php';
 require_once './Modelo/Entidades/Usuario.php';
@@ -9,28 +11,31 @@ require_once './Modelo/Metodos/BitacoraSolicitudM.php';
 require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Metodos/SolicitudM.php';
 
-class BitacoraControlador{
-    function BuscarConversacion(){
+class BitacoraControlador
+{
+    function BuscarConversacion()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $bitacoraM = new BitacoraSolicitudM();
             $id = $_GET['idConv'];
             $tipo = $_GET['interno'];
             echo $bitacoraM->BuscarConversacion($id, $tipo);
         }
     }
-    function EnviarEmail(){
+    function EnviarEmail()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             session_start();
             $personaM = new PersonaM();
             $solicitudM = new SolicitudM();
             $persona = $personaM->BuscarPersona($_POST['idSolicitante']);
             $solicitud = $solicitudM->BuscarCabeceraSolicitud($_POST['idSolicitud']);
             $cuerpoEmail = $_POST['cuerpoEmail'];
-            $asuntoEmail = "Bitacora Solicitud Río Cuarto - ".time();
+            $asuntoEmail = "Bitacora Solicitud Río Cuarto - " . time();
             $mail = new PHPMailer();
-            try{
+            try {
                 $bitacora = new BitacoraSolicitud();
                 $bitacoraM = new BitacoraSolicitudM();
                 $credenciales = $bitacoraM->CredencialesSMTP();
@@ -57,29 +62,29 @@ class BitacoraControlador{
                 $bitacora->setDetalle($cuerpoEmail);
                 $bitacora->setInterno($_POST['interno']);
                 $bitacora->setAdjuntos('');
-                if (isset($_FILES['adjuntos'])){
+                if (isset($_FILES['adjuntos'])) {
                     $adjuntos = array();
                     $archivo = false;
                     $rutaDestino = './repo/';
-                    foreach($_FILES['adjuntos']['tmp_name'] as $adjunto => $tmp_name){
+                    foreach ($_FILES['adjuntos']['tmp_name'] as $adjunto => $tmp_name) {
                         $archivo = true;
-                        $urlArchivo = $rutaDestino.time().basename($_FILES['adjuntos']['name'][$adjunto]);
+                        $urlArchivo = $rutaDestino . time() . basename($_FILES['adjuntos']['name'][$adjunto]);
                         if (move_uploaded_file($tmp_name, $urlArchivo)) {
                             $adjuntos[] = $urlArchivo;
                         } else {
-                            echo 'Ha habido un error con la subida del archivo'.$_FILES['adjuntos']['name'][$adjunto].', intente con otro archivo';
+                            echo 'Ha habido un error con la subida del archivo' . $_FILES['adjuntos']['name'][$adjunto] . ', intente con otro archivo';
                             $archivo = false;
                             break;
                         }
                     }
-                    if ($archivo){
+                    if ($archivo) {
                         $bitacora->setAdjuntos(json_encode($adjuntos));
                     }
                 }
                 if ($bitacoraM->IngresarBitacora($bitacora))
                     echo 'OK';
                 else echo 'ERROR';
-            } catch (Exception $ex){
+            } catch (Exception $ex) {
                 var_dump($ex);
             }
         }

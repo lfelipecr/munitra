@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once './Modelo/Metodos/DepartamentoM.php';
 require_once './Modelo/Metodos/NoticiaM.php';
 require_once './Modelo/Metodos/SesionM.php';
@@ -12,20 +12,24 @@ require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Metodos/UsuarioM.php';
 require_once './Controlador/LoginControlador.php';
 
-class WebControlador {
-    function ListadoDocsWeb(){
+class WebControlador
+{
+    function ListadoDocsWeb()
+    {
         $documentacionM = new DocumentacionM();
         $idDepartamento = $_GET['idDepto'];
         $jsonData = $documentacionM->ListarDocumentos($idDepartamento);
         echo $jsonData;
     }
-    function Actividad(){
+    function Actividad()
+    {
         $id = $_GET['id'];
         $actividadM = new ActividadM();
         $actividad = $actividadM->BuscarActividad($id);
         require_once './Web/actividad.php';
     }
-    function Alcaldia(){
+    function Alcaldia()
+    {
         session_start();
         $deptomodel = new DepartamentoM();
         $consultaM = new ConsultaM();
@@ -34,7 +38,8 @@ class WebControlador {
         $consulta = null;
         require_once './Web/alcaldia.php';
     }
-    function Conformacion(){
+    function Conformacion()
+    {
         session_start();
         $consultaM = new ConsultaM();
         $deptomodel = new DepartamentoM();
@@ -43,7 +48,8 @@ class WebControlador {
         $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         require_once './Web/conformacion.php';
     }
-    function Contacto(){
+    function Contacto()
+    {
         session_start();
         $consultaM = new ConsultaM();
         $consulta = null;
@@ -51,12 +57,14 @@ class WebControlador {
         $estadisticas = $consultaM->GenerarEstadisticas();
         require_once './Web/contacto.php';
     }
-    function Helper(){
+    function Helper()
+    {
         session_start();
         session_unset();
         session_destroy();
     }
-    function Departamentos(){
+    function Departamentos()
+    {
         session_start();
         $consultaM = new ConsultaM();
         $deptomodel = new DepartamentoM();
@@ -67,33 +75,40 @@ class WebControlador {
         $jsonData = $deptomodel->BuscarDepartamentosUsuario();
         require_once './Web/departamentos.php';
     }
-    function Himno(){
+    function Himno()
+    {
         require_once './Web/himno.html';
     }
-    function Municipalidad(){
+    function Municipalidad()
+    {
         require_once './Web/municipalidad.php';
     }
-    function Noticias(){
+    function Noticias()
+    {
         $noticiaM = new NoticiaM();
         $jsonData = $noticiaM->BuscarNoticias();
         require_once './Web/noticias.php';
     }
-    function Noticia(){
+    function Noticia()
+    {
         $noticiaM = new NoticiaM();
         $noticia = $noticiaM->BuscarNoticia($_GET['id']);
         require_once './Web/noticia.php';
     }
-    function Actividades(){
+    function Actividades()
+    {
         $actividadM = new ActividadM();
         $jsonData = $actividadM->BuscarTodas();
         require_once './Web/quehacer.php';
     }
-    function Sesiones(){
+    function Sesiones()
+    {
         $sesionM = new SesionM();
         $jsonData = $sesionM->BuscarSesiones();
         require_once './Web/sesiones.php';
     }
-    function NuestroCanton(){
+    function NuestroCanton()
+    {
         require_once './Web/inicio.php';
     }
     function SolicitarTramite()

@@ -1,12 +1,14 @@
-<?php 
+<?php
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/SolicitudM.php';
 require_once './Modelo/Metodos/ProvinciaM.php';
 require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Entidades/DetalleSolicitud.php';
 
-class PatenteControlador {
-    function Imprimir(){
+class PatenteControlador
+{
+    function Imprimir()
+    {
         $provinciaM = new ProvinciaM();
         $id = $_GET['id'];
         $solicitudM = new SolicitudM();
@@ -17,13 +19,23 @@ class PatenteControlador {
         $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
         $distritos = $provinciaM->BuscarDistritos();
         //Datos de impresión
-        $tiposId = ['n/a', 'Cédula de Identidad', 'Pasaporte', 'Cédula de Residencia',
-        'Número Interno', 'Número asegurado', 'DIMEX', 'NITE', 'DIDI'];
+        $tiposId = [
+            'n/a',
+            'Cédula de Identidad',
+            'Pasaporte',
+            'Cédula de Residencia',
+            'Número Interno',
+            'Número asegurado',
+            'DIMEX',
+            'NITE',
+            'DIDI'
+        ];
         $locaciones = $provinciaM->LocacionesId($persona->getIdProvincia(), $persona->getIdCanton(), $persona->getIdDistrito());
         require_once './Vista/Dashboard/Tramites/Patentes/impresion.php';
     }
-    private function LlamarVistaActualizar($msg, $id){
-        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+    private function LlamarVistaActualizar($msg, $id)
+    {
+        if ($_SESSION['usuario']->getIdDepartamento() == 1) {
             $solicitudM = new SolicitudM();
             $personaM = new PersonaM();
             $provinciaM = new ProvinciaM();
@@ -45,8 +57,9 @@ class PatenteControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    private function LlamarVistaIngresar($msg){
-        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+    private function LlamarVistaIngresar($msg)
+    {
+        if ($_SESSION['usuario']->getIdDepartamento() == 1) {
             $provinciaM = new ProvinciaM();
             $id = $_SESSION['usuario']->getIdPersona();
             $personaM = new PersonaM();
@@ -64,34 +77,38 @@ class PatenteControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function VIngresar(){
+    function VIngresar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $this->LlamarVistaIngresar('');
         }
     }
-    function Ingresar(){
+    function Ingresar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
-            if (isset($_POST['usoPatente']) && isset($_POST['nombreFantasia']) &&
-            isset($_POST['actividadComercial']) && isset($_POST['direccionExacta']) &&
-            isset($_POST['area']) && isset($_POST['dimensiones'])){
+        if ($u->VerificarSesion()) {
+            if (
+                isset($_POST['usoPatente']) && isset($_POST['nombreFantasia']) &&
+                isset($_POST['actividadComercial']) && isset($_POST['direccionExacta']) &&
+                isset($_POST['area']) && isset($_POST['dimensiones'])
+            ) {
                 $adjuntos = array();
                 $archivo = false;
                 $rutaDestino = './repo/';
-                foreach($_FILES['requisitos']['tmp_name'] as $adjunto => $tmp_name){
+                foreach ($_FILES['requisitos']['tmp_name'] as $adjunto => $tmp_name) {
                     $archivo = true;
-                    $urlArchivo = $rutaDestino.time().basename($_FILES['requisitos']['name'][$adjunto]);
+                    $urlArchivo = $rutaDestino . time() . basename($_FILES['requisitos']['name'][$adjunto]);
                     if (move_uploaded_file($tmp_name, $urlArchivo)) {
                         $adjuntos[] = $urlArchivo;
                     } else {
-                        $msg = 'Ha habido un error con la subida del archivo'.$_FILES['requisitos']['name'][$adjunto].', intente con otro archivo';
+                        $msg = 'Ha habido un error con la subida del archivo' . $_FILES['requisitos']['name'][$adjunto] . ', intente con otro archivo';
                         $this->LlamarVistaIngresar($msg);
                         $archivo = false;
                         break;
                     }
                 }
-                if ($archivo){
+                if ($archivo) {
                     //Si todos los datos están correctos, guarda la solicitud y obtiene el id
                     $solicitudM = new SolicitudM();
                     $solicitud = new Solicitud();
@@ -101,14 +118,14 @@ class PatenteControlador {
                     $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
                     //si un administrador ingresa la persona, manda el id
                     //si un usuario externo lo hace, busca los datos de la persona
-                    if (isset($_POST['persona'])){
+                    if (isset($_POST['persona'])) {
                         $solicitud->setIdPersona($_POST['persona']);
                     } else {
                         $cedula = $_POST['identificacion'];
                         $personaM = new PersonaM();
                         //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
                         $persona = $personaM->BuscarPersonaCedula($cedula);
-                        if ($persona != null){
+                        if ($persona != null) {
                             $solicitud->setIdPersona($persona->getId());
                         } else {
                             //genera el usuario
@@ -149,11 +166,19 @@ class PatenteControlador {
                         $adjunto->setTipoRequisito(1);
                         $registrar[] = $adjunto;
                         //variables del post
-                        $post = ['usoPatente', 'nombreFantasia', 'actividadComercial', 'numeroUsoSuelo',
-                        'distrito', 'direccionExacta', 'area', 'dimensiones'];
+                        $post = [
+                            'usoPatente',
+                            'nombreFantasia',
+                            'actividadComercial',
+                            'numeroUsoSuelo',
+                            'distrito',
+                            'direccionExacta',
+                            'area',
+                            'dimensiones'
+                        ];
                         $contador = 2;
                         //objetos
-                        for($i = 0; $i < 8; $i++){
+                        for ($i = 0; $i < 8; $i++) {
                             $detalle = new DetalleSolicitud();
                             $detalle->setCumple(1);
                             $detalle->setIdSolicitud($idSolicitud);
@@ -162,8 +187,8 @@ class PatenteControlador {
                             $contador++;
                             $registrar[] = $detalle;
                         }
-                        
-                        if ($solicitudM->IngresarDetalles($registrar)){
+
+                        if ($solicitudM->IngresarDetalles($registrar)) {
                             header('location: index.php?controlador=Tramites&metodo=Patentes');
                         } else {
                             $solicitudM->EliminarSolicitud($idSolicitud);
@@ -174,39 +199,42 @@ class PatenteControlador {
             }
         }
     }
-    function Actualizar(){
+    function Actualizar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
-            if (isset($_POST['usoPatente']) && isset($_POST['nombreFantasia']) &&
-            isset($_POST['actividadComercial']) && isset($_POST['direccionExacta']) &&
-            isset($_POST['area']) && isset($_POST['dimensiones'])){
+        if ($u->VerificarSesion()) {
+            if (
+                isset($_POST['usoPatente']) && isset($_POST['nombreFantasia']) &&
+                isset($_POST['actividadComercial']) && isset($_POST['direccionExacta']) &&
+                isset($_POST['area']) && isset($_POST['dimensiones'])
+            ) {
                 $solicitudM = new SolicitudM();
                 $solicitud = new Solicitud();
                 //cabecera solicitud
                 $solicitud->setId($_POST['idSolicitud']);
                 $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-                if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)){
+                if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)) {
                     //Si la actualización es exitosa, genera un arreglo
                     $registrar = array();
                     //archivos adjuntos
                     $rutaDestino = './repo/';
                     $archivos = false;
-                    if (!empty($_FILES['requisitos']['name'][0])){
+                    if (!empty($_FILES['requisitos']['name'][0])) {
                         $archivos = true;
                         $adjuntos = array();
-                        foreach($_FILES['requisitos']['tmp_name'] as $adjunto => $tmp_name){
-                            $urlArchivo = $rutaDestino.time().basename($_FILES['requisitos']['name'][$adjunto]);
+                        foreach ($_FILES['requisitos']['tmp_name'] as $adjunto => $tmp_name) {
+                            $urlArchivo = $rutaDestino . time() . basename($_FILES['requisitos']['name'][$adjunto]);
                             if (move_uploaded_file($tmp_name, $urlArchivo)) {
                                 $archivos = true;
                                 $adjuntos[] = $urlArchivo;
                             } else {
                                 $archivos = false;
-                                $this->LlamarVistaActualizar('Ha habido un error con la subida del archivo'.$_FILES['adjuntos']['name'][$adjunto].', intente con otro archivo', $_POST['idSolicitud']);
+                                $this->LlamarVistaActualizar('Ha habido un error con la subida del archivo' . $_FILES['adjuntos']['name'][$adjunto] . ', intente con otro archivo', $_POST['idSolicitud']);
                                 break;
                             }
                         }
                     }
-                    if ($archivos){
+                    if ($archivos) {
                         $adjunto = new DetalleSolicitud();
                         $adjunto->setCumple(1);
                         $adjunto->setId($_POST['idRequisitos']);
@@ -215,12 +243,28 @@ class PatenteControlador {
                         $registrar[] = $adjunto;
                     }
                     //variables del post
-                    $post = ['usoPatente', 'nombreFantasia', 'actividadComercial', 'numeroUsoSuelo',
-                    'distrito', 'direccionExacta', 'area', 'dimensiones'];
-                    $ids = ['idUsoPatentes', 'idNombreFantasia', 'idActividadComercial', 'idNumeroUsoSuelo',
-                    'idDistrito', 'idDireccionExacta', 'idArea', 'idDimensiones'];
+                    $post = [
+                        'usoPatente',
+                        'nombreFantasia',
+                        'actividadComercial',
+                        'numeroUsoSuelo',
+                        'distrito',
+                        'direccionExacta',
+                        'area',
+                        'dimensiones'
+                    ];
+                    $ids = [
+                        'idUsoPatentes',
+                        'idNombreFantasia',
+                        'idActividadComercial',
+                        'idNumeroUsoSuelo',
+                        'idDistrito',
+                        'idDireccionExacta',
+                        'idArea',
+                        'idDimensiones'
+                    ];
                     $contador = 2;
-                    for($i = 0; $i < 8; $i++){
+                    for ($i = 0; $i < 8; $i++) {
                         $detalle = new DetalleSolicitud();
                         $detalle->setCumple(1);
                         $detalle->setId($_POST[$ids[$i]]);
@@ -230,7 +274,7 @@ class PatenteControlador {
                         $contador++;
                     }
                     //Si se envió un archivo, se agrega a la lista de detalles para modificar
-                    if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
+                    if ($solicitudM->ActualizarDetallesSolicitud($registrar)) {
                         header('location: index.php?controlador=Tramites&metodo=Patentes');
                     } else {
                         $this->LlamarVistaActualizar('Ha ocurrido un error interno, si el problema persiste, contacte al profesional de TI', $_POST['idSolicitud']);
@@ -241,9 +285,10 @@ class PatenteControlador {
             }
         }
     }
-    function VActualizar(){
+    function VActualizar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $id = $_GET['id'];
             $this->LlamarVistaActualizar('', $id);
         }

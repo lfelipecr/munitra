@@ -9,10 +9,12 @@ require_once './Modelo/Entidades/Usuario.php';
 require_once './Modelo/Metodos/DepartamentoM.php';
 require_once './Modelo/Entidades/Departamento.php';
 
-class DocumentacionControlador {
-    function Listado(){
+class DocumentacionControlador
+{
+    function Listado()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $documentacionM = new DocumentacionM();
             $departamentoM = new DepartamentoM();
             $idDepartamento = $_SESSION['usuario']->getIdDepartamento();
@@ -22,9 +24,10 @@ class DocumentacionControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function VIngresar(){
+    function VIngresar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $documentacionM = new DocumentacionM();
             $msg = '';
             $tipos = $documentacionM->TiposDocumento();
@@ -32,13 +35,14 @@ class DocumentacionControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function Ingresar(){
+    function Ingresar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
-            if (isset($_POST['descripcion'])){
+        if ($u->VerificarSesion()) {
+            if (isset($_POST['descripcion'])) {
                 if (isset($_FILES['flSubir']) && $_FILES['flSubir']['error'] === UPLOAD_ERR_OK) {
                     $rutaDestino = './repo/';
-                    $urlArchivo = $rutaDestino.time().basename($_FILES['flSubir']['name']);
+                    $urlArchivo = $rutaDestino . time() . basename($_FILES['flSubir']['name']);
                     if (move_uploaded_file($_FILES['flSubir']['tmp_name'], $urlArchivo)) {
                         $documentacionM = new DocumentacionM();
                         $documentacion = new Documentacion();
@@ -48,7 +52,7 @@ class DocumentacionControlador {
                         $documentacion->setDepartamento($usuario->getIdDepartamento());
                         $documentacion->setUsuarioCreacion($usuario->getId());
                         $documentacion->setTipoDocumento($_POST['tipoDoc']);
-                        if ($documentacionM->IngresarDocumento($documentacion)){
+                        if ($documentacionM->IngresarDocumento($documentacion)) {
                             header('location: index.php?controlador=Documentacion&metodo=Listado');
                         } else {
                             $msg = 'Ha habido un problema, verifique los datos';
@@ -72,18 +76,20 @@ class DocumentacionControlador {
             }
         }
     }
-    function Eliminar(){
+    function Eliminar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $id = $_GET['id'];
             $documentacionM = new DocumentacionM();
             $documentacionM->EliminarDocumento($id);
             $this->Listado();
         }
     }
-    function CrearCategoria(){
+    function CrearCategoria()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $descripcion = $_POST['descripcion'];
             $documentacionM = new DocumentacionM();
             $documentacionM->CrearCategoria($descripcion);
@@ -91,26 +97,27 @@ class DocumentacionControlador {
         }
     }
 
-    function Categorias(){
+    function Categorias()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $documentacionM = new DocumentacionM();
             $tipos = $documentacionM->TiposDocumento();
             $vista = './Vista/Dashboard/Documentacion/categorias.php';
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function EliminarCategoria(){
+    function EliminarCategoria()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $id = $_GET['id'];
             $documentacionM = new DocumentacionM();
-            if ($documentacionM->EliminarCategoria($id)){
+            if ($documentacionM->EliminarCategoria($id)) {
                 $this->Categorias();
             } else {
                 echo '0';
             }
-            
         }
     }
 }

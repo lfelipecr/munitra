@@ -1,12 +1,14 @@
-<?php 
+<?php
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/SolicitudM.php';
 require_once './Modelo/Metodos/ProvinciaM.php';
 require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Entidades/DetalleSolicitud.php';
 
-class VisadoControlador {
-    function Imprimir(){
+class VisadoControlador
+{
+    function Imprimir()
+    {
         $provinciaM = new ProvinciaM();
         $id = $_GET['id'];
         $solicitudM = new SolicitudM();
@@ -17,13 +19,23 @@ class VisadoControlador {
         $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
         $distritos = $provinciaM->BuscarDistritos();
         //Datos de impresión
-        $tiposId = ['n/a', 'Cédula de Identidad', 'Pasaporte', 'Cédula de Residencia',
-        'Número Interno', 'Número asegurado', 'DIMEX', 'NITE', 'DIDI'];
+        $tiposId = [
+            'n/a',
+            'Cédula de Identidad',
+            'Pasaporte',
+            'Cédula de Residencia',
+            'Número Interno',
+            'Número asegurado',
+            'DIMEX',
+            'NITE',
+            'DIDI'
+        ];
         $locaciones = $provinciaM->LocacionesId($persona->getIdProvincia(), $persona->getIdCanton(), $persona->getIdDistrito());
         require_once './Vista/Dashboard/Tramites/Visado/impresion.php';
     }
-    private function LlamarVistaActualizar($msg, $id){
-        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+    private function LlamarVistaActualizar($msg, $id)
+    {
+        if ($_SESSION['usuario']->getIdDepartamento() == 1) {
             $personaM = new PersonaM();
             $solicitudM = new SolicitudM();
             $provinciaM = new ProvinciaM();
@@ -45,10 +57,11 @@ class VisadoControlador {
             $distritos = $provinciaM->BuscarDistritos();
             $vista = './Vista/Dashboard/Tramites/Visado/actualizar.php';
             require_once './Vista/Utilidades/sidebar.php';
-        }        
+        }
     }
-    private function LlamarVistaIngresar($msg){
-        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+    private function LlamarVistaIngresar($msg)
+    {
+        if ($_SESSION['usuario']->getIdDepartamento() == 1) {
             $provinciaM = new ProvinciaM();
             $id = $_SESSION['usuario']->getIdPersona();
             $personaM = new PersonaM();
@@ -66,21 +79,24 @@ class VisadoControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function VIngresar(){
+    function VIngresar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $this->LlamarVistaIngresar('');
         }
     }
-    function VActualizar(){
+    function VActualizar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $this->LlamarVistaActualizar('', $_GET['id']);
         }
     }
-    function Actualizar(){
+    function Actualizar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $solicitudM = new SolicitudM();
             $solicitud = new Solicitud();
             session_start();
@@ -90,14 +106,14 @@ class VisadoControlador {
             $solicitud->setTipoSolicitud(3);
             $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
             $solicitud->setIdPersona($_POST['persona']);
-            if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)){
+            if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)) {
                 $registrar = array();
                 //datos de inputs
                 //variables del POST
                 $post = ['direccionPropiedad', 'distrito', 'numeroPlano', 'areaPlano', 'numeroFinca', 'areaRegistroPublico', 'frente', 'numeroContrato'];
                 $postIds = ['idDireccionPropiedad', 'idDistrito', 'idNumeroPlano', 'idAreaPlano', 'idNumeroFinca', 'idAreaRegistroPublico', 'idFrente', 'idNumeroContrato'];
                 $tipoRequisito = 18;
-                for ($i = 0; $i < count($post); $i++){
+                for ($i = 0; $i < count($post); $i++) {
                     $detalle = new DetalleSolicitud();
                     $detalle->setId($_POST[$postIds[$i]]);
                     $detalle->setCumple(1);
@@ -112,7 +128,7 @@ class VisadoControlador {
                 if (!is_writable('./repo/')) {
                     $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
                     $validacionArchivos = false;
-                }  else {
+                } else {
                     if (!is_dir($rutaDestino)) {
                         mkdir($rutaDestino, 0777, true);
                     }
@@ -120,9 +136,9 @@ class VisadoControlador {
                     $postIds = ['idCartaDisponibilidad', 'idCroquis', 'idPlanoCorregido', 'idMinuta', 'idCartaMOPT'];
                     $tipoRequisito = 26;
                     //carta de disponibilidad
-                    for ($i = 0; $i < count($post); $i++){
+                    for ($i = 0; $i < count($post); $i++) {
                         if (isset($_FILES[$post[$i]]) && $_FILES[$post[$i]]['error'] === UPLOAD_ERR_OK) {
-                            $urlArchivo = $rutaDestino.time().basename($_FILES[$post[$i]]['name']);
+                            $urlArchivo = $rutaDestino . time() . basename($_FILES[$post[$i]]['name']);
                             if (move_uploaded_file($_FILES[$post[$i]]['tmp_name'], $urlArchivo)) {
                                 $cartaDisponibilidad = new DetalleSolicitud();
                                 $cartaDisponibilidad->setId($_POST[$postIds[$i]]);
@@ -132,10 +148,10 @@ class VisadoControlador {
                                 $cartaDisponibilidad->setTipoRequisito($tipoRequisito);
                                 $registrar[] = $cartaDisponibilidad;
                             }
-                        }    
+                        }
                     }
                     //Firma
-                    if (isset($_POST['firma'])){
+                    if (isset($_POST['firma'])) {
                         $firma = $_POST['firma'];
                         $firma = str_replace("data:image/png;base64,", "", $firma);
                         $firma = str_replace(" ", "+", $firma);
@@ -152,7 +168,7 @@ class VisadoControlador {
                         echo $archivo;
                     }
                 }
-                if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
+                if ($solicitudM->ActualizarDetallesSolicitud($registrar)) {
                     header('location: index.php?controlador=Tramites&metodo=Visado');
                 } else {
                     $this->Actualizar('Ha habido un error con la subida de los datos, si el problema persiste, comuniquese con el profesional de TI', $idSolicitud);
@@ -160,9 +176,10 @@ class VisadoControlador {
             }
         }
     }
-    function Ingresar(){
+    function Ingresar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             //arreglo a mandar a BD 
             $registrar = array();
             //Variable verifica que todos los archivos sean correctos
@@ -172,17 +189,16 @@ class VisadoControlador {
             if (!is_writable('./repo/')) {
                 $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
                 $validacionArchivos = true;
-            }  else {
+            } else {
                 if (!is_dir($rutaDestino)) {
                     mkdir($rutaDestino, 0777, true);
                 }
                 //variables de $_FILES
                 $filePost = ['flCartaDisponibilidad', 'flCroquis', 'flPlanoCorregido', 'flMinuta', 'flCartaMOPT'];
                 $tipoRequisito = 26;
-                for($i = 0; $i < 5; $i++)
-                {
-                    if (isset($_FILES[$filePost[$i]]) && $_FILES[$filePost[$i]]['error'] === UPLOAD_ERR_OK){
-                        $urlArchivo = $rutaDestino.time().basename($_FILES[$filePost[$i]]['name']);
+                for ($i = 0; $i < 5; $i++) {
+                    if (isset($_FILES[$filePost[$i]]) && $_FILES[$filePost[$i]]['error'] === UPLOAD_ERR_OK) {
+                        $urlArchivo = $rutaDestino . time() . basename($_FILES[$filePost[$i]]['name']);
                         if (move_uploaded_file($_FILES[$filePost[$i]]['tmp_name'], $urlArchivo)) {
                             $adjunto = new DetalleSolicitud();
                             $adjunto->setCumple(1);
@@ -192,7 +208,7 @@ class VisadoControlador {
                             $tipoRequisito++;
                         }
                     } else {
-                        if ($filePost[$i] == 'flCartaMOPT'){
+                        if ($filePost[$i] == 'flCartaMOPT') {
                             $adjunto = new DetalleSolicitud();
                             $adjunto->setCumple(1);
                             $adjunto->setCampoRequisito('');
@@ -207,13 +223,13 @@ class VisadoControlador {
                     }
                 }
                 //Firma
-                if (isset($_POST['firma'])){
+                if (isset($_POST['firma'])) {
                     $firma = $_POST['firma'];
                     $firma = str_replace("data:image/png;base64,", "", $firma);
                     $firma = str_replace(" ", "+", $firma);
-                    $imagen = base64_decode($firma);                    
+                    $imagen = base64_decode($firma);
                     $archivo = "repo/firmas/firma_" . time() . ".png";
-                    if (file_put_contents($archivo, $imagen) == false){
+                    if (file_put_contents($archivo, $imagen) == false) {
                         error_log("Error al guardar la imagen.");
                     }
                     $soliFirma = new DetalleSolicitud();
@@ -226,23 +242,23 @@ class VisadoControlador {
                 }
             }
             //Si todos los archivos se subieron, guarda la solicitud y obtiene el id
-            if ($validacionArchivos){
+            if ($validacionArchivos) {
                 $solicitudM = new SolicitudM();
                 $solicitud = new Solicitud();
                 session_start();
                 $solicitud->setIdUsuario($_SESSION['usuario']->getId());
                 $solicitud->setTipoSolicitud(3);
                 $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-                 //si un administrador ingresa la persona, manda el id
+                //si un administrador ingresa la persona, manda el id
                 //si un usuario externo lo hace, busca los datos de la persona
-                if (isset($_POST['persona'])){
+                if (isset($_POST['persona'])) {
                     $solicitud->setIdPersona($_POST['persona']);
                 } else {
                     $cedula = $_POST['identificacion'];
                     $personaM = new PersonaM();
                     //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
                     $persona = $personaM->BuscarPersonaCedula($cedula);
-                    if ($persona != null){
+                    if ($persona != null) {
                         $solicitud->setIdPersona($persona->getId());
                     } else {
                         //genera el usuario
@@ -273,16 +289,16 @@ class VisadoControlador {
                 }
                 $idSolicitud = $solicitudM->IngresarSolicitud($solicitud);
                 //Valida que la solicitud se haya ingresado
-                if ($idSolicitud != 0){
+                if ($idSolicitud != 0) {
                     //Agrega los id de solicitud
-                    for ($i = 0; $i < count($registrar); $i++){
+                    for ($i = 0; $i < count($registrar); $i++) {
                         $registrar[$i]->setIdSolicitud($idSolicitud);
                     }
                     //datos de inputs
                     //variables del POST
                     $post = ['direccionPropiedad', 'distrito', 'numeroPlano', 'areaPlano', 'numeroFinca', 'areaRegistroPublico', 'frente', 'numeroContrato'];
                     $tipoRequisito = 18;
-                    for ($i = 0; $i < 8; $i++){
+                    for ($i = 0; $i < 8; $i++) {
                         $detalle = new DetalleSolicitud();
                         $detalle->setCumple(1);
                         $detalle->setCampoRequisito($_POST[$post[$i]]);
@@ -291,10 +307,10 @@ class VisadoControlador {
                         $registrar[] = $detalle;
                         $tipoRequisito++;
                     }
-                    if ($solicitudM->IngresarDetalles($registrar)){
+                    if ($solicitudM->IngresarDetalles($registrar)) {
                         header('location: index.php?controlador=Tramites&metodo=Visado');
                     } else {
-                        $this->LlamarVistaIngresar('Verfique los datos de la solicitud');    
+                        $this->LlamarVistaIngresar('Verfique los datos de la solicitud');
                     }
                 } else {
                     $this->LlamarVistaIngresar('Verfique los datos de la solicitud');

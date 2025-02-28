@@ -1,22 +1,24 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 require_once './Modelo/Entidades/Solicitud.php';
 require_once './Modelo/Entidades/DetalleSolicitud.php';
 require_once './Modelo/Metodos/BitacoraSolicitudM.php';
 require_once './Modelo/Metodos/UsuarioM.php';
 require_once './Modelo/Conexion.php';
 
-class SolicitudM {
-    function BuscarCabeceraSolicitud ($id){
-        $conexion= new Conexion();
-        $sql="CALL SpConsultarSolicitudPorID($id);";
-        $resultado=$conexion->Ejecutar($sql);
-        if(mysqli_num_rows($resultado)>0)
-        {
-            while($fila=$resultado->fetch_assoc())
-            {
+class SolicitudM
+{
+    function BuscarCabeceraSolicitud($id)
+    {
+        $conexion = new Conexion();
+        $sql = "CALL SpConsultarSolicitudPorID($id);";
+        $resultado = $conexion->Ejecutar($sql);
+        if (mysqli_num_rows($resultado) > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
                 $solicitud = new Solicitud();
                 $solicitud->setId($fila["ID"]);
                 $solicitud->setFecha($fila['FECHA']);
@@ -27,113 +29,114 @@ class SolicitudM {
                 $solicitud->setIdUsuario($fila['ID_USUARIO']);
                 $registro = $solicitud;
             }
-        }
-        else
-            $registro=null;
+        } else
+            $registro = null;
         $conexion->Cerrar();
         return $registro;
     }
-    function BuscarDetallesSolicitud($id){
-        $conexion= new Conexion();
-        $sql="CALL SpBuscarDetallesPorSolicitud($id);";
-        
-        $resultado=$conexion->Ejecutar($sql);
-        if(mysqli_num_rows($resultado)>0)
-        {
+    function BuscarDetallesSolicitud($id)
+    {
+        $conexion = new Conexion();
+        $sql = "CALL SpBuscarDetallesPorSolicitud($id);";
+
+        $resultado = $conexion->Ejecutar($sql);
+        if (mysqli_num_rows($resultado) > 0) {
             $registro = json_encode($resultado->fetch_all());
-        }
-        else
-            $registro=null;
+        } else
+            $registro = null;
         $conexion->Cerrar();
         return $registro;
     }
-    function MaxID(){
+    function MaxID()
+    {
         $idMax = 0;
-        $conexion= new Conexion();
-        $sql="SELECT MAX(ID) FROM SOLICITUD;";
-        $resultado=$conexion->Ejecutar($sql);
-        if(mysqli_num_rows($resultado)>0)
-        {
-            while($fila=$resultado->fetch_assoc())
+        $conexion = new Conexion();
+        $sql = "SELECT MAX(ID) FROM SOLICITUD;";
+        $resultado = $conexion->Ejecutar($sql);
+        if (mysqli_num_rows($resultado) > 0) {
+            while ($fila = $resultado->fetch_assoc())
                 $idMax = $fila["MAX(ID)"];
         }
         $conexion->Cerrar();
         return $idMax;
     }
-    function IngresarDetalles($arregloDetalles){
-        $retVal=true;
-        $conexion= new Conexion();
-        for ($i = 0; $i < count($arregloDetalles); $i++){
-            $sql = "CALL SpIngresarDetalleSolicitud('".$arregloDetalles[$i]->getCampoRequisito().
-            "', '', ".$arregloDetalles[$i]->getCumple().
-            ", ".$arregloDetalles[$i]->getIdSolicitud().
-            ", ".$arregloDetalles[$i]->getTipoRequisito().")";
-            try{
-                if($conexion->Ejecutar($sql)){
+    function IngresarDetalles($arregloDetalles)
+    {
+        $retVal = true;
+        $conexion = new Conexion();
+        for ($i = 0; $i < count($arregloDetalles); $i++) {
+            $sql = "CALL SpIngresarDetalleSolicitud('" . $arregloDetalles[$i]->getCampoRequisito() .
+                "', '', " . $arregloDetalles[$i]->getCumple() .
+                ", " . $arregloDetalles[$i]->getIdSolicitud() .
+                ", " . $arregloDetalles[$i]->getTipoRequisito() . ")";
+            try {
+                if ($conexion->Ejecutar($sql)) {
                     $retVal = true;
                 } else {
                     $retVal = false;
                     break;
                 }
-            } catch (Exception $ex){
-                $retVal=false;
+            } catch (Exception $ex) {
+                $retVal = false;
             }
         }
         $conexion->Cerrar();
         return $retVal;
     }
-    function IngresarSolicitud(Solicitud $solicitud){
-        $retVal=0;
-        $conexion= new Conexion();
-        $sql = "CALL SpIngresarSolicitud(".$solicitud->getIdPersona().
-        ", ".$solicitud->getIdUsuario().
-        ", ".$solicitud->getEstadoSolicitud().
-        ", ".$solicitud->getTipoSolicitud().")";
-        try{
-            if($conexion->Ejecutar($sql)){
+    function IngresarSolicitud(Solicitud $solicitud)
+    {
+        $retVal = 0;
+        $conexion = new Conexion();
+        $sql = "CALL SpIngresarSolicitud(" . $solicitud->getIdPersona() .
+            ", " . $solicitud->getIdUsuario() .
+            ", " . $solicitud->getEstadoSolicitud() .
+            ", " . $solicitud->getTipoSolicitud() . ")";
+        try {
+            if ($conexion->Ejecutar($sql)) {
                 $retVal = $this->MaxID();
             }
-        } catch (Exception $ex){
-            $retVal=0;
-        }        
+        } catch (Exception $ex) {
+            $retVal = 0;
+        }
         $conexion->Cerrar();
         return $retVal;
     }
-    function EliminarSolicitud($id){
-        $retVal=false;
-        $conexion= new Conexion();
+    function EliminarSolicitud($id)
+    {
+        $retVal = false;
+        $conexion = new Conexion();
         $sql = "DELETE FROM  SOLICITUD WHERE ID = $id";
-        try{
-            if($conexion->Ejecutar($sql)){
+        try {
+            if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
             }
-        } catch (Exception $ex){
-            $retVal=false;
-        }        
+        } catch (Exception $ex) {
+            $retVal = false;
+        }
         $conexion->Cerrar();
         return $retVal;
     }
-    function BuscarSolicitudes($idTipo){
-        $conexion= new Conexion();
-        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+    function BuscarSolicitudes($idTipo)
+    {
+        $conexion = new Conexion();
+        if ($_SESSION['usuario']->getIdDepartamento() == 1) {
             $idUsuario = $_SESSION['usuario']->getId();
-            $sql="CALL SpConsultarTodasSolicitudesUsuario($idTipo, $idUsuario);";
+            $sql = "CALL SpConsultarTodasSolicitudesUsuario($idTipo, $idUsuario);";
         } else {
-            $sql="CALL SpConsultarTodasSolicitudes($idTipo);";
+            $sql = "CALL SpConsultarTodasSolicitudes($idTipo);";
         }
-        $resultado=$conexion->Ejecutar($sql);
-        if(mysqli_num_rows($resultado)>0)
-        {
+        $resultado = $conexion->Ejecutar($sql);
+        if (mysqli_num_rows($resultado) > 0) {
             $registro = json_encode($resultado->fetch_all());
-        }
-        else
-            $registro=null;
+        } else
+            $registro = null;
         $conexion->Cerrar();
         return $registro;
     }
-    function EnviarEstado($idUsuario, $idEstado, $codigo){
+    function EnviarEstado($idUsuario, $idEstado, $codigo)
+    {
         $estado = '';
-        switch ($idEstado){
+        switch ($idEstado) {
             case '1':
                 $estado = 'Nueva';
                 break;
@@ -163,15 +166,15 @@ class SolicitudM {
         echo $idUsuario;
         $email = $usuarioM->BuscarUsuarioId($idUsuario)->getCorreo();
         $cuerpoEmail = '<html><head><meta charset="UTF-8"><style>body {font-family: Arial, sans-serif; line-height: 1.6;color: #333;}.container { max-width: 600px; margin: 0 auto;padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: #f9f9f9; }.title {font-size: 18px;font-weight: bold; color: #555;}.content {margin-top: 10px;}.info {margin-top: 15px;padding: 10px; background-color: #eef;border-left: 4px solidrgb(10, 41, 75);}</style></head><body><div class="container">';
-        $cuerpoEmail = $cuerpoEmail.'<p class="title">Municipalidad de Río Cuarto</p>';
-        $cuerpoEmail = $cuerpoEmail.'<div class="content">">
+        $cuerpoEmail = $cuerpoEmail . '<p class="title">Municipalidad de Río Cuarto</p>';
+        $cuerpoEmail = $cuerpoEmail . '<div class="content">">
                                 <p><strong>Estimado Usuario</strong> </br></p>
-                                <p id="consulta">Se ha actualizado su solicitud (codigo: #'.$codigo.') por parte de la Municipalidad de Río Cuarto, el estado actual de su solicitud es '.$estado.'</p>
+                                <p id="consulta">Se ha actualizado su solicitud (codigo: #' . $codigo . ') por parte de la Municipalidad de Río Cuarto, el estado actual de su solicitud es ' . $estado . '</p>
                                 </div>
                             </div>
                         </body>
                         </html>';
-        try{
+        try {
             $bitacoraM = new BitacoraSolicitudM();
             $credenciales = $bitacoraM->CredencialesSMTP();
             $mail = new PHPMailer();
@@ -190,51 +193,53 @@ class SolicitudM {
             $mail->Subject = 'Municipalidad de Río Cuarto - Estado de Solicitud';
             $mail->Body = $cuerpoEmail;
             $mail->send();
-        } catch(Exception $e){
+        } catch (Exception $e) {
             var_dump($e);
         }
     }
-    function ActualizarCabeceraSolicitud(Solicitud $solicitud){
-        $retVal=false;
-        $conexion= new Conexion();
-        $sql = "CALL SpActualizarSolicitud(".$solicitud->getId().
-        ", ".$solicitud->getEstadoSolicitud().")";
-        try{
-            if($conexion->Ejecutar($sql)){
+    function ActualizarCabeceraSolicitud(Solicitud $solicitud)
+    {
+        $retVal = false;
+        $conexion = new Conexion();
+        $sql = "CALL SpActualizarSolicitud(" . $solicitud->getId() .
+            ", " . $solicitud->getEstadoSolicitud() . ")";
+        try {
+            if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
             }
-        } catch (Exception $ex){
-            $retVal=false;
-        }        
+        } catch (Exception $ex) {
+            $retVal = false;
+        }
         $conexion->Cerrar();
-        if ($retVal){
+        if ($retVal) {
             $solicitud = $this->BuscarCabeceraSolicitud($solicitud->getId());
             $this->EnviarEstado($solicitud->getIdUsuario(), $solicitud->getEstadoSolicitud(), $solicitud->getId());
         }
         return $retVal;
     }
-    function ActualizarDetallesSolicitud($arregloDetalles){
-        $retVal=true;
-        $conexion= new Conexion();
-        for ($i = 0; $i < count($arregloDetalles); $i++){
-            $sql = "CALL SpActualizarDetalleSolicitud( ".$arregloDetalles[$i]->getId().
-            ", '".$arregloDetalles[$i]->getCampoRequisito().
-            "', ".$arregloDetalles[$i]->getCumple().")";
-            echo $sql.' - ';
-            if ($sql != "CALL SpActualizarDetalleSolicitud( , '', 1)"){
-                try{
-                    if($conexion->Ejecutar($sql)){
+    function ActualizarDetallesSolicitud($arregloDetalles)
+    {
+        $retVal = true;
+        $conexion = new Conexion();
+        for ($i = 0; $i < count($arregloDetalles); $i++) {
+            $sql = "CALL SpActualizarDetalleSolicitud( " . $arregloDetalles[$i]->getId() .
+                ", '" . $arregloDetalles[$i]->getCampoRequisito() .
+                "', " . $arregloDetalles[$i]->getCumple() . ")";
+            echo $sql . ' - ';
+            if ($sql != "CALL SpActualizarDetalleSolicitud( , '', 1)") {
+                try {
+                    if ($conexion->Ejecutar($sql)) {
                         $retVal = true;
                     } else {
                         $retVal = false;
                         break;
                     }
-                } catch (Exception $ex){                
-                    $retVal=false;
+                } catch (Exception $ex) {
+                    $retVal = false;
                 }
             }
         }
         $conexion->Cerrar();
-        return $retVal;       
+        return $retVal;
     }
 }

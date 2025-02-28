@@ -36,7 +36,7 @@
                   <th></th>
                 </thead>
                 <tbody>
-                  <?php while ($fila = $listado->fetch_assoc()) {?>
+                  <?php while ($fila = $listado->fetch_assoc()) { ?>
                     <tr>
                       <td><?php echo $fila['DESCRIPCION'] ?></td>
                       <td class="text-end">
@@ -79,7 +79,7 @@
         contentType: false,
         processData: false,
         success: function(response) {
-          if (response != 'Ok'){
+          if (response != 'Ok') {
             $('#alerta').show();
             $('#alerta').html(response);
           }
@@ -87,7 +87,7 @@
         error: function(xhr, status, error) {
           console.error("Error en la petición:", error);
         }
-      }).then(function (){
+      }).then(function() {
         location.reload();
       });
 

@@ -1,12 +1,14 @@
-<?php 
+<?php
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/SolicitudM.php';
 require_once './Modelo/Metodos/PersonaM.php';
 require_once './Modelo/Metodos/ProvinciaM.php';
 require_once './Modelo/Entidades/DetalleSolicitud.php';
 
-class CondonacionControlador {
-    function Imprimir(){
+class CondonacionControlador
+{
+    function Imprimir()
+    {
         $provinciaM = new ProvinciaM();
         $id = $_GET['id'];
         $solicitudM = new SolicitudM();
@@ -17,13 +19,23 @@ class CondonacionControlador {
         $persona = $personaM->BuscarPersona($solicitud->getIdPersona());
         $distritos = $provinciaM->BuscarDistritos();
         //Datos de impresión
-        $tiposId = ['n/a', 'Cédula de Identidad', 'Pasaporte', 'Cédula de Residencia',
-        'Número Interno', 'Número asegurado', 'DIMEX', 'NITE', 'DIDI'];
+        $tiposId = [
+            'n/a',
+            'Cédula de Identidad',
+            'Pasaporte',
+            'Cédula de Residencia',
+            'Número Interno',
+            'Número asegurado',
+            'DIMEX',
+            'NITE',
+            'DIDI'
+        ];
         $locaciones = $provinciaM->LocacionesId($persona->getIdProvincia(), $persona->getIdCanton(), $persona->getIdDistrito());
         require_once './Vista/Dashboard/Tramites/Condonacion/impresion.php';
     }
-    private function LlamarVistaActualizar($msg, $id){
-        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+    private function LlamarVistaActualizar($msg, $id)
+    {
+        if ($_SESSION['usuario']->getIdDepartamento() == 1) {
             $provinciaM = new ProvinciaM();
             $solicitudM = new SolicitudM();
             $personaM = new PersonaM();
@@ -47,8 +59,9 @@ class CondonacionControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    private function LlamarVistaIngresar($msg){
-        if ($_SESSION['usuario']->getIdDepartamento() == 1){
+    private function LlamarVistaIngresar($msg)
+    {
+        if ($_SESSION['usuario']->getIdDepartamento() == 1) {
             $provinciaM = new ProvinciaM();
             $id = $_SESSION['usuario']->getIdPersona();
             $personaM = new PersonaM();
@@ -64,21 +77,24 @@ class CondonacionControlador {
         }
     }
 
-    function VIngresar(){
+    function VIngresar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $this->LlamarVistaIngresar('');
         }
     }
-    function VActualizar(){
+    function VActualizar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $this->LlamarVistaActualizar('', $_GET['id']);
         }
     }
-    function Actualizar(){
+    function Actualizar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             //Si todos los datos están correctos, guarda la solicitud y obtiene el id
             $solicitudM = new SolicitudM();
             $solicitud = new Solicitud();
@@ -88,22 +104,64 @@ class CondonacionControlador {
             $solicitud->setIdUsuario($_SESSION['usuario']->getId());
             $solicitud->setTipoSolicitud(4);
             $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-            if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)){
+            if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)) {
                 $registrar = array();
-                $post = ['representante', 'identificacionRepresentante', 'direccion', 'notificaciones',
-                'tipoSolicitud', 'firma', 'recibido', 'fecha', 'funcionario', 'consecutivo',
-                'totalContado', 'montoCondonarContado', 'fechaPago', 'totalArreglo',
-                'montoCondonarArreglo', 'fechaInicio', 'plazoMeses', 'cantidadCuotas', 'adelanto',
-                'pagoPorCuota', 'resolucion', 'plazo', 'fechaNotificacion', 'cumple'];
-                $postIds = ['idRepresentante', 'idIdentificacionRepresentante', 'idDireccion', 'idNotificaciones',
-                'idTipoSolicitud', 'idFirma', 'idRecibido', 'idFecha', 'idFuncionario', 'idConsecutivo',
-                'idTotalContado', 'idMontoCondonarContado', 'idFechaPago', 'idTotalArreglo',
-                'idMontoCondonarArreglo', 'idFechaInicio', 'idPlazoMeses', 'idCantidadCuotas', 'idAdelanto',
-                'idPagoPorCuota', 'idResolucion', 'idPlazo', 'idFechaNotificacion', 'idCumple'];
+                $post = [
+                    'representante',
+                    'identificacionRepresentante',
+                    'direccion',
+                    'notificaciones',
+                    'tipoSolicitud',
+                    'firma',
+                    'recibido',
+                    'fecha',
+                    'funcionario',
+                    'consecutivo',
+                    'totalContado',
+                    'montoCondonarContado',
+                    'fechaPago',
+                    'totalArreglo',
+                    'montoCondonarArreglo',
+                    'fechaInicio',
+                    'plazoMeses',
+                    'cantidadCuotas',
+                    'adelanto',
+                    'pagoPorCuota',
+                    'resolucion',
+                    'plazo',
+                    'fechaNotificacion',
+                    'cumple'
+                ];
+                $postIds = [
+                    'idRepresentante',
+                    'idIdentificacionRepresentante',
+                    'idDireccion',
+                    'idNotificaciones',
+                    'idTipoSolicitud',
+                    'idFirma',
+                    'idRecibido',
+                    'idFecha',
+                    'idFuncionario',
+                    'idConsecutivo',
+                    'idTotalContado',
+                    'idMontoCondonarContado',
+                    'idFechaPago',
+                    'idTotalArreglo',
+                    'idMontoCondonarArreglo',
+                    'idFechaInicio',
+                    'idPlazoMeses',
+                    'idCantidadCuotas',
+                    'idAdelanto',
+                    'idPagoPorCuota',
+                    'idResolucion',
+                    'idPlazo',
+                    'idFechaNotificacion',
+                    'idCumple'
+                ];
                 $tipoRequisito = 32;
-                for ($i = 0; $i < count($post); $i++){
-                    if ($tipoRequisito == 37){
-                        if (isset($_POST['firma'])){
+                for ($i = 0; $i < count($post); $i++) {
+                    if ($tipoRequisito == 37) {
+                        if (isset($_POST['firma'])) {
                             $firma = $_POST['firma'];
                             $firma = str_replace("data:image/png;base64,", "", $firma);
                             $firma = str_replace(" ", "+", $firma);
@@ -129,19 +187,20 @@ class CondonacionControlador {
                     }
                     $tipoRequisito++;
                 }
-                if ($solicitudM->ActualizarDetallesSolicitud($registrar)){
+                if ($solicitudM->ActualizarDetallesSolicitud($registrar)) {
                     header('location: index.php?controlador=Tramites&metodo=Condonacion');
                 } else {
-                    $this->LlamarVistaActualizar('Verfique los detalles de la solicitud', $idSolicitud);    
+                    $this->LlamarVistaActualizar('Verfique los detalles de la solicitud', $idSolicitud);
                 }
             } else {
                 $this->LlamarVistaActualizar('Verfique los datos de la solicitud', $idSolicitud);
             }
         }
     }
-    function Ingresar(){
+    function Ingresar()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             //if
             //Si todos los datos están correctos, guarda la solicitud y obtiene el id
             $solicitudM = new SolicitudM();
@@ -152,14 +211,14 @@ class CondonacionControlador {
             $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
             //si un administrador ingresa la persona, manda el id
             //si un usuario externo lo hace, busca los datos de la persona
-            if (isset($_POST['persona'])){
+            if (isset($_POST['persona'])) {
                 $solicitud->setIdPersona($_POST['persona']);
             } else {
                 $cedula = $_POST['identificacion'];
                 $personaM = new PersonaM();
                 //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
                 $persona = $personaM->BuscarPersonaCedula($cedula);
-                if ($persona != null){
+                if ($persona != null) {
                     $solicitud->setIdPersona($persona->getId());
                 } else {
                     //genera el usuario
@@ -187,21 +246,42 @@ class CondonacionControlador {
                     $idUsuario = $personaM->IngresarPersona($persona);
                     $solicitud->setIdPersona($idUsuario);
                 }
-            }            
+            }
             $idSolicitud = $solicitudM->IngresarSolicitud($solicitud);
-            if ($idSolicitud != 0){
+            if ($idSolicitud != 0) {
                 $registrar = array();
-                $post = ['representante', 'identificacionRepresentante', 'direccion', 'notificaciones',
-                'tipoSolicitud', 'firma', 'recibido', 'fecha', 'funcionario', 'consecutivo',
-                'totalContado', 'montoCondonarContado', 'fechaPago', 'totalArreglo',
-                'montoCondonarArreglo', 'fechaInicio', 'plazoMeses', 'cantidadCuotas', 'adelanto',
-                'pagoPorCuota', 'resolucion', 'plazo', 'fechaNotificacion', 'cumple'];
+                $post = [
+                    'representante',
+                    'identificacionRepresentante',
+                    'direccion',
+                    'notificaciones',
+                    'tipoSolicitud',
+                    'firma',
+                    'recibido',
+                    'fecha',
+                    'funcionario',
+                    'consecutivo',
+                    'totalContado',
+                    'montoCondonarContado',
+                    'fechaPago',
+                    'totalArreglo',
+                    'montoCondonarArreglo',
+                    'fechaInicio',
+                    'plazoMeses',
+                    'cantidadCuotas',
+                    'adelanto',
+                    'pagoPorCuota',
+                    'resolucion',
+                    'plazo',
+                    'fechaNotificacion',
+                    'cumple'
+                ];
                 $tipoRequisito = 32;
                 //representante legal
-                
-                for ($i = 0; $i < count($post); $i++){
-                    if ($tipoRequisito == 37){
-                        if (isset($_POST['firma'])){
+
+                for ($i = 0; $i < count($post); $i++) {
+                    if ($tipoRequisito == 37) {
+                        if (isset($_POST['firma'])) {
                             //firma
                             $firma = $_POST['firma'];
                             $firma = str_replace("data:image/png;base64,", "", $firma);
@@ -226,17 +306,16 @@ class CondonacionControlador {
                     }
                     $tipoRequisito++;
                 }
-                
-                
-                if ($solicitudM->IngresarDetalles($registrar)){
+
+
+                if ($solicitudM->IngresarDetalles($registrar)) {
                     header('location: index.php?controlador=Tramites&metodo=Condonacion');
                 } else {
-                    $this->LlamarVistaIngresar('Verfique los datos de la solicitud');    
+                    $this->LlamarVistaIngresar('Verfique los datos de la solicitud');
                 }
             } else {
                 $this->LlamarVistaIngresar('Verfique los datos de la solicitud');
             }
         }
     }
-    
 }

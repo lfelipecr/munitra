@@ -1,20 +1,23 @@
-<?php 
+<?php
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/NoticiaM.php';
 require_once './Modelo/Metodos/SesionM.php';
 require_once './Modelo/Metodos/ActividadM.php';
 require_once './Modelo/Metodos/BannerM.php';
 
-class BlogControlador {
-    function Index(){
+class BlogControlador
+{
+    function Index()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $u->LlamarVista('./Vista/Dashboard/Blog/listadoOpciones.php');
         }
     }
-    function Sesiones(){
+    function Sesiones()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $sesionM = new SesionM();
             $jsonData = $sesionM->BuscarSesiones();
             $comisiones = json_encode($sesionM->Comisiones());
@@ -22,9 +25,10 @@ class BlogControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function Noticias(){
+    function Noticias()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $idUsuario = $_SESSION['usuario']->getId();
             $notiM = new NoticiaM();
             $jsonData = $notiM->BuscarNoticias();
@@ -32,9 +36,10 @@ class BlogControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function Actividades(){
+    function Actividades()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $actividadM = new ActividadM();
             $jsonData = $actividadM->BuscarTodas();
             $idUsuario = $_SESSION['usuario']->getId();
@@ -42,9 +47,10 @@ class BlogControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function Banner(){
+    function Banner()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $bannerM = new BannerM();
             $listado = $bannerM->BuscarBanners();
             $msg = '';
@@ -52,15 +58,16 @@ class BlogControlador {
             require_once './Vista/Utilidades/sidebar.php';
         }
     }
-    function NuevoBanner(){
+    function NuevoBanner()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             if (isset($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK) {
                 $rutaDestino = './repo/';
-                $urlArchivo = $rutaDestino.time().basename($_FILES['banner']['name']);
+                $urlArchivo = $rutaDestino . time() . basename($_FILES['banner']['name']);
                 if (!is_writable('./repo/')) {
                     echo 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
-                }                
+                }
                 if (!is_dir($rutaDestino)) {
                     mkdir($rutaDestino, 0777, true);
                 }
@@ -68,7 +75,7 @@ class BlogControlador {
                     $bannerM = new BannerM();
                     $descripcion = $_POST['descripcion'];
                     $url = basename($_FILES['banner']['name']);
-                    if ($bannerM->IngresarBanner($descripcion, $url)){
+                    if ($bannerM->IngresarBanner($descripcion, $url)) {
                         echo 'Ok';
                     } else {
                         echo 'Ha habido un problema con los datos del banner';
@@ -79,18 +86,20 @@ class BlogControlador {
             }
         }
     }
-    function EliminarBanner(){
+    function EliminarBanner()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $bannerM = new BannerM();
             $id = $_GET['id'];
             $bannerM->EliminarBanner($id);
             $this->Banner();
         }
     }
-    function ActivarBanner(){
+    function ActivarBanner()
+    {
         $u = new Utilidades();
-        if ($u->VerificarSesion()){
+        if ($u->VerificarSesion()) {
             $bannerM = new BannerM();
             $id = $_GET['id'];
             $bannerM->GenerarActivo($id);
