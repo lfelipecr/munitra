@@ -22,9 +22,13 @@ class BannerM
     function BuscarBannerActivo()
     {
         $listado = $this->BuscarBanners();
-        while ($fila = $listado->fetch_assoc()) {
-            if ($fila['ACTIVO'] == '1') {
-                return $fila['URL_BANNER'];
+        if ($listado == null){
+            return '';
+        } else {
+            while ($fila = $listado->fetch_assoc()) {
+                if ($fila['ACTIVO'] == '1') {
+                    return $fila['URL_BANNER'];
+                }
             }
         }
         return '0';

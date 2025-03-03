@@ -29,7 +29,7 @@
           </div>
           <hr>
           <div class="col-md-12 my-3">
-            <?php if (true) { ?>
+            <?php if ($listado != null) { ?>
               <table class="table table-responsive">
                 <thead>
                   <th>Descripción</th>

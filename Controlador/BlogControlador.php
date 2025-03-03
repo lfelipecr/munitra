@@ -74,7 +74,7 @@ class BlogControlador
                 if (move_uploaded_file($_FILES['banner']['tmp_name'], $urlArchivo)) {
                     $bannerM = new BannerM();
                     $descripcion = $_POST['descripcion'];
-                    $url = basename($_FILES['banner']['name']);
+                    $url = basename(time().$_FILES['banner']['name']);
                     if ($bannerM->IngresarBanner($descripcion, $url)) {
                         echo 'Ok';
                     } else {

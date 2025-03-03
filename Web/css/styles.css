@@ -10845,10 +10845,9 @@ textarea.form-control-lg {
 }
 
 header.masthead {
+  aspect-ratio: 16/9;
   position: relative;
   background-color: #343a40;
-  background: url("../assets/img/banner-rio-cuarto.png") no-repeat center center;
-  background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
 }

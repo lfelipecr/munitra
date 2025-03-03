@@ -10,7 +10,7 @@
       </a>
     </div>
     <input type="hidden" id="tipos" value="<?php echo $tipos; ?>">
-    <form action="index.php?controlador=Documentacion&metodo=CrearCategoria" id="frmDoc" method="post" enctype="multipart/form-data">
+    <div>
       <div class="p-3 bg-body rounded shadow-sm">
         <div class="row mt-3">
           <div class="col-12">
@@ -21,7 +21,7 @@
             <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
           </div>
           <div class="col-12 d-flex align-items-center mb-3">
-            <button type="submit" class="btn btn-outline-warning mx-1">
+            <button type="submit" class="btn btn-outline-warning mx-1" id="btnEnviar">
               <span>Agregar +</span>
             </button>
           </div>
@@ -53,7 +53,7 @@
           </div>
         </div>
       </div>
-    </form>
+      </div>
   </div>
 </main>
 <script>
@@ -61,14 +61,29 @@
     $('#alerta').hide();
     return false;
   });
-  $('#frmDoc').on('submit', function() {
+  $('#btnEnviar').on('click', function() {
     let descripcion = $('#descripcion').val();
-    console.log(descripcion)
     if (descripcion != '') {
-      return true;
+      $.ajax({
+        url: "index.php?controlador=Documentacion&metodo=CrearCategoria",
+        type: "POST",
+        data: {descripcion: descripcion},
+        success: function(response) {
+          if (response != 'Ok') {
+            $('#alerta').show();
+            $('#alerta').html(response);
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error("Error en la petición:", error);
+        }
+      }).then(function() {
+        location.reload();
+      });
+
+    } else {
+      $('#alerta').show();
+      $('#alerta').html('Debe añadir una descripcion');
     }
-    $('#alerta').show();
-    $('#alerta').html('Debe añadir una descripcion')
-    return false;
   });
 </script>
