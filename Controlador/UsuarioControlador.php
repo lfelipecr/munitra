@@ -458,10 +458,13 @@ class UsuarioControlador
             $identificacion = $_POST['identificacion'];
             $usuario = $personaM->BuscarPersonaCedula($identificacion);
             if ($usuario != null) {
+                session_start();
                 $correo = $usuario->getCorreo();
                 $mail = new PHPMailer();
                 $codigo = substr(bin2hex(random_bytes(8)), 0, 8);
+                echo $codigo;
                 $_SESSION['codigo'] = $codigo;
+                $_SESSION['usuario'] = $usuario;
                 $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Usa el siguiente código para completar tu proceso de verificación:</p><div class="code">' . $codigo . '</div><p>Si no solicitaste este código, ignora este mensaje.</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
                 try {
                     session_start();
@@ -481,15 +484,48 @@ class UsuarioControlador
                     $mail->isHTML(true);
                     $mail->Subject = 'Municipalidad de Río Cuarto | Cambiar Contraseña';
                     $mail->Body = $msg;
-                    $mail->send();
+                    //$mail->send();
+                    $msg = '';
+                    require_once './Vista/Login/codigoRecuperacion.php';
                 } catch (Exception $ex) {
                     var_dump($ex);
                 }
             } else {
-                $msg = 'Su usuario no se encuentra, puede crear su cuenta en <a href="index.php?controlador=Login&metodo=Registro">este enlace</a>';
+                $msg = "Su usuario no se encuentra, puede crear su cuenta en <a href='index.php?controlador=Login&metodo=Registro'>este enlace</a>";
+                require_once './Vista/Login/recuperacion.php';
+            }
+        } else {
+            $msg = '';
+            require_once './Vista/Login/recuperacion.php';
+        }
+    }
+    function VerificarCodigo()
+    {
+        session_start();
+        var_dump($_SESSION);
+        if (isset($_POST['codigo'])) {            
+            $codigo = $_POST['codigo'];
+            $codigoSesion = $_SESSION['codigo'];
+            if ($codigo == $codigoSesion) {
+                unset($_SESSION['codigo']);
+                //cambia contraseña
+                $usuarioM = new UsuarioM();
+                $contra = $_POST['contra'];
+                $id = $_SESSION['usuario']->getId();
+                $idUsuario = $usuarioM->BuscarUsuarioIdPersona($id)->getId();
+                unset($_SESSION['usuario']);
+                if ($usuarioM->CambiarContra($contra, $idUsuario)){
+                    $msg = 'Su contraseña ha sido modificada, ahora puede acceder con sus nuevas credenciales';
+                    require_once './Vista/Login/login.php';
+                } else {
+                    $msg = 'Su código no es correcto, ingrese el código de nuevo o solicite otro código';
+                    require_once './Vista/Login/codigoRecuperacion.php';  
+                }
+                
+            } else {
+                $msg = 'Su código no es correcto, ingrese el código de nuevo o solicite otro código';
+                require_once './Vista/Login/codigoRecuperacion.php';  
             }
         }
-        $msg = '';
-        require_once './Vista/Login/recuperacion.php';
     }
 }

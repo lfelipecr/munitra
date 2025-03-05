@@ -21,9 +21,9 @@
             <select name="persona" id="slPersonas" class="form-control">
               <?php for ($i = 0; $i < count($personas); $i++) {
                 if ($personas[$i]->getId() == $solicitud->getIdPersona()) { ?>
-                  <option selected value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre() . " " . $personas[$i]->getPrimerApellido() . " " . $personas[$i]->getSegundoApellido(); ?></option>
+                  <option selected value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre() . " " . $personas[$i]->getPrimerApellido() . " " . $personas[$i]->getSegundoApellido()." (".$personas[$i]->getIdentificacion().")"; ?></option>
                 <?php } else { ?>
-                  <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre() . " " . $personas[$i]->getPrimerApellido() . " " . $personas[$i]->getSegundoApellido(); ?></option>
+                  <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre() . " " . $personas[$i]->getPrimerApellido() . " " . $personas[$i]->getSegundoApellido()." (".$personas[$i]->getIdentificacion().")"; ?></option>
                 <?php } ?>
               <?php } ?>
             </select>

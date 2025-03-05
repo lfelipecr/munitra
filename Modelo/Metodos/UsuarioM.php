@@ -142,6 +142,7 @@ class UsuarioM
         $conexion = new Conexion();
         $passHash = password_hash($contra, PASSWORD_DEFAULT);
         $sql = "UPDATE USUARIO SET PASS = '$passHash' WHERE ID = $id";
+        echo $sql;
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;

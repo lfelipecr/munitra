@@ -81,9 +81,9 @@
     </nav>
     <!-- Masthead-->
      <?php if ($url != '') { ?>
-        <header class="masthead" style="background: url('./repo/<?php echo $url; ?>') !important;background-size: 100% 100% !important;">
+        <header class="masthead" style="background: url('./repo/<?php echo $url; ?>') !important; background-size: cover !important; background-position: center center !important; height: 300px; overflow: hidden;">
     <?php } else {?>
-        <header class="masthead" style="background: url('./Web/assets/img/banner-rio-cuarto.png') !important;background-size: 100% 100% !important;">
+        <header class="masthead" style="background: url('./Web/assets/img/banner-rio-cuarto.png') !important; background-size: cover !important; background-position: center center !important; height: 300px; overflow: hidden;">
     <?php } ?>
         <div class="container position-relative">
             <div class="row justify-content-center">

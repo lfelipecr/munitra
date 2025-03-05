@@ -37,19 +37,28 @@
     <div class="container-fluid d-flex justify-content-center all pt-md-5 mt-5">
         <div class="card p-5">
             <div class="text-center p-md-5 p-1">
-                <h4 class="h3">Recuperar Cuenta<a href="#" style="text-decoration: none;">(?)</a></h4>
+                <h4 class="h3">Cambio de Contraseña<a href="#" style="text-decoration: none;">(?)</a></h4>
                 <div class="mx-1">
                     <img src="./Vista/assets/img/icon.png" class="img-fluid" alt="">
                 </div>
                 <input type="hidden" id="msg" value="<?php echo $msg; ?>">
                 <hr>
-                <form action="index.php?controlador=Usuario&metodo=RecuperarCuenta" method="post" id="frmIngresar">
+                <form action="index.php?controlador=Usuario&metodo=VerificarCodigo" method="post" id="frmIngresar">
                     <div class="row justify-content-center">
-                        <p>Introduzca su número de cédula y se le enviará un correo <br> con las instrucciones para recuperar su cuenta</p>
+                        <p>Introduzca el código que debió haberle llegado a su correo <br> electrónico o <a href="">solicite un nuevo código</a></p>
+                        <p>Introduzca su nueva contraseña</p>
                         <div class="col-md-12 text-center">
                             <div class="form-floating mb-3">
-                                <input type="text" name="identificacion" class="form-control" placeholder="" id="txtCedula">
-                                <label>Cédula</label>
+                                <input type="text" name="codigo" class="form-control" placeholder="" id="txtCodigo">
+                                <label>Código</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" name="contra" class="form-control" placeholder="" id="txtContra">
+                                <label>Contraseña</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" name="" class="form-control" placeholder="" id="txtConfirmar">
+                                <label>Confirmar Contraseña</label>
                             </div>
                         </div>
                     </div>
@@ -73,6 +82,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
     <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
+    <script>
+        $(document).ready(function (){
+            $('#frmIngresar').on('submit', () => {
+                let pass = $('#txtContra').val();
+                let confPass = $('#txtConfirmar').val();
+                
+                if (pass == confPass)
+                    return true;
+                
+                return false;
+            })
+        });
+    </script>
 </body>
 
 </html>

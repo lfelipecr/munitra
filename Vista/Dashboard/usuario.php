@@ -2,9 +2,6 @@
     <div class="container-fluid">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" id="title">
             <h1 class="h2">Mi Perfil</h1>
-            <a href="index.php?controlador=Tramites&metodo=Patentes" class="btn btn-outline-secondary">
-                <span>x</span>
-            </a>
         </div>
         <div class="row text-center">
             <div class="col-12">

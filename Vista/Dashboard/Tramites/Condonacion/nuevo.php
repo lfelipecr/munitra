@@ -27,7 +27,7 @@
             <span class="mb-3">Solicitante (*)</span>
             <select name="persona" id="slPersonas" class="form-control">
               <?php for ($i = 0; $i < count($personas); $i++) { ?>
-                <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre() . " " . $personas[$i]->getPrimerApellido() . " " . $personas[$i]->getSegundoApellido(); ?></option>
+                <option value="<?php echo $personas[$i]->getId(); ?>"><?php echo $personas[$i]->getNombre() . " " . $personas[$i]->getPrimerApellido() . " " . $personas[$i]->getSegundoApellido()." (".$personas[$i]->getIdentificacion().")"; ?></option>
               <?php } ?>
             </select>
           </div>

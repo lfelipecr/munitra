@@ -10845,7 +10845,7 @@ textarea.form-control-lg {
 }
 
 header.masthead {
-  aspect-ratio: 16/9;
+  min-height: 35vh;
   position: relative;
   background-color: #343a40;
   padding-top: 8rem;
