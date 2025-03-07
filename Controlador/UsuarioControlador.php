@@ -24,9 +24,14 @@ class UsuarioControlador
             $personaM = new PersonaM();
             $usuario = $_SESSION['usuario'];
             $persona = $personaM->BuscarPersona($usuario->getIdPersona());
-            $imagen = $personaM->BuscarImagen($usuario->getIdPersona());
-            $vista = './Vista/Dashboard/usuario.php';
-            require_once './Vista/Utilidades/sidebar.php';
+            if ($usuario->getIdDepartamento() == 1) {
+                $vista = './Vista/TramitesUsuario/Dashboard/perfil.php';
+                require_once './Vista/Utilidades/navbar.php';
+            } else {
+                $imagen = $personaM->BuscarImagen($usuario->getIdPersona());
+                $vista = './Vista/Dashboard/usuario.php';
+                require_once './Vista/Utilidades/sidebar.php';
+            }
         }
     }
     function CambiarFotoPerfil()
@@ -291,6 +296,31 @@ class UsuarioControlador
             $persona->setUsuarioCreacion($_SESSION['usuario']->getId());
             $idUsuario = $personaM->IngresarPersona($persona);
             if ($idUsuario != 0) {
+                //cedula (opcional)
+                if (isset($_FILES['cedulaFrontal']) && $_FILES['cedulaFrontal']['error'] === UPLOAD_ERR_OK) {
+                    if (isset($_FILES['cedulaTrasera']) && $_FILES['cedulaTrasera']['error'] === UPLOAD_ERR_OK) {
+                        $persona->setId($idUsuario);
+                        $rutaDestino = './repo/';
+                        $urlArchivo = $rutaDestino . time() . basename($_FILES['cedulaFrontal']['name']);
+                        $persona->setCedulaFrontal($urlArchivo);
+                        if (!is_writable('./repo/')) {
+                            $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
+                        }
+                        //Guarda la cedula por delante
+                        if (move_uploaded_file($_FILES['cedulaFrontal']['tmp_name'], $urlArchivo)) {
+                            //Si se guarda la cedula por delante, guarda la cedula por detrás
+                            $urlArchivo = $rutaDestino . time() . basename($_FILES['cedulaTrasera']['name']);
+                            if (move_uploaded_file($_FILES['cedulaTrasera']['tmp_name'], $urlArchivo)) {
+                                $persona->setCedulaTrasera($urlArchivo);
+                            } else {
+                                $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
+                            }
+                            $personaM->GestionarCedula($persona);
+                        } else {
+                            $this->LlamarVistaIngresar('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
+                        }
+                    }
+                }
                 if (isset($_POST['nombreUsuario']) && $_POST['nombreUsuario'] != '') {
                     $usuarioM = new UsuarioM();
                     $usuario = new Usuario();
@@ -306,14 +336,14 @@ class UsuarioControlador
                         $imagen->setIdUsuario($idUsuario);
                         $imagen->setUrlImagen('./repo/serverside/placeholder.jpg');
                         if ($personaM->IngresarImagen($imagen)) {
-                            header('location: index.php?controlador=Usuario&metodo=Listado');
+                            $this->Listado();
                         }
                     } else {
                         $personaM->EliminarPersona($idUsuario);
                         $this->LlamarVistaIngresar('Credenciales de usuario ya existen');
                     }
                 } else {
-                    $this->Listado('Persona registrada correctamente');
+                    $this->Listado();
                 }
             } else {
                 $msg = 'Los datos de esta persona ya existen';
@@ -502,8 +532,7 @@ class UsuarioControlador
     function VerificarCodigo()
     {
         session_start();
-        var_dump($_SESSION);
-        if (isset($_POST['codigo'])) {            
+        if (isset($_POST['codigo'])) {
             $codigo = $_POST['codigo'];
             $codigoSesion = $_SESSION['codigo'];
             if ($codigo == $codigoSesion) {
@@ -514,18 +543,56 @@ class UsuarioControlador
                 $id = $_SESSION['usuario']->getId();
                 $idUsuario = $usuarioM->BuscarUsuarioIdPersona($id)->getId();
                 unset($_SESSION['usuario']);
-                if ($usuarioM->CambiarContra($contra, $idUsuario)){
+                if ($usuarioM->CambiarContra($contra, $idUsuario)) {
                     $msg = 'Su contraseña ha sido modificada, ahora puede acceder con sus nuevas credenciales';
                     require_once './Vista/Login/login.php';
                 } else {
                     $msg = 'Su código no es correcto, ingrese el código de nuevo o solicite otro código';
-                    require_once './Vista/Login/codigoRecuperacion.php';  
+                    require_once './Vista/Login/codigoRecuperacion.php';
                 }
-                
             } else {
                 $msg = 'Su código no es correcto, ingrese el código de nuevo o solicite otro código';
-                require_once './Vista/Login/codigoRecuperacion.php';  
+                require_once './Vista/Login/codigoRecuperacion.php';
             }
+        }
+    }
+    function GestionarCedulas()
+    {
+        $u = new Utilidades();
+        if ($u->VerificarSesion()) {
+            $fls = true;
+            $persona = new Persona();
+            $personaM = new PersonaM();
+            $urls = array();
+            $persona->setId($_POST['idPersona']);
+            $rutaDestino = './repo/';
+            if (!is_writable('./repo/')) {
+                echo '0';
+            }
+            if (isset($_FILES['cedulaFrontal']) && $_FILES['cedulaFrontal']['error'] === UPLOAD_ERR_OK) {
+                $urlArchivo = $rutaDestino . time() . basename($_FILES['cedulaFrontal']['name']);
+                $persona->setCedulaFrontal($urlArchivo);
+                if (move_uploaded_file($_FILES['cedulaFrontal']['tmp_name'], $urlArchivo)) {
+                    $urls[] = $urlArchivo;
+                } else {
+                    echo '0';
+                }
+            } else {
+                $urls[] = '0';
+            }
+            if (isset($_FILES['cedulaTrasera']) && $_FILES['cedulaTrasera']['error'] === UPLOAD_ERR_OK) {
+                $urlArchivo = $rutaDestino . time() . basename($_FILES['cedulaTrasera']['name']);
+                $persona->setCedulaTrasera($urlArchivo);
+                if (move_uploaded_file($_FILES['cedulaTrasera']['tmp_name'], $urlArchivo)) {
+                    $urls[] = $urlArchivo;
+                } else {
+                    echo '0';
+                }
+            } else {
+                $urls[] = '0';
+            }
+            if ($personaM->GestionarCedula($persona))
+                echo json_encode($urls);
         }
     }
 }

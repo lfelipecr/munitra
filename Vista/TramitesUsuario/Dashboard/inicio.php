@@ -6,34 +6,28 @@
                 <div class="row">
                     <div class="col-md-10 col-12 py-2 d-flex align-items-center">
                         <div class="d-block">
-                            <h4>¡Hola, NOMBRE PERSONA!</h4>
+                            <h4>¡Hola, <?php echo $persona->getNombre() . ' ' . $persona->getPrimerApellido() . ' ' . $persona->getSegundoApellido(); ?>!</h4>
                             <p>Bienvenido de regreso</p>
                         </div>
                     </div>
                     <div class="col-md-2 col-12 d-none d-md-flex align-items-center">
                         <div class="row w-100">
                             <div class="col-12 w-100 my-1">
-                                <button class="btn btn-outline-warning w-100">
+                                <a href="index.php?controlador=Usuario&metodo=Perfil" class="btn btn-outline-warning w-100">
                                     <span>Mi perfil</span>
                                     <span><svg style="width: .75em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                             <path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
-                                        </svg></span>
-                                </button>
-                            </div>
-                            <div class="col-12 w-100 my-1">
-                                <button class="btn btn-outline-warning w-100">
-                                    <span>Ayuda</span>
-                                    <span><svg style="width: .5em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                            <path fill="currentColor" d="M80 160c0-35.3 28.7-64 64-64l32 0c35.3 0 64 28.7 64 64l0 3.6c0 21.8-11.1 42.1-29.4 53.8l-42.2 27.1c-25.2 16.2-40.4 44.1-40.4 74l0 1.4c0 17.7 14.3 32 32 32s32-14.3 32-32l0-1.4c0-8.2 4.2-15.8 11-20.2l42.2-27.1c36.6-23.6 58.8-64.1 58.8-107.7l0-3.6c0-70.7-57.3-128-128-128l-32 0C73.3 32 16 89.3 16 160c0 17.7 14.3 32 32 32s32-14.3 32-32zm80 320a40 40 0 1 0 0-80 40 40 0 1 0 0 80z" />
-                                        </svg></span>
-                                </button>
+                                        </svg>
+                                    </span>
+                                </a>
                             </div>
                             <div class="col-12 w-100 my-1">
                                 <a href="index.php?controlador=Login&metodo=CerrarSesion" class="btn btn-outline-secondary w-100">
                                     <span>Cerrar Sesión</span>
                                     <span><svg class="mb-1" style="width: .75em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                             <path fill="currentColor" d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 224c0 17.7 14.3 32 32 32s32-14.3 32-32l0-224zM143.5 120.6c13.6-11.3 15.4-31.5 4.1-45.1s-31.5-15.4-45.1-4.1C49.7 115.4 16 181.8 16 256c0 132.5 107.5 240 240 240s240-107.5 240-240c0-74.2-33.8-140.6-86.6-184.6c-13.6-11.3-33.8-9.4-45.1 4.1s-9.4 33.8 4.1 45.1c38.9 32.3 63.5 81 63.5 135.4c0 97.2-78.8 176-176 176s-176-78.8-176-176c0-54.4 24.7-103.1 63.5-135.4z" />
-                                        </svg></span>
+                                        </svg>
+                                    </span>
                                 </a>
                             </div>
                         </div>

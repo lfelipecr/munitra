@@ -4,13 +4,14 @@ class Utilidades
 {
     public static function VerificarSesion()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         if (isset($_SESSION['usuario'])) {
-
             return true;
         } else {
             header('location: index.php?controlador=Login&metodo=CerrarSesion');
-            return false;
+            exit;
         }
     }
     public static function LlamarVista($vista)

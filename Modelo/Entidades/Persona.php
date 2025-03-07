@@ -25,6 +25,8 @@ class Persona
     private $idCanton;
     private $idProvincia;
     private $usuarioCreacion;
+    private $cedulaFrontal;
+    private $cedulaTrasera;
     
     public function getId()
     {
@@ -209,5 +211,21 @@ class Persona
     public function setUsuarioCreacion($usuarioCreacion): void
     {
         $this->usuarioCreacion = $usuarioCreacion;
+    }
+    public function getCedulaFrontal()
+    {
+        return $this->cedulaFrontal;
+    }
+    public function setCedulaFrontal($cedulaFrontal): void
+    {
+        $this->cedulaFrontal = $cedulaFrontal;
+    }
+    public function getCedulaTrasera()
+    {
+        return $this->cedulaTrasera;
+    }
+    public function setCedulaTrasera($cedulaTrasera): void
+    {
+        $this->cedulaTrasera = $cedulaTrasera;
     }
 }

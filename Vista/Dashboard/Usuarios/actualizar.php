@@ -44,7 +44,7 @@
             </select>
           </div>
           <input type="hidden" value="<?php echo $usuario->getId(); ?>" name="idUsuario">
-          <input type="hidden" value="<?php echo $persona->getId(); ?>" name="idPersona">
+          <input type="hidden" value="<?php echo $persona->getId(); ?>" name="idPersona" id="idPersona">
           <div class="col-md-6">
             <span class="mb-3">Identificacion (*)</span>
             <input type="text" class="form-control mb-3" name="identificacion" id="txtIdentificacion" value="<?php echo $persona->getIdentificacion(); ?>">
@@ -186,12 +186,57 @@
             <a href="index.php?controlador=Usuario&metodo=Listado" class="btn btn-outline-danger mx-1">
               <span>Cancelar x</span>
             </a>
+            <a class="btn btn-outline-success mx-1" id="btnVer" data-bs-toggle="modal" data-bs-target="#modalCedula">
+              <span>Cédula <svg style="width: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                  <path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+                </svg></span>
+            </a>
           </div>
         </div>
       </div>
     </form>
   </div>
 </main>
+<div class="modal fade" id="modalCedula" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="titulo">Copia de la Cédula</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-2" id="infoModal">
+          <div class="row">
+            <div class="col-md-6 mt-md-4">
+              <span class="mb-3">Cédula por delante <strong>(Opcional)</strong></span>
+              <input type="file" class="form-control mb-3" name="cedulaFrontal" id="cedulaFrontal">
+            </div>
+            <div class="col-md-6 mt-md-4">
+              <span class="mb-3">Cédula por detrás <strong>(Opcional)</strong></span>
+              <input type="file" class="form-control mb-3" name="cedulaTrasera" id="cedulaTrasera">
+            </div>
+            <div class="col-md-6">
+              <a href="<?php echo $persona->getCedulaFrontal();?>" target="_blank" class="btn btn-secondary">
+                <span>Ver Cédula (Frente)</span>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="<?php echo $persona->getCedulaTrasera();?>" target="_blank" class="btn btn-secondary">
+                <span>Ver Cédula (Detrás)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" id="btnSubirCedula">
+          <span>Enviar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="./Vista/assets/js/usuarios.js"></script>
 <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
 <script src="./Vista/assets/js/dashboardDependencia/locaciones.js"></script>

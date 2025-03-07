@@ -85,4 +85,40 @@ $(document).ready(function () {
     }
     return true;
   });
+  $("#btnSubirCedula").on("click", () => {
+    let formData = new FormData();
+    formData.append("idPersona", $("#idPersona").val());
+    formData.append(
+      "cedulaFrontal",
+      document.getElementById("cedulaFrontal").files[0]
+    );
+    formData.append(
+      "cedulaTrasera",
+      document.getElementById("cedulaTrasera").files[0]
+    );
+
+    $.ajax({
+      url: "index.php?controlador=Usuario&metodo=GestionarCedulas",
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response != "0") {
+          response = JSON.parse(response);
+          if (response[0] != '0')
+            $("#cedulaFrontal").prop('href', response[0]);
+
+          if (response[1] != '0')
+            $("#cedulaTrasera").prop('href', response[1]);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error("Error en la petición:", error);
+      },
+    });
+
+    $("#cedulaFrontal").val("");
+    $("#cedulaTrasera").val("");
+  });
 });

@@ -117,6 +117,8 @@ class PersonaM
                 $persona->setIdProvincia($fila["ID_PROVINCIA"]);
                 $persona->setUsuarioCreacion($fila["USUARIO_CREACION"]);
                 $persona->setCorreo($fila["CORREO"]);
+                $persona->setCedulaFrontal($fila['CEDULA_FRONTAL']);
+                $persona->setCedulaTrasera($fila['CEDULA_TRASERA']);
             }
         }
         $conexion->Cerrar();
@@ -278,6 +280,22 @@ class PersonaM
             "', '" . $persona->getIdProvincia() .
             "', " . $persona->getUsuarioCreacion() .
             ")";
+        try {
+            if ($conexion->Ejecutar($sql)) {
+                $retVal = true;
+            }
+        } catch (Exception $ex) {
+            $retVal = false;
+        }
+        $conexion->Cerrar();
+        return $retVal;
+    }
+    function GestionarCedula(Persona $persona) 
+    {
+        $retVal = false;
+        $conexion = new Conexion();
+        $sql = "CALL SpGestionarCopiasCedula(".$persona->getId().
+        ", '".$persona->getCedulaFrontal()."', '".$persona->getCedulaTrasera()."');";
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;

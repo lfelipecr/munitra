@@ -10,7 +10,7 @@
       </a>
     </div>
     <input type="hidden" id="msg" value="<?php echo $msg; ?>">
-    <form action="index.php?controlador=Usuario&metodo=Ingresar" id="frmPersona" method="post">
+    <form action="index.php?controlador=Usuario&metodo=Ingresar" id="frmPersona" method="post" enctype="multipart/form-data">
       <div class="my-3 p-3 bg-body rounded shadow-sm">
         <h4 class="border-bottom pb-2 mb-0">Datos de la Persona</h4>
         <div class="row mt-3">
@@ -109,6 +109,14 @@
                 </option>
               <?php } ?>
             </select>
+          </div>
+          <div class="col-md-6 mt-md-4">
+            <span class="mb-3">Cédula por delante <strong>(Opcional)</strong></span>
+            <input type="file" class="form-control mb-3" name="cedulaFrontal" id="">
+          </div>
+          <div class="col-md-6 mt-md-4">
+            <span class="mb-3">Cédula por detrás <strong>(Opcional)</strong></span>
+            <input type="file" class="form-control mb-3" name="cedulaTrasera" id="">
           </div>
           <div class="col-12 d-flex align-items-center mb-3 mt-2">
             <label class="mx-1 mb-1">Generar Usuario en Sistema</label>

@@ -993,3 +993,19 @@ BEGIN
     VALUES(resp, adjunto, NOW(), usuario, 0, idConsulta);
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE SpGestionarCopiasCedula(IN idPersona INT, IN copiaCedulaFrontal LONGTEXT, IN copiaCedulaTrasera LONGTEXT)
+BEGIN
+    IF copiaCedulaFrontal <> '' THEN
+        UPDATE PERSONA
+        SET CEDULA_FRONTAL = copiaCedulaFrontal
+        WHERE ID = idPersona;
+    END IF;
+    IF copiaCedulaTrasera <> '' THEN
+        UPDATE PERSONA
+        SET CEDULA_TRASERA = copiaCedulaTrasera
+        WHERE ID = idPersona;
+    END IF;
+END //
+DELIMITER;

@@ -10,6 +10,8 @@ class ExternoControlador
     {
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
+            $personaM = new PersonaM();
+            $persona = $personaM->BuscarPersonaUsuario($_SESSION['usuario']->getIdPersona());
             $vista = './Vista/TramitesUsuario/Dashboard/inicio.php';
             require_once './Vista/Utilidades/navbar.php';
         }

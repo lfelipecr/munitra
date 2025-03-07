@@ -157,8 +157,7 @@ class LoginControlador
                 if ($usuario->getIdDepartamento() == 1) {
                     $this->InicioTramites();
                 } else {
-                    //Permisos
-                    header('location: index.php?controlador=Login&metodo=AdminInicio');
+                    $this->AdminInicio();
                 }
             } else {
                 $msg = 'El usuario se encuentra inactivo, </br> comuniquese con la municipalidad';
@@ -227,6 +226,32 @@ class LoginControlador
                     $idUsuario = $usuarioM->IdMax();
                     $usuario->setId($idUsuario);
                     $_SESSION['usuario'] = $usuario;
+                    //cedula (opcional)
+                    if (isset($_FILES['cedulaFrontal']) && $_FILES['cedulaFrontal']['error'] === UPLOAD_ERR_OK) {
+                        if (isset($_FILES['cedulaTrasera']) && $_FILES['cedulaTrasera']['error'] === UPLOAD_ERR_OK) 
+                        {
+                            $persona->setId($usuario->getIdPersona());
+                            $rutaDestino = './repo/';
+                            $urlArchivo = $rutaDestino . time() . basename($_FILES['cedulaFrontal']['name']);
+                            $persona->setCedulaFrontal($urlArchivo);
+                            if (!is_writable('./repo/')) {
+                                $this->LlamarVistaRegistro('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
+                            }
+                            //Guarda la cedula por delante
+                            if (move_uploaded_file($_FILES['cedulaFrontal']['tmp_name'], $urlArchivo)) {
+                                //Si se guarda la cedula por delante, guarda la cedula por detrás
+                                $urlArchivo = $rutaDestino . time() . basename($_FILES['cedulaTrasera']['name']);
+                                if (move_uploaded_file($_FILES['cedulaTrasera']['tmp_name'], $urlArchivo)) {
+                                    $persona->setCedulaTrasera($urlArchivo);
+                                } else {
+                                    $this->LlamarVistaRegistro('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
+                                }
+                                $personaM->GestionarCedula($persona);
+                            } else {
+                                $this->LlamarVistaRegistro('El directorio no tiene permisos de escritura, comuníquese con el profesional de TI');
+                            }
+                        }
+                    }
                     require_once './Vista/Login/credenciales.php';
                 } else {
                     $personaM->EliminarPersona($idUsuario);

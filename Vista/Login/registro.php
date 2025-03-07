@@ -50,7 +50,7 @@
                 </div>
                 <hr>
                 <input type="hidden" id="msg" value="<?php echo $msg; ?>">
-                <form action="index.php?controlador=Login&metodo=RegistrarUsuario" id="frmIngresar" method="post" class="text-start">
+                <form action="index.php?controlador=Login&metodo=RegistrarUsuario" id="frmIngresar" method="post" class="text-start" enctype="multipart/form-data">
                     <div class="my-1 p-3">
                         <div class="row mt-3">
                             <div class="col-md-6">
@@ -144,6 +144,14 @@
                             <div class="col-md-6">
                                 <span class="mb-3">Confirme su contraseña (*)</span>
                                 <input type="password" class="form-control mb-3" id="txtPass2">
+                            </div>
+                            <div class="col-md-6">
+                                <span class="mb-3">Cédula por delante <strong>(Opcional)</strong></span>
+                                <input type="file" class="form-control mb-3" name="cedulaFrontal" id="">
+                            </div>
+                            <div class="col-md-6">
+                                <span class="mb-3">Cédula por detrás <strong>(Opcional)</strong></span>
+                                <input type="file" class="form-control mb-3" name="cedulaTrasera" id="">
                             </div>
                             <div class="col-12 mb-3">
                                 <input type="hidden" name="estado" id="lsEstado" value="3">
