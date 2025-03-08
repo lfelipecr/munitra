@@ -105,12 +105,7 @@ $(document).ready(function () {
       processData: false,
       success: function (response) {
         if (response != "0") {
-          response = JSON.parse(response);
-          if (response[0] != '0')
-            $("#cedulaFrontal").prop('href', response[0]);
-
-          if (response[1] != '0')
-            $("#cedulaTrasera").prop('href', response[1]);
+          location.reload();
         }
       },
       error: function (xhr, status, error) {

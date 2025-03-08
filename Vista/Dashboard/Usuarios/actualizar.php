@@ -215,16 +215,22 @@
               <span class="mb-3">Cédula por detrás <strong>(Opcional)</strong></span>
               <input type="file" class="form-control mb-3" name="cedulaTrasera" id="cedulaTrasera">
             </div>
-            <div class="col-md-6">
-              <a href="<?php echo $persona->getCedulaFrontal();?>" target="_blank" class="btn btn-secondary">
-                <span>Ver Cédula (Frente)</span>
-              </a>
-            </div>
-            <div class="col-md-6">
-              <a href="<?php echo $persona->getCedulaTrasera();?>" target="_blank" class="btn btn-secondary">
-                <span>Ver Cédula (Detrás)</span>
-              </a>
-            </div>
+            <?php if ($persona->getCedulaFrontal() != null || $persona->getCedulaTrasera() != null) { ?>
+              <div class="col-md-6">
+                <a href="<?php echo $persona->getCedulaFrontal(); ?>" target="_blank" class="btn btn-secondary">
+                  <span>Ver Cédula (Frente)</span>
+                </a>
+              </div>
+              <div class="col-md-6">
+                <a href="<?php echo $persona->getCedulaTrasera(); ?>" target="_blank" class="btn btn-secondary">
+                  <span>Ver Cédula (Detrás)</span>
+                </a>
+              </div>
+            <?php } else { ?>
+              <div class="col-12">
+                <span class="card p-3">Debe subir la copia de la cédula</span>
+              </div>
+            <?php } ?>
           </div>
         </div>
 

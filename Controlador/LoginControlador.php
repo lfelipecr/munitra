@@ -3,7 +3,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use setasign\Fpdi\Fpdi;
+use setasign\Fpdf\Fpdf;
 
+require_once './vendor/autoload.php';
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/UsuarioM.php';
 require_once './Modelo/Entidades/Usuario.php';
@@ -130,6 +133,92 @@ class LoginControlador
                 $usuario = $_SESSION['usuario'];
                 $usuario->setIdEstado(4);
                 $usuarioM->Actualizar($usuario);
+                $pdf = new Fpdi();
+                $pdf->SetAutoPageBreak(false); // Desactiva el salto automático de página
+
+                // Ruta del PDF de entrada
+                $sourceFile = './repo/serverside/consentimientoInformado.pdf';
+                $numberOfPages = $pdf->setSourceFile($sourceFile); // Obtiene el número total de páginas
+
+                $pdf->AddPage();
+                $tplIdx = $pdf->importPage(1);
+                $size = $pdf->getTemplateSize($tplIdx);
+                $pdf->useTemplate($tplIdx, 0, 0);
+
+                $pdf->SetFont('Arial', '', 12);
+                $pdf->SetXY(70, 50);
+                $pdf->Write(10, 'Texto en la primera página');
+
+                $pdf->SetFont('Arial', '', 12);
+                $pdf->SetXY(60, 57);
+                $pdf->Write(10, 'Locacion');
+
+                $pdf->SetFont('Arial', '', 12);
+                $pdf->SetXY(145, 62);
+                $pdf->Write(10, '119690990');
+
+                $pdf->SetFont('Arial', '', 12);
+                $pdf->SetXY(105, 67);
+                $pdf->Write(10, 'correo');
+
+                $pdf->SetFont('Arial', '', 12);
+                $pdf->SetXY(85, 72);
+                $pdf->Write(10, 'telefono');
+
+                // Agregar texto a la segunda página
+                $pdf->AddPage();
+                $tplIdx = $pdf->importPage(2); // Importa la segunda página
+                $size = $pdf->getTemplateSize($tplIdx); // Obtiene el tamaño de la página importada
+                $pdf->useTemplate($tplIdx, 0, 0); // Usa la plantilla de la segunda página
+                $meses = [
+                    1 => 'enero',
+                    2 => 'febrero',
+                    3 => 'marzo',
+                    4 => 'abril',
+                    5 => 'mayo',
+                    6 => 'junio',
+                    7 => 'julio',
+                    8 => 'agosto',
+                    9 => 'septiembre',
+                    10 => 'octubre',
+                    11 => 'noviembre',
+                    12 => 'diciembre'
+                ];
+                date_default_timezone_set('America/Mexico_City');
+                $dia = date('d');
+                $mes = $meses[date('n')];
+                $anio = date('Y');
+                $anio = substr($anio, -1);
+
+                // Agregar texto en la segunda página
+                $pdf->SetFont('Arial', '', 10);
+                $pdf->SetXY(51, 202);
+                $pdf->Write(10, $dia);
+
+                $pdf->SetFont('Arial', '', 10);
+                $pdf->SetXY(65, 202);
+                $pdf->Write(10, $mes);
+
+                $pdf->SetFont('Arial', '', 10);
+                $pdf->SetXY(98.5, 202);
+                $pdf->Write(10, $anio);
+
+                $pdf->SetFont('Arial', '', 12);
+                $pdf->SetXY(50, 235);
+                $pdf->Write(10, 'Nombre');
+
+                $pdf->SetFont('Arial', '', 12);
+                $pdf->SetXY(48, 240);
+                $pdf->Write(10, '119690990');
+
+                //firma
+                $imagePath = './repo/firmas/firma_1739603254.png';
+                $imageX = 50;
+                $imageY = 210;
+                $imageWidth = 30;
+                $imageHeight = 30;
+                $pdf->Image($imagePath, $imageX, $imageY, $imageWidth, $imageHeight);
+                $pdf->Output('F', './repo/' . time() . 'consentimiento.pdf');
                 require_once './Vista/Login/aviso.php';
             } else {
                 $idUsuario = $_SESSION['usuario']->getId();
@@ -228,8 +317,7 @@ class LoginControlador
                     $_SESSION['usuario'] = $usuario;
                     //cedula (opcional)
                     if (isset($_FILES['cedulaFrontal']) && $_FILES['cedulaFrontal']['error'] === UPLOAD_ERR_OK) {
-                        if (isset($_FILES['cedulaTrasera']) && $_FILES['cedulaTrasera']['error'] === UPLOAD_ERR_OK) 
-                        {
+                        if (isset($_FILES['cedulaTrasera']) && $_FILES['cedulaTrasera']['error'] === UPLOAD_ERR_OK) {
                             $persona->setId($usuario->getIdPersona());
                             $rutaDestino = './repo/';
                             $urlArchivo = $rutaDestino . time() . basename($_FILES['cedulaFrontal']['name']);

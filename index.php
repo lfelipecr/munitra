@@ -1,6 +1,7 @@
 <?php
     require_once './Core/RutaFija.php';
     require_once './Core/Rutas.php';
+    require_once './vendor/autoload.php';
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;

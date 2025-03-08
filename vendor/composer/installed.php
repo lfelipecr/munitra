@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => '361b386fbdc554e3b872510eb59719afa583ac6a',
+        'name' => '__root__',
+        'dev' => true,
+    ),
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => '361b386fbdc554e3b872510eb59719afa583ac6a',
+            'dev_requirement' => false,
+        ),
+        'setasign/fpdf' => array(
+            'pretty_version' => '1.8.2',
+            'version' => '1.8.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../setasign/fpdf',
+            'aliases' => array(),
+            'reference' => 'd77904018090c17dc9f3ab6e944679a7a47e710a',
+            'dev_requirement' => false,
+        ),
+        'setasign/fpdi' => array(
+            'pretty_version' => 'v2.6.3',
+            'version' => '2.6.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../setasign/fpdi',
+            'aliases' => array(),
+            'reference' => '67c31f5e50c93c20579ca9e23035d8c540b51941',
+            'dev_requirement' => false,
+        ),
+    ),
+);

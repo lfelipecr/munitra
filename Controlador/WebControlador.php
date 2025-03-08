@@ -1,4 +1,5 @@
 <?php
+
 require_once './Modelo/Metodos/DepartamentoM.php';
 require_once './Modelo/Metodos/NoticiaM.php';
 require_once './Modelo/Metodos/SesionM.php';
