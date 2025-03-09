@@ -61,6 +61,33 @@
                     <a href="#" class="link-blog">Ver</a>
                 </div>
             </div>
+            <?php if ($estado == 5) { ?>
+                <div class="col-12 mb-3 col-md-4">
+                    <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Tramites&metodo=IngresarCodigo';">
+                        <span><svg style="width: 3em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                <path fill="currentColor" d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3zM504 312l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+                            </svg></span>
+                        <hr>
+
+                        <h6><strong>Verificar Cuenta</strong></h6>
+                        <p>Verifique su cuenta para que sus trámites entren en vigencia, ingresando el código enviado a su correo</p>
+                        <a href="#" class="link-blog">Ver</a>
+                    </div>
+                </div>
+            <?php }
+            if ($estado == 3) { ?>
+                <div class="col-12 mb-3 col-md-4">
+                    <div class="card p-5 cardOpciones" onclick="window.location.href='index.php?controlador=Tramites&metodo=Credenciales';">
+                        <span><svg style="width: 3em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                <path fill="currentColor" d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3zM504 312l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+                            </svg></span>
+                        <hr>
+                        <h6><strong>Ingrese sus Credenciales</strong></h6>
+                        <p>Verifique su cuenta para que sus trámites entren en vigencia</p>
+                        <a href="#" class="link-blog">Ver</a>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </main>

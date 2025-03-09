@@ -376,7 +376,7 @@ class UsuarioControlador
             $codigo = bin2hex(random_bytes(4));
             if ($_GET['validar'] == 'true') {
                 //base de datos
-                $usuario->setIdEstado(5);
+                $usuario->setIdEstado(1);
                 $usuarioM->Actualizar($usuario);
                 $credencialesM = new CredencialesM();
                 $credenciales = new Credenciales();

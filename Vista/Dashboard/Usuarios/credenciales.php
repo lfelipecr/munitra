@@ -52,7 +52,13 @@
                         </div>
                     </div>
                     <div class="row justify-content-center mb-3 mt-1">
-                        <a class="btn btn-warning" href="#" id="consentimiento">Consentimiento Informado</a>
+                        <a class="btn btn-warning" href="#" target="_blank" id="consentimiento">Consentimiento Informado</a>
+                    </div>
+                    <div class="row justify-content-center mb-3 mt-1">
+                        <a class="btn btn-warning" href="#" target="_blank" id="cedulaFro">Cédula (Frente)</a>
+                    </div>
+                    <div class="row justify-content-center mb-3 mt-1">
+                        <a class="btn btn-warning" href="#" target="_blank" id="cedulaTra">Cédula (Detrás)</a>
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex">
@@ -73,6 +79,7 @@
     <script>
         $(document).ready(function() {
             let jsonData = JSON.parse($('#jsonData').val());
+            console.log(jsonData);
             $('#nombre').html(`Nombre: ${jsonData.NOMBRE} ${jsonData.PRIMER_APELLIDO} ${jsonData.SEGUNDO_APELLIDO}`);
             $('#cedula').html(`Nombre: ${jsonData.IDENTIFICACION}`);
             $('#correo').html(`Correo: ${jsonData.CORREO_USUARIO}`);
@@ -80,6 +87,8 @@
             $('#whatsapp').html(`Whatsapp: ${jsonData.WHATSAPP}`);
             document.getElementById('firmaCredenciales').src = jsonData.FIRMA;
             document.getElementById('consentimiento').href = jsonData.URL_CONSENTIMIENTO;
+            document.getElementById('cedulaFro').href = jsonData.CEDULA_FRONTAL;
+            document.getElementById('cedulaTra').href = jsonData.CEDULA_TRASERA;
             document.getElementById('denegar').href = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=false`;
             document.getElementById('aceptar').href = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=true`;
         });

@@ -74,7 +74,6 @@ class DocumentacionM
         $retVal = false;
         $conexion = new Conexion();
         $sql = "INSERT INTO TIPO_DOCUMENTO (DESCRIPCION) VALUES ('$descripcion');";
-        echo $sql;
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;

@@ -61,8 +61,6 @@ class ConsultaM
         $conexion = new Conexion();
         $sql = "CALL SpAtenderConsulta( " . $consulta->getIdConsulta() . ", '" . $consulta->getTexto() . "', '" . $consulta->getInteractor() .
             "', '" . $consulta->getAdjuntos() . "')";
-        //BORRAR
-        echo $sql;
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;

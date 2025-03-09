@@ -1,5 +1,5 @@
 <?php
-require_once './Modelo/Entidades/Usuario.php';
+require_once './Modelo/Metodos/UsuarioM.php';
 require_once './Utilidades/Utilidades.php';
 require_once './Modelo/Metodos/SolicitudM.php';
 require_once './Libraries/dompdf-3.1.0/dompdf/autoload.inc.php';
@@ -19,8 +19,9 @@ class TramitesControlador
     function ListadoTramites()
     {
         session_start();
+        $usuarioM = new UsuarioM();
         $usuario = $_SESSION['usuario']->getIdPersona();
-        $estado = $_SESSION['usuario']->getIdEstado();
+        $estado = $usuarioM->BuscarUsuarioIdPersona($usuario)->getIdEstado();
         $vista = './Vista/TramitesUsuario/listadoTramites.php';
         require_once './Vista/Utilidades/navbar.php';
     }

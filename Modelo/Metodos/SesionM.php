@@ -73,7 +73,6 @@ class SesionM
             ", '" . $sesion->getUrlActa() .
             "', '" . $sesion->getUrlAgenda() .
             "', '" . $sesion->getUrlVideo() . "', " . $sesion->getIdComision() . ")";
-        echo $sql;
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;

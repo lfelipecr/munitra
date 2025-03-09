@@ -7,6 +7,7 @@
         <div class="row text-center">
             <div class="col-12 mt-md-5">
                 <h1 class="h3"><?php echo $persona->getNombre() . " " . $persona->getPrimerApellido() . " " . $persona->getSegundoApellido(); ?></h1>
+                <input type="hidden" id="idPersona" value="<?php echo $persona->getId(); ?>">
             </div>
             <div class="col-12">
                 <hr>
@@ -39,7 +40,7 @@
                 <button class="btn btn-outline-primary" id="cambiarContra" data-bs-toggle="modal" data-bs-target="#modalCodigo">
                     <span>Cambiar Contraseña</span>
                 </button>
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalFotoPerfil">
+                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCedula">
                     <span>Copia de su Cédula</span>
                 </button>
                 <a href="index.php?controlador=Tramites&amp;metodo=InicioExterno" class="btn mt-1 btn-outline-secondary">
@@ -88,24 +89,51 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalFotoPerfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <form method="post" action="index.php?controlador=Usuario&metodo=CambiarFotoPerfil" method="post" enctype="multipart/form-data">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Foto de Perfil (jpg, png, jpeg)</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="file" class="form-control" name="foto">
-                    <input type="hidden" name="idFoto" value="<?php echo $imagen->getId(); ?>">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-warning">Subir</button>
-                </div>
+<div class="modal fade" id="modalCedula" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="titulo">Copia de la Cédula</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-2" id="infoModal">
+          <div class="row">
+            <div class="col-md-6 mt-md-4">
+              <span class="mb-3">Cédula por delante <strong>(Opcional)</strong></span>
+              <input type="file" class="form-control mb-3" name="cedulaFrontal" id="cedulaFrontal">
             </div>
-        </form>
+            <div class="col-md-6 mt-md-4">
+              <span class="mb-3">Cédula por detrás <strong>(Opcional)</strong></span>
+              <input type="file" class="form-control mb-3" name="cedulaTrasera" id="cedulaTrasera">
+            </div>
+            <?php if ($persona->getCedulaFrontal() != null || $persona->getCedulaTrasera() != null) { ?>
+              <div class="col-md-6">
+                <a href="<?php echo $persona->getCedulaFrontal(); ?>" target="_blank" class="btn btn-secondary">
+                  <span>Ver Cédula (Frente)</span>
+                </a>
+              </div>
+              <div class="col-md-6">
+                <a href="<?php echo $persona->getCedulaTrasera(); ?>" target="_blank" class="btn btn-secondary">
+                  <span>Ver Cédula (Detrás)</span>
+                </a>
+              </div>
+            <?php } else { ?>
+              <div class="col-12">
+                <span class="card p-3">Debe subir la copia de la cédula</span>
+              </div>
+            <?php } ?>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" id="btnSubirCedula">
+          <span>Enviar</span>
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
 <script>
@@ -176,3 +204,4 @@
         }
     });
 </script>
+<script src="./Vista/assets/js/usuarios.js"></script>
