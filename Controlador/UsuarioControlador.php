@@ -86,10 +86,15 @@ class UsuarioControlador
     {
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
+            $credencialesM = new CredencialesM();
             $locaciones = new ProvinciaM();
             $deptoM = new DepartamentoM();
             $arrLocaciones  = $locaciones->BuscarLocaciones();
             $deptos = $deptoM->BuscarDepartamentos();
+            $credenciales = false;
+            if ($credencialesM->BuscarCredenciales($usuario->getIdPersona()) != NULL){
+                $credenciales = true;
+            }
             //Vista a llamar dentro del template
             $vista = './Vista/Dashboard/Usuarios/actualizar.php';
             require_once './Vista/Utilidades/sidebar.php';
@@ -374,12 +379,11 @@ class UsuarioControlador
             $msg = '';
             $asunto = '';
             $codigo = bin2hex(random_bytes(4));
+            $credenciales = new Credenciales();
+            $credencialesM = new CredencialesM(); 
             if ($_GET['validar'] == 'true') {
-                //base de datos
                 $usuario->setIdEstado(1);
-                $usuarioM->Actualizar($usuario);
-                $credencialesM = new CredencialesM();
-                $credenciales = new Credenciales();
+                $usuarioM->Actualizar($usuario);               
                 $credenciales->setCodigo($codigo);
                 $credenciales->setId($idCredencial);
                 $credencialesM->ModificarCredenciales($credenciales);
@@ -398,21 +402,24 @@ class UsuarioControlador
             try {
                 session_start();
                 $bitacoraM = new BitacoraSolicitudM();
-                $credenciales = $bitacoraM->CredencialesSMTP();
+                $credencialesSmtp = $bitacoraM->CredencialesSMTP();
                 $mail->isSMTP();
                 $mail->CharSet = "UTF-8";
                 $mail->Encoding = "base64";
-                $mail->Host = $credenciales['host'];
+                $mail->Host = $credencialesSmtp['host'];
                 $mail->SMTPAuth = true;
-                $mail->Username = $credenciales['user'];
-                $mail->Password = $credenciales['key'];
+                $mail->Username = $credencialesSmtp['user'];
+                $mail->Password = $credencialesSmtp['key'];
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
-                $mail->setFrom($credenciales['from']);
+                $mail->setFrom($credencialesSmtp['from']);
                 $mail->addAddress($usuario->getCorreo());
                 $mail->isHTML(true);
                 $mail->Subject = $asunto;
                 $mail->Body = $msg;
+                if ($_GET['validar'] == 'true' && isset($_GET['consentimiento'])) {
+                    $mail->addAttachment($_GET['consentimiento']);
+                }
                 $mail->send();
                 $this->Listado();
             } catch (Exception $ex) {

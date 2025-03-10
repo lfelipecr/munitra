@@ -57,6 +57,7 @@ class CredencialesM
         $conexion->Cerrar();
         return $retVal;
     }
+    //JSON -> PHP
     function BuscarCredenciales($id)
     {
         $registro = null;

@@ -9,8 +9,8 @@
     require_once './Libraries/PHPMailer-6.9.3/src/SMTP.php';
     require_once './Libraries/PHPMailer-6.9.3/src/Exception.php';
     
-    //ini_set('display_errors', 1);
-    //error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
     $ruta=new Rutas();
     if(isset($_GET['controlador']))
     {

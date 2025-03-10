@@ -69,6 +69,11 @@
                                 <span class="p-1 px-md-5 p-1">Denegar</span>
                             </a>
                         </div>
+                        <div class="col-12 d-flex mt-1">
+                            <a class="btn-outline-success btn w-100 mx-1" onclick="window.history.back()" href="#">
+                                <span class="p-1 px-md-5 p-1">Regresar</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,7 +95,7 @@
             document.getElementById('cedulaFro').href = jsonData.CEDULA_FRONTAL;
             document.getElementById('cedulaTra').href = jsonData.CEDULA_TRASERA;
             document.getElementById('denegar').href = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=false`;
-            document.getElementById('aceptar').href = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=true`;
+            document.getElementById('aceptar').href = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=true&consentimiento=${jsonData.URL_CONSENTIMIENTO}`;
         });
     </script>
 </body>
