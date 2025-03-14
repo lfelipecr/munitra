@@ -40,7 +40,7 @@
           </div>
           <div class="col-12 d-flex align-items-center mb-3">
             <button type="submit" class="btn btn-outline-warning mx-1">
-              <span>Ingresar +</span>
+              <span>Actualizar +</span>
             </button>
             <a href="index.php?controlador=Blog&metodo=Noticias" class="btn btn-outline-danger mx-1">
               <span>Cancelar x</span>

@@ -65,7 +65,7 @@
                             <a class="btn-outline-warning btn w-100 mx-1" type="submit" id="aceptar">
                                 <span class="p-1 px-md-5 p-1">Aceptar</span>
                             </a>
-                            <a class="btn-outline-danger btn w-100 mx-1" id="denegar">
+                            <a class="btn-outline-danger btn w-100 mx-1" id="" data-bs-toggle="modal" data-bs-target="#modalMensajeDenegacion">
                                 <span class="p-1 px-md-5 p-1">Denegar</span>
                             </a>
                         </div>
@@ -79,12 +79,36 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalMensajeDenegacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalBitacoraLabel">Rechazar Credenciales</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label for="" class="form-label" id="razonLabel">Razón de la denegación *</label>
+                        <textarea class="form-control" id="denegacionTexto"></textarea>
+                        <input type="hidden" id="idConsulta">
+                    </div>
+                </div>
+                <div class="modal-footer d-block">
+                    <div class="mb-2 text-end">
+                        <a id="denegar" class="btn btn-warning">
+                            <span>Enviar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
             let jsonData = JSON.parse($('#jsonData').val());
-            console.log(jsonData);
+            let urlDenegacion = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=false`;
             $('#nombre').html(`Nombre: ${jsonData.NOMBRE} ${jsonData.PRIMER_APELLIDO} ${jsonData.SEGUNDO_APELLIDO}`);
             $('#cedula').html(`Nombre: ${jsonData.IDENTIFICACION}`);
             $('#correo').html(`Correo: ${jsonData.CORREO_USUARIO}`);
@@ -94,8 +118,19 @@
             document.getElementById('consentimiento').href = jsonData.URL_CONSENTIMIENTO;
             document.getElementById('cedulaFro').href = jsonData.CEDULA_FRONTAL;
             document.getElementById('cedulaTra').href = jsonData.CEDULA_TRASERA;
-            document.getElementById('denegar').href = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=false`;
             document.getElementById('aceptar').href = `index.php?controlador=Usuario&metodo=ValidarCredenciales&id=${jsonData.ID_USUARIO}&idCredencial=${jsonData.ID_CREDENCIAL}&validar=true&consentimiento=${jsonData.URL_CONSENTIMIENTO}`;
+            $('#denegar').on('click', function() {
+                let razon = $('#denegacionTexto').val();
+                if (razon != '') {
+                    urlDenegacion += '&motivo='+razon;
+                    window.location.href = urlDenegacion;
+                } else {
+                    let clases = ['bg-danger', 'text-white', 'p-3', 'card'];
+                    clases.forEach(e => {
+                        $('#razonLabel').addClass(e);
+                    });
+                }
+            })
         });
     </script>
 </body>

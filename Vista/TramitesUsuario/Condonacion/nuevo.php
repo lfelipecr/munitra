@@ -137,14 +137,6 @@
             <span class="mb-3">Recibido por (*)</span><br>
             <input type="text" name="recibido" id="txtRecibido" class="form-control">
           </div>
-          <div class="col-md-12 mt-md-3 text-center">
-            <span class="mb-3">Firma (*)</span><br>
-            <canvas id="canvas" class="w-100 mx-auto" style="max-width: 300px;" height="200"></canvas>
-
-            <br>
-            <input type="hidden" name="firma" id="firma">
-            <button id="clear" class="btn btn-outline-danger">Limpiar</button>
-          </div>
           <div class="col-md-12 mt-md-3">
             <input type="hidden" class="form-control" name="fecha" id="fecha">
             <input type="hidden" class="form-control" name="consecutivo" id="consecutivo">

@@ -96,6 +96,7 @@ $(document).ready(function () {
         let idDom = "#listadoDepto" + datosJSON[i][17];
         let listado = $(idDom).html();
         if (idDom != ultimoIdDom) {
+          console.log(ultimoIdDom);
           html += '<div class="col-lg-12"><div class="row">';
           let regularBotonTramites = true;
           ultimoIdDom = idDom;
@@ -111,6 +112,17 @@ $(document).ready(function () {
                                 <svg style="width: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480l0-83.6c0-4 1.5-7.8 4.2-10.8L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
                             </button>
                         </div>`;
+          if (idDom == '#listadoDepto3'){
+            html += `<div class="col-lg-4">
+                          <a class="btn btn-outline-warning mx-1 mt-md-none mb-1 mt-1" target="_blank" href="https://www.sicop.go.cr/moduloPcont/expedientesElectronicos.jsp?code=394a63e5c2cba6c204bd05ce743c8cb68a60f9b816b83e6354616abc9c8fa065781c9860c97339134d6a057d648d50ac40312dc935b16473588536a33dd30c061d56fcd93abfb44ebd896cf16c399d8580fd0c93fc26c249b6a9cfe06539c2b99db935e417f1cb3bcd9c66c183dbcc9e4c288d3ff47a35c1000f57eafc62a3dd">
+                              <span style="font-size: 1em;">Compras SICOP</span>
+                              <svg style="width: 1em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                  <path fill="currentColor" d="M64 64C28.7 64 0 92.7 0 128L0 384c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64L64 64zm48 160l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zM96 336c0-8.8 7.2-16 16-16l352 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-352 0c-8.8 0-16-7.2-16-16zM376 160l80 0c13.3 0 24 10.7 24 24l0 48c0 13.3-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24l0-48c0-13.3 10.7-24 24-24z" />
+                              </svg>
+                          </a>
+                      </div>`;
+            console.log(html);
+          }
           for (let j = 0; j < tramites.length; j++) {
             if (tramites[j][2] == datosJSON[i][17] && regularBotonTramites) {
               regularBotonTramites = false;

@@ -77,7 +77,7 @@
         </div>
     </div>
     <div class="modal fade" id="terminosYCondiciones" tabindex="-1" aria-labelledby="" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="">Términos y Condiciones</h1>
@@ -96,34 +96,34 @@
                         demás licencias, permisos y trámites ligados a los servicios que brinda la
                         Municipalidad. Además, soy consciente de la existencia de una base de datos
                         perteneciente a LA AUTORIZADA, la cual se utiliza para realizar las gestiones
-                        supra descritas.
+                        supra descritas. <br>
                         II.-Utilización de datos personales: La información que contiene la base de datos
                         de LA AUTORIZADA, sobre mi persona de uso restringido podrán ser utilizados
-                        para las gestiones descritas en el punto I.
+                        para las gestiones descritas en el punto I. <br>
                         III.-Consultas: Expresamente autorizo que mi información sea consultada por los
                         colaboradores de LA AUTORIZADA, Unidades Estratégicas y demás
-                        dependencias.
+                        dependencias. <br>
                         IV.-Entrega de datos: La entrega de la información es de carácter facultativo,
-                        voluntario y libre de cualquier tipo de coacción o amenaza.
+                        voluntario y libre de cualquier tipo de coacción o amenaza. <br>
                         V.-Información necesaria: La no entrega de la información solicitada por LA
                         AUTORIZADA, sus Unidades Estratégicas, oficinas o cualquier dependencia
                         podría ocasionar el rechazo de mi solicitud o afectación de la provisión de los
                         servicios municipales requeridos. Así mismo, he sido informado(a) que para laprestación de los servicios o eventualmente una gestión de cobro judicial es
                         necesario realizar la tercerización de labores con proveedores o abogados
                         externos contratados por LA AUTORIZADA, por lo que autorizo que mi
-                        información sea compartida con dichos agentes.
+                        información sea compartida con dichos agentes. <br>
                         VI.-Encargado de la base de datos. El encargado oficial del manejo responsable
                         de la base de datos será únicamente la Municipalidad de Río Cuarto, excluyendo
                         auditoría externa, agencias y convenios, los mismos dan fe de que mi información
                         será tratada confidencialmente para uso interno ya que LA AUTORIZADA
-                        asignará usuarios y claves de acceso para sus colaboradores.
+                        asignará usuarios y claves de acceso para sus colaboradores. <br>
                         VII.-Actualización de datos. De conformidad con la Ley de Protección de Datos
                         Frente al Tratamiento de sus Datos Personales es mi derecho rectificar, adicionar,
                         modificar, actualizar o eliminar mis datos personales presentándome en
-                        cualquiera de las oficinas de LA AUTORIZADA.
+                        cualquiera de las oficinas de LA AUTORIZADA. <br>
                         VIII.-Envío de notificaciones. Consiento a LA AUTORIZADA para enviar
                         notificaciones o comunicaciones ya sea por medio de llamadas telefónicas,
-                        correo electrónico, mensaje de texto o cualquier medio electrónico disponible.
+                        correo electrónico, mensaje de texto o cualquier medio electrónico disponible. <br>
                         IX.-Consulta. LA AUTORIZADA podrá realizar cualquier tipo de consulta de mi
                         información en cualquier tipo de base de datos ya sea pública o privada y podrán
                         acceder, copiar, transmitir, recopilar o almacenar información relativa a mis datos

@@ -38,8 +38,10 @@ $(document).ready(function () {
           case "5":
             $("#idNumeroUsoSuelo").val(datos[i][0]);
             $("#txtUsoSuelo").val(datos[i][1]);
-            $("#cbxUsoSuelo").attr("checked", "");
-            $("#usoSuelo").show();
+            if (datos[i][1] != ''){
+              $("#cbxUsoSuelo").attr("checked", "");
+              $("#usoSuelo").show();
+            }
             break;
           case "6":
             $("#idDistrito").val(datos[i][0]);

@@ -54,7 +54,9 @@ class BitacoraControlador
                 $mail->isHTML(true);
                 $mail->Subject = $asuntoEmail;
                 $mail->Body = $cuerpoEmail;
-                //$mail->send();
+                if ($_POST['interno'] != 1){
+                    $mail->send();
+                }
                 $bitacora->setIdSolicitud($solicitud->getId());
                 $bitacora->setIdUsuario($_SESSION['usuario']->getId());
                 $bitacora->setIdEstado($solicitud->getEstadoSolicitud());

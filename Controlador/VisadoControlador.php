@@ -132,7 +132,7 @@ class VisadoControlador
                     if (!is_dir($rutaDestino)) {
                         mkdir($rutaDestino, 0777, true);
                     }
-                    $post = ['flCartaDisponibilidad', 'flCroquis', 'flPlanoCorregido', 'flMinuta', 'flCartaMOPT'];
+                    $post = ['flCartaDisponibilidad', 'flCroquis', 'flPlanoCorregido', 'flMinuta', 'flCartaMOPT', 'flImagenMinuta'];
                     $postIds = ['idCartaDisponibilidad', 'idCroquis', 'idPlanoCorregido', 'idMinuta', 'idCartaMOPT'];
                     $tipoRequisito = 26;
                     //carta de disponibilidad
@@ -149,23 +149,6 @@ class VisadoControlador
                                 $registrar[] = $cartaDisponibilidad;
                             }
                         }
-                    }
-                    //Firma
-                    if (isset($_POST['firma'])) {
-                        $firma = $_POST['firma'];
-                        $firma = str_replace("data:image/png;base64,", "", $firma);
-                        $firma = str_replace(" ", "+", $firma);
-                        $imagen = base64_decode($firma);
-                        $archivo = "repo/firmas/firma_" . time() . ".png";
-                        file_put_contents($archivo, $imagen);
-                        $soliFirma = new DetalleSolicitud();
-                        $soliFirma->setId($_POST['idFirma']);
-                        $soliFirma->setCumple(1);
-                        $soliFirma->setIdSolicitud($idSolicitud);
-                        $soliFirma->setCampoRequisito($archivo);
-                        $soliFirma->setTipoRequisito(31);
-                        $registrar[] = $soliFirma;
-                        echo $archivo;
                     }
                 }
                 if ($solicitudM->ActualizarDetallesSolicitud($registrar)) {
@@ -194,9 +177,9 @@ class VisadoControlador
                     mkdir($rutaDestino, 0777, true);
                 }
                 //variables de $_FILES
-                $filePost = ['flCartaDisponibilidad', 'flCroquis', 'flPlanoCorregido', 'flMinuta', 'flCartaMOPT'];
+                $filePost = ['flCartaDisponibilidad', 'flCroquis', 'flPlanoCorregido', 'flMinuta', 'flCartaMOPT', 'flImagenMinuta'];
                 $tipoRequisito = 26;
-                for ($i = 0; $i < 5; $i++) {
+                for ($i = 0; $i < 6; $i++) {
                     if (isset($_FILES[$filePost[$i]]) && $_FILES[$filePost[$i]]['error'] === UPLOAD_ERR_OK) {
                         $urlArchivo = $rutaDestino . time() . basename($_FILES[$filePost[$i]]['name']);
                         if (move_uploaded_file($_FILES[$filePost[$i]]['tmp_name'], $urlArchivo)) {
@@ -207,117 +190,83 @@ class VisadoControlador
                             $registrar[] = $adjunto;
                             $tipoRequisito++;
                         }
-                    } else {
-                        if ($filePost[$i] == 'flCartaMOPT') {
-                            $adjunto = new DetalleSolicitud();
-                            $adjunto->setCumple(1);
-                            $adjunto->setCampoRequisito('');
-                            $adjunto->setTipoRequisito($tipoRequisito);
-                            $registrar[] = $adjunto;
-                            $tipoRequisito++;
-                            $validacionArchivos = true;
-                        } else {
-                            $validacionArchivos = false;
-                        }
-                        break;
                     }
-                }
-                //Firma
-                if (isset($_POST['firma'])) {
-                    $firma = $_POST['firma'];
-                    $firma = str_replace("data:image/png;base64,", "", $firma);
-                    $firma = str_replace(" ", "+", $firma);
-                    $imagen = base64_decode($firma);
-                    $archivo = "repo/firmas/firma_" . time() . ".png";
-                    if (file_put_contents($archivo, $imagen) == false) {
-                        error_log("Error al guardar la imagen.");
-                    }
-                    $soliFirma = new DetalleSolicitud();
-                    $soliFirma->setCumple(1);
-                    $soliFirma->setCampoRequisito($archivo);
-                    $soliFirma->setTipoRequisito(31);
-                    $registrar[] = $soliFirma;
-                } else {
-                    $validacionArchivos = false;
                 }
             }
-            //Si todos los archivos se subieron, guarda la solicitud y obtiene el id
-            if ($validacionArchivos) {
-                $solicitudM = new SolicitudM();
-                $solicitud = new Solicitud();
-                session_start();
-                $solicitud->setIdUsuario($_SESSION['usuario']->getId());
-                $solicitud->setTipoSolicitud(3);
-                $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-                //si un administrador ingresa la persona, manda el id
-                //si un usuario externo lo hace, busca los datos de la persona
-                if (isset($_POST['persona'])) {
-                    $solicitud->setIdPersona($_POST['persona']);
+            $solicitudM = new SolicitudM();
+            $solicitud = new Solicitud();
+            session_start();
+            $solicitud->setIdUsuario($_SESSION['usuario']->getId());
+            $solicitud->setTipoSolicitud(3);
+            $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
+            //si un administrador ingresa la persona, manda el id
+            //si un usuario externo lo hace, busca los datos de la persona
+            if (isset($_POST['persona'])) {
+                $solicitud->setIdPersona($_POST['persona']);
+            } else {
+                $cedula = $_POST['identificacion'];
+                $personaM = new PersonaM();
+                //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
+                $persona = $personaM->BuscarPersonaCedula($cedula);
+                if ($persona != null) {
+                    $solicitud->setIdPersona($persona->getId());
                 } else {
-                    $cedula = $_POST['identificacion'];
-                    $personaM = new PersonaM();
-                    //busca una cedula coincidente y la asigna, si no la encuentra, crea a la persona
-                    $persona = $personaM->BuscarPersonaCedula($cedula);
-                    if ($persona != null) {
-                        $solicitud->setIdPersona($persona->getId());
-                    } else {
-                        //genera el usuario
-                        session_start();
-                        $persona = new Persona();
-                        $persona->setIdTipoIdentificacion($_POST['tipoIdentificacion']);
-                        $persona->setIdentificacion(trim($_POST['identificacion']));
-                        $persona->setNombre(trim($_POST['nombre']));
-                        $persona->setPrimerApellido(trim($_POST['apellido1']));
-                        $persona->setSegundoApellido(trim($_POST['apellido2']));
-                        $persona->setDireccion(trim($_POST['direccion']));
-                        $persona->setTelefono(trim($_POST['telefono']));
-                        $persona->setWhatsapp(trim($_POST['whatsapp']));
-                        $persona->setCorreo(trim($_POST['correo']));
-                        $persona->setSituacion(trim($_POST['situacion']));
-                        $persona->setEstado(2);
-                        $persona->setMontoMorosidad($_POST['montoMorosidad']);
-                        $persona->setMontoAdeudado($_POST['montoAdeudado']);
-                        $persona->setPropiedadFuera($_POST['propiedadFuera']);
-                        $persona->setConsentimiento($_POST['consentimiento']);
-                        $persona->setIdProvincia($_POST['provincia']);
-                        $persona->setIdCanton($_POST['canton']);
-                        $persona->setIdDistrito($_POST['distrito']);
-                        $persona->setUsuarioCreacion($_SESSION['usuario']->getId());
-                        $idUsuario = $personaM->IngresarPersona($persona);
-                        $solicitud->setIdPersona($idUsuario);
-                    }
+                    //genera el usuario
+                    session_start();
+                    $persona = new Persona();
+                    $persona->setIdTipoIdentificacion($_POST['tipoIdentificacion']);
+                    $persona->setIdentificacion(trim($_POST['identificacion']));
+                    $persona->setNombre(trim($_POST['nombre']));
+                    $persona->setPrimerApellido(trim($_POST['apellido1']));
+                    $persona->setSegundoApellido(trim($_POST['apellido2']));
+                    $persona->setDireccion(trim($_POST['direccion']));
+                    $persona->setTelefono(trim($_POST['telefono']));
+                    $persona->setWhatsapp(trim($_POST['whatsapp']));
+                    $persona->setCorreo(trim($_POST['correo']));
+                    $persona->setSituacion(trim($_POST['situacion']));
+                    $persona->setEstado(2);
+                    $persona->setMontoMorosidad($_POST['montoMorosidad']);
+                    $persona->setMontoAdeudado($_POST['montoAdeudado']);
+                    $persona->setPropiedadFuera($_POST['propiedadFuera']);
+                    $persona->setConsentimiento($_POST['consentimiento']);
+                    $persona->setIdProvincia($_POST['provincia']);
+                    $persona->setIdCanton($_POST['canton']);
+                    $persona->setIdDistrito($_POST['distrito']);
+                    $persona->setUsuarioCreacion($_SESSION['usuario']->getId());
+                    $idUsuario = $personaM->IngresarPersona($persona);
+                    $solicitud->setIdPersona($idUsuario);
                 }
-                $idSolicitud = $solicitudM->IngresarSolicitud($solicitud);
-                //Valida que la solicitud se haya ingresado
-                if ($idSolicitud != 0) {
-                    //Agrega los id de solicitud
-                    for ($i = 0; $i < count($registrar); $i++) {
-                        $registrar[$i]->setIdSolicitud($idSolicitud);
-                    }
-                    //datos de inputs
-                    //variables del POST
-                    $post = ['direccionPropiedad', 'distrito', 'numeroPlano', 'areaPlano', 'numeroFinca', 'areaRegistroPublico', 'frente', 'numeroContrato'];
-                    $tipoRequisito = 18;
-                    for ($i = 0; $i < 8; $i++) {
-                        $detalle = new DetalleSolicitud();
-                        $detalle->setCumple(1);
-                        $detalle->setCampoRequisito($_POST[$post[$i]]);
-                        $detalle->setIdSolicitud($idSolicitud);
-                        $detalle->setTipoRequisito($tipoRequisito);
-                        $registrar[] = $detalle;
-                        $tipoRequisito++;
-                    }
-                    if ($solicitudM->IngresarDetalles($registrar)) {
-                        header('location: index.php?controlador=Tramites&metodo=Visado');
-                    } else {
-                        $this->LlamarVistaIngresar('Verfique los datos de la solicitud');
-                    }
+            }
+            $idSolicitud = $solicitudM->IngresarSolicitud($solicitud);
+            //Valida que la solicitud se haya ingresado
+            if ($idSolicitud != 0) {
+                //Agrega los id de solicitud
+                for ($i = 0; $i < count($registrar); $i++) {
+                    $registrar[$i]->setIdSolicitud($idSolicitud);
+                }
+                //datos de inputs
+                //variables del POST
+                $post = ['direccionPropiedad', 'distrito', 'numeroPlano', 'areaPlano', 'numeroFinca', 'areaRegistroPublico', 'frente', 'numeroContrato'];
+                $tipoRequisito = 18;
+                for ($i = 0; $i < 8; $i++) {
+                    $detalle = new DetalleSolicitud();
+                    $detalle->setCumple(1);
+                    $detalle->setCampoRequisito($_POST[$post[$i]]);
+                    $detalle->setIdSolicitud($idSolicitud);
+                    $detalle->setTipoRequisito($tipoRequisito);
+                    $registrar[] = $detalle;
+                    $tipoRequisito++;
+                }
+                if ($solicitudM->IngresarDetalles($registrar)) {
+                    header('location: index.php?controlador=Tramites&metodo=Visado');
                 } else {
                     $this->LlamarVistaIngresar('Verfique los datos de la solicitud');
                 }
             } else {
-                $this->LlamarVistaIngresar('Debe subir todos los archivos obligatorios');
+                $this->LlamarVistaIngresar('Verfique los datos de la solicitud');
             }
+        } else {
+            $this->LlamarVistaIngresar('Debe subir todos los archivos obligatorios');
         }
     }
 }

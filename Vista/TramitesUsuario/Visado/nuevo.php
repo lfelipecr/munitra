@@ -192,7 +192,7 @@
             <input type="hidden" name="firma" id="firma">
             <button id="clear" class="btn btn-outline-danger">Limpiar</button>
           </div>
-          <input type="hidden" name="estadoSolicitud" id="slEstado" value="12">
+          <input type="hidden" name="estadoSolicitud" id="slEstado" value="2">
           <div class="col-12 py-2">
             <div class="alert alert-danger mt-1" role="alert" id="alerta"></div>
           </div>

@@ -261,6 +261,7 @@
         <!-- Copyright -->
         <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2024 Copyright: Municipalidad de Río Cuarto
+            <hr class="mx-5">Desarrollado por <a style="text-decoration: none; color:#0f1a4f" target="_blank" href="https://xalachi.com/">Xalachi</a>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -13,7 +13,9 @@ class TramitesControlador
     {
         $u = new Utilidades();
         if ($u->VerificarSesion()) {
-            $u->LlamarVista('./Vista/Dashboard/Tramites/listadoOpciones.php');
+            $depto = $_SESSION['usuario']->getIdDepartamento();
+            $vista = './Vista/Dashboard/Tramites/listadoOpciones.php';
+            require_once './Vista/Utilidades/sidebar.php';
         }
     }
     function ListadoTramites()

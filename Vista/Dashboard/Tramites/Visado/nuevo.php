@@ -101,21 +101,17 @@
             <span class="mb-3">Plano Corregido (*)</span><br>
             <input type="file" class="form-control" id="flPlanoCorregido" name="flPlanoCorregido">
           </div>
-          <div class="col-md-6 mt-md-3">
+          <div class="col-md-4 mt-md-3">
             <span class="mb-3">Copia de la minuta (*)</span><br>
             <input type="file" class="form-control" id="flMinuta" name="flMinuta">
           </div>
-          <div class="col-md-6 mt-md-3">
+          <div class="col-md-4 mt-md-3">
+            <span class="mb-3">Imágen de la Minuta</span><br>
+            <input type="file" class="form-control" id="flImgMinuta" name="flImagenMinuta">
+          </div>
+          <div class="col-md-4 mt-md-3">
             <span class="mb-3">Carta de certificación MOPT</span><br>
             <input type="file" class="form-control" id="flCartaMOPT" name="flCartaMOPT">
-          </div>
-          <div class="col-12 mt-md-3 text-center">
-            <span class="mb-3">Firma (*)</span><br>
-            <canvas id="canvas" class="w-100 mx-auto" style="max-width: 300px;" height="200"></canvas>
-
-            <br>
-            <input type="hidden" name="firma" id="firma">
-            <button id="clear" class="btn btn-outline-danger">Limpiar</button>
           </div>
           <div class="col-12 mt-md-3">
             <span class="mb-3">Estado de Solicitud</span><br>

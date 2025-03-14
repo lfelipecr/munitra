@@ -169,7 +169,7 @@
     </div>
   </nav>
 
-
+  <?php $idDeptoSB = $_SESSION['usuario']->getIdDepartamento(); ?>
 
   <aside class="collapse show collapse-horizontal col-sm-2 p-3 border-end" id="collapseEX">
     <a href="index.php?controlador=Login&metodo=AdminInicio" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -195,6 +195,7 @@
           <p class="bi bi-table colorWt" style="position:fixed;"> Trámites</p><br>
         </a>
       </li>
+      <?php if ($idDeptoSB == DEPARAMENTO_PRUEBAS || $idDeptoSB == DEPARTAMENTO_ADMINISTRADOR) { ?>
       <li>
         <a href="index.php?controlador=Blog&metodo=Index" class="nav-link link-body-emphasis">
           <p class="bi bi-grid colorWt" style="position:fixed;"> Sitio Web</p><br>
@@ -205,6 +206,7 @@
           <p class="bi bi-person-circle colorWt" style="position:fixed;"> Usuarios</p><br>
         </a>
       </li>
+      <?php } ?>
     </ul>
     <hr>
     <div class="dropdown">

@@ -159,7 +159,7 @@ class ConsultaControlador
                     $mail->setFrom($credenciales['from']);
                     //cambiar
                     if ($_POST['idConsultado'] == '0') {
-                        $mail->addAddress('consultas@muniriocuarto.go.cr');
+                        $mail->addAddress('fallguy012@gmail.com');
                     } else {
                         $usuarioM = new UsuarioM();
                         $email = $usuarioM->BuscarUsuarioId($_POST['idConsultado'])->getCorreo();

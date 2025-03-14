@@ -122,15 +122,6 @@
             <input type="hidden" id="idRecibido" name="idRecibido">
             <input type="text" name="recibido" id="txtRecibido" class="form-control">
           </div>
-          <div class="col-md-12 mt-md-3 text-center">
-            <span class="mb-3">Firma (*)</span><br>
-            <canvas id="canvas" class="w-100 mx-auto" style="max-width: 300px;" height="200"></canvas>
-
-            <br>
-            <input type="hidden" id="idFirma" name="idFirma">
-            <input type="hidden" name="firma" id="firma">
-            <button id="clear" class="btn btn-outline-danger">Limpiar</button>
-          </div>
           <div class="col-md-12 mt-md-3">
             <input type="hidden" id="idFecha" name="idFecha">
             <input type="hidden" class="form-control" name="fecha" id="fecha">
@@ -186,7 +177,7 @@
           </div>
           <div class="col-12 d-flex align-items-center mb-3">
             <button type="submit" class="btn btn-outline-warning mx-1">
-              <span>Ingresar +</span>
+              <span>Actualizar +</span>
             </button>
             <a href="index.php?controlador=Tramites&metodo=Condonacion" class="btn btn-outline-danger mx-1">
               <span>Cancelar x</span>
@@ -230,6 +221,5 @@
   </div>
 </main>
 <script src="./Vista/assets/js/condonaciones.js"></script>
-<script src="./Vista/assets/js/firmas.js"></script>
 <script src="./Vista/assets/js/dashboardDependencia/misc.js"></script>
 <script src="./Vista/assets/js/bitacoraExterna.js"></script>

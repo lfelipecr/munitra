@@ -93,12 +93,15 @@
             <span class="mb-3">Propiedad Fuera</span>
             <input type="number" class="form-control mb-3" name="propiedadFuera" id="txtPropiedadFuera" value="<?php echo $persona->getPropiedadFuera(); ?>">
           </div>
-          <div class="col-12">
-            <span class="mb-3">Consentimiento</span>
-            <input type="checkbox" id="cbxConsentimiento" <?php if ($persona->getConsentimiento()) {
-                                                            echo 'checked';
-                                                          } ?>>
-            <input type="hidden" name="consentimiento" value="" id="valorConsentimiento">
+          <div class="col-12 mb-3">
+            <?php 
+              if ($consentimiento != null){
+                echo '<span class=""><a class="btn btn-success" target="_blank" href="'.$consentimiento.'">Consentimiento</a></span>';
+                echo '<input type="hidden" name="consentimiento" value="1" id="valorConsentimiento">';
+              } else {
+                echo '<input type="hidden" name="consentimiento" value="0" id="valorConsentimiento">';
+              }
+            ?>
           </div>
           <div class="col-md-4">
             <span class="mb-3">Provincia (*)</span>

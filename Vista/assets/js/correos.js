@@ -129,4 +129,50 @@ $(document).ready(function () {
     $("#modalDocs").modal("hide");
     $("#modalConversacion").modal("show");
   });
+  $("#txtBusqueda").on("keyup", function () {
+    let query = $("#txtBusqueda").val();
+    if (query != "") {
+      for (let i = 0; i < jsonData.length; i++) {
+        //recorre la matriz buscando similitudes
+        for (let j = 0; j < 9; j++) {
+          if (jsonData[i][j].includes(query)) {
+            id = "#listadoNotiMuni";
+            $(id).html("");
+            if (jsonData[i][6] == 0) {
+              let tipo = "Consulta";
+              if (jsonData[i][7] == 2) {
+                tipo = "Denuncia";
+              } else if (jsonData[i][7] == 3) {
+                tipo = "Queja";
+              }
+              let estado = "Pendiente";
+              if (jsonData[i][9] == 1) {
+                estado = "Atendido";
+              }
+              let cuerpo = JSON.parse(jsonData[i][6]);
+              let listado = $(id).html();
+              listado += `<div class="col-12 m-1">
+                            <div class="card chat p-5" onclick='AbrirConversacion(${i})'>
+                                <h5>${jsonData[i][1]} - ${jsonData[i][2]} - ${jsonData[i][8]}</h5>
+                                <h6>${tipo} - ${estado}</h6>
+                                <hr>
+                                <strong>${jsonData[i][5]}</strong>
+                            </div>
+                        </div>`;
+              $(id).html(listado);
+            }
+            let html = `<div class="col-12 text-center mx-1"><div class="card p-5"><h5>Aún no hay consultas!</h5></div></div>`;
+            if ($("#listadoNotiMuni").html() == "") {
+              $("#listadoNotiMuni").html(html);
+            }
+            if ($("#listadoNotiPersona").html() == "") {
+              $("#listadoNotiPersona").html(html);
+            }
+          }
+        }
+      }
+    } else {
+      MostrarConsultas();
+    }
+  });
 });
