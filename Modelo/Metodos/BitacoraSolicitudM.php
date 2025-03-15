@@ -30,8 +30,21 @@ class BitacoraSolicitudM
         $conexion = new Conexion();
         $sql = "CALL SpBuscarConversacion($id, $tipo)";
         $resultado = $conexion->Ejecutar($sql);
+        $egistro = array();
         if (mysqli_num_rows($resultado) > 0) {
-            $registro = json_encode($resultado->fetch_all());
+            while ($fila = $resultado->fetch_assoc()){
+                $bitacora = new BitacoraSolicitud();
+                $bitacora->setId($fila['BitacoraID']);
+                $bitacora->setIdSolicitud($fila['ID_SOLICITUD']);
+                $bitacora->setIdEstado($fila['ID_ESTADO']);
+                $bitacora->setFecha($fila['FECHA']);
+                $bitacora->setNota($fila['NOTA']);
+                $bitacora->setDetalle($fila['DETALLE']);
+                $bitacora->setIdUsuario($fila['UsuarioID']);
+                $bitacora->setAdjuntos($fila['ADJUNTOS']);
+                $bitacora->setUsuario($fila['NOMBRE'].' '.$fila['PRIMER_APELLIDO'].' '.$fila['SEGUNDO_APELLIDO'].' ('.$fila['IDENTIFICACION'].')');
+                $registro[] = $bitacora;
+            }
         } else
             $registro = null;
         $conexion->Cerrar();

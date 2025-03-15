@@ -11,8 +11,18 @@ class DocumentacionM
         $conexion = new Conexion();
         $sql = "CALL SpListarDocumentos($id)";
         $resultado = $conexion->Ejecutar($sql);
+        $registro = array();
         if (mysqli_num_rows($resultado) > 0) {
-            $registro = json_encode($resultado->fetch_all());
+            while ($fila = $resultado->fetch_assoc()) {
+                $documentacion = new Documentacion();
+                $documentacion->setId($fila['ID']);
+                $documentacion->setDescripcion($fila['DESCRIPCION']);
+                $documentacion->setUrlArchivo($fila['URL_ARCHIVO']);
+                $documentacion->setUsuarioCreacion($fila['USUARIO_CREACION']);
+                $documentacion->setDepartamento($fila['DEPARTAMENTO']);
+                $documentacion->setTipoDocumento($fila['TIPO_DOCUMENTO']);
+                $registro[] = $documentacion;
+            }
         } else
             $registro = null;
         $conexion->Cerrar();

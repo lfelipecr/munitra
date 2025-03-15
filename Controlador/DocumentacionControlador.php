@@ -20,6 +20,9 @@ class DocumentacionControlador
             $idDepartamento = $_SESSION['usuario']->getIdDepartamento();
             $departamento = $departamentoM->BuscarDepartamento($idDepartamento);
             $jsonData = $documentacionM->ListarDocumentos($idDepartamento);
+            if ($jsonData != null){
+                $jsonData = json_encode($jsonData);
+            }
             $vista = './Vista/Dashboard/Documentacion/listado.php';
             require_once './Vista/Utilidades/sidebar.php';
         }

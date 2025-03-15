@@ -20,6 +20,9 @@ class WebControlador
         $documentacionM = new DocumentacionM();
         $idDepartamento = $_GET['idDepto'];
         $jsonData = $documentacionM->ListarDocumentos($idDepartamento);
+        if ($jsonData != null){
+            $jsonData = json_encode($jsonData);
+        }
         echo $jsonData;
     }
     function Actividad()

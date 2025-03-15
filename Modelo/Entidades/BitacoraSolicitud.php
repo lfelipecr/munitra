@@ -1,5 +1,6 @@
-<?php 
-class BitacoraSolicitud {
+<?php
+class BitacoraSolicitud implements JsonSerializable
+{
     private $id;
     private $idSolicitud;
     private $idUsuario;
@@ -9,6 +10,7 @@ class BitacoraSolicitud {
     private $detalle;
     private $interno;
     private $adjuntos;
+    private $usuario;
 
     public function getId()
     {
@@ -100,4 +102,29 @@ class BitacoraSolicitud {
         $this->adjuntos = $adjuntos;
     }
 
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario($usuario): void
+    {
+        $this->usuario = $usuario;
+    }
+    
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'idSolicitud' => $this->idSolicitud,
+            'idUsuario' => $this->idUsuario,
+            'idEstado' => $this->idEstado,
+            'fecha' => $this->fecha instanceof DateTime ? $this->fecha->format('Y-m-d H:i:s') : $this->fecha,
+            'nota' => $this->nota,
+            'detalle' => $this->detalle,
+            'interno' => $this->interno,
+            'adjuntos' => is_array($this->adjuntos) ? $this->adjuntos : ($this->adjuntos ? [$this->adjuntos] : []),
+            'usuario' => $this->usuario instanceof JsonSerializable ? $this->usuario->jsonSerialize() : $this->usuario
+        ];
+    }
 }

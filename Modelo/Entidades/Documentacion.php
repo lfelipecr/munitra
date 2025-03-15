@@ -1,6 +1,6 @@
 <?php
 
-class Documentacion
+class Documentacion implements JsonSerializable
 {
     private $id;
     private $descripcion;
@@ -8,52 +8,76 @@ class Documentacion
     private $usuarioCreacion;
     private $departamento;
     private $tipoDocumento;
-    
-    public function getId() {
+
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    public function getDescripcion() {
+    public function getDescripcion()
+    {
         return $this->descripcion;
     }
 
-    public function setDescripcion($descripcion) {
+    public function setDescripcion($descripcion)
+    {
         $this->descripcion = $descripcion;
     }
-    
-    public function getUrlArchivo() {
+
+    public function getUrlArchivo()
+    {
         return $this->urlArchivo;
     }
 
-    public function setUrlArchivo($urlArchivo) {
+    public function setUrlArchivo($urlArchivo)
+    {
         $this->urlArchivo = $urlArchivo;
     }
-    
-    public function getUsuarioCreacion() {
+
+    public function getUsuarioCreacion()
+    {
         return $this->usuarioCreacion;
     }
 
-    public function setUsuarioCreacion($usuarioCreacion) {
+    public function setUsuarioCreacion($usuarioCreacion)
+    {
         $this->usuarioCreacion = $usuarioCreacion;
     }
-    
-    public function getDepartamento() {
+
+    public function getDepartamento()
+    {
         return $this->departamento;
     }
 
-    public function setDepartamento($departamento) {
+    public function setDepartamento($departamento)
+    {
         $this->departamento = $departamento;
     }
 
-    public function getTipoDocumento() {
+    public function getTipoDocumento()
+    {
         return $this->tipoDocumento;
     }
 
-    public function setTipoDocumento($tipoDocumento) {
+    public function setTipoDocumento($tipoDocumento)
+    {
         $this->tipoDocumento = $tipoDocumento;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'descripcion' => $this->descripcion,
+            'urlArchivo' => $this->urlArchivo,
+            'usuarioCreacion' => $this->usuarioCreacion,
+            'departamento' => $this->departamento,
+            'tipoDocumento' => $this->tipoDocumento
+        ];
     }
 }

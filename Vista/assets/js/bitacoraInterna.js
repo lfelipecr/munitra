@@ -2,11 +2,11 @@ let interno;
 function Adjuntos(jsonAdjuntos) {
   $("#docs").html("");
   let adjuntos = JSON.parse(jsonAdjuntos);
-  for (let i = 0; i < adjuntos.length; i++) {
+  adjuntos.forEach((adjunto) => {
     let docs = $("#docs").html();
-    docs += `<embed src="${adjuntos[i]}" type="application/pdf" width="100%" height="500px"> <hr>`;
+    docs += `<embed src="${adjunto}" type="application/pdf" width="100%" height="500px"> <hr>`;
     $("#docs").html(docs);
-  }
+  });
 }
 function CambiarFormulario(conv) {
   $("#txtCuerpo").removeAttr("disabled");
@@ -28,16 +28,15 @@ function CambiarFormulario(conv) {
         $("#bitacora").html(html);
       } else {
         let jsonData = JSON.parse(response);
-        console.log(jsonData);
-        for (let i = 0; i < jsonData.length; i++) {
+        jsonData.forEach((lineaBitacora) => {
           let listado = $("#bitacora").html();
           let html = `<div class="col-12 my-1">
                                     <div class="card py-2 px-5 text-end">
-                                        <h6><strong>${jsonData[i][10]} ${jsonData[i][11]} ${jsonData[i][12]}</strong> - ${jsonData[i][3]}</h6>
+                                        <h6><strong>${lineaBitacora.usuario}</strong> - ${lineaBitacora.fecha}</h6>
                                         <hr>
-                                        <p>${jsonData[i][5]}</p>`;
-          if (jsonData[i][14] != "") {
-            let adjuntos = jsonData[i][14];
+                                        <p>${lineaBitacora.detalle}</p>`;
+          if (lineaBitacora.adjuntos != "") {
+            let adjuntos = lineaBitacora.adjuntos;
             html += `<button class="btn btn-outline-warning mx-1 mt-md-none mb-1 mt-1" data-bs-toggle="modal" data-bs-target="#modalDocs" onclick='Adjuntos(${JSON.stringify(
               adjuntos
             ).replace(/"/g, "&quot;")})'>
@@ -48,7 +47,7 @@ function CambiarFormulario(conv) {
           html += `</div></div>`;
           listado += html;
           $("#bitacora").html(listado);
-        }
+        });
       }
     },
     error: function (xhr, status, error) {

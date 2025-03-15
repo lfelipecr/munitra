@@ -14,7 +14,6 @@ $(document).ready(function () {
   let estadoUsuario = 0;
   let activos = true;
   let datos = JSON.parse($("#jsonData").val());
-  console.log(datos);
   function RenderizarTabla() {
     let tabla = "";
     for (let i = 0; i < datos.length; i++) {

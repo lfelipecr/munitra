@@ -20,7 +20,11 @@ class BitacoraControlador
             $bitacoraM = new BitacoraSolicitudM();
             $id = $_GET['idConv'];
             $tipo = $_GET['interno'];
-            echo $bitacoraM->BuscarConversacion($id, $tipo);
+            $jsonData = $bitacoraM->BuscarConversacion($id, $tipo);
+            if ($jsonData != null){
+                $jsonData = json_encode($jsonData);
+            }
+            echo $jsonData;
         }
     }
     function EnviarEmail()
