@@ -12,20 +12,20 @@ $(document).ready(function () {
       listado += html;
       $("#noticias").html(listado);
     }
-    for (let i = 0; i < jsonData.length; i++) {
+    jsonData.forEach((noticia) => {
       let listado = $("#noticias").html();
       let html = `<div class="col-md-4 text-center d-flex justify-content-center"><div class="card my-1" style="width: 18rem;">
-                            <div class="bgNoticiaNoPic" style="background: url('${jsonData[i][3]}') no-repeat center center;background-size: cover;"></div>
+                            <div class="bgNoticiaNoPic" style="background: url('${noticia.urlImagen}') no-repeat center center;background-size: cover;"></div>
                             <!--<img src="..." class="card-img-top" alt="...">-->
                             <div class="card-body">
-                            <h5 class="card-title">${jsonData[i][1]}</h5>
-                            <p>${jsonData[i][11]}</p>
-                            <a href="index.php?controlador=Web&metodo=Noticia&id=${jsonData[i][0]}" class="btn btn-outline-warning">Información</a>
+                            <h5 class="card-title">${noticia.titulo}</h5>
+                            <p>${noticia.fecha}</p>
+                            <a href="index.php?controlador=Web&metodo=Noticia&id=${noticia.id}" class="btn btn-outline-warning">Información</a>
                             </div>
                         </div></div>`;
       listado += html;
       $("#noticias").html(listado);
-    }
+    });
   }
   MostrarNoticias();
 });

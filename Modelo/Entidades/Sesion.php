@@ -1,5 +1,6 @@
 <?php
-class Sesion{
+class Sesion implements JsonSerializable
+{
     private $id;
     private $fecha;
     private $descripcion;
@@ -8,7 +9,7 @@ class Sesion{
     private $urlAgenda;
     private $urlVideo;
     private $idComision;
-    
+
     public function getId()
     {
         return $this->id;
@@ -87,5 +88,19 @@ class Sesion{
     public function setIdComision($idComision): void
     {
         $this->idComision = $idComision;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'fecha' => $this->fecha,
+            'descripcion' => $this->descripcion,
+            'actaAprobada' => $this->actaAprobada,
+            'urlActa' => $this->urlActa,
+            'urlAgenda' => $this->urlAgenda,
+            'urlVideo' => $this->urlVideo,
+            'idComision' => $this->idComision
+        ];
     }
 }

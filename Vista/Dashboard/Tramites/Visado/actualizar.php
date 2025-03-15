@@ -128,9 +128,9 @@
             <input type="hidden" id="idCartaMOPT" name="idCartaMOPT">
             <input type="file" class="form-control" id="flCartaMOPT" name="flCartaMOPT">
           </div>
-          <div class="col-12 mt-md-3 text-center">
-            <span class="mb-3 embedTxt">Firma (*)</span><br>
-            <img src="" class="img-fluid border rounded" id="firmaCredenciales" alt="">
+          <div class="col-12 mt-md-3">
+            <span class="mb-3 embedTxt">Imágen de la minuta (*)</span><br>
+            <embed src="" type="application/pdf" width="100%" id="imagenMinuta" height="500px">
             <br>
           </div>
           <div class="col-12 mt-md-3" id="requisitosEmbed"></div>

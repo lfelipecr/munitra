@@ -67,8 +67,18 @@ class ActividadM
         $conexion = new Conexion();
         $sql = "SELECT * FROM ACTIVIDAD WHERE INHABILITADA = 0;";
         $resultado = $conexion->Ejecutar($sql);
+        $registro = array();
         if (mysqli_num_rows($resultado) > 0) {
-            $registro = json_encode($resultado->fetch_all());
+            while ($fila = $resultado->fetch_assoc()) {
+                $actividad = new Actividad();
+                $actividad->setId($fila['ID']);
+                $actividad->setIdUsuario($fila['ID_USUARIO']);
+                $actividad->setTitulo($fila['TITULO']);
+                $actividad->setDescripcionLarga($fila['DESCRIPCION_LARGA']);
+                $actividad->setUrlAdjunto($fila['ADJUNTOS']);
+                $actividad->setFecha($fila['FECHA']);
+                $registro[] = $actividad;
+            }
         } else
             $registro = null;
         $conexion->Cerrar();

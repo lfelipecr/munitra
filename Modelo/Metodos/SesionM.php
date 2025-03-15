@@ -8,10 +8,22 @@ class SesionM
     function BuscarSesiones()
     {
         $conexion = new Conexion();
-        $sql = "CALL SpBuscarSesiones();";
+        $sql = "SELECT * FROM SESION;";
         $resultado = $conexion->Ejecutar($sql);
+        $registro = array();
         if (mysqli_num_rows($resultado) > 0) {
-            $registro = json_encode($resultado->fetch_all());
+            while ($fila = $resultado->fetch_assoc()) {
+                $sesion = new Sesion();
+                $sesion->setId($fila['ID']);
+                $sesion->setFecha($fila['FECHA']);
+                $sesion->setDescripcion($fila['DESCRIPCION']);
+                $sesion->setActaAprobada($fila['ACTA_APROBADA']);
+                $sesion->setUrlActa($fila['URL_ACTA']);
+                $sesion->setUrlAgenda($fila['URL_AGENDA']);
+                $sesion->setUrlVideo($fila['URL_VIDEO']);
+                $sesion->setIdComision($fila['ID_COMISION']);
+                $registro[] = $sesion;
+            }
         } else
             $registro = null;
         $conexion->Cerrar();

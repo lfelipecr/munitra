@@ -88,6 +88,8 @@ class WebControlador
     {
         $noticiaM = new NoticiaM();
         $jsonData = $noticiaM->BuscarNoticias();
+        if ($jsonData != null)
+            $jsonData = json_encode($jsonData);
         require_once './Web/noticias.php';
     }
     function Noticia()
@@ -100,12 +102,17 @@ class WebControlador
     {
         $actividadM = new ActividadM();
         $jsonData = $actividadM->BuscarTodas();
+        if ($jsonData != null){
+            $jsonData = json_encode($jsonData);
+        }
         require_once './Web/quehacer.php';
     }
     function Sesiones()
     {
         $sesionM = new SesionM();
         $jsonData = $sesionM->BuscarSesiones();
+        if ($jsonData != null)
+                $jsonData = json_encode($jsonData);
         require_once './Web/sesiones.php';
     }
     function NuestroCanton()

@@ -73,10 +73,10 @@ $(document).ready(function () {
             );
             break;
           case "31":
-            if (document.getElementById("firmaCredenciales")) {
-              document.getElementById("firmaCredenciales").src = datos[i][1];
+            if (document.getElementById("imagenMinuta")) {
+              document.getElementById("imagenMinuta").src = datos[i][1];
             }
-            $("#idFirma").val(datos[i][0]);
+            $("#idImagenMinuta").val(datos[i][0]);
             break;
         }
       }

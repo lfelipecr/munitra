@@ -20,6 +20,8 @@ class BlogControlador
         if ($u->VerificarSesion()) {
             $sesionM = new SesionM();
             $jsonData = $sesionM->BuscarSesiones();
+            if ($jsonData != null)
+                $jsonData = json_encode($jsonData);
             $comisiones = json_encode($sesionM->Comisiones());
             $vista = './Vista/Dashboard/Blog/Sesiones/listado.php';
             require_once './Vista/Utilidades/sidebar.php';
@@ -32,6 +34,8 @@ class BlogControlador
             $idUsuario = $_SESSION['usuario']->getId();
             $notiM = new NoticiaM();
             $jsonData = $notiM->BuscarNoticias();
+            if ($jsonData != null)
+                $jsonData = json_encode($jsonData);
             $vista = './Vista/Dashboard/Blog/Noticias/listado.php';
             require_once './Vista/Utilidades/sidebar.php';
         }
@@ -42,6 +46,9 @@ class BlogControlador
         if ($u->VerificarSesion()) {
             $actividadM = new ActividadM();
             $jsonData = $actividadM->BuscarTodas();
+            if ($jsonData != null){
+                $jsonData = json_encode($jsonData);
+            }
             $idUsuario = $_SESSION['usuario']->getId();
             $vista = './Vista/Dashboard/Blog/Actividades/listado.php';
             require_once './Vista/Utilidades/sidebar.php';

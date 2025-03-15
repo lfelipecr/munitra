@@ -100,12 +100,13 @@ class VisadoControlador
             $solicitudM = new SolicitudM();
             $solicitud = new Solicitud();
             session_start();
+            var_dump($_POST);
             $idSolicitud = $_POST['idSolicitud'];
             $solicitud->setId($idSolicitud);
             $solicitud->setIdUsuario($_SESSION['usuario']->getId());
             $solicitud->setTipoSolicitud(3);
             $solicitud->setEstadoSolicitud($_POST['estadoSolicitud']);
-            $solicitud->setIdPersona($_POST['persona']);
+            $solicitud->setIdPersona($_POST['idPersona']);
             if ($solicitudM->ActualizarCabeceraSolicitud($solicitud)) {
                 $registrar = array();
                 //datos de inputs
@@ -133,22 +134,23 @@ class VisadoControlador
                         mkdir($rutaDestino, 0777, true);
                     }
                     $post = ['flCartaDisponibilidad', 'flCroquis', 'flPlanoCorregido', 'flMinuta', 'flCartaMOPT', 'flImagenMinuta'];
-                    $postIds = ['idCartaDisponibilidad', 'idCroquis', 'idPlanoCorregido', 'idMinuta', 'idCartaMOPT'];
+                    $postIds = ['idCartaDisponibilidad', 'idCroquis', 'idPlanoCorregido', 'idMinuta', 'idCartaMOPT', 'idImagenMinuta'];
                     $tipoRequisito = 26;
                     //carta de disponibilidad
                     for ($i = 0; $i < count($post); $i++) {
                         if (isset($_FILES[$post[$i]]) && $_FILES[$post[$i]]['error'] === UPLOAD_ERR_OK) {
                             $urlArchivo = $rutaDestino . time() . basename($_FILES[$post[$i]]['name']);
                             if (move_uploaded_file($_FILES[$post[$i]]['tmp_name'], $urlArchivo)) {
-                                $cartaDisponibilidad = new DetalleSolicitud();
-                                $cartaDisponibilidad->setId($_POST[$postIds[$i]]);
-                                $cartaDisponibilidad->setCumple(1);
-                                $cartaDisponibilidad->setCampoRequisito($urlArchivo);
-                                $cartaDisponibilidad->setIdSolicitud($idSolicitud);
-                                $cartaDisponibilidad->setTipoRequisito($tipoRequisito);
-                                $registrar[] = $cartaDisponibilidad;
+                                $archivo = new DetalleSolicitud();
+                                $archivo->setId($_POST[$postIds[$i]]);
+                                $archivo->setCumple(1);
+                                $archivo->setCampoRequisito($urlArchivo);
+                                $archivo->setIdSolicitud($idSolicitud);
+                                $archivo->setTipoRequisito($tipoRequisito);
+                                $registrar[] = $archivo;
                             }
                         }
+                        $tipoRequisito++;
                     }
                 }
                 if ($solicitudM->ActualizarDetallesSolicitud($registrar)) {
@@ -188,9 +190,9 @@ class VisadoControlador
                             $adjunto->setCampoRequisito($urlArchivo);
                             $adjunto->setTipoRequisito($tipoRequisito);
                             $registrar[] = $adjunto;
-                            $tipoRequisito++;
                         }
                     }
+                    $tipoRequisito++;
                 }
             }
             $solicitudM = new SolicitudM();

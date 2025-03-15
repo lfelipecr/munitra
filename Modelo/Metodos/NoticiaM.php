@@ -86,8 +86,20 @@ class NoticiaM
         $conexion = new Conexion();
         $sql = "CALL SpBuscarNoticias();";
         $resultado = $conexion->Ejecutar($sql);
+        $registro = array();
         if (mysqli_num_rows($resultado) > 0) {
-            $registro = json_encode($resultado->fetch_all());
+            while ($fila = $resultado->fetch_assoc()) {
+                $noticia = new Noticia();
+                $noticia->setId($fila['NOTICIA_ID']);
+                $noticia->setTitulo($fila['NOTICIA_TITULO']);
+                $noticia->setDescripcionLarga($fila['NOTICIA_DESCRIPCION']);
+                $noticia->setUrlImagen($fila['NOTICIA_URL_IMAGEN']);
+                $noticia->setIdUsuario($fila['USUARIO_ID']);
+                $noticia->setFecha($fila['FECHA']);
+                $noticia->setAutor($fila['PERSONA_NOMBRE'] . ' '
+                .$fila['PERSONA_PRIMER_APELLIDO'] . ' ' . $fila['PERSONA_SEGUNDO_APELLIDO']);
+                $registro[] = $noticia;
+            }
         } else
             $registro = null;
         $conexion->Cerrar();

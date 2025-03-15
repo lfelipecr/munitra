@@ -227,6 +227,8 @@ class LoginControlador
             //guarda la ruta del consentimiento
             $credenciales->setUrlConsentimiento($ruta);
             if ($credencialesM->IngresarCredenciales($credenciales)) {
+                $persona->setConsentimiento(1);
+                $personaM->Actualizar($persona);
                 $usuarioM->Actualizar($usuario);
                 require_once './Vista/Login/aviso.php';
             } else {

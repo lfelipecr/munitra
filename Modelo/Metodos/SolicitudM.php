@@ -163,7 +163,6 @@ class SolicitudM
                 break;
         }
         $usuarioM = new UsuarioM();
-        echo $idUsuario;
         $email = $usuarioM->BuscarUsuarioId($idUsuario)->getCorreo();
         $cuerpoEmail = '<html><head><meta charset="UTF-8"><style>body {font-family: Arial, sans-serif; line-height: 1.6;color: #333;}.container { max-width: 600px; margin: 0 auto;padding: 20px;border: 1px solid #ddd;border-radius: 8px;background-color: #f9f9f9; }.title {font-size: 18px;font-weight: bold; color: #555;}.content {margin-top: 10px;}.info {margin-top: 15px;padding: 10px; background-color: #eef;border-left: 4px solidrgb(10, 41, 75);}</style></head><body><div class="container">';
         $cuerpoEmail = $cuerpoEmail . '<p class="title">Municipalidad de Río Cuarto</p>';
@@ -225,7 +224,6 @@ class SolicitudM
             $sql = "CALL SpActualizarDetalleSolicitud( " . $arregloDetalles[$i]->getId() .
                 ", '" . $arregloDetalles[$i]->getCampoRequisito() .
                 "', " . $arregloDetalles[$i]->getCumple() . ")";
-            echo $sql . ' - ';
             if ($sql != "CALL SpActualizarDetalleSolicitud( , '', 1)") {
                 try {
                     if ($conexion->Ejecutar($sql)) {

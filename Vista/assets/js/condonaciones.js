@@ -218,21 +218,6 @@ $(document).ready(function () {
     }
     if ($("#usuarioTipo").val() != "externo") {
       if ($("#contadoOpcion").is(":selected")) {
-        if (
-          $("#totalContado").val().trim() == "" ||
-          $("#montoCondonarContado").val().trim() == ""
-        ) {
-          $("#alerta").html(
-            "Debe proporcionar todos los datos obligatorios para pago de contado"
-          );
-          return false;
-        } else if (
-          Number($("#totalContado").val()) < 1 ||
-          Number($("#montoCondonarContado").val()) < 1
-        ) {
-          $("#alerta").html("Los montos no son válidos");
-          return false;
-        }
         //borra los campos no necesarios para la solicitud
         $("#totalArreglo").val("");
         $("#montoCondonarArreglo").val("");
@@ -241,43 +226,9 @@ $(document).ready(function () {
         $("#adelanto").val("");
         $("#pagoPorCuota").val("");
       } else {
-        if (
-          $("#totalArreglo").val().trim() == "" ||
-          $("#montoCondonarArreglo").val().trim() == "" ||
-          $("#plazoMeses").val().trim() == "" ||
-          $("#cantidadCuotas").val().trim() == "" ||
-          $("#adelanto").val().trim() == "" ||
-          $("#pagoPorCuota").val().trim() == ""
-        ) {
-          $("#alerta").html(
-            "Debe proporcionar todos los datos obligatorios para acuerdo de pago"
-          );
-          return false;
-        } else if (
-          Number($("#totalArreglo").val()) < 1 ||
-          Number($("#montoCondonarArreglo").val()) < 1 ||
-          Number($("#plazoMeses").val()) < 1 ||
-          Number($("#cantidadCuotas").val()) < 1 ||
-          Number($("#adelanto").val()) < 1 ||
-          Number($("#pagoPorCuota").val()) < 1
-        ) {
-          $("#alerta").html("Los montos no son válidos");
-          return false;
-        }
         //borra los campos no necesarios para la solicitud
         $("#totalContado").val("");
         $("#montoCondonarContado").val("");
-      }
-      if ($("#opcionPrevencion").is(":selected")) {
-        if ($("#plazo").val().trim() == "") {
-          $("#alerta").html(
-            "Debe proporcionar todos los datos obligatorios para acuerdo de pago"
-          );
-          return false;
-        } else if (Number($("#plazo").val()) < 1) {
-          $("#alerta").html("El plazo de prevención no es válido");
-          return false;
-        }
       }
     }
     let dataURL = canvas.toDataURL("image/png");
