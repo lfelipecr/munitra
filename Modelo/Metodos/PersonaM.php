@@ -195,8 +195,39 @@ class PersonaM
         $conexion = new Conexion();
         $sql = "CALL SpConsultarTodosUsuarios();";
         $resultado = $conexion->Ejecutar($sql);
+        $registro = array();
         if (mysqli_num_rows($resultado) > 0) {
-            $registro = json_encode($resultado->fetch_all());
+            while ($fila = $resultado->fetch_assoc()) {
+                $usuario = [
+                    'id' => $fila['ID'],
+                    'idTipoIdentificacion' => $fila['ID_TIPO_IDENTIFICACION'],
+                    'identificacion' => $fila['IDENTIFICACION'],
+                    'nombre' => $fila['NOMBRE'],
+                    'primerApellido' => $fila['PRIMER_APELLIDO'],
+                    'segundoApellido' => $fila['SEGUNDO_APELLIDO'],
+                    'direccion' => $fila['DIRECCION'],
+                    'telefono' => $fila['TELEFONO'],
+                    'whatsapp' => $fila['WHATSAPP'],
+                    'estado' => $fila['ESTADO'],
+                    'situacion' => $fila['SITUACION'],
+                    'montoMorosidad' => $fila['MONTO_MOROSIDAD'],
+                    'montoAdeudado' => $fila['MONTO_ADEUDADO'],
+                    'consentimiento' => $fila['CONSENTIMIENTO'],
+                    'fechaConsentimiento' => $fila['FECHA_CONSENTIMIENTO'],
+                    'propiedadFuera' => $fila['PROPIEDAD_FUERA'],
+                    'idDistrito' => $fila['ID_DISTRITO'],
+                    'idCanton' => $fila['ID_CANTON'],
+                    'idProvincia' => $fila['ID_PROVINCIA'],
+                    'correo' => $fila['CORREO'],
+                    'usuarioId' => $fila['UsuarioID'],
+                    'nombreUsuario' => $fila['NOMBRE_USUARIO'],
+                    'responsable' => $fila['RESPONSABLE'],
+                    'idDepartamento' => $fila['ID_DEPARTAMENTO'],
+                    'idEstado' => $fila['ID_ESTADO'],
+                ];
+                $registro[] = $usuario;
+            }
+            $registro = json_encode($registro);
         } else
             $registro = null;
         $conexion->Cerrar();

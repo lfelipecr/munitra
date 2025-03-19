@@ -391,7 +391,7 @@ class UsuarioControlador
                 $credenciales->setId($idCredencial);
                 $credencialesM->ModificarCredenciales($credenciales);
                 $asunto = 'Código de verificación | Municipalidad de Río Cuarto';
-                $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Usa el siguiente código para completar tu proceso de verificación:</p><div class="code">' . $codigo . '</div><p>Si no solicitaste este código, ignora este mensaje.</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
+                $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>¡Su cuenta ha sido activada!</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Su cuenta para la Municipalidad de Río Cuarto se encuentra activa</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html';
             }
             if ($_GET['validar'] == 'false') {
                 $credencialesM = new CredencialesM();
@@ -424,9 +424,6 @@ class UsuarioControlador
                 $mail->isHTML(true);
                 $mail->Subject = $asunto;
                 $mail->Body = $msg;
-                if ($_GET['validar'] == 'true' && isset($_GET['consentimiento'])) {
-                    $mail->addAttachment($_GET['consentimiento']);
-                }
                 $mail->send();
                 $this->Listado();
             } catch (Exception $ex) {
@@ -444,7 +441,7 @@ class UsuarioControlador
             $datos = $credencialesM->ValidarCodigo($codigo);
             if ($datos != NULL) {
                 $usuarioM = new UsuarioM();
-                $usuario->setIdEstado(1);
+                $usuario->setIdEstado(4);
                 if ($usuarioM->Actualizar($usuario)) {
                     header('location: index.php?controlador=Tramites&metodo=InicioExterno');
                 }

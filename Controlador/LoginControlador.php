@@ -132,7 +132,7 @@ class LoginControlador
             //modifica el estado del usuario
             $usuarioM = new UsuarioM();
             $usuario = $_SESSION['usuario'];
-            $usuario->setIdEstado(4);
+            $usuario->setIdEstado(5);
             //obtiene los datos de la persona
             $personaM = new PersonaM();
             $persona = $personaM->BuscarPersonaUsuario($usuario->getIdPersona());
@@ -210,11 +210,11 @@ class LoginControlador
 
             $pdf->SetFont('Arial', '', 12);
             $pdf->SetXY(50, 235);
-            $pdf->Write(10, 'Nombre');
+            $pdf->Write(10, $persona->getNombre() . ' ' . $persona->getPrimerApellido() . ' ' . $persona->getSegundoApellido());
 
             $pdf->SetFont('Arial', '', 12);
             $pdf->SetXY(48, 240);
-            $pdf->Write(10, '119690990');
+            $pdf->Write(10, $persona->getIdentificacion());
 
             //firma
             $imageX = 50;
@@ -224,12 +224,39 @@ class LoginControlador
             $pdf->Image($archivo, $imageX, $imageY, $imageWidth, $imageHeight);
             $ruta = './repo/' . time() . 'consentimiento.pdf';
             $pdf->Output('F', $ruta);
+            $codigo = bin2hex(random_bytes(4));
             //guarda la ruta del consentimiento
             $credenciales->setUrlConsentimiento($ruta);
+            $credenciales->setCodigo($codigo);
             if ($credencialesM->IngresarCredenciales($credenciales)) {
                 $persona->setConsentimiento(1);
                 $personaM->Actualizar($persona);
                 $usuarioM->Actualizar($usuario);
+                //correo phpmailer                
+                $asunto = 'Código de verificación | Municipalidad de Río Cuarto';
+                $msg = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Código de Confirmación</title><style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 20px;}.container {max-width: 600px;background-color: #ffffff;padding: 20px;margin: auto;border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);text-align: center;}.header {font-size: 24px;color: #333;margin-bottom: 20px;}.code {font-size: 30px;font-weight: bold;color: #0f1a4f;background-color: #f0f8ff;display: inline-block;padding: 10px 20px;border-radius: 5px;letter-spacing: 5px;margin: 10px 0;}.footer {font-size: 14px;color: #666;margin-top: 20px;}</style></head><body><div class="container"><div class="header"><img src="https://155.138.227.216/munitra/Web/assets/img/Municipalidad%20de%20Rio%20Cuarto.png" alt=""></div><div class="header">Código de Confirmación - Municipalidad de Río Cuarto</div><p>Usa el siguiente código para completar tu proceso de verificación:</p><div class="code">' . $codigo . '</div><p>Si no solicitaste este código, ignora este mensaje.</p><div class="footer">© 2024 Municipalidad de Río Cuarto. Todos los derechos reservados.</div></div></body></html>';
+                $mail = new PHPMailer();
+                try {
+                    $bitacoraM = new BitacoraSolicitudM();
+                    $credencialesSmtp = $bitacoraM->CredencialesSMTP();
+                    $mail->isSMTP();
+                    $mail->CharSet = "UTF-8";
+                    $mail->Encoding = "base64";
+                    $mail->Host = $credencialesSmtp['host'];
+                    $mail->SMTPAuth = true;
+                    $mail->Username = $credencialesSmtp['user'];
+                    $mail->Password = $credencialesSmtp['key'];
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
+                    $mail->setFrom($credencialesSmtp['from']);
+                    $mail->addAddress($usuario->getCorreo());
+                    $mail->isHTML(true);
+                    $mail->Subject = $asunto;
+                    $mail->Body = $msg;
+                    $mail->addAttachment($ruta);
+                    $mail->send();
+                } catch (Exception $ex) {
+                }
                 require_once './Vista/Login/aviso.php';
             } else {
                 $idUsuario = $_SESSION['usuario']->getId();
