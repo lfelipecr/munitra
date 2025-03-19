@@ -10,8 +10,8 @@ class Utilidades
         if (isset($_SESSION['usuario'])) {
             return true;
         } else {
-            Logger::warning("Intento de ingreso sin sesión");
-            //header('location: index.php?controlador=Login&metodo=CerrarSesion');
+            Logger::info("Intento de ingreso sin sesión");
+            header('location: index.php?controlador=Login&metodo=CerrarSesion');
             exit;
         }
     }

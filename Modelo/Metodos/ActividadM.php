@@ -14,8 +14,11 @@ class ActividadM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
+            } else {
+                Logger::error("Ejecución incorrecta ActividadM Ingresar. SQL: (".$sql.")");
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción no manejada ActividadM Ingresar.Exception: (".$ex->getMessage().")");
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -29,8 +32,10 @@ class ActividadM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
-            }
+            } else 
+                Logger::error("Ejecución Incorrecta ActividadM Eliminar. SQL: (".$sql.")");
         } catch (Exception $ex) {
+            Logger::error("Excepción no manejada ActividadM Eliminar. Exception: (".$ex->getMessage().")");
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -54,8 +59,10 @@ class ActividadM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
-            }
+            } else 
+                Logger::error("Ejecución Incorrecta ActividadM Actualizar. SQL: (".$sql.")");
         } catch (Exception $ex) {
+            Logger::error("Excepción no manejada ActividadM Actualizar. Exception: (".$ex->getMessage().")");
             $retVal = false;
         }
         $conexion->Cerrar();
