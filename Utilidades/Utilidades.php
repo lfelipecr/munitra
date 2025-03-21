@@ -19,5 +19,17 @@ class Utilidades
     {
         require_once './Vista/Utilidades/sidebar.php';
     }
-    public static function GenerarCorreoGenerico($cuerpo) {}
+    public static function ValidarUsuarioActivo() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['usuario'])) {
+            $usuario = $_SESSION['usuario'];
+            if ($usuario->getIdEstado() == 2){
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
 }

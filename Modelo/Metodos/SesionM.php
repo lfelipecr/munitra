@@ -47,6 +47,7 @@ class SesionM
                 $sesion->setUrlVideo($fila["URL_VIDEO"]);
                 $sesion->setIdComision($fila['ID_COMISION']);
             }
+            Logger::info("Se consulta la sesión: " . $id);
         } else
             $sesion = null;
         $conexion->Cerrar();
@@ -65,9 +66,13 @@ class SesionM
             "', '" . $sesion->getUrlVideo() . "', " . $sesion->getIdComision() . ")";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Ingreso de nueva sesión: " . $sql);
                 $retVal = true;
+            } else {
+                Logger::error("No se pudo ingresar sesión: " . $sql);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
 
@@ -87,9 +92,13 @@ class SesionM
             "', '" . $sesion->getUrlVideo() . "', " . $sesion->getIdComision() . ")";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Se modifica sesión: " . $sesion->getId());
                 $retVal = true;
+            } else {
+                Logger::error("No se pudo modificar sesión: " . $sesion->getId());
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
 

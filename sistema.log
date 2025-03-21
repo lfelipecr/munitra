@@ -1,3 +1,496 @@
-[2025-03-19 04:06:48] [WARNING] Intento de ingreso sin sesión
-[2025-03-19 04:07:11] [WARNING] Intento de ingreso sin sesión
-[2025-03-19 04:08:52] [WARNING] Intento de ingreso sin sesión
+[2025-03-21 00:58:47] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER - Usuario: 6
+[2025-03-21 00:58:47] [INFO] Consulta a BD: SELECT * FROM BANNER - Usuario: 6
+[2025-03-21 00:58:58] [INFO] Solicitud de Controlador: Login - Método: Index - Usuario: 6
+[2025-03-20 17:59:12] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 17:59:12] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 17:59:12] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 6
+[2025-03-20 17:59:12] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 17:59:25] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 17:59:25] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 17:59:26] [INFO] Fallo de inicio de sesión - Usuario: 6
+[2025-03-20 17:59:27] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 17:59:27] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 17:59:27] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 17:59:27] [INFO] Fallo de inicio de sesión - Usuario: 6
+[2025-03-20 17:59:41] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-20 17:59:41] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-20 17:59:41] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 17:59:41] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 17:59:42] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-20 17:59:47] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 17:59:47] [INFO] Empieza a validar usuario
+[2025-03-20 17:59:47] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 17:59:47] [INFO] Fallo de inicio de sesión
+[2025-03-20 17:59:53] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 17:59:53] [INFO] Empieza a validar usuario
+[2025-03-20 17:59:53] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 17:59:53] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 17:59:53] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 17:59:53] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 17:59:53] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 17:59:53] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 17:59:54] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 17:59:54] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 17:59:54] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 17:59:54] [INFO] Fallo de inicio de sesión - Usuario: 6
+[2025-03-20 17:59:54] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 17:59:54] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 17:59:54] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 17:59:54] [INFO] Fallo de inicio de sesión - Usuario: 6
+[2025-03-20 18:00:14] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-20 18:00:14] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-20 18:00:14] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 18:00:14] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 18:00:18] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 18:00:18] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 18:00:19] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-20 18:00:22] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:00:22] [INFO] Empieza a validar usuario
+[2025-03-20 18:00:23] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:00:23] [INFO] Fallo de inicio de sesión
+[2025-03-20 18:00:34] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:00:34] [INFO] Empieza a validar usuario
+[2025-03-20 18:00:34] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:00:34] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Fallo de inicio de sesión - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:00:34] [INFO] Fallo de inicio de sesión - Usuario: 6
+[2025-03-20 18:01:02] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-20 18:01:02] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-20 18:01:02] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 18:01:02] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 18:01:03] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-20 18:01:12] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:01:12] [INFO] Empieza a validar usuario
+[2025-03-20 18:01:12] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:01:12] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Fallo de inicio de sesión - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:01:12] [INFO] Fallo de inicio de sesión - Usuario: 6
+[2025-03-20 18:02:15] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-20 18:02:15] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-20 18:02:15] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 18:02:15] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 18:02:17] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-20 18:02:20] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:02:20] [INFO] Empieza a validar usuario
+[2025-03-20 18:02:20] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:02:25] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:02:25] [INFO] Empieza a validar usuario
+[2025-03-20 18:02:25] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:02:25] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:02:25] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:02:25] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:02:25] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:02:25] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:02:26] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:02:26] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:02:26] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:04:35] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-20 18:04:35] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-20 18:04:35] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 18:04:35] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 18:04:36] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-20 18:04:40] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:04:40] [INFO] Empieza a validar usuario
+[2025-03-20 18:04:40] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:04:40] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:04:40] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:04:40] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:04:40] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:04:40] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:04:40] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:04:40] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:04:40] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:05:51] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:05:51] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:05:51] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 6
+[2025-03-20 18:05:51] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:05:51] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:05:51] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:05:51] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:05:51] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:05:52] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:05:52] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:05:52] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:05:52] [INFO] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:05:52] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:05:52] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:05:52] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:05:52] [INFO] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:09:29] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:09:29] [INFO] Empieza a validar usuario
+[2025-03-20 18:09:29] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('')
+[2025-03-20 18:09:29] [INFO] Error al iniciar sesión
+[2025-03-20 18:10:13] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-20 18:10:13] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-20 18:10:13] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 18:10:13] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 18:10:23] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-20 18:10:30] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:10:30] [INFO] Empieza a validar usuario
+[2025-03-20 18:10:30] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:10:30] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:10:30] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:10:30] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:10:30] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:13:22] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:13:22] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:13:22] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 6
+[2025-03-20 18:13:22] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:13:22] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:13:22] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:13:22] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:13:22] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:13:23] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:13:23] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:13:23] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:13:23] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:13:23] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:13:23] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:13:23] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:13:23] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:13:30] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:13:30] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:13:30] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 6
+[2025-03-20 18:13:30] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:13:30] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:13:30] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:13:30] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:13:30] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:13:31] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:13:31] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:13:31] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:13:31] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:13:32] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:13:32] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:13:32] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:13:32] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:15:15] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-20 18:15:15] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-20 18:15:15] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 18:15:15] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 18:15:16] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-20 18:15:20] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:15:20] [INFO] Empieza a validar usuario
+[2025-03-20 18:15:20] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:15:21] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:15:21] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:15:21] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:15:21] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:20:51] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER - Usuario: 112
+[2025-03-20 18:20:51] [INFO] Consulta a BD: SELECT * FROM BANNER - Usuario: 112
+[2025-03-20 18:20:52] [INFO] Solicitud de Controlador: Login - Método: Index - Usuario: 112
+[2025-03-20 18:20:56] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 112
+[2025-03-20 18:20:56] [INFO] Empieza a validar usuario - Usuario: 112
+[2025-03-20 18:20:56] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 112
+[2025-03-20 18:20:56] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:20:56] [WARNING] Controlador './Controlador/DashboardControlador.php' no encontrado, redirige a Index - Usuario: 6
+[2025-03-20 18:20:56] [INFO] Solicitud de Controlador: Dashboard - Método: AdminInicio - Usuario: 6
+[2025-03-20 18:20:56] [WARNING] Metodo 'AdminInicio' no encontrado, redirige a Index - Usuario: 6
+[2025-03-20 18:20:56] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER - Usuario: 6
+[2025-03-20 18:20:56] [INFO] Consulta a BD: SELECT * FROM BANNER - Usuario: 6
+[2025-03-20 18:21:49] [INFO] Solicitud de Controlador: Login - Método: Index - Usuario: 6
+[2025-03-20 18:21:54] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:21:54] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:21:54] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 6
+[2025-03-20 18:21:54] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:21:58] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:21:58] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:21:58] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 6
+[2025-03-20 18:21:58] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:22:14] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:22:14] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:22:14] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 6
+[2025-03-20 18:22:14] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com') - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Empieza a validar usuario - Usuario: 6
+[2025-03-20 18:22:30] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('') - Usuario: 6
+[2025-03-20 18:22:30] [WARNING] Error al iniciar sesión - Usuario: 6
+[2025-03-20 18:23:53] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-20 18:23:53] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-20 18:23:53] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 18:23:53] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 18:23:55] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-20 18:24:02] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:24:02] [INFO] Empieza a validar usuario
+[2025-03-20 18:24:02] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:24:02] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-20 18:24:02] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-20 18:24:02] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-20 18:24:02] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:24:02] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-20 18:24:02] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-20 18:24:13] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-20 18:24:13] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-20 18:24:13] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-20 18:24:13] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-20 18:24:14] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-20 18:24:22] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-20 18:24:22] [INFO] Empieza a validar usuario
+[2025-03-20 18:24:22] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-20 18:24:22] [WARNING] Error al iniciar sesión
+[2025-03-21 15:46:30] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-21 15:46:30] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-21 15:46:32] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-21 15:46:38] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-21 15:46:38] [INFO] Empieza a validar usuario
+[2025-03-21 15:46:38] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('fallguy012@gmail.com')
+[2025-03-21 15:46:38] [WARNING] Error al iniciar sesión
+[2025-03-21 15:46:43] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-21 15:46:43] [INFO] Empieza a validar usuario
+[2025-03-21 15:46:43] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-21 15:46:43] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-21 15:46:43] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:46:43] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-21 15:46:43] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 15:46:43] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 15:46:43] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-21 15:46:47] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:46:47] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:46:48] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:46:48] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:46:48] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:46:48] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:46:49] [INFO] Solicitud de Controlador: Patente - Método: VIngresar - Usuario: 6
+[2025-03-21 15:46:49] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:46:49] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:46:49] [INFO] Solicitud de Controlador: Patente - Método: VIngresar - Usuario: 6
+[2025-03-21 15:46:49] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:46:49] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:46:49] [INFO] Solicitud de Controlador: Patente - Método: VIngresar - Usuario: 6
+[2025-03-21 15:46:49] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:46:49] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Solicitud de Controlador: Patente - Método: Ingresar - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarSolicitud(61, 6, 1, 1) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: SELECT MAX(ID) FROM SOLICITUD; - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa la cabecera de la solicitud: 125 - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarDetalleSolicitud('[".\/repo\/1742593645invoicesample1 (another copy).pdf"]', '', 1, 125, 1) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa detalle de solicitud - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarDetalleSolicitud('Transporte', '', 1, 125, 2) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa detalle de solicitud - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarDetalleSolicitud('Nombre', '', 1, 125, 3) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa detalle de solicitud - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarDetalleSolicitud('Actividad', '', 1, 125, 4) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa detalle de solicitud - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarDetalleSolicitud('1', '', 1, 125, 5) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa detalle de solicitud - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarDetalleSolicitud('1', '', 1, 125, 6) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa detalle de solicitud - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarDetalleSolicitud('direccion', '', 1, 125, 7) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa detalle de solicitud - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarDetalleSolicitud('123', '', 1, 125, 8) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa detalle de solicitud - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpIngresarDetalleSolicitud('123', '', 1, 125, 9) - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Se ingresa detalle de solicitud - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:47:25] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:47:27] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:47:30] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:47:30] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:47:30] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:47:30] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:48:02] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:48:02] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:48:12] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:48:12] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:48:13] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:48:13] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:48:14] [INFO] Solicitud de Controlador: Patente - Método: VIngresar - Usuario: 6
+[2025-03-21 15:48:14] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:48:14] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:48:14] [INFO] Solicitud de Controlador: Patente - Método: VIngresar - Usuario: 6
+[2025-03-21 15:48:14] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:48:14] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:48:21] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:48:21] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:48:21] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:48:21] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:48:23] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 15:48:23] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 15:48:23] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 15:48:23] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 15:48:23] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:48:23] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:48:24] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 15:48:24] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 15:48:24] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 15:48:24] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 15:48:24] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:48:24] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 15:48:49] [INFO] Solicitud de Controlador: Blog - Método: Index - Usuario: 6
+[2025-03-21 15:48:49] [INFO] Solicitud de Controlador: Blog - Método: Index - Usuario: 6
+[2025-03-21 15:48:54] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:48:54] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:48:55] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:48:55] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:48:55] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 15:48:55] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 15:48:57] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:48:57] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:50:25] [INFO] Solicitud de Controlador: Documentacion - Método: Listado - Usuario: 6
+[2025-03-21 15:50:25] [INFO] Ejecución Correcta BD: SELECT * FROM DEPARTAMENTO; - Usuario: 6
+[2025-03-21 15:50:25] [INFO] Ejecución Correcta BD: CALL SpListarDocumentos(12) - Usuario: 6
+[2025-03-21 15:50:25] [INFO] Solicitud de Controlador: Documentacion - Método: Listado - Usuario: 6
+[2025-03-21 15:50:25] [INFO] Ejecución Correcta BD: SELECT * FROM DEPARTAMENTO; - Usuario: 6
+[2025-03-21 15:50:25] [INFO] Ejecución Correcta BD: CALL SpListarDocumentos(12) - Usuario: 6
+[2025-03-21 15:51:39] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:51:39] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Solicitud de Controlador: Login - Método: AdminInicio - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Solicitud de Controlador: Login - Método: AdminInicio - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 15:51:43] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 15:56:52] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-21 15:56:52] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-21 15:56:52] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-21 15:56:52] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-21 17:00:49] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-21 17:00:53] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-21 17:00:53] [INFO] Empieza a validar usuario
+[2025-03-21 17:00:53] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-21 17:00:53] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-21 17:00:53] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 17:00:53] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-21 17:00:53] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 17:00:53] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 17:00:53] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6
+[2025-03-21 17:01:52] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 17:01:53] [INFO] Solicitud de Controlador: Tramites - Método: Index - Usuario: 6
+[2025-03-21 17:01:56] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 17:01:56] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 17:01:56] [INFO] Solicitud de Controlador: Tramites - Método: Patentes - Usuario: 6
+[2025-03-21 17:01:56] [INFO] Ejecución Correcta BD: CALL SpConsultarTodasSolicitudes(1); - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 17:01:57] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 17:02:02] [INFO] Solicitud de Controlador: Patente - Método: Actualizar - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Solicitud de Controlador: Patente - Método: VActualizar - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: CALL SpBuscarDetallesPorSolicitud(125); - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: CALL SpConsultarSolicitudPorID(125); - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Se consultó la solicitud: 125 - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 17:02:43] [INFO] Ejecución Correcta BD: SELECT * FROM DISTRITO; - Usuario: 6
+[2025-03-21 17:05:44] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion - Usuario: 6
+[2025-03-21 17:05:44] [INFO] Usuario 6 cierra sesión - Usuario: 6
+[2025-03-21 17:05:47] [INFO] Solicitud de Controlador: Patente - Método: VActualizar
+[2025-03-21 17:05:47] [INFO] Intento de ingreso sin sesión
+[2025-03-21 17:05:47] [INFO] Solicitud de Controlador: Login - Método: CerrarSesion
+[2025-03-21 17:05:54] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-21 17:05:54] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-21 17:05:54] [INFO] Ejecución Correcta BD: SELECT * FROM BANNER
+[2025-03-21 17:05:54] [INFO] Consulta a BD: SELECT * FROM BANNER
+[2025-03-21 17:07:33] [INFO] Solicitud de Controlador: Login - Método: Index
+[2025-03-21 17:07:37] [INFO] Solicitud de Controlador: Login - Método: Login
+[2025-03-21 17:07:37] [INFO] Empieza a validar usuario
+[2025-03-21 17:07:37] [INFO] Ejecución Correcta BD: CALL SpConsultarCredenciales('pruebas@interno.com')
+[2025-03-21 17:07:37] [INFO] Usuario 6 inicia sesión. Interno - Usuario: 6
+[2025-03-21 17:07:37] [INFO] Ejecución Correcta BD: CALL SpConsultarPersonas() - Usuario: 6
+[2025-03-21 17:07:37] [INFO] Se consulta persona de usuario: 61 - Usuario: 6
+[2025-03-21 17:07:37] [INFO] Ejecución Correcta BD: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 17:07:37] [INFO] Listado de consultas: CALL SpBuscarConsultas() - Usuario: 6
+[2025-03-21 17:07:37] [INFO] Solicitud de Controlador: Login - Método: Login - Usuario: 6

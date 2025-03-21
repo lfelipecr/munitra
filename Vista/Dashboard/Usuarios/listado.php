@@ -15,7 +15,7 @@
         <option value="2">Inactivo</option>
         <option value="3">Sin Registrar</option>
         <option value="4">Por Confirmar</option>
-        <option value="5">Revisado</option>
+        <option value="5">Correo Pendiente</option>
         <option value="6">Externos</option>
       </select>
       <a href="index.php?controlador=Usuario&metodo=VIngresar" class="btn btn-outline-primary">

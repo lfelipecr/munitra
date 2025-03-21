@@ -168,6 +168,7 @@ class CondonacionControlador
                             $imagen = base64_decode($firma);
                             $archivo = "repo/firmas/firma_" . time() . ".png";
                             file_put_contents($archivo, $imagen);
+            Logger::info("Generación de firma en: " . $archivo);
                             $soliFirma = new DetalleSolicitud();
                             $soliFirma->setId($_POST['idFirma']);
                             $soliFirma->setCumple(1);
@@ -289,6 +290,7 @@ class CondonacionControlador
                             $imagen = base64_decode($firma);
                             $archivo = "repo/firmas/firma_" . time() . ".png";
                             file_put_contents($archivo, $imagen);
+            Logger::info("Generación de firma en: " . $archivo);
                             $soliFirma = new DetalleSolicitud();
                             $soliFirma->setCumple(1);
                             $soliFirma->setIdSolicitud($idSolicitud);

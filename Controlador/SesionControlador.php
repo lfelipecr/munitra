@@ -35,6 +35,7 @@ class SesionControlador
                     $sesion->setActaAprobada(1);
                     $urlArchivo = $rutaDestino . time() . basename($_FILES['acta']['name']);
                     if (!is_writable($rutaDestino)) {
+                        Logger::warning("No existen permisos de escritura para el directorio ./repo");
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Sesiones/nuevo.php';
                         require_once './Vista/Utilidades/sidebar.php';
@@ -56,6 +57,7 @@ class SesionControlador
                 if (isset($_FILES['agenda']) && $_FILES['agenda']['error'] === UPLOAD_ERR_OK) {
                     $urlArchivo = $rutaDestino . time() . basename($_FILES['agenda']['name']);
                     if (!is_writable($rutaDestino)) {
+                        Logger::warning("No existen permisos de escritura para el directorio ./repo");
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Sesiones/nuevo.php';
                         require_once './Vista/Utilidades/sidebar.php';
@@ -119,6 +121,7 @@ class SesionControlador
                     $sesion->setActaAprobada(1);
                     $urlArchivo = $rutaDestino . time() . basename($_FILES['acta']['name']);
                     if (!is_writable($rutaDestino)) {
+                        Logger::warning("No existen permisos de escritura para el directorio ./repo");
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Sesiones/actualizar.php';
                         require_once './Vista/Utilidades/sidebar.php';
@@ -140,6 +143,7 @@ class SesionControlador
                 if (isset($_FILES['agenda']) && $_FILES['agenda']['error'] === UPLOAD_ERR_OK) {
                     $urlArchivo = $rutaDestino . time() . basename($_FILES['agenda']['name']);
                     if (!is_writable($rutaDestino)) {
+                        Logger::warning("No existen permisos de escritura para el directorio ./repo");
                         $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                         $vista = './Vista/Dashboard/Blog/Sesiones/actualizar.php';
                         require_once './Vista/Utilidades/sidebar.php';

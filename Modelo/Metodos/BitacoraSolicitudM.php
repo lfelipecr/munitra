@@ -17,8 +17,12 @@ class BitacoraSolicitudM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
+                Logger::info("Ingreso a BD: " . $sql);
+            } else {
+                Logger::error("Ejecución incorrecta BitacoraSolicitudM Ingresar. SQL: (" . $sql . ")");
             }
         } catch (Exception $ex) {
+            Logger::error("Ejecución incorrecta BitacoraSolicitudM Ingresar. Exception: (" . $ex->getMessage() . ")");
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -30,9 +34,10 @@ class BitacoraSolicitudM
         $conexion = new Conexion();
         $sql = "CALL SpBuscarConversacion($id, $tipo)";
         $resultado = $conexion->Ejecutar($sql);
+        Logger::info("Ejecución a BD BitacoraSolicitudM Buscar Conversación: " . $sql);
         $egistro = array();
         if (mysqli_num_rows($resultado) > 0) {
-            while ($fila = $resultado->fetch_assoc()){
+            while ($fila = $resultado->fetch_assoc()) {
                 $bitacora = new BitacoraSolicitud();
                 $bitacora->setId($fila['BitacoraID']);
                 $bitacora->setIdSolicitud($fila['ID_SOLICITUD']);
@@ -42,7 +47,7 @@ class BitacoraSolicitudM
                 $bitacora->setDetalle($fila['DETALLE']);
                 $bitacora->setIdUsuario($fila['UsuarioID']);
                 $bitacora->setAdjuntos($fila['ADJUNTOS']);
-                $bitacora->setUsuario($fila['NOMBRE'].' '.$fila['PRIMER_APELLIDO'].' '.$fila['SEGUNDO_APELLIDO'].' ('.$fila['IDENTIFICACION'].')');
+                $bitacora->setUsuario($fila['NOMBRE'] . ' ' . $fila['PRIMER_APELLIDO'] . ' ' . $fila['SEGUNDO_APELLIDO'] . ' (' . $fila['IDENTIFICACION'] . ')');
                 $registro[] = $bitacora;
             }
         } else
@@ -56,6 +61,7 @@ class BitacoraSolicitudM
         $conexion = new Conexion();
         $sql = "SELECT * FROM PARAMETROS";
         $resultado = $conexion->Ejecutar($sql);
+        Logger::info("Uso de las credenciales SMTP");
         if (mysqli_num_rows($resultado) > 0) {
             while ($fila = $resultado->fetch_assoc()) {
                 $registro[$fila['DESCRIPCION']] = $fila['VALOR'];

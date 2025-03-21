@@ -11,6 +11,7 @@ class ConsultaM
         $conexion = new Conexion();
         $sql = "SELECT MAX(ID) FROM CONSULTA;";
         $resultado = $conexion->Ejecutar($sql);
+        Logger::info("Consulta a BD: " . $sql);
         if (mysqli_num_rows($resultado) > 0) {
             while ($fila = $resultado->fetch_assoc())
                 $idMax = $fila["MAX(ID)"];
@@ -30,9 +31,11 @@ class ConsultaM
             "', " . $consulta->getIdConsultado() . ", " . $consulta->getTipoConsulta() . ")";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Ingresar Consulta en BD: " . $sql);
                 $retVal = true;
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD Ingresar Consulta: Exception: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -48,8 +51,12 @@ class ConsultaM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
+                Logger::info("Ingreso de linea de consulta: " . $consulta->getIdConsulta());
+            } else {
+                Logger::error("Error en llamada a SP de linea de consulta: " . $sql);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en ingreso de linea de consulta: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -63,9 +70,13 @@ class ConsultaM
             "', '" . $consulta->getAdjuntos() . "')";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Ingreso a BD metodo AtenderConsulta - ID de consulta: " . $consulta->getIdConsulta());
                 $retVal = true;
+            } else {
+                Logger::error("Problemas al atender consulta: " . $consulta->getIdConsulta());
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción al atender consulta: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -114,6 +125,7 @@ class ConsultaM
         $datos['Pendientes'] = $pendientes;
         $datos['FechaHoy'] = $consultasHoy;
         $conexion->Cerrar();
+        Logger::info("Generación de estadísticas: " . json_encode($datos));
         return $datos;
     }
     function BuscarConsultas()
@@ -122,6 +134,7 @@ class ConsultaM
         $conexion = new Conexion();
         $sql = "CALL SpBuscarConsultas()";
         $resultado = $conexion->Ejecutar($sql);
+        Logger::info("Listado de consultas: " . $sql);
         if (mysqli_num_rows($resultado) > 0) {
             $registro = json_encode($resultado->fetch_all());
         } else
@@ -135,6 +148,7 @@ class ConsultaM
         $conexion = new Conexion();
         $sql = "CALL SpBuscarConsulta($id)";
         $resultado = $conexion->Ejecutar($sql);
+        Logger::info("Busqueda de consulta: " . $sql);
         if (mysqli_num_rows($resultado) > 0) {
             while ($fila = $resultado->fetch_assoc()) {
                 $consulta = new Consulta();
@@ -159,6 +173,7 @@ class ConsultaM
         $registro = null;
         $conexion = new Conexion();
         $sql = "CALL SpBuscarInteracciones($id)";
+        Logger::info("Busqueda de Interacciones en consulta: " . $sql);
         $resultado = $conexion->Ejecutar($sql);
         if (mysqli_num_rows($resultado) > 0) {
             $registro = json_encode($resultado->fetch_all());

@@ -14,6 +14,7 @@ class ActividadM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
+                Logger::info("Consulta a BD: ".$sql);
             } else {
                 Logger::error("Ejecución incorrecta ActividadM Ingresar. SQL: (".$sql.")");
             }
@@ -32,6 +33,7 @@ class ActividadM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
+                Logger::info("Consulta a BD: ".$sql);
             } else 
                 Logger::error("Ejecución Incorrecta ActividadM Eliminar. SQL: (".$sql.")");
         } catch (Exception $ex) {
@@ -59,6 +61,7 @@ class ActividadM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
+                Logger::info("Consulta a BD: ".$sql);
             } else 
                 Logger::error("Ejecución Incorrecta ActividadM Actualizar. SQL: (".$sql.")");
         } catch (Exception $ex) {
@@ -86,6 +89,7 @@ class ActividadM
                 $actividad->setFecha($fila['FECHA']);
                 $registro[] = $actividad;
             }
+            Logger::info("Consulta a BD: ".$sql);
         } else
             $registro = null;
         $conexion->Cerrar();
@@ -107,6 +111,7 @@ class ActividadM
                 $actividad->setUrlAdjunto($fila['ADJUNTOS']);
                 $actividad->setFecha($fila['FECHA']);
             }
+            Logger::info("Consulta a BD: ".$sql);
         } else
             $actividad = null;
         $conexion->Cerrar();

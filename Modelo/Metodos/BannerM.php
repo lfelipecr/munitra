@@ -12,6 +12,7 @@ class BannerM
         $conexion = new Conexion();
         $sql = "SELECT * FROM BANNER";
         $resultado = $conexion->Ejecutar($sql);
+        Logger::info("Consulta a BD: " . $sql);
         if (mysqli_num_rows($resultado) > 0) {
             return $resultado;
         } else
@@ -22,7 +23,7 @@ class BannerM
     function BuscarBannerActivo()
     {
         $listado = $this->BuscarBanners();
-        if ($listado == null){
+        if ($listado == null) {
             return '';
         } else {
             while ($fila = $listado->fetch_assoc()) {
@@ -42,10 +43,11 @@ class BannerM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
-            } else 
-                Logger::error("Ejecución incorrecta BannerM IngresarBanner. SQL: (".$sql.")");
+                Logger::info("Ingreso a BD: " . $sql);
+            } else
+                Logger::error("Ejecución incorrecta BannerM IngresarBanner. SQL: (" . $sql . ")");
         } catch (Exception $ex) {
-            Logger::error("Ejecución incorrecta BannerM IngresarBanner. Exception: (".$ex->getMessage().")");
+            Logger::error("Ejecución incorrecta BannerM IngresarBanner. Exception: (" . $ex->getMessage() . ")");
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -59,11 +61,12 @@ class BannerM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
+                Logger::info("Eliminar registro en BD: " . $sql);
             } else {
-                Logger::error("Ejecución incorrecta BannerM EliminarBanner. SQL: (".$sql.")");
+                Logger::error("Ejecución incorrecta BannerM EliminarBanner. SQL: (" . $sql . ")");
             }
         } catch (Exception $ex) {
-            Logger::error("Ejecución incorrecta BannerM IngresarBanner. Exception: (".$ex->getMessage().")");
+            Logger::error("Ejecución incorrecta BannerM IngresarBanner. Exception: (" . $ex->getMessage() . ")");
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -78,9 +81,10 @@ class BannerM
             $conexion->Ejecutar($sql);
             $sql = 'UPDATE BANNER SET ACTIVO = 1 WHERE ID = ' . $id;
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Consulta a BD: " . $sql);
                 $retVal = true;
             } else {
-                Logger::error("Ejecución incorrecta BannerM IngresarBanner. SQL: (".$sql.")");
+                Logger::error("Ejecución incorrecta BannerM IngresarBanner. SQL: (" . $sql . ")");
             }
         } catch (Exception $ex) {
             $retVal = false;

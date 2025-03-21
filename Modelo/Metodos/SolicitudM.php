@@ -29,6 +29,9 @@ class SolicitudM
                 $solicitud->setIdUsuario($fila['ID_USUARIO']);
                 $registro = $solicitud;
             }
+            Logger::info(
+                "Se consultó la solicitud: " . $id
+            );
         } else
             $registro = null;
         $conexion->Cerrar();
@@ -71,12 +74,15 @@ class SolicitudM
                 ", " . $arregloDetalles[$i]->getTipoRequisito() . ")";
             try {
                 if ($conexion->Ejecutar($sql)) {
+                    Logger::info("Se ingresa detalle de solicitud");
                     $retVal = true;
                 } else {
+                    Logger::info("No se pudo ingresar el dato: " . $arregloDetalles[$i]->getCampoRequisito());
                     $retVal = false;
                     break;
                 }
             } catch (Exception $ex) {
+                Logger::error("Excepción en BD: " . $ex->getMessage());
                 $retVal = false;
             }
         }
@@ -94,8 +100,10 @@ class SolicitudM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = $this->MaxID();
+                Logger::info("Se ingresa la cabecera de la solicitud: " . $retVal);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = 0;
         }
         $conexion->Cerrar();
@@ -108,9 +116,11 @@ class SolicitudM
         $sql = "DELETE FROM  SOLICITUD WHERE ID = $id";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Se elimina la solicitud: " . $id);
                 $retVal = true;
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -191,8 +201,14 @@ class SolicitudM
             $mail->isHTML(true);
             $mail->Subject = 'Municipalidad de Río Cuarto - Estado de Solicitud';
             $mail->Body = $cuerpoEmail;
-            $mail->send();
+            ob_start();
+            if (!$mail->send()) {
+                echo "Error: " . $mail->ErrorInfo;
+            }
+            $log = ob_get_clean();
+            Logger::info("Correo de cambio de solicitud: " . $log);
         } catch (Exception $e) {
+            Logger::error("Excepción en BD: " . $e->getMessage());
             var_dump($e);
         }
     }
@@ -202,18 +218,23 @@ class SolicitudM
         $conexion = new Conexion();
         $sql = "CALL SpActualizarSolicitud(" . $solicitud->getId() .
             ", " . $solicitud->getEstadoSolicitud() . ")";
-        try {
-            if ($conexion->Ejecutar($sql)) {
-                $retVal = true;
+        $usuarioM = new UsuarioM();
+        $usuario = $usuarioM->BuscarUsuarioId($solicitud->getIdUsuario());
+        if ($usuario->getIdEstado() == 1) {
+            try {
+                if ($conexion->Ejecutar($sql)) {
+                    $retVal = true;
+                }
+            } catch (Exception $ex) {
+                Logger::error("Excepción en BD: " . $ex->getMessage());
+                $retVal = false;
             }
-        } catch (Exception $ex) {
-            $retVal = false;
-        }
-        $conexion->Cerrar();
-        if ($retVal) {
-            $solicitud = $this->BuscarCabeceraSolicitud($solicitud->getId());
-            $this->EnviarEstado($solicitud->getIdUsuario(), $solicitud->getEstadoSolicitud(), $solicitud->getId());
-        }
+            $conexion->Cerrar();
+            if ($retVal) {
+                $solicitud = $this->BuscarCabeceraSolicitud($solicitud->getId());
+                $this->EnviarEstado($solicitud->getIdUsuario(), $solicitud->getEstadoSolicitud(), $solicitud->getId());
+            }
+        } else $retVal = false;
         return $retVal;
     }
     function ActualizarDetallesSolicitud($arregloDetalles)
@@ -233,6 +254,7 @@ class SolicitudM
                         break;
                     }
                 } catch (Exception $ex) {
+                    Logger::error("Excepción en BD: " . $ex->getMessage());
                     $retVal = false;
                 }
             }

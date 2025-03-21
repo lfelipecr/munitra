@@ -33,6 +33,7 @@ class LoginControlador
                 echo '401';
         }
     }
+    //Codigo para cambio de contraseña
     function VerificarCodigo()
     {
         $u = new Utilidades();
@@ -41,9 +42,11 @@ class LoginControlador
                 $codigo = $_SESSION['codigo'];
                 $codigoEnviado = $_POST['codigo'];
                 if ($codigo == $codigoEnviado) {
+                    Logger::info("Código verificado correctamente");
                     unset($_SESSION['codigo']);
                     echo '200';
                 } else {
+                    Logger::warning("El código no se ha podido verificar");
                     echo '401';
                 }
             } else {
@@ -51,6 +54,7 @@ class LoginControlador
             }
         }
     }
+    //Codigo para cambio de contraseña
     function GenerarCodigo()
     {
         $u = new Utilidades();
@@ -80,9 +84,14 @@ class LoginControlador
                 $mail->isHTML(true);
                 $mail->Subject = 'Municipalidad de Río Cuarto | Cambiar Contraseña';
                 $mail->Body = $msg;
-                $mail->send();
+                ob_start();
+                if (!$mail->send()) {
+                    echo "Error: " . $mail->ErrorInfo;
+                }
+                $log = ob_get_clean();
+                Logger::info("Correo de validación de código para cambio de contraseña: " . $log);
             } catch (Exception $ex) {
-                var_dump($ex);
+                Logger::error("Excepción en controlador (phpmailer): " . $ex->getMessage());
             }
         }
     }
@@ -125,6 +134,7 @@ class LoginControlador
             $imagen = base64_decode($firma);
             $archivo = "repo/firmas/firma_" . time() . ".png";
             file_put_contents($archivo, $imagen);
+            Logger::info("Generación de firma en: " . $archivo);
             //modifica el objeto de credenciales
             $credenciales->setFirma($archivo);
             $credenciales->setIdUsuario($_POST['idUsuario']);
@@ -145,6 +155,7 @@ class LoginControlador
             $sourceFile = './repo/serverside/consentimientoInformado.pdf';
             $numberOfPages = $pdf->setSourceFile($sourceFile);
             //primera página
+            Logger::info("Empieza a armar pdf de consentimiento");
             $pdf->AddPage();
             $tplIdx = $pdf->importPage(1);
             $size = $pdf->getTemplateSize($tplIdx);
@@ -224,6 +235,8 @@ class LoginControlador
             $pdf->Image($archivo, $imageX, $imageY, $imageWidth, $imageHeight);
             $ruta = './repo/' . time() . 'consentimiento.pdf';
             $pdf->Output('F', $ruta);
+            Logger::info("Termina de armar el pdf de consentimiento");
+            Logger::info("Genera las credenciales del usuario");
             $codigo = bin2hex(random_bytes(4));
             //guarda la ruta del consentimiento
             $credenciales->setUrlConsentimiento($ruta);
@@ -254,8 +267,14 @@ class LoginControlador
                     $mail->Subject = $asunto;
                     $mail->Body = $msg;
                     $mail->addAttachment($ruta);
-                    $mail->send();
+                    ob_start();
+                    if (!$mail->send()) {
+                        echo "Error: " . $mail->ErrorInfo;
+                    }
+                    $log = ob_get_clean();
+                    Logger::info("Correo de envío de código para confirmar cuenta: " . $log);
                 } catch (Exception $ex) {
+                    Logger::error("Excepción en controlador (phpmailer): " . $ex->getMessage());
                 }
                 require_once './Vista/Login/aviso.php';
             } else {
@@ -269,26 +288,33 @@ class LoginControlador
     }
     function Login()
     {
-        $correo = $_POST['correo'];
-        $pass = $_POST['pass'];
-        $usuarioM = new UsuarioM();
-        $usuario = $usuarioM->ValidarCredenciales($correo, $pass);
-        if ($usuario == null) {
-            $msg = 'El usuario no se encuentra, </br> verifique sus credenciales';
-            require_once './Vista/Login/login.php';
-        } else {
-            //Usuario no está inactivo
-            if ($usuario->getIdEstado() != 2) {
-                session_start();
-                $_SESSION['usuario'] = $usuario;
-                if ($usuario->getIdDepartamento() == 1) {
-                    $this->InicioTramites();
-                } else {
-                    $this->AdminInicio();
-                }
-            } else {
-                $msg = 'El usuario se encuentra inactivo, </br> comuniquese con la municipalidad';
+        if (isset($_POST['correo'])) {
+            $correo = $_POST['correo'];
+            $pass = $_POST['pass'];
+            $usuarioM = new UsuarioM();
+            Logger::info("Empieza a validar usuario");
+            $usuario = $usuarioM->ValidarCredenciales($correo, $pass);
+            if ($usuario == null) {
+                Logger::warning("Error al iniciar sesión");
+                $msg = 'El usuario no se encuentra, </br> verifique sus credenciales';
                 require_once './Vista/Login/login.php';
+            } else {
+                //Usuario no está inactivo
+                if ($usuario->getIdEstado() != 2) {
+                    session_start();
+                    $_SESSION['usuario'] = $usuario;
+                    if ($usuario->getIdDepartamento() == 1) {
+                        Logger::info("Usuario " . $usuario->getId() . " inicia sesión. Externo");
+                        $this->InicioTramites();
+                    } else {
+                        Logger::info("Usuario " . $usuario->getId() . " inicia sesión. Interno");
+                        $this->AdminInicio();
+                    }
+                } else {
+                    Logger::warning("Usuario inactivo " . $usuario->getId() . " intenta iniciar sesión");
+                    $msg = 'El usuario se encuentra inactivo, </br> comuniquese con la municipalidad';
+                    require_once './Vista/Login/login.php';
+                }
             }
         }
     }
@@ -300,6 +326,7 @@ class LoginControlador
     }
     function CerrarSesion()
     {
+        Logger::info("Usuario " . $_SESSION['usuario']->getId() . " cierra sesión");
         session_start();
         unset($_SESSION['usuario']);
         header('Location: index.php');

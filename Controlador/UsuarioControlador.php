@@ -44,19 +44,21 @@ class UsuarioControlador
                 $rutaDestino = './repo/';
                 $urlArchivo = $rutaDestino . time() . basename($_FILES['foto']['name']);
                 if (!is_writable($rutaDestino)) {
+                    Logger::warning("No existen permisos de escritura para el directorio ./repo");
                     $msg = 'El directorio no tiene permisos de escritura, comuníquese con el profesional de TI';
                     $vista = './Vista/Dashboard/usuario.php';
                     require_once './Vista/Utilidades/sidebar.php';
                 }
                 if (move_uploaded_file($_FILES['foto']['tmp_name'], $urlArchivo)) {
                     session_start();
-
+                    
                     $personaM = new PersonaM();
                     $imagen = new ImagenUsuario();
                     $imagen->setId($_POST['idFoto']);
                     $imagen->setIdUsuario($_SESSION['usuario']->getIdPersona());
                     $imagen->setUrlImagen($urlArchivo);
                     if ($personaM->ActualizarImagen($imagen)) {
+                        Logger::info('Se actualiza la imagen del perfil del usuario: '.$_SESSION['usuario']->getIdPersona());
                         $this->Perfil();
                     }
                 } else {
@@ -93,7 +95,9 @@ class UsuarioControlador
             $deptos = $deptoM->BuscarDepartamentos();
             $credenciales = false;
             $consentimiento = null;
-            $cred = $credencialesM->BuscarCredenciales($usuario->getIdPersona());
+            if ($usuario->getIdPersona() != null){
+                $cred = $credencialesM->BuscarCredenciales($usuario->getIdPersona());
+            }
             if ($cred != NULL){
                 $credenciales = true;
                 $consentimiento = json_decode($cred)->URL_CONSENTIMIENTO;

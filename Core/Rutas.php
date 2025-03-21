@@ -8,6 +8,7 @@ class Rutas
         $archivoControlador = "./Controlador/" . $nombreControlador . ".php";
 
         if (!is_file($archivoControlador)) {
+            Logger::warning("Controlador '".$archivoControlador."' no encontrado, redirige a Index");
             $nombreControlador = "IndexControlador";
             $archivoControlador = RUTA_FIJA;
         }
@@ -22,6 +23,7 @@ class Rutas
         if (isset($metodo) && method_exists($controlador, $metodo)) {
             $controlador->$metodo();
         } else {
+            Logger::warning("Metodo '".$metodo."' no encontrado, redirige a Index");
             require_once RUTA_FIJA;
             $controlador = new IndexControlador();
             $controlador->Index();

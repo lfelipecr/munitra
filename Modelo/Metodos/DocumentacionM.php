@@ -23,6 +23,7 @@ class DocumentacionM
                 $documentacion->setTipoDocumento($fila['TIPO_DOCUMENTO']);
                 $registro[] = $documentacion;
             }
+            Logger::info("Listado de documentos para departamento: " . $id);
         } else
             $registro = null;
         $conexion->Cerrar();
@@ -38,9 +39,13 @@ class DocumentacionM
             ", " . $documentacion->getTipoDocumento() . ")";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Se sube documentación para departamento: " . $documentacion->getDepartamento());
                 $retVal = true;
+            } else {
+                Logger::error("Ha ocurrido un error con la subida de la documentación para departamento: " . $documentacion->getDepartamento());
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -53,9 +58,13 @@ class DocumentacionM
         $sql = "CALL SpEliminarDocumento($id)";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Eliminacion documento: " . $id);
                 $retVal = true;
+            } else {
+                Logger::error("No se pudo eliminar documento: " . $id);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -86,9 +95,11 @@ class DocumentacionM
         $sql = "INSERT INTO TIPO_DOCUMENTO (DESCRIPCION) VALUES ('$descripcion');";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Inserción de nueva categoría de documentación: " . $descripcion);
                 $retVal = true;
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -102,8 +113,12 @@ class DocumentacionM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = true;
+                Logger::info("Eliminacion categoría: " . $id);
+            } else {
+                Logger::error("No se pudo eliminar categoría: " . $id);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();

@@ -32,9 +32,13 @@ class UsuarioM
             ", " . $usuario->getIdEstado() . ")";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Se ingresa usuario para persona: " . $usuario->getIdPersona());
                 $retVal = true;
+            } else {
+                Logger::error("No se pudo generar usuario para persona: ".$usuario->getIdPersona());
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
 
@@ -130,6 +134,7 @@ class UsuarioM
                 $retVal = true;
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
 
@@ -147,6 +152,7 @@ class UsuarioM
                 $retVal = true;
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
 

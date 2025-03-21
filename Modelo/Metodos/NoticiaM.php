@@ -15,9 +15,13 @@ class NoticiaM
             "', '" . $noticia->getUrlImagen() . "', '" . $noticia->getUrlAdjunto() . "', '" . $noticia->getFecha() . "')";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Se modifica noticia: " . $sql);
                 $retVal = true;
+            } else {
+                Logger::error("No se puede modificar noticia: " . $sql);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -33,9 +37,13 @@ class NoticiaM
             "', '" . $noticia->getUrlAdjunto() . "', '" . $noticia->getUrlImagen() . "', '" . $noticia->getFecha() . "')";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Registro de nueva noticia: " . $sql);
                 $retVal = true;
+            } else {
+                Logger::error("No se puede conpletar registro de nueva noticia: " . $sql);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -48,9 +56,13 @@ class NoticiaM
         $sql = "UPDATE NOTICIA SET INHABILITADA = 1 WHERE ID = $id";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Eliminación de Noticia: " . $id);
                 $retVal = true;
+            } else {
+                Logger::error("No se pudo eliminar Noticia: " . $id);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -75,6 +87,7 @@ class NoticiaM
                 $noticia->setInhabilitada($fila["INHABILITADA"]);
                 $registro = $noticia;
             }
+            Logger::info("Consulta a noticia: " . $id);
         } else
             $registro = null;
         $conexion->Cerrar();
@@ -97,7 +110,7 @@ class NoticiaM
                 $noticia->setIdUsuario($fila['USUARIO_ID']);
                 $noticia->setFecha($fila['FECHA']);
                 $noticia->setAutor($fila['PERSONA_NOMBRE'] . ' '
-                .$fila['PERSONA_PRIMER_APELLIDO'] . ' ' . $fila['PERSONA_SEGUNDO_APELLIDO']);
+                    . $fila['PERSONA_PRIMER_APELLIDO'] . ' ' . $fila['PERSONA_SEGUNDO_APELLIDO']);
                 $registro[] = $noticia;
             }
         } else

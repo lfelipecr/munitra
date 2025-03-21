@@ -28,9 +28,13 @@ class PersonaM
         $resultado = $conexion->Ejecutar($sql);
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Modificación de imagen de usuario: " . $imagen->getId());
                 $retVal = true;
+            } else {
+                Logger::error("No se pudo modificar imágen de usuario: " . $imagen->getId());
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -44,19 +48,23 @@ class PersonaM
         $resultado = $conexion->Ejecutar($sql);
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Se ingresa imagen de usuario: " . $sql);
                 $retVal = true;
+            } else {
+                Logger::error("No se pudo ingresar imágen de usuario: " . $sql);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
         return $retVal;
     }
-    function BuscarImagen($idPersona)
+    function BuscarImagen($idUsuario)
     {
         $imagenUsuario = null;
         $conexion = new Conexion();
-        $sql = "SELECT * FROM IMAGEN_USUARIO WHERE ID_USUARIO = $idPersona";
+        $sql = "SELECT * FROM IMAGEN_USUARIO WHERE ID_USUARIO = $idUsuario";
         $resultado = $conexion->Ejecutar($sql);
         if (mysqli_num_rows($resultado) > 0) {
             while ($fila = $resultado->fetch_assoc()) {
@@ -77,9 +85,13 @@ class PersonaM
         $sql = "DELETE FROM PERSONA WHERE ID = $id";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Se elimina persona: " . $id);
                 $retVal = true;
+            } else {
+                Logger::error("No se puede eliminar persona: " . $id);
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
@@ -120,6 +132,7 @@ class PersonaM
                 $persona->setCedulaFrontal($fila['CEDULA_FRONTAL']);
                 $persona->setCedulaTrasera($fila['CEDULA_TRASERA']);
             }
+            Logger::info("Se consulta persona: " . $id);
         }
         $conexion->Cerrar();
         return $persona;
@@ -165,9 +178,10 @@ class PersonaM
     function BuscarPersonaCedula($cedula)
     {
         $listado = $this->ListadoPersonas();
-        if ($listado != 'null') {
+        if ($listado != null) {
             for ($i = 0; $i < count($listado); $i++) {
                 if ($cedula == $listado[$i]->getIdentificacion()) {
+                    Logger::info("Se consulta persona: " . $cedula);
                     return $listado[$i];
                 }
             }
@@ -179,9 +193,10 @@ class PersonaM
     function BuscarPersonaUsuario($idUsuario)
     {
         $listado = $this->ListadoPersonas();
-        if ($listado != 'null') {
+        if ($listado != null) {
             for ($i = 0; $i < count($listado); $i++) {
                 if ($idUsuario == $listado[$i]->getId()) {
+                    Logger::info("Se consulta persona de usuario: " . $idUsuario);
                     return $listado[$i];
                 }
             }
@@ -269,8 +284,12 @@ class PersonaM
         try {
             if ($conexion->Ejecutar($sql)) {
                 $retVal = $this->MaxID();
+                Logger::info("Se ingresa nueva persona, ID: " . $retVal);
+            } else {
+                Logger::error("No se pudo ingresar persona");
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = 0;
         }
 
@@ -313,25 +332,31 @@ class PersonaM
             ")";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Se modifica persona: " . $persona->getId());
                 $retVal = true;
+            } else {
+                Logger::error("No se pudo modificar persona:" . $persona->getId());
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
         return $retVal;
     }
-    function GestionarCedula(Persona $persona) 
+    function GestionarCedula(Persona $persona)
     {
         $retVal = false;
         $conexion = new Conexion();
-        $sql = "CALL SpGestionarCopiasCedula(".$persona->getId().
-        ", '".$persona->getCedulaFrontal()."', '".$persona->getCedulaTrasera()."');";
+        $sql = "CALL SpGestionarCopiasCedula(" . $persona->getId() .
+            ", '" . $persona->getCedulaFrontal() . "', '" . $persona->getCedulaTrasera() . "');";
         try {
             if ($conexion->Ejecutar($sql)) {
+                Logger::info("Se modifica cédula de la persona: " . $persona->getId());
                 $retVal = true;
             }
         } catch (Exception $ex) {
+            Logger::error("Excepción en BD: " . $ex->getMessage());
             $retVal = false;
         }
         $conexion->Cerrar();
