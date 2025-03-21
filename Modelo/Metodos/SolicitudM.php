@@ -219,8 +219,8 @@ class SolicitudM
         $sql = "CALL SpActualizarSolicitud(" . $solicitud->getId() .
             ", " . $solicitud->getEstadoSolicitud() . ")";
         $usuarioM = new UsuarioM();
-        $usuario = $usuarioM->BuscarUsuarioId($solicitud->getIdUsuario());
-        if ($usuario->getIdEstado() == 1) {
+        //$usuario = $usuarioM->BuscarUsuarioId($solicitud->getIdUsuario());
+        if (true) {
             try {
                 if ($conexion->Ejecutar($sql)) {
                     $retVal = true;
